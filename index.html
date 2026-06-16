@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link class="icon" type="image/png" href="img/favicon.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>BIORUSH</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Plus+Jakarta+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = { 
+            theme: { 
+                extend: { 
+                    screens: { 'xs': '400px' },
+                    colors: { 'jako-black': '#0a0705' },
+                    fontFamily: { 
+                        'sans': ['Orbitron', 'sans-serif'],
+                        'mono': ['Orbitron', 'monospace'],
+                        'body': ['Plus Jakarta Sans', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { 
+            font-family: 'Orbitron', sans-serif; 
+            scroll-behavior: smooth; 
+            letter-spacing: 0.05em; 
+            background-color: #020617;
+        } 
+        #page-bg-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: -1;
+            /* Recuperamos el gradiente radial para dar profundidad */
+            background: radial-gradient(circle at 50% 50%, #172554 0%, #0f172a 50%, #020617 100%);
+            pointer-events: none; /* Asegura que no interfiera con clics */
+        }
+
+        .img-glow-transition {
+            transition: opacity 0.6s ease-in-out;
+        }
+        .telemetry-text-style {
+            font-family: 'Orbitron', sans-serif;
+            font-variant: normal;
+            text-transform: capitalize; /* Esto le dice a la fuente que use "minúsculas", pero font-variant las convierte en versiones pequeñas de las mayúsculas */
+        }
+        .scrollbar-none::-webkit-scrollbar { display: none; }
+        .scrollbar-none { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+</head>
+<body class="antialiased selection:bg-white selection:text-black overflow-x-hidden text-white">
+
+    <div id="page-bg-overlay"></div>
+    <div class="fixed inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/20 z-0 pointer-events-none"></div>
+
+    <main id="main-vault" class="w-screen h-screen flex flex-col relative overflow-hidden">
+
+        <header class="h-[100px] shrink-0 bg-gradient-to-b from-black/90 via-black/40 to-transparent backdrop-blur-md z-50 flex items-center justify-center">
+            <div class="p-4 flex flex-col items-center justify-center w-full gap-1">
+                <!-- Fila superior: Logo y Nombre -->
+                <div class="flex items-center justify-center gap-3">
+                    <img src="img/lift.png" alt="Logo" class="h-6 w-auto object-contain opacity-90" />
+                    <span class="text-[14px] tracking-[0.25em] font-black text-white uppercase">
+                        BIORUSH
+                    </span>
+                </div>
+                <!-- Fila inferior: Slogan centrado -->
+                <span class="text-[7px] tracking-[0.4em] font-medium text-white/50 uppercase italic">
+                    Sinergia Biocinética
+                </span>
+            </div>
+        </header>
+
+        <div class="flex-1 overflow-y-auto w-full flex flex-col items-center justify-center py-6 px-4 gap-y-6">
+            
+            <div id="biorush-pack-container" class="relative w-full max-w-[180px] xs:max-w-[200px] sm:max-w-[240px] md:max-w-[280px] aspect-[13/15] shrink-0 drop-shadow-[0_40px_60px_rgba(0,0,0,0.9)]">
+                <div class="w-full h-full relative overflow-hidden bg-transparent">
+                    <img id="biorush-pack-img-back" src="img/45capsBack.png" alt="BioRush Pack Back" class="img-glow-transition absolute inset-0 w-full h-full object-contain opacity-0 pointer-events-none z-0" />
+                    <img id="biorush-pack-img" src="img/45caps.png" alt="BioRush Pack Front" class="img-glow-transition absolute inset-0 w-full h-full object-contain pointer-events-auto z-10" />
+                    
+                    <div class="absolute inset-0 flex items-center justify-center p-2 z-20 pointer-events-none">
+
+                            <svg id="laser-vector-target" viewBox="0 0 400 400" 
+                                class="w-full h-full fill-none stroke-white/40 stroke-[1.5] transition-all duration-500 origin-center transform scale-[1.3] sm:scale-[1.2]">
+                                <defs>
+                                    <path id="textPath-top" d="M 65,200 A 135,135 0 0,1 335,200" />
+                                    <path id="textPath-bottom" d="M 65,200 A 135,135 0 0,0 335,200" />
+                                </defs>
+                                
+                                <text class="fill-white font-black text-[13px] sm:text-[12px] tracking-[0.25em] sm:tracking-[0.3em] uppercase transition-all duration-500">
+                                    <textPath id="laser-variant-title" href="#textPath-top" startOffset="50%" text-anchor="middle">
+                                        BIORUSH MENTAL FOCUS
+                                    </textPath>
+                                </text>
+                                
+                                <g class="origin-center transform scale-[1.05]">
+                                    <path d="M 110,120 L 290,120 L 110,280 L 290,280 Z" class="opacity-20 stroke-[1.2]" />
+                                    <path d="M 110,120 Q 200,150 290,120" class="opacity-20 stroke-[1.2]" />
+                                    <path d="M 110,280 Q 200,250 290,280" stroke-dasharray="2 2" class="opacity-20 stroke-[1.2]" />
+                                    
+                                    <text x="200" y="165" text-anchor="middle" class="fill-white/30 text-[7px] tracking-[0.3em] font-bold uppercase"></text>
+                                    <text id="z-dial" x="200" y="210" text-anchor="middle" class="fill-white font-black text-[38px] tracking-[0.4em] font-sans">8UST11</text>
+                                    <text x="200" y="245" text-anchor="middle" class="fill-white/30 text-[6px] tracking-[0.4em] font-mono"></text>
+                                </g>
+                                
+                                <text  class="fill-white/60 font-black text-[11px] sm:text-[10px] tracking-[0.25em] uppercase transition-all duration-500">
+                                    <textPath id="biorush-description" href="#textPath-bottom" startOffset="50%" text-anchor="middle">
+                                        Enfoque y claridad cognitiva
+                                    </textPath>
+
+                                </text>
+                            </svg>
+                        <button id="btn-reveal-bio" 
+                                    class="absolute top-[65%] left-1/2 transform -translate-x-1/2 flex flex-col items-center gap-1 group focus:outline-none active:scale-95 transition-transform duration-200 z-50 pointer-events-auto" 
+                                    aria-label="Revelar reverso">
+                            <div class="w-6 h-6 rounded-full border border-sky-500/30 flex items-center justify-center bg-sky-950/20 group-hover:border-sky-400 group-hover:bg-sky-500/10 transition-all duration-300">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-3 h-3 text-white/70 group-hover:text-sky-400 transition-colors">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z" />
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                                </svg>
+                            </div>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="w-full flex flex-col items-center gap-4 shrink-0 relative z-20">
+                
+                <div class="flex flex-col items-center gap-3 w-full">
+                    <div id="biorush-items-menu" class="flex items-center justify-center space-x-6 text-[9px] tracking-[0.25em] font-bold text-white/50 uppercase"></div>
+                    <div id="biorush-variants-container" class="flex flex-wrap items-center justify-center gap-2 text-[9px] tracking-[0.2em] font-mono select-none w-full max-w-sm"></div>
+                </div>
+
+                <div class="flex flex-col items-center gap-2 w-full">
+                    <button onclick="adquirirNodo()" class="w-full max-w-[280px] py-3 bg-white/5 backdrop-blur-md text-white font-black text-[11px] tracking-[0.3em] uppercase rounded-sm border border-white/10 hover:border-sky-500/50 hover:bg-sky-500/10 transition-all duration-300">
+                        ACTIVAR
+                    </button>
+                    
+                    <div class="flex items-center justify-center gap-3 font-mono text-[8px] tracking-[0.2em] text-white/30 uppercase">
+                        <span id="biorush-spec">LION’S MANE</span>
+                        <span class="text-white/10">•</span>
+                        <span id="biorush-price">$68.000</span>
+                    </div>
+                </div>
+
+                <div class="w-full max-w-lg flex flex-col items-center gap-3 mt-2">
+                    <p id="telemetry-feedback-panel" class="text-[8px] tracking-[0.2em] text-sky-500/60 uppercase text-center transition-colors duration-300">
+                        Activación con protocolo biocinético
+                    </p>
+                    
+                    <div class="grid grid-cols-4 w-full gap-2 text-[9px] font-mono text-white/60">
+                        <div id="sub-sets-solar" class="flex flex-col items-center gap-1 cursor-help hover:text-sky-400 transition-colors">
+                            <span class="text-[7px] text-white/20 tracking-widest">HZ</span>
+                            <span class="font-bold">0.00</span>
+                        </div>
+                        <div id="telemetry-sphere-idx" class="flex flex-col items-center gap-1 cursor-help hover:text-sky-400 transition-colors">
+                            <span class="text-[7px] text-white/20 tracking-widest">IDX</span>
+                            <span class="font-bold">0000</span>
+                        </div>
+                        <div id="telemetry-active-node" class="flex flex-col items-center gap-1 cursor-help hover:text-sky-400 transition-colors">
+                            <span class="text-[7px] text-white/20 tracking-widest">NOD</span>
+                            <span class="font-bold">0000</span>
+                        </div>
+                        <div id="sub-reps-tension" class="flex flex-col items-center gap-1 cursor-help hover:text-sky-400 transition-colors">
+                            <span class="text-[7px] text-white/20 tracking-widest">TNS</span>
+                            <span class="font-bold">0.0</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer class="h-[72px] shrink-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent backdrop-blur-md z-50 flex items-center justify-center">
+            <div class="p-6 flex justify-center items-center w-full min-h-[72px]">
+                <div class="flex flex-row items-center gap-3">
+                    <span class="text-[7px] tracking-[0.25em] font-bold text-white uppercase">
+                        POWERED BY ZENERGY.WORLD
+                    </span>
+                    <img src="img/logo.png" alt="Logo" class="h-3 w-auto object-contain opacity-90" />
+                </div>
+            </div>
+
+        </footer>
+    </main>
+
+<script>
+    // =========================================================================
+    // 1. CONFIGURACIÓN DE CATÁLOGOS COMERCIALES
+    // =========================================================================
+    const BIORUSH_CATALOG = {
+        /*'BIORUSH': {
+            defaultVariant: 'FOCUS',
+            variants: {
+                'FOCUS': { desc: 'Enfoque y claridad cognitiva.', label: 'BIORUSH METAL FOCUS', img: 'img/biorush.png', imgBack: 'img/back.png', spec: 'FLAN DE AVENA // LION’S MANE', price: '$8.000', id: 'BR-01-FOC' },
+                'ZEN': { desc: 'Reducción del ruido mental.', label: 'BIORUSH MENTAL ZEN', img: 'img/biorush.png', imgBack: 'img/biorush_zen_back.png', spec: 'FLAN DE AVENA // REISHI', price: '$8.000', id: 'BR-01-ZEN' },
+                'STAMINA': { desc: 'Optimización del rendimiento energético celular.', label: 'BIORUSH BODY STAMINA', img: 'img/biorush.png', imgBack: 'img/biorush_stamina_back.png', spec: 'FLAN DE AVENA // CORDYCEPS', price: '$8.000', id: 'BR-01-STA' },
+                'CORE': { desc: 'Sincronización inmunológica integral.', label: 'BIORUSH BODY CORE', img: 'img/biorush.png', imgBack: 'img/biorush_core_back.png', spec: 'FLAN DE AVENA // TURKEY TAIL', price: '$8.000', id: 'BR-01-COR' }
+            }
+        }, */
+    'ULTRAPULSOR': {
+            defaultVariant: 'FOCUS',
+            variants: {
+                'FOCUS': { desc: 'Enfoque mental óptimo', label: 'ULTRAPULSOR FOCUS', img: 'img/45caps.png', imgBack: 'img/45capsBackLion.png', spec: '45X500MG // LION’S MANE', price: '$70.000', id: 'PULS45F' },
+                'ZEN': { desc: 'Silencio mental óptimo', label: 'ULTRAPULSOR ZEN', img: 'img/45caps.png', imgBack: 'img/45capsBackReishi.png', spec: '45X500MG // REISHI', price: '$70.000', id: 'PULS45Z' },
+                'STAMINA': { desc: 'Potencia celular óptima', label: 'ULTRAPULSOR STAMINA', img: 'img/45caps.png', imgBack: 'img/45capsBackCordy.png', spec: '45X500MG // CORDYCEPS', price: '$70.000', id: 'PULS45S' },
+                'CORE': { desc: 'Respuesta inmune óptima', label: 'ULTRAPULSOR CORE', img: 'img/45caps.png', imgBack: 'img/45capsBackTail.png', spec: '45X500MG // TURKEY TAIL', price: '$70.000', id: 'PULS45C' }
+            }
+        },
+        'PULSOR': {
+            defaultVariant: 'FOCUS',
+            variants: {
+                'FOCUS': { desc: 'Claridad cognitiva', label: 'PULSOR FOCUS', img: 'img/45caps.png', imgBack: 'img/item3_calm_back.png', spec: '24X500MG // LION’S MANE', price: '$50.000', id: 'PULS24F' },
+                'ZEN': { desc: 'Calma profunda', label: 'PULSOR ZEN', img: 'img/45caps.png', imgBack: 'img/item3_sleep_back.png', spec: '24X500MG // REISHI', price: '$50.000', id: 'PULS24Z' },
+                'STAMINA': { desc: 'Vitalidad celular', label: 'PULSOR STAMINA', img: 'img/45caps.png', imgBack: 'img/item3_stamina_back.png', spec: '24X500MG // CORDYCEPS', price: '$50.000', id: 'PULS24S' },
+                'CORE': { desc: 'Defensa celular', label: 'PULSOR CORE', img: 'img/45caps.png', imgBack: 'img/item3_core_back.png', spec: '24X500MG // TURKEY TAIL', price: '$50.000', id: 'PULS24C' }
+            }
+        }
+    };
+
+    let currentBioItem = 'ULTRAPULSOR';
+    let currentBioVariant = 'FOCUS';
+    const numeroCelular = "573025333130";
+
+    // ==========================================
+    // 2. CACHÉ DE ELEMENTOS DE UI (OPTIMIZADO)
+    // ==========================================
+    const $ = (id) => document.getElementById(id);
+    const cachedElements = {};
+    
+    function getCachedEl(id) {
+        if (!cachedElements[id]) {
+            cachedElements[id] = $(id);
+        }
+        return cachedElements[id];
+    }
+
+    const triggerHaptic = (ms) => { if (navigator.vibrate) navigator.vibrate(ms); };
+
+    // ==========================================
+    // 3. SISTEMA DE REVELADO (POINTER EVENTS)
+    // ==========================================
+    function vincularBotonRevelado(btnId, frontImgId, backImgId, vectorId) {
+        const btn = getCachedEl(btnId);
+        const frontImg = getCachedEl(frontImgId);
+        const backImg = getCachedEl(backImgId);
+        const vectorSvg = getCachedEl(vectorId);
+
+        if (!btn || !frontImg || !backImg) return;
+
+    const mostrarReverso = (e) => {
+        e.preventDefault();
+        
+        // 1. Ocultar frente
+        frontImg.style.opacity = '0';
+        // Esperamos a que la opacidad baje para mover el Z-Index
+        setTimeout(() => {
+            frontImg.style.zIndex = '0';
+        }, 600);
+        
+        // 2. Mostrar reverso
+        backImg.style.zIndex = '10'; // Traer al frente
+        backImg.style.opacity = '1';
+        
+        if (vectorSvg) vectorSvg.classList.add('opacity-0', 'pointer-events-none');
+        triggerHaptic(12);
+    };
+
+    const ocultarReverso = () => {
+        // 1. Ocultar reverso
+        backImg.style.opacity = '0';
+        backImg.style.zIndex = '0';
+        
+        // 2. Mostrar frente
+        frontImg.style.zIndex = '10';
+        frontImg.style.opacity = '1';
+        
+        if (vectorSvg) vectorSvg.classList.remove('opacity-0', 'pointer-events-none');
+    };
+
+        btn.addEventListener('pointerdown', mostrarReverso);
+        btn.addEventListener('pointerup', ocultarReverso);
+        btn.addEventListener('pointerleave', ocultarReverso);
+    }
+
+    // ==========================================
+    // 4. CONTROLADORES DE INTERFAZ DE USUARIO
+    // ==========================================
+    function inicializarBioRush() {
+        const menuContainer = getCachedEl('biorush-items-menu');
+        if (menuContainer) {
+            menuContainer.innerHTML = Object.keys(BIORUSH_CATALOG).map(item => `
+                <span id="menu-bio-${item}" onclick="cambiarBioItem('${item}')" class="cursor-pointer tracking-[0.15em] transition-all duration-300 h-5 leading-none font-bold">
+                    ${item}
+                </span>
+            `).join('');
+        }
+        
+        vincularBotonRevelado('btn-reveal-bio', 'biorush-pack-img', 'biorush-pack-img-back', 'laser-vector-target');
+        actualizarBioUI();
+    }
+
+    function cambiarBioItem(itemKey) {
+        currentBioItem = itemKey;
+        currentBioVariant = BIORUSH_CATALOG[itemKey].defaultVariant;
+        actualizarBioUI();
+        triggerHaptic(15);
+    }
+
+    function cambiarBioVariant(variantKey) {
+        currentBioVariant = variantKey;
+        actualizarBioUI();
+        triggerHaptic(10);
+    }
+
+    function actualizarBioUI() {
+        const itemConfig = BIORUSH_CATALOG[currentBioItem];
+        const variantConfig = itemConfig.variants[currentBioVariant];
+        
+        const drawerNode = getCachedEl('drawer-vault-node');
+        if (drawerNode) drawerNode.textContent = currentBioItem;
+
+        const descEl = getCachedEl('biorush-description');
+        const packImg = getCachedEl('biorush-pack-img');
+        const packImgBack = getCachedEl('biorush-pack-img-back');
+        
+        if (descEl && packImg && packImgBack) {
+            descEl.classList.add('opacity-0');
+            packImg.classList.replace('opacity-100', 'opacity-0');
+            packImgBack.classList.replace('opacity-100', 'opacity-0');
+
+            setTimeout(() => {
+                descEl.textContent = variantConfig.desc;
+                packImg.src = variantConfig.img;
+                packImgBack.src = variantConfig.imgBack;
+                
+                const labelTitle = getCachedEl('laser-variant-title');
+                const specEl = getCachedEl('biorush-spec');
+                const priceEl = getCachedEl('biorush-price');
+                
+                if (labelTitle) labelTitle.textContent = variantConfig.label;
+                if (specEl) specEl.textContent = variantConfig.spec;
+                if (priceEl) priceEl.textContent = variantConfig.price;
+                
+                descEl.classList.remove('opacity-0');
+                packImg.classList.replace('opacity-0', 'opacity-100');
+            }, 120);
+        }
+
+        Object.keys(BIORUSH_CATALOG).forEach(item => {
+            const el = getCachedEl(`menu-bio-${item}`);
+            if (el) {
+                el.className = (item === currentBioItem) 
+                    ? "cursor-pointer tracking-[0.15em] transition-all duration-300 h-5 leading-none font-bold text-white scale-105 border-b border-sky-400 pb-0.5" 
+                    : "cursor-pointer tracking-[0.15em] transition-all duration-300 h-5 leading-none text-white/40 hover:text-white/80";
+            }
+        });
+
+        const variantContainer = getCachedEl('biorush-variants-container');
+        if (variantContainer) {
+            variantContainer.innerHTML = Object.keys(itemConfig.variants).map(vKey => {
+                const isSelected = (vKey === currentBioVariant);
+                return `
+                    <span onclick="cambiarBioVariant('${vKey}')" 
+                          class="cursor-pointer transition-all duration-300 px-3 py-1 bg-black/40 backdrop-blur-md rounded-sm border ${isSelected ? 'border-white text-white font-black shadow-[0_0_12px_rgba(255,255,255,0.1)]' : 'border-white/5 text-white/40 hover:border-white/20 hover:text-white/80'}">
+                        ${vKey}
+                    </span>
+                `;
+            }).join('');
+        }
+    }
+
+    // =========================================================================
+    // 5. MOTOR DE TELEMETRÍA (PROTOCOLO PULS)
+    // =========================================================================
+    function calculateSphereIndex() {
+        const now = new Date();
+        const epoch = new Date('2012-12-21T00:00:00Z');
+        const daysSinceEpoch = Math.floor((now - epoch) / 86400000);
+        
+        // Calculamos qué parte del día es (0 a 3, representando los 4 bloques de 6 horas)
+        const currentHour = now.getHours();
+        const sphereQuadrant = Math.floor(currentHour / 6);
+        
+        // El índice total será (Días * 4) + el cuadrante actual
+        const totalSpheres = (daysSinceEpoch * 4) + sphereQuadrant;
+        
+        return `${String(totalSpheres).padStart(4, '0')}.◯`;
+    }
+
+    function updateZ() {
+        let biokineticCoordinate = "";
+        const now = new Date();
+        const hours = now.getHours(); 
+        const minutes = now.getMinutes();
+        const seconds = now.getSeconds();
+
+        const currentSphereIdx = calculateSphereIndex();
+        
+        const elIdx = getCachedEl('telemetry-sphere-idx');
+        if (elIdx && elIdx.textContent !== currentSphereIdx) elIdx.textContent = currentSphereIdx;
+
+        let setsStage = 1;  
+        let repsStage = 1;  
+        let currentAction = 'P'; 
+
+        if (seconds % 2 !== 0) {
+            const progress1s = now.getMilliseconds() / 1000; 
+            setsStage = Math.floor(progress1s * 12) + 1;
+            repsStage = 13 - setsStage; 
+
+            if (progress1s < 0.25) currentAction = 'P';
+            else if (progress1s < 0.5) currentAction = 'U';
+            else if (progress1s < 0.75) currentAction = 'L';
+            else currentAction = 'S';
+        } else {
+            setsStage = Math.floor((minutes % 12) + 1);
+            
+            if (seconds < 30) {
+                const subSlot = Math.floor((seconds % 30) / 7.5);
+                currentAction = ["PL", "PU", "LU", "SU"][subSlot] || "PL";
+                repsStage = Math.floor((seconds % 10) + 2);
+            } else {
+                const subSlot = Math.floor(((seconds - 30) % 30) / 7.5);
+                currentAction = ["PUL", "PLS", "LUP", "ULS"][subSlot] || "ULS";
+                repsStage = Math.floor(((seconds - 30) % 10) + 3);
+            }
+        }
+        setsStage = Math.max(1, Math.min(12, setsStage));
+        repsStage = Math.max(1, Math.min(12, repsStage));
+        biokineticCoordinate = `${setsStage}${currentAction}${repsStage}`;
+
+        const elDial = getCachedEl('z-dial');
+        if (elDial) elDial.textContent = biokineticCoordinate;
+                
+        // Dentro de la función updateZ(), reemplaza la línea de activeNodeText por esta:
+        const totalSecondsSinceMidnight = (hours * 3600) + (minutes * 60) + seconds;
+        const activeNodeText = `⨀.${String(totalSecondsSinceMidnight + 1).padStart(4, '0')}`;
+        const elActiveNode = getCachedEl('telemetry-active-node');
+        if (elActiveNode) elActiveNode.textContent = activeNodeText;
+
+        const subSetsSolar = getCachedEl('sub-sets-solar');
+        const subRepsTension = getCachedEl('sub-reps-tension');
+        if (subSetsSolar) subSetsSolar.textContent = `${(0.05 + (setsStage / 240)).toFixed(3)} Hz`;
+        if (subRepsTension) subRepsTension.textContent = `${(14.2 + (repsStage * 0.8)).toFixed(1)} N`;
+    }
+
+    const TELEMETRY_MEANINGS = {
+        'telemetry-sphere-idx': "CICLO OPERATIVO DEL ECOSISTEMA",
+        'telemetry-active-node': "ÍNDICE DE SATURACIÓN DEL NODO",
+        'sub-sets-solar': "FRECUENCIA BIOCINÉTICA BASE",
+        'sub-reps-tension': "TENSIÓN DE INTEGRIDAD MOLECULAR"
+    };
+
+    function habilitarReveladoTelemetria() {
+        const feedbackPanel = getCachedEl('telemetry-feedback-panel');
+        // Aseguramos que el mensaje original también esté en formato lowercase base
+        const mensajeOriginal = "Activación con protocolo biocinético";
+
+        Object.keys(TELEMETRY_MEANINGS).forEach(id => {
+            const el = getCachedEl(id);
+            if (!el) return;
+
+            el.addEventListener('click', () => {
+                feedbackPanel.style.color = '#38bdf8';
+                // .toLowerCase() prepara el texto para que 'capitalize' lo formatee correctamente
+                feedbackPanel.textContent = TELEMETRY_MEANINGS[id].toLowerCase(); 
+                
+                setTimeout(() => {
+                    feedbackPanel.style.color = '';
+                    feedbackPanel.textContent = mensajeOriginal.toLowerCase();
+                }, 8000);
+            });
+        });
+    }
+
+    // =========================================================================
+    // 6. CAPTURA DE TELEMETRÍA DE COMPRA (GENERACIÓN DE PAYLOAD)
+    // =========================================================================
+    function adquirirNodo() {
+        const variantConfig = BIORUSH_CATALOG[currentBioItem].variants[currentBioVariant];
+        const currentCoord = getCachedEl('z-dial')?.textContent || "N/A";
+        const currentSphere = getCachedEl('telemetry-sphere-idx')?.textContent || "N/A";
+        const currentNode = getCachedEl('telemetry-active-node')?.textContent || "N/A";
+        
+        // Captura de valores calculados en el DOM
+        const freqValue = getCachedEl('sub-sets-solar')?.textContent || "0.00 Hz";
+        const tensionValue = getCachedEl('sub-reps-tension')?.textContent || "0.0 N";
+        
+        // Traducción del Dial
+        const dialInterpretation = currentCoord.replace(/(\d+)([A-Z]+)(\d+)/, "$1 SETS, $3 REPS - ACCIONES $2");
+        
+        const mensaje = `⚡ *ORDEN - BIORUSH* ⚡\n\n` +
+                        `• *Vector:* ${currentBioItem} ${currentBioVariant}\n` +
+                        `• *Carga:* ${variantConfig.spec}\n` +
+                        `• *ID:* \`${variantConfig.id}\`\n` +
+                        `• *Precio:* ${variantConfig.price}\n\n` +
+                        `--- *PROTOCOLO* ---\n` +
+                        `• *Codigo Dial:* \`${currentCoord}\`\n` +
+                        `• *Biocinética:* ${dialInterpretation}\n` +
+                        `• *Ciclo:* \`${currentSphere}\`\n` +
+                        `• *Nodo:* \`${currentNode}\`\n` +
+                        `• *Frecuencia:* \`${freqValue}\`\n` +
+                        `• *Tensión:* \`${tensionValue}\`\n\n` +
+                        `Activar configuración actual.`;
+
+        triggerHaptic([15, 40, 15]);
+        window.open(`https://api.whatsapp.com/send?phone=${numeroCelular}&text=${encodeURIComponent(mensaje)}`, '_blank');
+    }
+
+    // Inicialización coordinada del Ciclo de Vida del DOM
+    document.addEventListener('DOMContentLoaded', () => {
+        inicializarBioRush();
+        updateZ(); 
+        setInterval(updateZ, 1000);
+        habilitarReveladoTelemetria();
+    });
+</script>
+</body>
+</html>
