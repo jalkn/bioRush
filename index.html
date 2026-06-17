@@ -79,6 +79,7 @@
                 <div class="w-full h-full relative overflow-hidden bg-transparent">
                     <img id="biorush-pack-img-back" src="img/45capsBack.png" alt="BioRush Pack Back" class="img-glow-transition absolute inset-0 w-full h-full object-contain opacity-0 pointer-events-none z-0" />
                     <img id="biorush-pack-img" src="img/45caps.png" alt="BioRush Pack Front" class="img-glow-transition absolute inset-0 w-full h-full object-contain pointer-events-auto z-10" />
+                    <img id="biorush-pack-img-raw" src="" alt="Raw Content" class="img-glow-transition absolute inset-0 w-full h-full object-contain opacity-0 pointer-events-none z-[5]" />
                     
                     <div class="absolute inset-0 flex items-center justify-center p-2 z-20 pointer-events-none">
 
@@ -122,6 +123,17 @@
                                 </svg>
                             </div>
                         </button>
+
+                        <button id="btn-reveal-raw" 
+                                class="absolute top-[35%] left-1/2 transform -translate-x-1/2 flex flex-col items-center gap-1 group focus:outline-none active:scale-95 transition-transform duration-200 z-50 pointer-events-auto" 
+                                aria-label="Revelar interior">
+                            <div class="w-6 h-6 rounded-full border border-emerald-500/30 flex items-center justify-center bg-emerald-950/20 group-hover:border-emerald-400 group-hover:bg-emerald-500/10 transition-all duration-300">
+                                <!-- SVG de "Raw" o símbolo de interior -->
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-3 h-3 text-white/70">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 3.75h.008v.008H12v-.008Z" />
+                                </svg>
+                            </div>
+                        </button>
                     </div>
                 </div>
             </div>
@@ -147,7 +159,7 @@
 
                 <div class="w-full max-w-lg flex flex-col items-center gap-3 mt-2">
                     <p id="telemetry-feedback-panel" class="text-[8px] tracking-[0.2em] text-sky-500/60 uppercase text-center transition-colors duration-300">
-                        Activación con protocolo p.u.l.s.
+                        Configuración de sinergia molecular
                     </p>
                     
                     <div class="grid grid-cols-4 w-full gap-2 text-[9px] font-mono text-white/60">
@@ -189,15 +201,15 @@
     // 1. CONFIGURACIÓN DE CATÁLOGOS COMERCIALES
     // =========================================================================
     const BIORUSH_CATALOG = {
-    'ULTRAPULSOR': {
-            defaultVariant: 'FOCUS',
-            variants: {
-                'FOCUS': { desc: 'Enfoque mental óptimo', label: 'ULTRAPULSOR MENTAL FOCUS', img: 'img/45caps.png', imgBack: 'img/45capsBackLion.png', spec: '45X500MG // LION’S MANE', price: '$70.000', id: 'PULS45F' },
-                'ZEN': { desc: 'Silencio mental óptimo', label: 'ULTRAPULSOR MENTAL ZEN', img: 'img/45caps.png', imgBack: 'img/45capsBackReishi.png', spec: '45X500MG // REISHI', price: '$70.000', id: 'PULS45Z' },
-                'STAMINA': { desc: 'Potencia celular óptima', label: 'ULTRAPULSOR BODY STAMINA', img: 'img/45caps.png', imgBack: 'img/45capsBackCordy.png', spec: '45X500MG // CORDYCEPS', price: '$70.000', id: 'PULS45S' },
-                'CORE': { desc: 'Respuesta inmune óptima', label: 'ULTRAPULSOR BODY CORE', img: 'img/45caps.png', imgBack: 'img/45capsBackTail.png', spec: '45X500MG // TURKEY TAIL', price: '$70.000', id: 'PULS45C' }
-            }
-        },
+        'ULTRAPULSOR': {
+        defaultVariant: 'FOCUS',
+        variants: {
+            'FOCUS': { desc: 'Enfoque mental óptimo', label: 'ULTRAPULSOR MENTAL FOCUS', img: 'img/45caps.png', imgBack: 'img/45capsBackLion.png', imgRaw: 'img/maneRaw.png', spec: '45X500MG // LION’S MANE', price: '$70.000', id: 'PULS45F' },
+            'ZEN': { desc: 'Silencio mental óptimo', label: 'ULTRAPULSOR MENTAL ZEN', img: 'img/45caps.png', imgBack: 'img/45capsBackReishi.png', imgRaw: 'img/reishiRaw.png', spec: '45X500MG // REISHI', price: '$70.000', id: 'PULS45Z' },
+            'STAMINA': { desc: 'Potencia celular óptima', label: 'ULTRAPULSOR BODY STAMINA', img: 'img/45caps.png', imgBack: 'img/45capsBackCordy.png', imgRaw: 'img/cordyRaw.png', spec: '45X500MG // CORDYCEPS', price: '$70.000', id: 'PULS45S' },
+            'CORE': { desc: 'Respuesta inmune óptima', label: 'ULTRAPULSOR BODY CORE', img: 'img/45caps.png', imgBack: 'img/45capsBackTail.png', imgRaw: 'img/tailRaw.png', spec: '45X500MG // TURKEY TAIL', price: '$70.000', id: 'PULS45C' }
+        }
+    },
         'PULSOR': {
             defaultVariant: 'FOCUS',
             variants: {
@@ -231,47 +243,48 @@
     // ==========================================
     // 3. SISTEMA DE REVELADO (POINTER EVENTS)
     // ==========================================
-    function vincularBotonRevelado(btnId, frontImgId, backImgId, vectorId) {
-        const btn = getCachedEl(btnId);
-        const frontImg = getCachedEl(frontImgId);
-        const backImg = getCachedEl(backImgId);
-        const vectorSvg = getCachedEl(vectorId);
+// ==========================================
+    // 3. MOTOR DE ESTADO VISUAL (Centralizado)
+    // ==========================================
+    function aplicarModoVisual(modo) {
+        const front = getCachedEl('biorush-pack-img');
+        const back = getCachedEl('biorush-pack-img-back');
+        const raw = getCachedEl('biorush-pack-img-raw');
+        const svg = getCachedEl('laser-vector-target');
 
-        if (!btn || !frontImg || !backImg) return;
+        // Reset general
+        [front, back, raw].forEach(el => { if(el) el.style.opacity = '0'; });
+        
+        // Aplicar estado
+        if (modo === 'front') {
+            front.style.opacity = '1';
+            front.style.zIndex = '10';
+            back.style.zIndex = '0';
+            if (svg) { svg.style.opacity = '1'; svg.style.pointerEvents = 'auto'; }
+        } else if (modo === 'back') {
+            back.style.opacity = '1';
+            back.style.zIndex = '10';
+            front.style.zIndex = '0';
+            if (svg) { svg.style.opacity = '0'; svg.style.pointerEvents = 'none'; }
+        } else if (modo === 'raw') {
+            raw.style.opacity = '1';
+            if (svg) { svg.style.opacity = '0'; svg.style.pointerEvents = 'none'; }
+        }
+    }
 
-    const mostrarReverso = (e) => {
-        e.preventDefault();
-        
-        // 1. Ocultar frente
-        frontImg.style.opacity = '0';
-        // Esperamos a que la opacidad baje para mover el Z-Index
-        setTimeout(() => {
-            frontImg.style.zIndex = '0';
-        }, 600);
-        
-        // 2. Mostrar reverso
-        backImg.style.zIndex = '10'; // Traer al frente
-        backImg.style.opacity = '1';
-        
-        if (vectorSvg) vectorSvg.classList.add('opacity-0', 'pointer-events-none');
-        triggerHaptic(12);
-    };
+    function vincularBotones() {
+        const btnBio = getCachedEl('btn-reveal-bio');
+        const btnRaw = getCachedEl('btn-reveal-raw');
 
-    const ocultarReverso = () => {
-        // 1. Ocultar reverso
-        backImg.style.opacity = '0';
-        backImg.style.zIndex = '0';
-        
-        // 2. Mostrar frente
-        frontImg.style.zIndex = '10';
-        frontImg.style.opacity = '1';
-        
-        if (vectorSvg) vectorSvg.classList.remove('opacity-0', 'pointer-events-none');
-    };
+        // Eventos Bio (Reverso)
+        btnBio.addEventListener('pointerdown', (e) => { e.preventDefault(); aplicarModoVisual('back'); triggerHaptic(12); });
+        btnBio.addEventListener('pointerup', () => aplicarModoVisual('front'));
+        btnBio.addEventListener('pointerleave', () => aplicarModoVisual('front'));
 
-        btn.addEventListener('pointerdown', mostrarReverso);
-        btn.addEventListener('pointerup', ocultarReverso);
-        btn.addEventListener('pointerleave', ocultarReverso);
+        // Eventos Raw
+        btnRaw.addEventListener('pointerdown', (e) => { e.preventDefault(); aplicarModoVisual('raw'); triggerHaptic(10); });
+        btnRaw.addEventListener('pointerup', () => aplicarModoVisual('front'));
+        btnRaw.addEventListener('pointerleave', () => aplicarModoVisual('front'));
     }
 
     // ==========================================
@@ -287,7 +300,7 @@
             `).join('');
         }
         
-        vincularBotonRevelado('btn-reveal-bio', 'biorush-pack-img', 'biorush-pack-img-back', 'laser-vector-target');
+        vincularBotones();
         actualizarBioUI();
     }
 
@@ -308,56 +321,41 @@
         const itemConfig = BIORUSH_CATALOG[currentBioItem];
         const variantConfig = itemConfig.variants[currentBioVariant];
         
-        const drawerNode = getCachedEl('drawer-vault-node');
-        if (drawerNode) drawerNode.textContent = currentBioItem;
-
         const descEl = getCachedEl('biorush-description');
         const packImg = getCachedEl('biorush-pack-img');
         const packImgBack = getCachedEl('biorush-pack-img-back');
         
         if (descEl && packImg && packImgBack) {
             descEl.classList.add('opacity-0');
-            packImg.classList.replace('opacity-100', 'opacity-0');
-            packImgBack.classList.replace('opacity-100', 'opacity-0');
-
+            
             setTimeout(() => {
                 descEl.textContent = variantConfig.desc;
                 packImg.src = variantConfig.img;
                 packImgBack.src = variantConfig.imgBack;
+                getCachedEl('biorush-pack-img-raw').src = variantConfig.imgRaw;
                 
                 const labelTitle = getCachedEl('laser-variant-title');
-                const specEl = getCachedEl('biorush-spec');
-                const priceEl = getCachedEl('biorush-price');
-                
                 if (labelTitle) labelTitle.textContent = variantConfig.label;
-                if (specEl) specEl.textContent = variantConfig.spec;
-                if (priceEl) priceEl.textContent = variantConfig.price;
+                getCachedEl('biorush-spec').textContent = variantConfig.spec;
+                getCachedEl('biorush-price').textContent = variantConfig.price;
                 
                 descEl.classList.remove('opacity-0');
-                packImg.classList.replace('opacity-0', 'opacity-100');
             }, 120);
         }
 
+        // Actualizar estados visuales de menú
         Object.keys(BIORUSH_CATALOG).forEach(item => {
             const el = getCachedEl(`menu-bio-${item}`);
-            if (el) {
-                el.className = (item === currentBioItem) 
-                    ? "cursor-pointer tracking-[0.15em] transition-all duration-300 h-5 leading-none font-bold text-white scale-105 border-b border-sky-400 pb-0.5" 
-                    : "cursor-pointer tracking-[0.15em] transition-all duration-300 h-5 leading-none text-white/40 hover:text-white/80";
-            }
+            if (el) el.className = (item === currentBioItem) ? "cursor-pointer tracking-[0.15em] transition-all duration-300 h-5 leading-none font-bold text-white scale-105 border-b border-sky-400 pb-0.5" : "cursor-pointer tracking-[0.15em] transition-all duration-300 h-5 leading-none text-white/40 hover:text-white/80";
         });
 
-        const variantContainer = getCachedEl('biorush-variants-container');
-        if (variantContainer) {
-            variantContainer.innerHTML = Object.keys(itemConfig.variants).map(vKey => {
-                const isSelected = (vKey === currentBioVariant);
-                return `
-                    <span onclick="cambiarBioVariant('${vKey}')" 
-                          class="cursor-pointer transition-all duration-300 px-3 py-1 bg-black/40 backdrop-blur-md rounded-sm border ${isSelected ? 'border-white text-white font-black shadow-[0_0_12px_rgba(255,255,255,0.1)]' : 'border-white/5 text-white/40 hover:border-white/20 hover:text-white/80'}">
-                        ${vKey}
-                    </span>
-                `;
-            }).join('');
+        // Actualizar variantes
+        const vContainer = getCachedEl('biorush-variants-container');
+        if (vContainer) {
+            vContainer.innerHTML = Object.keys(itemConfig.variants).map(vKey => `
+                <span onclick="cambiarBioVariant('${vKey}')" class="cursor-pointer transition-all duration-300 px-3 py-1 bg-black/40 backdrop-blur-md rounded-sm border ${vKey === currentBioVariant ? 'border-white text-white font-black shadow-[0_0_12px_rgba(255,255,255,0.1)]' : 'border-white/5 text-white/40 hover:border-white/20 hover:text-white/80'}">
+                    ${vKey}
+                </span>`).join('');
         }
     }
 
@@ -445,7 +443,7 @@
 
     function habilitarReveladoTelemetria() {
         const feedbackPanel = getCachedEl('telemetry-feedback-panel');
-        const mensajeOriginal = "Activación con protocolo p.u.l.s.";
+        const mensajeOriginal = "Configuración de sinergia molecular";
 
         Object.keys(TELEMETRY_MEANINGS).forEach(id => {
             const el = getCachedEl(id);
