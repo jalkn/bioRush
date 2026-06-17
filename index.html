@@ -38,7 +38,7 @@
 <body class="antialiased selection:bg-white selection:text-black overflow-x-hidden text-white">
 
     <div id="page-bg-overlay"></div>
-    <div class="fixed inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/20 z-0 pointer-events-none"></div>
+    <div class="fixed inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/40 z-0 pointer-events-none"></div>
 
     <main id="main-vault" class="w-screen h-screen flex flex-col relative overflow-hidden">
 
@@ -52,7 +52,7 @@
                     </span>
                 </div>
                 <!-- Fila inferior: Slogan centrado -->
-                <span class="text-[7px] tracking-[0.4em] font-medium text-white/50 uppercase italic">
+                <span class="text-[7px] tracking-[0.4em] font-medium text-white/80 uppercase italic">
                     Sinergia Molecular Óptima
                 </span>
             </div>
@@ -126,7 +126,7 @@
             <div class="w-full flex flex-col items-center gap-4 shrink-0 relative z-20">
                 
                 <div class="flex flex-col items-center gap-3 w-full">
-                    <div id="biorush-items-menu" class="flex items-center justify-center space-x-6 text-[9px] tracking-[0.25em] font-bold text-white/50 uppercase"></div>
+                    <div id="biorush-items-menu" class="flex items-center justify-center space-x-6 text-[9px] tracking-[0.25em] font-bold text-white/80 uppercase"></div>
                     <div id="biorush-variants-container" class="flex flex-wrap items-center justify-center gap-2 text-[9px] tracking-[0.2em] font-mono select-none w-full max-w-sm"></div>
                 </div>
 
@@ -135,9 +135,9 @@
                         ACTIVAR
                     </button>
                     
-                    <div class="flex items-center justify-center gap-3 font-mono text-[8px] tracking-[0.2em] text-white/30 uppercase">
+                    <div class="flex items-center justify-center gap-3 font-mono text-[8px] tracking-[0.2em] text-white/80 uppercase">
                         <span id="biorush-spec">LION’S MANE</span>
-                        <span class="text-white/10">•</span>
+                        <span class="text-white/30">•</span>
                         <span id="biorush-price">$68.000</span>
                     </div>
                 </div>
@@ -147,21 +147,21 @@
                         Configuración de sinergia molecular
                     </p>
                     
-                    <div class="grid grid-cols-4 w-full gap-2 text-[9px] font-mono text-white/60">
+                    <div class="grid grid-cols-4 w-full gap-2 text-[9px] font-mono text-white/80">
                         <div id="sub-sets-solar" class="flex flex-col items-center gap-1 cursor-help hover:text-sky-400 transition-colors">
-                            <span class="text-[7px] text-white/20 tracking-widest">HZ</span>
+                            <span class="text-[7px] text-white/50 tracking-widest">HZ</span>
                             <span class="font-bold">0.00</span>
                         </div>
                         <div id="telemetry-sphere-idx" class="flex flex-col items-center gap-1 cursor-help hover:text-sky-400 transition-colors">
-                            <span class="text-[7px] text-white/20 tracking-widest">IDX</span>
+                            <span class="text-[7px] text-white/50 tracking-widest">IDX</span>
                             <span class="font-bold">0000</span>
                         </div>
                         <div id="telemetry-active-node" class="flex flex-col items-center gap-1 cursor-help hover:text-sky-400 transition-colors">
-                            <span class="text-[7px] text-white/20 tracking-widest">NOD</span>
+                            <span class="text-[7px] text-white/50 tracking-widest">NOD</span>
                             <span class="font-bold">0000</span>
                         </div>
                         <div id="sub-reps-tension" class="flex flex-col items-center gap-1 cursor-help hover:text-sky-400 transition-colors">
-                            <span class="text-[7px] text-white/20 tracking-widest">TNS</span>
+                            <span class="text-[7px] text-white/50 tracking-widest">TNS</span>
                             <span class="font-bold">0.0</span>
                         </div>
                     </div>
@@ -337,14 +337,14 @@
         // Actualizar estados visuales de menú
         Object.keys(BIORUSH_CATALOG).forEach(item => {
             const el = getCachedEl(`menu-bio-${item}`);
-            if (el) el.className = (item === currentBioItem) ? "cursor-pointer tracking-[0.15em] transition-all duration-300 h-5 leading-none font-bold text-white scale-105 border-b border-sky-400 pb-0.5" : "cursor-pointer tracking-[0.15em] transition-all duration-300 h-5 leading-none text-white/40 hover:text-white/80";
+            if (el) el.className = (item === currentBioItem) ? "cursor-pointer tracking-[0.15em] transition-all duration-300 h-5 leading-none font-bold text-white scale-105 border-b border-sky-400 pb-0.5" : "cursor-pointer tracking-[0.15em] transition-all duration-300 h-5 leading-none text-white/80 hover:text-white/80";
         });
 
         // Actualizar variantes
         const vContainer = getCachedEl('biorush-variants-container');
         if (vContainer) {
             vContainer.innerHTML = Object.keys(itemConfig.variants).map(vKey => `
-                <span onclick="cambiarBioVariant('${vKey}')" class="cursor-pointer transition-all duration-300 px-3 py-1 bg-black/40 backdrop-blur-md rounded-sm border ${vKey === currentBioVariant ? 'border-white text-white font-black shadow-[0_0_12px_rgba(255,255,255,0.1)]' : 'border-white/5 text-white/40 hover:border-white/20 hover:text-white/80'}">
+                <span onclick="cambiarBioVariant('${vKey}')" class="cursor-pointer transition-all duration-300 px-3 py-1 bg-black/40 backdrop-blur-md rounded-sm border ${vKey === currentBioVariant ? 'border-white text-white font-black shadow-[0_0_12px_rgba(255,255,255,0.1)]' : 'border-white/5 text-white/80 hover:border-white/20 hover:text-white/80'}">
                     ${vKey}
                 </span>`).join('');
         }
