@@ -46,7 +46,9 @@
     <div class="flex items-center justify-between w-full"> 
         
         <div class="flex items-center gap-3">
-            <img src="img/lift.png" alt="Logo" class="h-6 w-auto object-contain opacity-90" />
+            <a href="index.html" class="hover:opacity-100 transition-opacity duration-300">
+                <img src="img/lift.png" alt="Back" class="h-6 w-auto object-contain opacity-60" />
+            </a>
             <div class="flex flex-col sm:flex-row sm:items-center gap-0 sm:gap-2">
                 <span class="text-[11px] tracking-[0.25em] font-black text-white uppercase">BIORUSH</span>
             </div>
@@ -103,83 +105,85 @@
                     </div>
                 </div>
             </div>
-            
-            <div class="w-full flex flex-col items-center gap-4 shrink-0 relative z-20">
-    
-
-
-                    
-                <div class="flex flex-col gap-4 w-full items-center">
-                    <!-- Fila superior: Botones en los extremos -->
-                    <div class="flex items-center justify-between w-full max-w-sm px-4">
-                        <button id="btn-reveal-raw" 
-                                class="flex flex-col items-center gap-1 group focus:outline-none active:scale-95 transition-transform duration-200 pointer-events-auto" 
-                                aria-label="Revelar interior">
-                            <div class="w-6 h-6 rounded-full border border-sky-500/30 flex items-center justify-center bg-sky-950/20 group-hover:border-sky-400 group-hover:bg-sky-500/10 transition-all duration-300">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-3 h-3 text-white/70">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 3.75h.008v.008H12v-.008Z" />
-                                </svg>
-                            </div>
-                        </button>
-
-                        <button id="btn-reveal-bio" 
-                                class="flex flex-col items-center gap-1 group focus:outline-none active:scale-95 transition-transform duration-200 pointer-events-auto" 
-                                aria-label="Revelar reverso">
-                            <div class="w-6 h-6 rounded-full border border-sky-500/30 flex items-center justify-center bg-sky-950/20 group-hover:border-sky-400 group-hover:bg-sky-500/10 transition-all duration-300">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-3 h-3 text-white/70 group-hover:text-sky-400 transition-colors">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z" />
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
-                                </svg>
-                            </div>
-                        </button>
-                    </div>
-
-                    <!-- Fila inferior: Variantes centradas -->
-                    <div id="biorush-variants-container" class="flex flex-wrap items-center justify-center gap-2 text-[9px] tracking-[0.2em] font-mono select-none w-full max-w-sm">
-                    </div>
-
-                    <div class="flex flex-col items-center gap-2 w-full">
-                        <button onclick="adquirirNodo()" class="w-full max-w-[280px] py-3 bg-white/5 backdrop-blur-md text-white font-black text-[11px] tracking-[0.3em] uppercase rounded-sm border border-white/10 hover:border-sky-500/50 hover:bg-sky-500/10 transition-all duration-300">
-                            ACTIVAR
-                        </button>
-                        
-                        <div class="flex items-center justify-center gap-1 font-mono text-[8px] tracking-[0.3em] text-white/80">
-                            <span id="biorush-spec">LION’S MANE</span>
-                            <span class="text-white/30">•</span>
-                            <span id="biorush-price">$68.000</span>
-                        </div>
-                    </div>
-                </div>
-
-
-
-                
-                <div class="w-full max-w-lg flex flex-col items-center gap-3 mt-2">
-                    <p id="telemetry-feedback-panel" class="text-[8px] tracking-[0.2em] text-sky-500/60 uppercase text-center transition-colors duration-300">
-                        Pulsor: Protocolo de sinergia BIOCINETICA P.U.L.S.
-                    </p>
-                    
-                    <div class="grid grid-cols-4 w-full gap-2 text-[9px] font-mono tracking-[0.2em] text-white/60">
-                        <div id="sub-sets-solar" class="flex flex-col items-center gap-1 cursor-help hover:text-sky-400 transition-colors">
-                            <span class="text-[7px] text-white/30 tracking-widest">HZ</span>
-                            <span class="font-bold">0.00</span>
-                        </div>
-                        <div id="telemetry-sphere-idx" class="flex flex-col items-center gap-1 cursor-help hover:text-sky-400 transition-colors">
-                            <span class="text-[7px] text-white/30 tracking-widest">IDX</span>
-                            <span class="font-bold">0000</span>
-                        </div>
-                        <div id="telemetry-active-node" class="flex flex-col items-center gap-1 cursor-help hover:text-sky-400 transition-colors">
-                            <span class="text-[7px] text-white/30 tracking-widest">NOD</span>
-                            <span class="font-bold">0000</span>
-                        </div>
-                        <div id="sub-reps-tension" class="flex flex-col items-center gap-1 cursor-help hover:text-sky-400 transition-colors">
-                            <span class="text-[7px] text-white/30 tracking-widest">TNS</span>
-                            <span class="font-bold">0.0</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
+
+<section class="py-1">
+    <div class="flex flex-wrap items-center justify-center text-[9px] tracking-[0.2em] select-none w-full max-w-sm mx-auto">
+        <a href="vault.html" id="telemetry-feedback-panel" class="flex flex-col items-center justify-center h-8 w-auto rounded-sm transition-opacity hover:opacity-70">
+            <!-- La imagen -->
+            <img src="img/logo.png" alt="Logo" class="h-5 w-auto object-contain opacity-80" />
+            
+            <!-- El contenedor del texto (vacío por defecto) -->
+            <span class="text-[7px] tracking-[0.3em] text-sky-400 uppercase mt-1"></span>
+        </a>
+    </div>
+</section>
+
+
+
+<section class="w-full max-w-sm mx-auto px-6 py-4 backdrop-blur-sm">
+    <!-- Telemetría Técnica -->
+    <div class="grid grid-cols-4 gap-2 items-center text-center h-1 gap-x-2 text-center text-[9px] font-mono text-white/60">
+        
+        <div class="flex flex-col gap-1">
+            <span id="sub-sets-solar" class="font-bold text-sky-400">0.00</span>
+        </div>
+        <div class="flex flex-col gap-1">
+            <span id="telemetry-sphere-idx" class="font-bold text-white">0000</span>
+        </div>
+        <div class="flex flex-col gap-1">
+            <span id="telemetry-active-node" class="font-bold text-white">0000</span>
+        </div>
+        <div class="flex flex-col gap-1">
+            <span id="sub-reps-tension" class="font-bold text-sky-400">0.0</span>
+        </div>
+        
+    </div>
+</section>
+
+
+<section class="w-full max-w-sm mx-auto px-6 py-4 backdrop-blur-sm flex flex-col gap-4">
+    
+    <!-- Fila integrada: RAW - ACTIVAR - BIO -->
+    <div class="grid grid-cols-[auto_1fr_auto] items-center gap-2 w-full">
+        
+        <!-- Botón RAW -->
+        <button id="btn-reveal-raw" class="flex items-center justify-center w-10 h-10 rounded-sm border border-white/10 bg-white/5 hover:border-sky-500/50 hover:bg-sky-500/10 transition-all duration-300" aria-label="Revelar interior">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 text-white/70">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 3.75h.008v.008H12v-.008Z" />
+            </svg>
+        </button>
+
+        <!-- Botón ACTIVAR -->
+        <button onclick="adquirirNodo()" class="w-full py-3 bg-white/5 backdrop-blur-md text-white font-black text-[11px] tracking-[0.3em] uppercase rounded-sm border border-white/10 hover:border-sky-500/50 hover:bg-sky-500/10 transition-all duration-300">
+            ACTIVAR
+        </button>
+
+        <!-- Botón BIO -->
+        <button id="btn-reveal-bio" class="flex items-center justify-center w-10 h-10 rounded-sm border border-white/10 bg-white/5 hover:border-sky-500/50 hover:bg-sky-500/10 transition-all duration-300" aria-label="Revelar reverso">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 text-white/70">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z" />
+                <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+            </svg>
+        </button>
+    </div>
+
+</section>
+
+<section class="py-1">
+    <div id="biorush-variants-container" class="flex flex-wrap items-center justify-center gap-2 h-8 text-[9px] tracking-[0.2em] font-mono select-none w-full max-w-sm mx-auto">
+    </div>
+</section>
+
+<section class="py-1">
+    <!-- Especificaciones -->
+    <div class="flex flex-wrap items-center justify-center gap-2 text-white/40 text-[9px] tracking-[0.2em] font-mono select-none w-full max-w-sm mx-auto">
+        <span id="biorush-spec">LION’S MANE</span>
+        <span>|</span>
+        <span id="biorush-price">$68.000</span>
+    </div>
+</section>
+
 
         <footer class="h-[72px] shrink-0 bg-gradient-to-t from-black/60 via-black/40 to-transparent backdrop-blur-md z-50 flex items-center justify-center">
             <div class="p-6 flex justify-center items-center w-full min-h-[72px]">
@@ -434,20 +438,28 @@
 
     function habilitarReveladoTelemetria() {
         const feedbackPanel = getCachedEl('telemetry-feedback-panel');
-        const mensajeOriginal = "Configuración de sinergia molecular";
+        const mensajeOriginal = "img/logo.png"; // Ruta del logo
+        
+        // Asumiendo que dentro del enlace tienes una imagen y un span para el texto
+        const logoImg = feedbackPanel.querySelector('img');
+        const textoFeedback = feedbackPanel.querySelector('span') || feedbackPanel;
 
         Object.keys(TELEMETRY_MEANINGS).forEach(id => {
             const el = getCachedEl(id);
             if (!el) return;
 
             el.addEventListener('click', () => {
-                feedbackPanel.style.color = '#38bdf8';
+                // 1. Ocultar el logo y mostrar el texto de telemetría
+                if (logoImg) logoImg.style.display = 'none';
                 
-                feedbackPanel.textContent = TELEMETRY_MEANINGS[id].toLowerCase(); 
+                feedbackPanel.style.color = '#38bdf8';
+                textoFeedback.textContent = TELEMETRY_MEANINGS[id].toLowerCase(); 
                 
                 setTimeout(() => {
+                    // 2. Restaurar el logo y limpiar el texto
+                    if (logoImg) logoImg.style.display = 'block';
                     feedbackPanel.style.color = '';
-                    feedbackPanel.textContent = mensajeOriginal.toLowerCase();
+                    textoFeedback.textContent = ''; // Limpiamos el texto
                 }, 8000);
             });
         });
