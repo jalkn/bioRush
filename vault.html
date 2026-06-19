@@ -74,10 +74,6 @@
 
         <div class="flex-1 overflow-y-auto w-full flex flex-col items-center justify-center py-6 px-4 gap-y-3">
 
-            <div id="benefits-slider" class="w-full px-1 py-1 flex items-center justify-center">
-                <div id="active-benefit" class="text-[10px] font-mono text-white/95 transition-all duration-200 ease-in-out opacity-0 tracking-widest text-center">
-                </div>
-            </div>
 
             <div id="biorush-pack-container" class="relative w-full max-w-[180px] xs:max-w-[200px] sm:max-w-[240px] md:max-w-[280px] aspect-[13/15] shrink-0 drop-shadow-[0_40px_60px_rgba(0,0,0,0.9)]">
                 <div class="w-full h-full relative overflow-hidden bg-transparent">
@@ -96,7 +92,7 @@
                                 
                                 <text class="fill-white font-black text-[13px] sm:text-[12px] tracking-[0.25em] sm:tracking-[0.3em] uppercase transition-all duration-500">
                                     <textPath id="laser-variant-title" href="#textPath-top" startOffset="50%" text-anchor="middle">
-                                        BIORUSH MENTAL FOCUS
+                                        BIORUSH  FOCUS
                                     </textPath>
                                 </text>
                                 
@@ -112,12 +108,13 @@
                                     <text x="200" y="245" text-anchor="middle" class="fill-white/30 text-[6px] tracking-[0.4em] font-mono"></text>
                                 </g>
                                 
-                                <text  class="fill-white/60 font-black text-[11px] sm:text-[10px] tracking-[0.25em] uppercase transition-all duration-500">
-                                    <textPath id="biorush-spec" href="#textPath-bottom" startOffset="50%" text-anchor="middle">
-                                        LION'S MANE
-                                    </textPath>
-
-                                </text>
+                                <!-- Reemplaza el bloque <text> que contenía el textPath id="biorush-spec" por este: -->
+                                <foreignObject x="65" y="250" width="270" height="40" class="overflow-visible">
+                                    <div id="benefits-slider" class="w-full h-full flex items-center justify-center pointer-events-none">
+                                        <div id="active-benefit" class="text-[10px] font-mono text-white/95 transition-all duration-500 ease-in-out opacity-0 tracking-[0.25em] uppercase text-center">
+                                        </div>
+                                    </div>
+                                </foreignObject>
                             </svg>
                     </div>
                 </div>
@@ -168,28 +165,28 @@
             defaultVariant: 'FOCUS',
             variants: {
                 'FOCUS': { 
-                    label: 'PULSOR MENTAL FOCUS', desc: 'Enfoque mental óptimo', 
+                    label: 'PULSOR 1 FOCUS', desc: 'Enfoque 1 óptimo', 
                     spec: 'LION’S MANE', price: '$70.000', id: 'PULS45F',
                     img: 'img/45caps.png', imgBack: 'img/45mane.png', imgRaw: 'img/maneRaw.png',
                     telemetry: { COL: '24°/90%', FRU: '18°/95%', SEC: '40°/12h', MOL: '98.2%' },
-                    benefits: ['NEUROGÉNESIS', 'CLARIDAD COGNITIVA', 'MEMORIA FLUIDA', 'NIEBLA MENTAL (-)', 'OPTIMIZACIÓN SINÁPTICA', 'ENFOQUE PROFUNDO', 'AGUDEZA MENTAL', 'REPARACIÓN NEURONAL', 'ESTABILIDAD EMOCIONAL', 'PRODUCTIVIDAD SOSTENIDA']
+                    benefits: ['NEUROGÉNESIS', 'CLARIDAD COGNITIVA', 'MEMORIA FLUIDA', 'NIEBLA  (-)', 'OPTIMIZACIÓN SINÁPTICA', 'ENFOQUE PROFUNDO', 'AGUDEZA ', 'REPARACIÓN NEURONAL', 'ENFOQUE', 'PRODUCTIVIDAD SOSTENIDA']
                 },
                 'ZEN': { 
-                    label: 'PULSOR MENTAL ZEN', desc: 'Silencio mental óptimo', 
+                    label: 'PULSOR  ZEN', desc: 'Silencio  óptimo', 
                     spec: 'REISHI', price: '$70.000', id: 'PULS45Z',
                     img: 'img/45caps.png', imgBack: 'img/45reishi.png', imgRaw: 'img/reishiRaw.png',
                     telemetry: { COL: '22°/85%', FRU: '16°/90%', SEC: '38°/14h', MOL: '97.5%' },
-                    benefits: ['REDUCCIÓN CORTISOL', 'CALMA PROFUNDA', 'REGULACIÓN NERVIOSA', 'DESCANSO REPARADOR', 'EQUILIBRIO MENTAL', 'ADAPTACIÓN AL ESTRÉS', 'PAZ COGNITIVA', 'SUEÑO LÚCIDO', 'RELAJACIÓN MUSCULAR', 'CLARIDAD INTERNA']
+                    benefits: ['REDUCCIÓN CORTISOL', 'CALMA PROFUNDA', 'REGULACIÓN NERVIOSA', 'DESCANSO REPARADOR', 'EQUILIBRIO ', 'ADAPTACIÓN AL ESTRÉS', 'PAZ COGNITIVA', 'SUEÑO LÚCIDO', 'RELAJACIÓN MUSCULAR', 'CLARIDAD INTERNA']
                 },
                 'STAMINA': { 
-                    label: 'PULSOR BODY STAMINA', desc: 'Potencia celular óptima', 
+                    label: 'PULSOR  STAMINA', desc: 'Potencia celular óptima', 
                     spec: 'CORDYCEPS', price: '$70.000', id: 'PULS45S',
                     img: 'img/45caps.png', imgBack: 'img/45cordy.png', imgRaw: 'img/cordyRaw.png',
                     telemetry: { COL: '20°/80%', FRU: '15°/90%', SEC: '42°/10h', MOL: '99.0%' },
                     benefits: ['POTENCIA AERÓBICA', 'ENERGÍA CELULAR (ATP)', 'RESISTENCIA FÍSICA', 'OXIGENACIÓN SANGUÍNEA', 'RECUPERACIÓN RÁPIDA', 'VITALIDAD GENERAL', 'RENDIMIENTO ATLÉTICO', 'FUNCIÓN RESPIRATORIA', 'METABOLISMO ACTIVO', 'FATIGA (-)']
                 },
                 'CORE': { 
-                    label: 'PULSOR BODY CORE', desc: 'Respuesta inmune óptima', 
+                    label: 'PULSOR  CORE', desc: 'Respuesta inmune óptima', 
                     spec: 'TURKEY TAIL', price: '$70.000', id: 'PULS45C',
                     img: 'img/45caps.png', imgBack: 'img/45turkey.png', imgRaw: 'img/turkeyRaw.png',
                     telemetry: { COL: '23°/90%', FRU: '19°/95%', SEC: '40°/12h', MOL: '98.5%' },
@@ -330,32 +327,26 @@
 
     // Asegúrate de llamar a esta función dentro de inicializarBioRush()
 
-    function actualizarBioUI() {
+ function actualizarBioUI() {
         const itemConfig = BIORUSH_CATALOG[currentBioItem];
         const variantConfig = itemConfig.variants[currentBioVariant];
         
-        // 1. Actualización de elementos visuales (Imágenes y Textos)
-        const specEl = getCachedEl('biorush-spec'); // Apunta al textPath inferior
+        // 1. Actualización de elementos visuales
+        const specEl = getCachedEl('biorush-spec');
         const packImg = getCachedEl('biorush-pack-img');
         const packImgBack = getCachedEl('biorush-pack-img-back');
         const packImgRaw = getCachedEl('biorush-pack-img-raw');
 
         if (specEl && packImg && packImgBack) {
-            specEl.classList.add('opacity-0'); // Opcional: si quieres conservar el efecto de fade
-            
+            specEl.classList.add('opacity-0');
             setTimeout(() => {
-                // Actualizamos la especificación técnica en el arco inferior
                 specEl.textContent = variantConfig.spec; 
-                
-                // Actualizamos imágenes
                 packImg.src = variantConfig.img;
                 packImgBack.src = variantConfig.imgBack;
                 if(packImgRaw) packImgRaw.src = variantConfig.imgRaw;
                 
-                // Actualizamos el título superior
                 const labelTitle = getCachedEl('laser-variant-title');
                 if (labelTitle) labelTitle.textContent = variantConfig.label;
-                
                 specEl.classList.remove('opacity-0');
             }, 120);
         }
@@ -363,18 +354,15 @@
         // 2. Actualización de Telemetría
         const tele = variantConfig.telemetry;
         const teleMap = { 'tele-col': tele.COL, 'tele-fru': tele.FRU, 'tele-sec': tele.SEC, 'tele-mol': tele.MOL };
-        
         Object.entries(teleMap).forEach(([id, val]) => {
             const el = getCachedEl(id);
             if (el) el.textContent = val;
         });
 
-        // 3. Actualización dinámica del Slider de Beneficios
+        // 3. Sistema de beneficios (Slider dentro del SVG)
         const sliderEl = getCachedEl('active-benefit');
         if (sliderEl && variantConfig.benefits) {
             let bIndex = 0;
-            
-            // Función auxiliar para formato: "NEUROGÉNESIS (NGF)" -> "Neurogénesis (ngf)"
             const toSentenceCase = (str) => {
                 const lower = str.toLowerCase();
                 return lower.charAt(0).toUpperCase() + lower.slice(1);
@@ -384,9 +372,7 @@
 
             const rotateBenefits = () => {
                 sliderEl.style.opacity = '0'; 
-                
                 setTimeout(() => {
-                    // Aplicamos el formato sin el punto/símbolo inicial
                     sliderEl.textContent = toSentenceCase(variantConfig.benefits[bIndex]);
                     sliderEl.style.opacity = '1'; 
                     bIndex = (bIndex + 1) % variantConfig.benefits.length;
@@ -394,7 +380,7 @@
             };
 
             rotateBenefits(); 
-            window.benefitInterval = setInterval(rotateBenefits, 1500);
+            window.benefitInterval = setInterval(rotateBenefits, 3000);
         }
 
         // 4. Actualizar estados visuales de menú
