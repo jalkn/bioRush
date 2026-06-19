@@ -42,37 +42,30 @@
 
     <main id="main-vault" class="w-screen h-screen flex flex-col relative overflow-hidden">
 
-<header class="h-[80px] shrink-0 bg-gradient-to-b from-black/90 via-black/40 to-transparent backdrop-blur-md z-50 flex items-center px-6">
-    <!-- Contenedor que agrupa todo y lo centra -->
+<header class="h-[70px] shrink-0 bg-gradient-to-b from-black/90 via-black/40 to-transparent backdrop-blur-md z-50 flex items-center justify-center px-6">
     <div class="flex items-center justify-center gap-3 w-full"> 
-        
-        <!-- Logo -->
         <img src="img/lift.png" alt="Back" class="h-6 w-auto object-contain" />
-        
-        <!-- Texto -->
         <span class="text-[11px] tracking-[0.25em] font-black text-white uppercase">BIORUSH</span>
-
     </div>
 </header>
 
-<section class="w-full max-w-sm mx-auto py-3 flex flex-col items-center">
-
-    <div class="flex flex-col items-center justify-center w-full mb-6 min-h-[30px]">
-        <span id="panel-telemetry-data" class="text-[9px] text-center tracking-[0.4em] text-sky-400/80 uppercase transition-all duration-300">
+<section class="w-full max-w-sm mx-auto pt-2 pb-2 px-6 flex flex-col items-center">
+    <div class="w-full flex justify-center mb-6">
+        <span id="panel-telemetry-data" class="text-[8px] tracking-[0.4em] text-sky-400/80 uppercase transition-all duration-300">
            SINERGIA MOLECULAR ÓPTIMA
         </span>
     </div>
 
-    <div class="grid grid-cols-4 gap-y-6 gap-x-4 w-full px-6 text-center">
+    <div class="grid grid-cols-4 gap-y-6 gap-x-4 w-full text-center">
         <span id="sub-sets-solar" class="font-mono text-white/50 text-[12px] cursor-pointer hover:text-sky-400 transition-colors">0.00</span>
         <span id="telemetry-sphere-idx" class="font-mono text-white/50 text-[12px] cursor-pointer hover:text-sky-400 transition-colors">0000</span>
         <span id="telemetry-active-node" class="font-mono text-white/50 text-[12px] cursor-pointer hover:text-sky-400 transition-colors">0000</span>
         <span id="sub-reps-tension" class="font-mono text-white/50 text-[12px] cursor-pointer hover:text-sky-400 transition-colors">0.0</span>
+        
     </div>
-
-
-
 </section>
+
+
 
 
         <div class="flex-1 overflow-y-auto w-full flex flex-col items-center justify-center py-6 px-4 gap-y-6">
@@ -122,15 +115,19 @@
         </div>
 
 
-<section class="w-full max-w-sm mx-auto py-3 flex flex-col items-center">
-    <div class="grid grid-cols-4 gap-y-6 gap-x-4 w-full px-6 text-center">
+
+<section class="w-full max-w-sm mx-auto pt-2 pb-2 px-6 flex flex-col items-center">
+
+    <div class="grid grid-cols-4 gap-y-6 gap-x-4 w-full text-center">
+
         <span id="tele-col" class="font-mono text-white/50 text-[12px] cursor-pointer hover:text-sky-400 transition-colors">--</span>
         <span id="tele-fru" class="font-mono text-white/50 text-[12px] cursor-pointer hover:text-sky-400 transition-colors">--</span>
         <span id="tele-sec" class="font-mono text-white/50 text-[12px] cursor-pointer hover:text-sky-400 transition-colors">--</span>
         <span id="tele-mol" class="font-mono text-white/50 text-[12px] cursor-pointer hover:text-sky-400 transition-colors">--</span>
     </div>
-
 </section>
+
+
 
 
 
