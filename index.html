@@ -194,28 +194,28 @@
             defaultVariant: 'FOCUS',
             variants: {
                 'FOCUS': { 
-                    label: 'PULSOR 1 FOCUS', desc: 'Enfoque mental óptimo', 
+                    label: 'PULSOR FOCUS', desc: 'Enfoque y claridad cognitiva', 
                     spec: 'LION’S MANE', price: '$70.000', id: 'PULS45F',
                     img: 'img/45caps.png', imgBack: 'img/45mane.png', imgRaw: 'img/maneRaw.png',
                     telemetry: { COL: '24°/90%', FRU: '18°/95%', SEC: '40°/12h', MOL: '98.2%' },
                     benefits: ['NEUROGÉNESIS', 'CLARIDAD COGNITIVA', 'MEMORIA FLUIDA', 'NIEBLA  (-)', 'OPTIMIZACIÓN SINÁPTICA', 'ENFOQUE PROFUNDO', 'AGUDEZA ', 'REPARACIÓN NEURONAL', 'ENFOQUE', 'PRODUCTIVIDAD SOSTENIDA']
                 },
                 'ZEN': { 
-                    label: 'PULSOR  ZEN', desc: 'Silencio mental óptimo', 
+                    label: 'PULSOR ZEN', desc: 'Silencio mental óptimo', 
                     spec: 'REISHI', price: '$70.000', id: 'PULS45Z',
                     img: 'img/45caps.png', imgBack: 'img/45reishi.png', imgRaw: 'img/reishiRaw.png',
                     telemetry: { COL: '22°/85%', FRU: '16°/90%', SEC: '38°/14h', MOL: '97.5%' },
                     benefits: ['REDUCCIÓN CORTISOL', 'CALMA PROFUNDA', 'REGULACIÓN NERVIOSA', 'DESCANSO REPARADOR', 'EQUILIBRIO ', 'ADAPTACIÓN AL ESTRÉS', 'PAZ COGNITIVA', 'SUEÑO LÚCIDO', 'RELAJACIÓN MUSCULAR', 'CLARIDAD INTERNA']
                 },
                 'STAMINA': { 
-                    label: 'PULSOR  STAMINA', desc: 'Potencia celular óptima', 
+                    label: 'PULSOR STAMINA', desc: 'Potencia celular óptima', 
                     spec: 'CORDYCEPS', price: '$70.000', id: 'PULS45S',
                     img: 'img/45caps.png', imgBack: 'img/45cordy.png', imgRaw: 'img/cordyRaw.png',
                     telemetry: { COL: '20°/80%', FRU: '15°/90%', SEC: '42°/10h', MOL: '99.0%' },
                     benefits: ['POTENCIA AERÓBICA', 'ENERGÍA CELULAR (ATP)', 'RESISTENCIA FÍSICA', 'OXIGENACIÓN SANGUÍNEA', 'RECUPERACIÓN RÁPIDA', 'VITALIDAD GENERAL', 'RENDIMIENTO ATLÉTICO', 'FUNCIÓN RESPIRATORIA', 'METABOLISMO ACTIVO', 'FATIGA (-)']
                 },
                 'CORE': { 
-                    label: 'PULSOR  CORE', desc: 'Respuesta inmune óptima', 
+                    label: 'PULSOR CORE', desc: 'Respuesta inmune óptima', 
                     spec: 'TURKEY TAIL', price: '$70.000', id: 'PULS45C',
                     img: 'img/45caps.png', imgBack: 'img/45turkey.png', imgRaw: 'img/turkeyRaw.png',
                     telemetry: { COL: '23°/90%', FRU: '19°/95%', SEC: '40°/12h', MOL: '98.5%' },
@@ -279,16 +279,24 @@
     function vincularBotones() {
         const btnBio = getCachedEl('btn-reveal-bio');
         const btnRaw = getCachedEl('btn-reveal-raw');
+        
+        // Estado para gestionar el modo actual y permitir el "cierre" al presionar de nuevo
+        let modoActual = 'front';
 
-        // Eventos Bio (Reverso)
-        btnBio.addEventListener('pointerdown', (e) => { e.preventDefault(); aplicarModoVisual('back'); triggerHaptic(12); });
-        btnBio.addEventListener('pointerup', () => aplicarModoVisual('front'));
-        btnBio.addEventListener('pointerleave', () => aplicarModoVisual('front'));
+        const alternarModo = (modo, haptic) => {
+            if (modoActual === modo) {
+                aplicarModoVisual('front');
+                modoActual = 'front';
+            } else {
+                aplicarModoVisual(modo);
+                modoActual = modo;
+                triggerHaptic(haptic);
+            }
+        };
 
-        // Eventos Raw
-        btnRaw.addEventListener('pointerdown', (e) => { e.preventDefault(); aplicarModoVisual('raw'); triggerHaptic(10); });
-        btnRaw.addEventListener('pointerup', () => aplicarModoVisual('front'));
-        btnRaw.addEventListener('pointerleave', () => aplicarModoVisual('front'));
+        // Eventos de clic simple
+        btnBio.addEventListener('click', () => alternarModo('back', 12));
+        btnRaw.addEventListener('click', () => alternarModo('raw', 10));
     }
 
     // ==========================================
