@@ -140,8 +140,8 @@
 <section class="w-full max-w-sm mx-auto px-6 py-4 border-t border-white/5 flex flex-col gap-3">
 
     <div class="flex flex-col items-center justify-center w-full mt-1">
-        <span id="panel-telemetry-data" class="text-[9px] text-center tracking-[0.5em] text-sky-400 uppercase transition-colors duration-300">
-            SINERGIA MOLECULAR ÓPTIMA
+        <span id="panel-telemetry-data" class="text-[8px] text-center tracking-[0.5em] text-sky-400 uppercase transition-colors duration-300">
+            PROTOCOLO BIOCINÉTICO P.U.L.S.<span class="opacity-30">O.R.</span>
         </span>
     </div>
 
@@ -369,13 +369,15 @@
         getCachedEl('tele-fru').textContent = tele.FRU;
         getCachedEl('tele-sec').textContent = tele.SEC;
         getCachedEl('tele-mol').textContent = tele.MOL;
+        // ... dentro de la función actualizarBioUI() ...
+
         if (vContainer) {
             vContainer.innerHTML = Object.keys(itemConfig.variants).map(vKey => `
                 <span onclick="cambiarBioVariant('${vKey}')" 
-                    class="cursor-pointer transition-all duration-300 px-3 py-1 rounded-sm border whitespace-nowrap 
+                    class="cursor-pointer transition-all duration-300 px-4 py-3 rounded-sm border backdrop-blur-md whitespace-nowrap font-black uppercase tracking-[0.3em]
                     ${vKey === currentBioVariant 
-                        ? 'border-white text-white font-black' 
-                        : 'border-white/10 text-white/50 hover:border-white/30 hover:text-white'}">
+                        ? 'bg-sky-500/20 border-sky-500/50 text-white' 
+                        : 'bg-white/10 border-white/20 text-white/60 hover:border-sky-500/50 hover:bg-sky-500/10'}">
                     ${vKey}
                 </span>`).join('');
         }
@@ -469,9 +471,13 @@
         
     };
 
+// =========================================================================
+    // 5. MOTOR DE TELEMETRÍA (PROTOCOLO PULSOR - ACTUALIZADO)
+    // =========================================================================
     function habilitarReveladoTelemetria() {
         const telemetryData = getCachedEl('panel-telemetry-data');
-        const textoOriginal = "PROTOCOLO BIOCINÉTICO P.U.L.S.";
+        // Texto con el efecto visual deseado
+        const textoOriginal = "PROTOCOLO BIOCINÉTICO P.U.L.S.<span class='opacity-30'>O.R.</span>";
         let ultimoElemento = null;
 
         Object.keys(TELEMETRY_MEANINGS).forEach(id => {
@@ -479,25 +485,21 @@
             if (!el) return;
 
             el.addEventListener('click', () => {
-                // 1. Resetear color del elemento anterior (si existe)
                 if (ultimoElemento) {
                     ultimoElemento.classList.remove('text-sky-400');
-                    ultimoElemento.classList.add('text-white/60'); // Vuelve al color base de los valores
+                    ultimoElemento.classList.add('text-white/60');
                 }
                 
-                // 2. Aplicar color al nuevo elemento seleccionado
                 el.classList.remove('text-white/60');
                 el.classList.add('text-sky-400');
                 ultimoElemento = el;
 
-                // 3. Mostrar la descripción técnica en el panel superior
-                telemetryData.textContent = TELEMETRY_MEANINGS[id].toUpperCase();
+                // Actualizamos con innerHTML para renderizar el span de opacidad
+                telemetryData.innerHTML = TELEMETRY_MEANINGS[id].toUpperCase();
                 
-                // 4. Restaurar todo después de 8 segundos
                 setTimeout(() => {
-                    telemetryData.textContent = textoOriginal;
+                    telemetryData.innerHTML = textoOriginal;
                     
-                    // Solo revertimos si sigue siendo el mismo elemento activo
                     if (ultimoElemento === el) {
                         el.classList.remove('text-sky-400');
                         el.classList.add('text-white/60');
