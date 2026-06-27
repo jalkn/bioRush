@@ -50,28 +50,20 @@
 
 </header>
 
-    <!-- PANEL 1: PROTOCOLO BIOCINÉTICO (Para Lote y Saturación) -->
-    <div class="flex flex-col items-center justify-center w-full">
-        <span id="panel-telemetry-puls" class="text-[8px] text-center tracking-[0.5em] text-sky-400 uppercase transition-colors duration-300">
-            PROTOCOLO BIOCINÉTICO P.U.L.S.<span class="opacity-30">O.R.</span>
-        </span>
-    </div>
-
 <section class="w-full max-w-sm mx-auto pt-3 pb-3 flex flex-col border-t border-white/5 items-center">
-
-
-    <div class="grid grid-cols-2 gap-y-1 gap-x-2 w-full px-4 text-center">
-        <!-- Etiquetas Superiores -->
+    <div class="grid grid-cols-4 gap-y-1 gap-x-2 w-full px-4 text-center">
         <span class="text-[7px] tracking-[0.3em] text-white/40 uppercase">Hz</span>
+        <span class="text-[7px] tracking-[0.3em] text-white/40 uppercase">Ciclo</span>
+        <span class="text-[7px] tracking-[0.3em] text-white/40 uppercase">Nodo</span>
         <span class="text-[7px] tracking-[0.3em] text-white/40 uppercase">Tensión</span>
         
-        <!-- Valores Superiores Dinámicos -->
         <span id="sub-sets-solar" class="font-mono text-white/60 tracking-[0.2em] text-[11px] cursor-pointer hover:text-sky-400 transition-colors pb-2">0.00</span>
+        <span id="telemetry-sphere-idx" class="font-mono text-white/60 tracking-[0.2em] text-[11px] cursor-pointer hover:text-sky-400 transition-colors pb-2">0000</span>
+        <span id="telemetry-active-node" class="font-mono text-white/60 tracking-[0.2em] text-[11px] cursor-pointer hover:text-sky-400 transition-colors pb-2">0000</span>
         <span id="sub-reps-tension" class="font-mono text-white/60 tracking-[0.2em] text-[11px] cursor-pointer hover:text-sky-400 transition-colors pb-2">0.0</span>
     </div>
-
-
 </section>
+
 
 
 
@@ -124,34 +116,32 @@
 
 
 <section class="w-full max-w-sm mx-auto pt-1 pb-3 flex flex-col items-center">
-    <div class="grid grid-cols-6 gap-y-1 gap-x-1 w-full px-2 text-center">
-        <!-- Valores Inferiores -->
-        <span id="telemetry-sphere-idx" class="font-mono text-white/60 tracking-[0.1em] text-[10px] cursor-pointer hover:text-sky-400 transition-colors">0000</span>
-        <span id="telemetry-active-node" class="font-mono text-white/60 tracking-[0.1em] text-[10px] cursor-pointer hover:text-sky-400 transition-colors">0000</span>
-        <span id="tele-col" class="font-mono text-white/60 tracking-[0.1em] text-[10px] cursor-pointer hover:text-sky-400 transition-colors">--</span>
-        <span id="tele-fru" class="font-mono text-white/60 tracking-[0.1em] text-[10px] cursor-pointer hover:text-sky-400 transition-colors">--</span>
-        <span id="tele-sec" class="font-mono text-white/60 tracking-[0.1em] text-[10px] cursor-pointer hover:text-sky-400 transition-colors">--</span>
-        <span id="tele-mol" class="font-mono text-white/60 tracking-[0.1em] text-[10px] cursor-pointer hover:text-sky-400 transition-colors">--</span>
+    <div class="grid grid-cols-4 gap-y-1 gap-x-2 w-full px-4 text-center">
 
-        <!-- Etiquetas Inferiores -->
-        <span class="text-[6px] tracking-[0.2em] text-white/40 uppercase">Ciclo</span>
-        <span class="text-[6px] tracking-[0.2em] text-white/40 uppercase">Nodo</span>
-        <span class="text-[6px] tracking-[0.2em] text-white/40 uppercase">Temp</span>
-        <span class="text-[6px] tracking-[0.2em] text-white/40 uppercase">Fruto</span>
-        <span class="text-[6px] tracking-[0.2em] text-white/40 uppercase">Secado</span>
-        <span class="text-[6px] tracking-[0.2em] text-white/40 uppercase">Pureza</span>
+        <!-- Valores: Fila 2 -->
+        <span id="tele-col" class="font-mono text-white/60 tracking-[0.2em] text-[11px] cursor-pointer hover:text-sky-400 transition-colors">--</span>
+        <span id="tele-fru" class="font-mono text-white/60 tracking-[0.2em] text-[11px] cursor-pointer hover:text-sky-400 transition-colors">--</span>
+        <span id="tele-sec" class="font-mono text-white/60 tracking-[0.2em] text-[11px] cursor-pointer hover:text-sky-400 transition-colors">--</span>
+        <span id="tele-mol" class="font-mono text-white/60 tracking-[0.2em] text-[11px] cursor-pointer hover:text-sky-400 transition-colors">--</span>
+
+        <!-- Etiquetas: Fila 2 (Debajo de los valores) -->
+        <span class="text-[7px] tracking-[0.3em] text-white/40 uppercase">Temp</span>
+        <span class="text-[7px] tracking-[0.3em] text-white/40 uppercase">Fruto</span>
+        <span class="text-[7px] tracking-[0.3em] text-white/40 uppercase">Secado</span>
+        <span class="text-[7px] tracking-[0.3em] text-white/40 uppercase">Pureza</span>
+
     </div>
 </section>
 
 
 
 
-<section class="w-full max-w-sm mx-auto px-6 py-4 border-t border-white/5 flex flex-col gap-4">
 
-    <!-- PANEL 2: ESPECIFICACIONES DE PRODUCTO (Para Frecuencia, Cohesión y Laboratorio) -->
-    <div class="flex flex-col items-center justify-center w-full mt-2">
+<section class="w-full max-w-sm mx-auto px-6 py-4 border-t border-white/5 flex flex-col gap-4">
+    
+    <div class="flex flex-col items-center justify-center w-full">
         <span id="panel-telemetry-data" class="text-[8px] text-center tracking-[0.5em] text-sky-400 uppercase transition-colors duration-300">
-            SINERGIA MOLECULAR ÓPTIMA
+            PROTOCOLO BIOCINÉTICO P.U.L.S.<span class="opacity-30">O.R.</span>
         </span>
     </div>
 
@@ -401,7 +391,7 @@
         }
 
     // =========================================================================
-    // 5. MOTOR DE TELEMETRÍA (LENGUAJE PULS)
+    // 5. MOTOR DE TELEMETRÍA (PROTOCOLO PULS)
     // =========================================================================
     function calculateSphereIndex() {
         const now = new Date();
@@ -475,89 +465,56 @@
         if (subRepsTension) subRepsTension.textContent = `${(14.2 + (repsStage * 0.8)).toFixed(1)}`;
     }
 
-    const TELEMETRYPULS_MEANINGS = {
-        'sub-sets-solar': "Frecuencia de resonancia",
-        'sub-reps-tension': "Índice de cohesión molecular"
-    };
-
     const TELEMETRY_MEANINGS = {
         'telemetry-sphere-idx': "Registro de lote molecular", 
         'telemetry-active-node': "Nivel de saturación técnica",
+        'sub-sets-solar': "Frecuencia de resonancia",
+        'sub-reps-tension': "Índice de cohesión molecular",
         'tele-col': "Temperatura de Colonizacion",
         'tele-fru': "Parámetros de maduración",
         'tele-sec': "Ciclo de deshidratación",
         'tele-mol': "Índice de pureza molecular"
+        
     };
 
-    // =========================================================================
-    // 5. MOTOR DE TELEMETRÍA (PROTOCOLO PULSOR Y DATA PRODUCTO)
+// =========================================================================
+    // 5. MOTOR DE TELEMETRÍA (PROTOCOLO PULSOR - ACTUALIZADO)
     // =========================================================================
     function habilitarReveladoTelemetria() {
-        // --- MOTOR 1: PROTOCOLO BIOCINÉTICO P.U.L.S.O.R. ---
-        const telemetryPuls = getCachedEl('panel-telemetry-puls');
-        const textoOriginalPuls = "PROTOCOLO BIOCINÉTICO P.U.L.S.<span class='opacity-30'>O.R.</span>";
-        let ultimoElementoPuls = null;
-
-        Object.keys(TELEMETRYPULS_MEANINGS).forEach(id => {
-            const el = getCachedEl(id);
-            if (!el) return;
-
-            el.addEventListener('click', () => {
-                if (ultimoElementoPuls) {
-                    ultimoElementoPuls.classList.remove('text-sky-400');
-                    ultimoElementoPuls.classList.add('text-white/60');
-                }
-                
-                el.classList.remove('text-white/60');
-                el.classList.add('text-sky-400');
-                ultimoElementoPuls = el;
-
-                telemetryPuls.innerHTML = TELEMETRYPULS_MEANINGS[id].toUpperCase();
-                
-                setTimeout(() => {
-                    telemetryPuls.innerHTML = textoOriginalPuls;
-                    if (ultimoElementoPuls === el) {
-                        el.classList.remove('text-sky-400');
-                        el.classList.add('text-white/60');
-                        ultimoElementoPuls = null;
-                    }
-                }, 8000);
-            });
-        });
-
-        // --- MOTOR 2: DATOS DEL PRODUCTO ---
         const telemetryData = getCachedEl('panel-telemetry-data');
-        const textoOriginalData = "SINERGIA MOLECULAR ÓPTIMA";
-        let ultimoElementoData = null;
+        // Texto con el efecto visual deseado
+        const textoOriginal = "PROTOCOLO BIOCINÉTICO P.U.L.S.<span class='opacity-30'>O.R.</span>";
+        let ultimoElemento = null;
 
         Object.keys(TELEMETRY_MEANINGS).forEach(id => {
             const el = getCachedEl(id);
             if (!el) return;
 
             el.addEventListener('click', () => {
-                if (ultimoElementoData) {
-                    ultimoElementoData.classList.remove('text-sky-400');
-                    ultimoElementoData.classList.add('text-white/60');
+                if (ultimoElemento) {
+                    ultimoElemento.classList.remove('text-sky-400');
+                    ultimoElemento.classList.add('text-white/60');
                 }
                 
                 el.classList.remove('text-white/60');
                 el.classList.add('text-sky-400');
-                ultimoElementoData = el;
+                ultimoElemento = el;
 
+                // Actualizamos con innerHTML para renderizar el span de opacidad
                 telemetryData.innerHTML = TELEMETRY_MEANINGS[id].toUpperCase();
                 
                 setTimeout(() => {
-                    telemetryData.innerHTML = textoOriginalData;
-                    if (ultimoElementoData === el) {
+                    telemetryData.innerHTML = textoOriginal;
+                    
+                    if (ultimoElemento === el) {
                         el.classList.remove('text-sky-400');
                         el.classList.add('text-white/60');
-                        ultimoElementoData = null;
+                        ultimoElemento = null;
                     }
                 }, 8000);
             });
         });
-
-        }
+    }
 
     // =========================================================================
     // 6. CAPTURA DE TELEMETRÍA DE COMPRA (GENERACIÓN DE PAYLOAD)
@@ -580,7 +537,7 @@
                         `• *Carga:* ${variantConfig.spec}\n` +
                         `• *ID:* \`${variantConfig.id}\`\n` +
                         `• *Precio:* ${variantConfig.price}\n\n` +
-                        `--- *LENGUAJE P.U.L.S.* ---\n` +
+                        `--- *PROTOCOLO P.U.L.S.* ---\n` +
                         `• *Matriz de Configuración:* \`${currentCoord}\`\n` +
                         `• *Análisis de Estado:* ${dialInterpretation}\n` +
                         `• *Lote:* \`${currentSphere}\`\n` +
