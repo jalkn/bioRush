@@ -155,32 +155,42 @@
         </span>
     </div>
 
+
     <div class="flex items-center justify-center gap-3 text-white/50 text-[8px] tracking-[0.3em] font-mono select-none w-full uppercase">
         <span id="biorush-spec">LION’S MANE</span>
         <span class="opacity-30">|</span>
         <span id="biorush-price" class="text-white-400/80">$68.000</span>
     </div>
 
-    <div class="grid grid-cols-[50px_1fr_50px] items-center gap-2 w-full">
-        <button id="btn-reveal-raw" class="h-[50px] flex items-center justify-center rounded-sm border border-white/10 bg-white/5 hover:border-sky-500/50 hover:bg-sky-500/10 transition-all duration-300">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 text-white/60">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 3.75h.008v.008H12v-.008Z" />
-            </svg>
-        </button>
-
-        <div id="biorush-variants-container" class="w-full">
-        </div>
-
-        <button id="btn-reveal-bio" class="h-[50px] flex items-center justify-center rounded-sm border border-white/10 bg-white/5 hover:border-sky-500/50 hover:bg-sky-500/10 transition-all duration-300">
+<!-- FILA UNIFICADA: CONTROL DE ACCIÓN Y VISTAS (CUADRADOS COMPACTOS) -->
+    <div class="grid grid-cols-4 items-center gap-2 w-full max-w-[240px] mx-auto">
+        <!-- VISTA TRASERA / DETALLES -->
+        <button id="btn-reveal-bio" class="w-full aspect-square flex items-center justify-center rounded-sm border border-white/10 bg-white/5 hover:border-sky-500/50 hover:bg-sky-500/10 transition-all duration-300">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 text-white/60">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z" />
                 <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
             </svg>
         </button>
+
+        <!-- VISTA COMPONENTES / MATERIA -->
+        <button id="btn-reveal-raw" class="w-full aspect-square flex items-center justify-center rounded-sm border border-white/10 bg-white/5 hover:border-sky-500/50 hover:bg-sky-500/10 transition-all duration-300">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 text-white/60">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 3.75h.008v.008H12v-.008Z" />
+            </svg>
+        </button>
+
+        <!-- BOTÓN PRINCIPAL CON ICONO WHATSAPP -->
+        <button onclick="adquirirNodo()" class="w-full aspect-square flex items-center justify-center bg-white/10 backdrop-blur-md rounded-sm border border-white/20 hover:border-sky-500/50 hover:bg-sky-500/10 transition-all duration-300 group">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 text-white/70 group-hover:text-sky-400 transition-colors duration-300">
+                <path d="M12.004 2c-5.517 0-9.993 4.476-9.993 9.993 0 1.82.487 3.53 1.338 5l-1.32 4.823 4.933-1.294A9.954 9.954 0 0 0 12.004 22c5.518 0 9.993-4.476 9.993-9.993S17.522 2 12.004 2zm4.743 13.364c-.244.688-1.218 1.252-1.674 1.3-.45.047-.9.23-2.894-.555-2.553-1.004-4.187-3.603-4.314-3.772-.127-.17-1.017-1.352-1.017-2.578 0-1.226.643-1.83.871-2.079.227-.248.5-.31.667-.31h.478c.153 0 .363-.058.565.431.208.503.714 1.74.776 1.867.062.127.104.275.02.443-.084.17-.127.276-.253.424-.127.148-.266.33-.38.452-.127.135-.26.282-.112.535.148.252.656 1.08 1.408 1.75.967.86 1.782 1.127 2.036 1.253.253.126.402.105.55-.064.148-.17.636-.739.805-.99.169-.253.338-.21.57-.126.23.084 1.468.693 1.72.82.254.127.422.19.486.296.064.105.064.612-.18 1.301z"/>
+            </svg>
+        </button>
+
+        <!-- NAVEGACIÓN DE VARIANTES INYECTADA AQUÍ -->
+        <div id="biorush-variants-container" class="w-full aspect-square">
+            <!-- Inyección dinámica desde actualizarBioUI() -->
+        </div>
     </div>
-
-
-
 
 
 
@@ -383,15 +393,12 @@
         getCachedEl('tele-sec').textContent = tele.SEC;
         getCachedEl('tele-mol').textContent = tele.MOL;
 
-    // Renderizar control de navegación unificado (Solo botón pace.png)
+    // Renderizar control de navegación adaptado a la rejilla de cuadrados compactos
         if (vContainer) {
             vContainer.innerHTML = `
-                <div class="flex items-center justify-center w-full max-w-sm mx-auto p-1">
-                    <!-- BOTÓN ÚNICO DE AVANCE (pace.png) -->
-                    <button onclick="navegarVariante(1)" class="h-[44px] w-full flex items-center justify-center rounded-sm border border-white/5 bg-white/5 hover:border-sky-500/50 hover:bg-sky-500/10 transition-all duration-300 group">
-                        <img src="img/pace.png" alt="Siguiente Variante" class="h-4 w-auto object-contain opacity-50 group-hover:opacity-100 transition-opacity" />
-                    </button>
-                </div>`;
+                <button onclick="navegarVariante(1)" class="w-full aspect-square flex items-center justify-center rounded-sm border border-white/10 bg-white/5 hover:border-sky-500/50 hover:bg-sky-500/10 transition-all duration-300 group">
+                    <img src="img/pace.png" alt="Siguiente Variante" class="h-4 w-auto object-contain opacity-50 group-hover:opacity-100 transition-opacity" />
+                </button>`;
         }
     }
 
