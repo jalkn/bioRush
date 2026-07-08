@@ -50,10 +50,10 @@
 
 </header>
 
-    <!-- PANEL 1: PROTOCOLO BIOCINÉTICO (Para Lote y Saturación) -->
+    <!-- PANEL 1: PULSORES BIOCINÉTICOS (Para Lote y Saturación) -->
     <div class="flex flex-col items-center justify-center w-full">
         <span id="panel-telemetry-puls" class="text-[8px] text-center tracking-[0.5em] text-sky-400 uppercase transition-colors duration-300">
-            PROTOCOLO BIOCINÉTICO P.U.L.S.<span class="opacity-30">O.R.</span>
+            P.U.L.S.<span class='opacity-30'>O.R.</span> BIOCINÉTICOS
         </span>
     </div>
 
@@ -134,10 +134,10 @@
         <span id="tele-mol" class="font-mono text-white/60 tracking-[0.1em] text-[10px] cursor-pointer hover:text-sky-400 transition-colors">--</span>
 
         <!-- Etiquetas Inferiores -->
-        <span class="text-[6px] tracking-[0.2em] text-white/40 uppercase">Ciclo</span>
+        <span class="text-[6px] tracking-[0.2em] text-white/40 uppercase">Ciclo </span>
         <span class="text-[6px] tracking-[0.2em] text-white/40 uppercase">Nodo</span>
-        <span class="text-[6px] tracking-[0.2em] text-white/40 uppercase">Temp</span>
-        <span class="text-[6px] tracking-[0.2em] text-white/40 uppercase">Fruto</span>
+        <span class="text-[6px] tracking-[0.2em] text-white/40 uppercase">Siembra</span>
+        <span class="text-[6px] tracking-[0.2em] text-white/40 uppercase">Cosecha</span>
         <span class="text-[6px] tracking-[0.2em] text-white/40 uppercase">Secado</span>
         <span class="text-[6px] tracking-[0.2em] text-white/40 uppercase">Pureza</span>
     </div>
@@ -155,6 +155,12 @@
         </span>
     </div>
 
+    <div class="flex items-center justify-center gap-3 text-white/50 text-[8px] tracking-[0.3em] font-mono select-none w-full uppercase">
+        <span id="biorush-spec">LION’S MANE</span>
+        <span class="opacity-30">|</span>
+        <span id="biorush-price" class="text-white-400/80">$68.000</span>
+    </div>
+
     <div class="grid grid-cols-[50px_1fr_50px] items-center gap-2 w-full">
         <button id="btn-reveal-raw" class="h-[50px] flex items-center justify-center rounded-sm border border-white/10 bg-white/5 hover:border-sky-500/50 hover:bg-sky-500/10 transition-all duration-300">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 text-white/60">
@@ -162,9 +168,8 @@
             </svg>
         </button>
 
-        <button onclick="adquirirNodo()" class="h-[50px] w-full bg-white/10 backdrop-blur-md text-white font-black text-[11px] tracking-[0.3em] uppercase rounded-sm border border-white/20 hover:border-sky-500/50 hover:bg-sky-500/10 transition-all duration-300">
-            ACTIVAR
-        </button>
+        <div id="biorush-variants-container" class="w-full">
+        </div>
 
         <button id="btn-reveal-bio" class="h-[50px] flex items-center justify-center rounded-sm border border-white/10 bg-white/5 hover:border-sky-500/50 hover:bg-sky-500/10 transition-all duration-300">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 text-white/60">
@@ -174,16 +179,11 @@
         </button>
     </div>
 
-    <div id="biorush-variants-container" class="w-full">
-    </div>
 
 
 
-    <div class="flex items-center justify-center gap-3 text-white/50 text-[8px] tracking-[0.3em] font-mono select-none w-full uppercase">
-        <span id="biorush-spec">LION’S MANE</span>
-        <span class="opacity-30">|</span>
-        <span id="biorush-price" class="text-white-400/80">$68.000</span>
-    </div>
+
+
 
 
 </section>
@@ -192,7 +192,7 @@
         <footer class="h-[72px] shrink-0 bg-gradient-to-t from-black/60 via-black/40 to-transparent backdrop-blur-md z-50 flex items-center justify-center">
             <div class="p-6 flex justify-center items-center w-full min-h-[72px]">
                         <span class="text-[6px] tracking-[0.6em] font-bold text-white/40 uppercase">
-                            BIORUSH © 2026
+                            POWERED BY JAKO.WORLD
                         </span>
                 </a>
             </div>
@@ -376,29 +376,36 @@
             if (el) el.className = (item === currentBioItem) ? "cursor-pointer tracking-[0.15em] transition-all duration-300 h-5 leading-none font-bold text-white scale-105 border-b border-sky-400 pb-0.5" : "cursor-pointer tracking-[0.15em] transition-all duration-300 h-5 leading-none text-white/80 hover:text-white/80";
         });
 
-        // ... dentro de actualizarBioUI() ...
-
-        // Actualizar variantes
+        // Actualizar telemetría de variantes
         const tele = variantConfig.telemetry;
         getCachedEl('tele-col').textContent = tele.COL;
         getCachedEl('tele-fru').textContent = tele.FRU;
         getCachedEl('tele-sec').textContent = tele.SEC;
         getCachedEl('tele-mol').textContent = tele.MOL;
 
+    // Renderizar control de navegación unificado (Solo botón pace.png)
         if (vContainer) {
-        vContainer.innerHTML = `
-                    <div class="col-start-2 flex items-center justify-center gap-2">
-                        ${Object.keys(itemConfig.variants).map(vKey => `
-                            <span onclick="cambiarBioVariant('${vKey}')" 
-                                class="cursor-pointer transition-all duration-300 px-4 py-3 rounded-sm border backdrop-blur-md whitespace-nowrap font-black uppercase tracking-[0.3em] text-[10px]
-                                ${vKey === currentBioVariant 
-                                    ? 'bg-sky-500/20 border-sky-500/50 text-white' 
-                                    : 'bg-white/10 border-white/20 text-white/60 hover:border-sky-500/50 hover:bg-sky-500/10'}">
-                                ${vKey}
-                            </span>`).join('')}
-                    </div>`;
-            }
+            vContainer.innerHTML = `
+                <div class="flex items-center justify-center w-full max-w-sm mx-auto p-1">
+                    <!-- BOTÓN ÚNICO DE AVANCE (pace.png) -->
+                    <button onclick="navegarVariante(1)" class="h-[44px] w-full flex items-center justify-center rounded-sm border border-white/5 bg-white/5 hover:border-sky-500/50 hover:bg-sky-500/10 transition-all duration-300 group">
+                        <img src="img/pace.png" alt="Siguiente Variante" class="h-4 w-auto object-contain opacity-50 group-hover:opacity-100 transition-opacity" />
+                    </button>
+                </div>`;
         }
+    }
+
+    // NUEVA FUNCIÓN COADYUVANTE PARA OPERAR EL PASO CÍCLICO (Asegúrate de agregarla a tu script)
+    function navegarVariante(direccion) {
+        const itemConfig = BIORUSH_CATALOG[currentBioItem];
+        const variantsKeys = Object.keys(itemConfig.variants);
+        let currentIndex = variantsKeys.indexOf(currentBioVariant);
+        
+        // Desplazamiento cíclico matemático
+        currentIndex = (currentIndex + direccion + variantsKeys.length) % variantsKeys.length;
+        
+        cambiarBioVariant(variantsKeys[currentIndex]);
+    }
 
     // =========================================================================
     // 5. MOTOR DE TELEMETRÍA (LENGUAJE PULS)
@@ -490,12 +497,12 @@
     };
 
     // =========================================================================
-    // 5. MOTOR DE TELEMETRÍA (PROTOCOLO PULSOR Y DATA PRODUCTO)
+    // 5. MOTOR DE TELEMETRÍA (PULSORES Y DATA PRODUCTO)
     // =========================================================================
     function habilitarReveladoTelemetria() {
-        // --- MOTOR 1: PROTOCOLO BIOCINÉTICO P.U.L.S.O.R. ---
+        // --- MOTOR 1: P.U.L.S.O.R.E.S. BIOCINÉTICOS---
         const telemetryPuls = getCachedEl('panel-telemetry-puls');
-        const textoOriginalPuls = "PROTOCOLO BIOCINÉTICO P.U.L.S.<span class='opacity-30'>O.R.</span>";
+        const textoOriginalPuls = "P.U.L.S.<span class='opacity-30'>O.R.</span> BIOCINÉTICOS";
         let ultimoElementoPuls = null;
 
         Object.keys(TELEMETRYPULS_MEANINGS).forEach(id => {
