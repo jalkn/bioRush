@@ -41,19 +41,14 @@
     <div class="fixed inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/40 z-0 pointer-events-none"></div>
 
     <main id="main-vault" class="w-screen h-screen flex flex-col relative overflow-hidden">
-<header class="h-[80px] shrink-0 bg-gradient-to-b from-black/90 via-black/40 to-transparent backdrop-blur-md z-50 flex flex-col items-center justify-center px-6">
-    <div class="flex items-center justify-center gap-3 w-full"> 
-        <img src="img/lift.png" alt="Back" class="h-6 w-auto object-contain" />
-        <span class="text-[11px] tracking-[0.25em] font-black text-white uppercase">BIORUSH</span>
-    </div>
-    
-
-</header>
-
-
+        <header class="h-[80px] shrink-0 bg-gradient-to-b from-black/90 via-black/40 to-transparent backdrop-blur-md z-50 flex flex-col items-center justify-center px-6">
+            <div class="flex items-center justify-center gap-3 w-full"> 
+                <img src="img/lift.png" alt="Back" class="h-6 w-auto object-contain" />
+                <span class="text-[11px] tracking-[0.25em] font-black text-white uppercase">BIORUSH</span>
+            </div>
+        </header>
 
         <div class="flex-1 w-full flex flex-col items-center justify-center py-4 px-4 gap-y-4">
-            
             <div id="biorush-pack-container" class="relative w-full max-w-[180px] xs:max-w-[200px] sm:max-w-[240px] md:max-w-[280px] aspect-[13/15] shrink-0 drop-shadow-[0_40px_60px_rgba(0,0,0,0.9)]">
                 <div class="w-full h-full relative overflow-hidden bg-transparent">
                     <img id="biorush-pack-img-back" src="img/45mane.png" alt="BioRush Pack Back" class="img-glow-transition absolute inset-0 w-full h-full object-contain opacity-0 pointer-events-none z-0" />
@@ -61,160 +56,117 @@
                     <img id="biorush-pack-img-raw" src="" alt="Raw Content" class="img-glow-transition absolute inset-0 w-full h-full object-contain opacity-0 pointer-events-none z-[5]" />
                     
                     <div class="absolute inset-0 flex items-center justify-center p-2 z-20 pointer-events-none">
-
-                            <svg id="laser-vector-target" viewBox="0 0 400 400" 
-                                class="w-full h-full fill-none stroke-white/40 stroke-[1.5] transition-all duration-500 origin-center transform scale-[1.3] sm:scale-[1.2]">
-                                <defs>
-                                    <path id="textPath-top" d="M 65,200 A 135,135 0 0,1 335,200" />
-                                    <path id="textPath-bottom" d="M 65,200 A 135,135 0 0,0 335,200" />
-                                </defs>
+                        <svg id="laser-vector-target" viewBox="0 0 400 400" class="w-full h-full fill-none stroke-white/40 stroke-[1.5] transition-all duration-500 origin-center transform scale-[1.3] sm:scale-[1.2]">
+                            <defs>
+                                <path id="textPath-top" d="M 65,200 A 135,135 0 0,1 335,200" />
+                                <path id="textPath-bottom" d="M 65,200 A 135,135 0 0,0 335,200" />
+                            </defs>
+                            
+                            <text class="fill-white font-black text-[12px] sm:text-[10px] tracking-[0.25em] sm:tracking-[0.3em] uppercase transition-all duration-500">
+                                <textPath id="laser-variant-title" href="#textPath-top" startOffset="50%" text-anchor="middle">PULSOR FOCUS</textPath>
+                            </text>
+                            
+                            <g class="origin-center transform scale-[1.05]">
+                                <path d="M 110,120 L 290,120 L 110,280 L 290,280 Z" class="opacity-20 stroke-[1.2]" />
+                                <path d="M 110,120 Q 200,150 290,120" class="opacity-20 stroke-[1.2]" />
+                                <path d="M 110,280 Q 200,250 290,280" stroke-dasharray="2 2" class="opacity-20 stroke-[1.2]" />
                                 
-                                <text class="fill-white font-black text-[12px] sm:text-[10px] tracking-[0.25em] sm:tracking-[0.3em] uppercase transition-all duration-500">
-                                    <textPath id="laser-variant-title" href="#textPath-top" startOffset="50%" text-anchor="middle">
-                                        PULSOR FOCUS
-                                    </textPath>
-                                </text>
-                                
-                                <g class="origin-center transform scale-[1.05]">
-                                    <path d="M 110,120 L 290,120 L 110,280 L 290,280 Z" class="opacity-20 stroke-[1.2]" />
-                                    <path d="M 110,120 Q 200,150 290,120" class="opacity-20 stroke-[1.2]" />
-                                    <path d="M 110,280 Q 200,250 290,280" stroke-dasharray="2 2" class="opacity-20 stroke-[1.2]" />
-                                    
-                                    <text x="200" y="165" text-anchor="middle" class="fill-white/30 text-[7px] tracking-[0.3em] font-bold uppercase"></text>
-                                    <text id="z-dial" x="200" y="210" text-anchor="middle" class="fill-white font-black text-[38px] tracking-[0.4em] font-sans">8UST11</text>
-                                    <text x="200" y="245" text-anchor="middle" class="fill-white/30 text-[6px] tracking-[0.4em] font-mono"></text>
-                                </g>
-                                
-                                <text  class="fill-white/60 font-black text-[12px] sm:text-[10px] tracking-[0.25em] uppercase transition-all duration-500">
-                                    <textPath id="biorush-description" href="#textPath-bottom" startOffset="50%" text-anchor="middle">
-                                        Enfoque y claridad cognitiva
-                                    </textPath>
-
-                                </text>
-                            </svg>
-
+                                <text x="200" y="165" text-anchor="middle" class="fill-white/30 text-[7px] tracking-[0.3em] font-bold uppercase"></text>
+                                <text id="z-dial" x="200" y="210" text-anchor="middle" class="fill-white font-black text-[38px] tracking-[0.4em] font-sans">8UST11</text>
+                                <text x="200" y="245" text-anchor="middle" class="fill-white/30 text-[6px] tracking-[0.4em] font-mono"></text>
+                            </g>
+                            
+                            <text class="fill-white/60 font-black text-[12px] sm:text-[10px] tracking-[0.25em] uppercase transition-all duration-500">
+                                <textPath id="biorush-description" href="#textPath-bottom" startOffset="50%" text-anchor="middle">Enfoque y claridad cognitiva</textPath>
+                            </text>
+                        </svg>
                     </div>
                 </div>
             </div>
         </div>
 
+        <section class="w-full max-w-sm mx-auto pt-3 pb-3 flex flex-col border-t border-white/5 items-center">
+            <div class="grid grid-cols-6 gap-y-1 gap-x-1 w-full px-2 text-center mb-2">
+                <span id="sub-sets-solar" class="font-mono text-white/60 tracking-[0.2em] text-[11px] cursor-pointer hover:text-sky-400 transition-colors pb-1">0.00</span>
+                <span id="sub-reps-tension" class="font-mono text-white/60 tracking-[0.2em] text-[11px] cursor-pointer hover:text-sky-400 transition-colors pb-1">0.0</span>
+                <span id="tele-col" class="font-mono text-white/60 tracking-[0.1em] text-[10px] cursor-pointer hover:text-sky-400 transition-colors pb-1">--</span>
+                <span id="tele-fru" class="font-mono text-white/60 tracking-[0.1em] text-[10px] cursor-pointer hover:text-sky-400 transition-colors pb-1">--</span>
+                <span id="tele-sec" class="font-mono text-white/60 tracking-[0.1em] text-[10px] cursor-pointer hover:text-sky-400 transition-colors pb-1">--</span>
+                <span id="tele-mol" class="font-mono text-white/60 tracking-[0.1em] text-[10px] cursor-pointer hover:text-sky-400 transition-colors pb-1">--</span>
 
+                <span class="text-[6px] tracking-[0.2em] text-white/40 uppercase">Hz</span>
+                <span class="text-[6px] tracking-[0.2em] text-white/40 uppercase">Tensión</span>
+                <span class="text-[6px] tracking-[0.2em] text-white/40 uppercase">Siembra</span>
+                <span class="text-[6px] tracking-[0.2em] text-white/40 uppercase">Cosecha</span>
+                <span class="text-[6px] tracking-[0.2em] text-white/40 uppercase">Secado</span>
+                <span class="text-[6px] tracking-[0.2em] text-white/40 uppercase">Precio</span>
+            </div>
 
-<section class="w-full max-w-sm mx-auto pt-3 pb-3 flex flex-col border-t border-white/5 items-center">
-
-    <div class="grid grid-cols-6 gap-y-1 gap-x-1 w-full px-2 text-center mb-2">
-        <span id="sub-sets-solar" class="font-mono text-white/60 tracking-[0.2em] text-[11px] cursor-pointer hover:text-sky-400 transition-colors pb-1">0.00</span>
-        <span id="sub-reps-tension" class="font-mono text-white/60 tracking-[0.2em] text-[11px] cursor-pointer hover:text-sky-400 transition-colors pb-1">0.0</span>
-        <span id="tele-col" class="font-mono text-white/60 tracking-[0.1em] text-[10px] cursor-pointer hover:text-sky-400 transition-colors pb-1">--</span>
-        <span id="tele-fru" class="font-mono text-white/60 tracking-[0.1em] text-[10px] cursor-pointer hover:text-sky-400 transition-colors pb-1">--</span>
-        <span id="tele-sec" class="font-mono text-white/60 tracking-[0.1em] text-[10px] cursor-pointer hover:text-sky-400 transition-colors pb-1">--</span>
-        <span id="tele-mol" class="font-mono text-white/60 tracking-[0.1em] text-[10px] cursor-pointer hover:text-sky-400 transition-colors pb-1">--</span>
-
-        <span class="text-[6px] tracking-[0.2em] text-white/40 uppercase">Hz</span>
-        <span class="text-[6px] tracking-[0.2em] text-white/40 uppercase">Tensión</span>
-        <span class="text-[6px] tracking-[0.2em] text-white/40 uppercase">Siembra</span>
-        <span class="text-[6px] tracking-[0.2em] text-white/40 uppercase">Cosecha</span>
-        <span class="text-[6px] tracking-[0.2em] text-white/40 uppercase">Secado</span>
-        <span class="text-[6px] tracking-[0.2em] text-white/40 uppercase">Precio</span>
-    </div>
-
-    <div class="flex flex-col items-center justify-center w-full mt-1">
-        <span id="panel-telemetry-puls" class="text-[8px] text-center tracking-[0.5em] text-sky-400 uppercase transition-colors duration-300">
-            ONDAS BIOCINÉTICAS REGENERATIVAS
-        </span>
-    </div>
-
-</section>
-
-<!-- Reemplaza el segmento inferior del HTML por esta estructura limpia (Líneas ~100-112) -->
+            <div class="flex flex-col items-center justify-center w-full mt-1">
+                <span id="panel-telemetry-puls" class="text-[8px] text-center tracking-[0.5em] text-sky-400 uppercase transition-colors duration-300">ONDAS BIOCINÉTICAS REGENERATIVAS</span>
+            </div>
+        </section>
 <section class="w-full max-w-sm mx-auto px-6 py-4 border-t border-white/5 flex flex-col gap-4">
+            <div class="grid grid-cols-3 items-center gap-2 w-full max-w-[240px] mx-auto">
+                <button id="btn-reveal-raw" class="w-full h-9 flex items-center justify-center rounded-sm border border-white/10 bg-white/5 hover:border-sky-500/50 hover:bg-sky-500/10 transition-all duration-300 text-[10px] tracking-[0.2em] font-bold text-white/60 hover:text-sky-400 uppercase">
+                    Ver
+                </button>
 
-<!-- FILA UNIFICADA: CONTROL DE ACCIÓN Y VISTAS (CUADRADOS COMPACTOS) -->
-    <div class="grid grid-cols-3 items-center gap-2 w-full max-w-[180px] mx-auto">
-        <!-- CONTROL DE VISTAS CÍCLICO (FRONT -> BACK -> RAW) -->
-        <button id="btn-reveal-raw" class="w-full aspect-square flex items-center justify-center rounded-sm border border-white/10 bg-white/5 hover:border-sky-500/50 hover:bg-sky-500/10 transition-all duration-300">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 text-white/60">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z" />
-                <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
-            </svg>
-        </button>
+                <button onclick="adquirirNodo()" class="w-full h-9 flex items-center justify-center bg-white/10 backdrop-blur-md rounded-sm border border-white/20 hover:border-sky-500/50 hover:bg-sky-500/10 transition-all duration-300 text-[10px] tracking-[0.2em] font-bold text-white/70 hover:text-sky-400 uppercase">
+                    Pedir
+                </button>
 
-        <!-- BOTÓN PRINCIPAL CON ICONO WHATSAPP -->
-        <button onclick="adquirirNodo()" class="w-full aspect-square flex items-center justify-center bg-white/10 backdrop-blur-md rounded-sm border border-white/20 hover:border-sky-500/50 hover:bg-sky-500/10 transition-all duration-300 group">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5 text-white/70 group-hover:text-sky-400 transition-colors duration-300">
-                <path d="M12.004 2c-5.517 0-9.993 4.476-9.993 9.993 0 1.82.487 3.53 1.338 5l-1.32 4.823 4.933-1.294A9.954 9.954 0 0 0 12.004 22c5.518 0 9.993-4.476 9.993-9.993S17.522 2 12.004 2zm4.743 13.364c-.244.688-1.218 1.252-1.674 1.3-.45.047-.9.23-2.894-.555-2.553-1.004-4.187-3.603-4.314-3.772-.127-.17-1.017-1.352-1.017-2.578 0-1.226.643-1.83.871-2.079.227-.248.5-.31.667-.31h.478c.153 0 .363-.058.565.431.208.503.714 1.74.776 1.867.062.127.104.275.02.443-.084.17-.127.276-.253.424-.127.148-.266.33-.38.452-.127.135-.26.282-.112.535.148.252.656 1.08 1.408 1.75.967.86 1.782 1.127 2.036 1.253.253.126.402.105.55-.064.148-.17.636-.739.805-.99.169-.253.338-.21.57-.126.23.084 1.468.693 1.72.82.254.127.422.19.486.296.064.105.064.612-.18 1.301z"/>
-            </svg>
-        </button>
-
-        <!-- NAVEGACIÓN DE VARIANTES INYECTADA AQUÍ -->
-        <div id="biorush-variants-container" class="w-full aspect-square">
-            <!-- Inyección dinámica desde actualizarBioUI() -->
-        </div>
-    </div>
-
-
-
-
-
-</section>
-
+                <div id="biorush-variants-container" class="w-full h-9"></div>
+            </div>
+        </section>
 
         <footer class="h-[72px] shrink-0 bg-gradient-to-t from-black/60 via-black/40 to-transparent backdrop-blur-md z-50 flex items-center justify-center">
             <div class="p-6 flex justify-center items-center w-full min-h-[72px]">
-                        <span class="text-[6px] tracking-[0.6em] font-bold text-white/40 uppercase">
-                            POWERED BY JAKO.ART
-                        </span>
+                <span class="text-[6px] tracking-[0.6em] font-bold text-white/40 uppercase">POWERED BY JAKO.ART</span>
             </div>
-
         </footer>
     </main>
 
 <script>
     // =========================================================================
-    // 1. CONFIGURACIÓN DE CATÁLOGOS COMERCIALES
+    // 1. CONFIGURACIÓN DE VARIANTES LINEALES EXCLUSIVAS BIORUSH
     // =========================================================================
     const BIORUSH_CATALOG = {
-        'PULSOR': {
-            defaultVariant: 'FOCUS',
-            variants: {
-                'FOCUS': { 
-                    label: 'PULSOR FOCUS', desc: 'Enfoque y claridad cognitiva', 
-                    spec: 'LION’S MANE', cant:  '45X500MGRS', price: '$70MIL', id: 'PULS45F',
-                    img: 'img/45caps.png', imgBack: 'img/45mane.png', imgRaw: 'img/maneRaw.png',
-                    telemetry: { COL: '24°', FRU: '18°', SEC: '40°', MOL: '98.2%' },
-                    benefits: ['NEUROGÉNESIS', 'CLARIDAD COGNITIVA', 'MEMORIA FLUIDA', 'NIEBLA  (-)', 'OPTIMIZACIÓN SINÁPTICA', 'ENFOQUE PROFUNDO', 'AGUDEZA ', 'REPARACIÓN NEURONAL', 'ENFOQUE', 'PRODUCTIVIDAD SOSTENIDA']
-                },
-                'ZEN': { 
-                    label: 'PULSOR ZEN', desc: 'Silencio mental óptimo', 
-                    spec: 'REISHI', cant:  '45X500MGRS', price: '$70MIL', id: 'PULS45Z',
-                    img: 'img/45caps.png', imgBack: 'img/45reishi.png', imgRaw: 'img/reishiRaw.png',
-                    telemetry: { COL: '22°', FRU: '16°', SEC: '38°', MOL: '97.5' },
-                    benefits: ['REDUCCIÓN CORTISOL', 'CALMA PROFUNDA', 'REGULACIÓN NERVIOSA', 'DESCANSO REPARADOR', 'EQUILIBRIO ', 'ADAPTACIÓN AL ESTRÉS', 'PAZ COGNITIVA', 'SUEÑO LÚCIDO', 'RELAJACIÓN MUSCULAR', 'CLARIDAD INTERNA']
-                },
-                'STAMINA': { 
-                    label: 'PULSOR STAMINA', desc: 'Potencia celular óptima', 
-                    spec: 'CORDYCEPS', cant:  '45X500MGRS', price: '$70MIL', id: 'PULS45S',
-                    img: 'img/45caps.png', imgBack: 'img/45cordy.png', imgRaw: 'img/cordyRaw.png',
-                    telemetry: { COL: '20°', FRU: '15°', SEC: '42°', MOL: '99.0' },
-                    benefits: ['POTENCIA AERÓBICA', 'ENERGÍA CELULAR (ATP)', 'RESISTENCIA FÍSICA', 'OXIGENACIÓN SANGUÍNEA', 'RECUPERACIÓN RÁPIDA', 'VITALIDAD GENERAL', 'RENDIMIENTO ATLÉTICO', 'FUNCIÓN RESPIRATORIA', 'METABOLISMO ACTIVO', 'FATIGA (-)']
-                },
-                'CORE': { 
-                    label: 'PULSOR CORE', desc: 'Respuesta inmune óptima', 
-                    spec: 'TURKEY TAIL', cant:  '45X500MGRS', price: '$70MIL', id: 'PULS45C',
-                    img: 'img/45caps.png', imgBack: 'img/45turkey.png', imgRaw: 'img/turkeyRaw.png',
-                    telemetry: { COL: '23°', FRU: '19°', SEC: '40°', MOL: '98.5' },
-                    benefits: ['RESPUESTA INMUNE', 'BIOMA INTESTINAL', 'DEFENSA CELULAR', 'ANTIOXIDANTE', 'SALUD DIGESTIVA', 'PROTECCIÓN SISTÉMICA', 'REDUCCIÓN INFLAMACIÓN', 'ESTABILIDAD INTERNA', 'SÍNTESIS NUTRITIVA', 'FORTALEZA INTEGRAL']
-                }
-            }
+        'FOCUS': { 
+            label: 'PULSOR FOCUS', desc: 'Enfoque y claridad cognitiva', 
+            spec: 'LION’S MANE', cant: '45X500MGRS', price: '$70MIL', id: 'PULS45F',
+            img: 'img/45caps.png', imgBack: 'img/45mane.png', imgRaw: 'img/maneRaw.png',
+            telemetry: { COL: '24°', FRU: '18°', SEC: '40°' },
+            benefits: ['NEUROGÉNESIS', 'CLARIDAD COGNITIVA', 'MEMORIA FLUIDA', 'OPTIMIZACIÓN SINÁPTICA', 'ENFOQUE PROFUNDO']
+        },
+        'ZEN': { 
+            label: 'PULSOR ZEN', desc: 'Silencio mental óptimo', 
+            spec: 'REISHI', cant: '45X500MGRS', price: '$70MIL', id: 'PULS45Z',
+            img: 'img/45caps.png', imgBack: 'img/45reishi.png', imgRaw: 'img/reishiRaw.png',
+            telemetry: { COL: '22°', FRU: '16°', SEC: '38°' },
+            benefits: ['REDUCCIÓN CORTISOL', 'CALMA PROFUNDA', 'REGULACIÓN NERVIOSA', 'DESCANSO REPARADOR', 'ADAPTACIÓN AL ESTRÉS']
+        },
+        'STAMINA': { 
+            label: 'PULSOR STAMINA', desc: 'Potencia celular óptima', 
+            spec: 'CORDYCEPS', cant: '45X500MGRS', price: '$70MIL', id: 'PULS45S',
+            img: 'img/45caps.png', imgBack: 'img/45cordy.png', imgRaw: 'img/cordyRaw.png',
+            telemetry: { COL: '20°', FRU: '15°', SEC: '42°' },
+            benefits: ['POTENCIA AERÓBICA', 'ENERGÍA CELULAR (ATP)', 'RESISTENCIA FÍSICA', 'OXIGENACIÓN SANGUÍNEA', 'RECUPERACIÓN RÁPIDA']
+        },
+        'CORE': { 
+            label: 'PULSOR CORE', desc: 'Respuesta inmune óptima', 
+            spec: 'TURKEY TAIL', cant: '45X500MGRS', price: '$70MIL', id: 'PULS45C',
+            img: 'img/45caps.png', imgBack: 'img/45turkey.png', imgRaw: 'img/turkeyRaw.png',
+            telemetry: { COL: '23°', FRU: '19°', SEC: '40°' },
+            benefits: ['RESPUESTA INMUNE', 'BIOMA INTESTINAL', 'DEFENSA CELULAR', 'ANTIOXIDANTE', 'PROTECCIÓN SISTÉMICA']
         }
     };
 
-    let currentBioItem = 'PULSOR';
     let currentBioVariant = 'FOCUS';
     const numeroCelular = "573025333130";
 
     // ==========================================
-    // 2. CACHÉ DE ELEMENTOS DE UI (OPTIMIZADO)
+    // 2. CACHÉ DE ELEMENTOS DE UI
     // ==========================================
     const $ = (id) => document.getElementById(id);
     const cachedElements = {};
@@ -228,8 +180,8 @@
 
     const triggerHaptic = (ms) => { if (navigator.vibrate) navigator.vibrate(ms); };
 
-// ==========================================
-    // 3. MOTOR DE ESTADO VISUAL (Centralizado)
+    // ==========================================
+    // 3. MOTOR DE ESTADO VISUAL (FRONT -> BACK -> RAW)
     // ==========================================
     function aplicarModoVisual(modo) {
         const front = getCachedEl('biorush-pack-img');
@@ -237,19 +189,13 @@
         const raw = getCachedEl('biorush-pack-img-raw');
         const svg = getCachedEl('laser-vector-target');
 
-        // Reset general
         [front, back, raw].forEach(el => { if(el) el.style.opacity = '0'; });
         
-        // Aplicar estado
         if (modo === 'front') {
-            front.style.opacity = '1';
-            front.style.zIndex = '10';
-            back.style.zIndex = '0';
+            front.style.opacity = '1'; front.style.zIndex = '10'; back.style.zIndex = '0';
             if (svg) { svg.style.opacity = '1'; svg.style.pointerEvents = 'auto'; }
         } else if (modo === 'back') {
-            back.style.opacity = '1';
-            back.style.zIndex = '10';
-            front.style.zIndex = '0';
+            back.style.opacity = '1'; back.style.zIndex = '10'; front.style.zIndex = '0';
             if (svg) { svg.style.opacity = '0'; svg.style.pointerEvents = 'none'; }
         } else if (modo === 'raw') {
             raw.style.opacity = '1';
@@ -263,43 +209,20 @@
 
         if (btnRaw) {
             btnRaw.addEventListener('click', () => {
-                // Rotación cíclica de estados: front -> back -> raw -> front
                 if (modoActual === 'front') {
-                    aplicarModoVisual('back');
-                    modoActual = 'back';
-                    triggerHaptic(12);
+                    aplicarModoVisual('back'); modoActual = 'back'; triggerHaptic(12);
                 } else if (modoActual === 'back') {
-                    aplicarModoVisual('raw');
-                    modoActual = 'raw';
-                    triggerHaptic(10);
+                    aplicarModoVisual('raw'); modoActual = 'raw'; triggerHaptic(10);
                 } else {
-                    aplicarModoVisual('front');
-                    modoActual = 'front';
-                    triggerHaptic(8);
+                    aplicarModoVisual('front'); modoActual = 'front'; triggerHaptic(8);
                 }
             });
         }
     }
 
-function inicializarBioRush() {
-        const menuContainer = getCachedEl('biorush-items-menu');
-        if (menuContainer && BIORUSH_CATALOG) {
-            menuContainer.innerHTML = Object.keys(BIORUSH_CATALOG).map(item => `
-                <span id="menu-bio-${item}" onclick="cambiarBioItem('${item}')" class="cursor-pointer tracking-[0.15em] transition-all duration-300 h-5 leading-none font-bold">
-                    ${item}
-                </span>
-            `).join('');
-        }
-        
+    function inicializarBioRush() {
         vincularBotones();
         actualizarBioUI();
-    }
-
-    function cambiarBioItem(itemKey) {
-        currentBioItem = itemKey;
-        currentBioVariant = BIORUSH_CATALOG[itemKey].defaultVariant;
-        actualizarBioUI();
-        triggerHaptic(15);
     }
 
     function cambiarBioVariant(variantKey) {
@@ -308,9 +231,8 @@ function inicializarBioRush() {
         triggerHaptic(10);
     }
 
-function actualizarBioUI() {
-        const itemConfig = BIORUSH_CATALOG[currentBioItem];
-        const variantConfig = itemConfig.variants[currentBioVariant];
+    function actualizarBioUI() {
+        const variantConfig = BIORUSH_CATALOG[currentBioVariant];
         const vContainer = getCachedEl('biorush-variants-container');
         
         const descEl = getCachedEl('biorush-description');
@@ -330,23 +252,11 @@ function actualizarBioUI() {
                 const labelTitle = getCachedEl('laser-variant-title');
                 if (labelTitle) labelTitle.textContent = variantConfig.label;
                 
-                // Validaciones seguras para evitar excepciones null
-                const specEl = getCachedEl('biorush-spec');
-                const priceEl = getCachedEl('biorush-price');
-                if (specEl) specEl.textContent = variantConfig.spec;
-                if (priceEl) priceEl.textContent = variantConfig.price;
-                
                 descEl.classList.remove('opacity-0');
             }, 120);
         }
 
-        // Actualizar estados visuales de menú si existe
-        Object.keys(BIORUSH_CATALOG).forEach(item => {
-            const el = getCachedEl(`menu-bio-${item}`);
-            if (el) el.className = (item === currentBioItem) ? "cursor-pointer tracking-[0.15em] transition-all duration-300 h-5 leading-none font-bold text-white scale-105 border-b border-sky-400 pb-0.5" : "cursor-pointer tracking-[0.15em] transition-all duration-300 h-5 leading-none text-white/80 hover:text-white/80";
-        });
-
-        // Actualizar telemetría de variantes
+        // Sincronizar Telemetría Dinámica
         const tele = variantConfig.telemetry;
         const tCol = getCachedEl('tele-col');
         const tFru = getCachedEl('tele-fru');
@@ -358,56 +268,30 @@ function actualizarBioUI() {
         if (tSec) tSec.textContent = tele.SEC;
         if (tMol) tMol.textContent = variantConfig.price;
 
-        // Renderizar control de navegación
+// Renderizar Inyección de Navegación Compacta con Texto
         if (vContainer) {
             vContainer.innerHTML = `
-                <button onclick="navegarVariante(1)" class="w-full aspect-square flex items-center justify-center rounded-sm border border-white/10 bg-white/5 hover:border-sky-500/50 hover:bg-sky-500/10 transition-all duration-300 group">
-                    <img src="img/pace.png" alt="Siguiente Variante" class="h-4 w-auto object-contain opacity-50 group-hover:opacity-100 transition-opacity" />
+                <button onclick="navegarVariante(1)" class="w-full h-full flex items-center justify-center rounded-sm border border-white/10 bg-white/5 hover:border-sky-500/50 hover:bg-sky-500/10 transition-all duration-300 text-[10px] tracking-[0.2em] font-bold text-white/50 hover:text-sky-400 uppercase">
+                    Next
                 </button>`;
         }
     }
 
-    // NUEVA FUNCIÓN COADYUVANTE PARA OPERAR EL PASO CÍCLICO (Asegúrate de agregarla a tu script)
     function navegarVariante(direccion) {
-        const itemConfig = BIORUSH_CATALOG[currentBioItem];
-        const variantsKeys = Object.keys(itemConfig.variants);
+        const variantsKeys = Object.keys(BIORUSH_CATALOG);
         let currentIndex = variantsKeys.indexOf(currentBioVariant);
-        
-        // Desplazamiento cíclico matemático
         currentIndex = (currentIndex + direccion + variantsKeys.length) % variantsKeys.length;
-        
         cambiarBioVariant(variantsKeys[currentIndex]);
     }
 
     // =========================================================================
-    // 5. MOTOR DE TELEMETRÍA (LENGUAJE PULS)
+    // 4. MOTOR DE CONFIGURACIÓN TEMPORAL (LENGUAJE BIOCINÉTICO)
     // =========================================================================
-    function calculateSphereIndex() {
-        const now = new Date();
-        const epoch = new Date('2012-12-21T00:00:00Z');
-        const daysSinceEpoch = Math.floor((now - epoch) / 86400000);
-        
-        // Calculamos qué parte del día es (0 a 3, representando los 4 bloques de 6 horas)
-        const currentHour = now.getHours();
-        const sphereQuadrant = Math.floor(currentHour / 6);
-        
-        // El índice total será (Días * 4) + el cuadrante actual
-        const totalSpheres = (daysSinceEpoch * 4) + sphereQuadrant;
-        
-        return `${String(totalSpheres).padStart(4, '0')}`;
-    }
-
     function updateZ() {
         let biokineticCoordinate = "";
         const now = new Date();
-        const hours = now.getHours(); 
         const minutes = now.getMinutes();
         const seconds = now.getSeconds();
-
-        const currentSphereIdx = calculateSphereIndex();
-        
-        const elIdx = getCachedEl('telemetry-sphere-idx');
-        if (elIdx && elIdx.textContent !== currentSphereIdx) elIdx.textContent = currentSphereIdx;
 
         let setsStage = 1;  
         let repsStage = 1;  
@@ -441,12 +325,6 @@ function actualizarBioUI() {
 
         const elDial = getCachedEl('z-dial');
         if (elDial) elDial.textContent = biokineticCoordinate;
-                
-        // Dentro de la función updateZ(), reemplaza la línea de activeNodeText por esta:
-        const totalSecondsSinceMidnight = (hours * 3600) + (minutes * 60) + seconds;
-        const activeNodeText = `${String(totalSecondsSinceMidnight + 1).padStart(4, '0')}`;
-        const elActiveNode = getCachedEl('telemetry-active-node');
-        if (elActiveNode) elActiveNode.textContent = activeNodeText;
 
         const subSetsSolar = getCachedEl('sub-sets-solar');
         const subRepsTension = getCachedEl('sub-reps-tension');
@@ -454,8 +332,8 @@ function actualizarBioUI() {
         if (subRepsTension) subRepsTension.textContent = `${(14.2 + (repsStage * 0.8)).toFixed(1)}`;
     }
 
-// =========================================================================
-    // 5. MOTOR DE TELEMETRÍA UNIFICADO (LENGUAJE BIOCINÉTICO)
+    // =========================================================================
+    // 5. TRADUCTOR DE ENUNCIADOS DE TELEMETRÍA
     // =========================================================================
     const TELEMETRY_MEANINGS = {
         'sub-sets-solar': "Frecuencia de resonancia",
@@ -476,21 +354,17 @@ function actualizarBioUI() {
             if (!el) return;
 
             el.addEventListener('click', () => {
-                // Reset visual del nodo activo anterior
                 if (ultimoElementoActivo) {
                     ultimoElementoActivo.classList.remove('text-sky-400');
                     ultimoElementoActivo.classList.add('text-white/60');
                 }
                 
-                // Activar estado visual en el nodo actual
                 el.classList.remove('text-white/60');
                 el.classList.add('text-sky-400');
                 ultimoElementoActivo = el;
 
-                // Inyección del significado traducido en el panel unificado
                 telemetryPuls.innerHTML = TELEMETRY_MEANINGS[id].toUpperCase();
                 
-                // Temporizador de restauración (8 segundos)
                 setTimeout(() => {
                     if (ultimoElementoActivo === el) {
                         telemetryPuls.innerHTML = textoOriginalPuls;
@@ -504,31 +378,25 @@ function actualizarBioUI() {
     }
 
     // =========================================================================
-    // 6. CAPTURA DE TELEMETRÍA DE COMPRA (GENERACIÓN DE PAYLOAD)
+    // 6. PAYLOAD DE ADQUISICIÓN WHATSAPP
     // =========================================================================
     function adquirirNodo() {
-        const variantConfig = BIORUSH_CATALOG[currentBioItem].variants[currentBioVariant];
+        const variantConfig = BIORUSH_CATALOG[currentBioVariant];
         const currentCoord = getCachedEl('z-dial')?.textContent || "N/A";
-        const currentSphere = getCachedEl('telemetry-sphere-idx')?.textContent || "N/A";
-        const currentNode = getCachedEl('telemetry-active-node')?.textContent || "N/A";
         
-        // Captura de valores calculados en el DOM
         const freqValue = getCachedEl('sub-sets-solar')?.textContent || "0.00 Hz";
         const tensionValue = getCachedEl('sub-reps-tension')?.textContent || "0.0 N";
         
-        // Traducción técnica bajo Sinergia Molecular Óptima
         const dialInterpretation = currentCoord.replace(/(\d+)([A-Z]+)(\d+)/, "$1 FASES, $3 NODOS - ESTADO $2");
         
         const mensaje = `⚡ *ORDEN - BIORUSH* ⚡\n\n` +
-                        `• *Vector:* ${currentBioItem} ${currentBioVariant}\n` +
+                        `• *Vector:* PULSOR ${currentBioVariant}\n` +
                         `• *Carga:* ${variantConfig.spec}\n` +
                         `• *ID:* \`${variantConfig.id}\`\n` +
                         `• *Precio:* ${variantConfig.price}\n\n` +
-                        `--- *LENGUAJE P.U.L.S.* ---\n` +
+                        `--- *LENGUAJE BIOCINÉTICO* ---\n` +
                         `• *Matriz de Configuración:* \`${currentCoord}\`\n` +
                         `• *Análisis de Estado:* ${dialInterpretation}\n` +
-                        `• *Lote:* \`${currentSphere}\`\n` +
-                        `• *Saturación:* \`${currentNode}\`\n` +
                         `• *Resonancia:* \`${freqValue}\`\n` +
                         `• *Cohesión:* \`${tensionValue}\`\n\n` +
                         `Activar configuración actual.`;
@@ -537,7 +405,6 @@ function actualizarBioUI() {
         window.open(`https://api.whatsapp.com/send?phone=${numeroCelular}&text=${encodeURIComponent(mensaje)}`, '_blank');
     }
 
-    // Inicialización coordinada del Ciclo de Vida del DOM
     document.addEventListener('DOMContentLoaded', () => {
         inicializarBioRush();
         updateZ(); 
