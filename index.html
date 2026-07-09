@@ -85,21 +85,39 @@
             </div>
         </div>
 
-        <section class="w-full max-w-sm mx-auto pt-3 pb-3 flex flex-col border-t border-white/5 items-center">
-            <div class="grid grid-cols-6 gap-y-1 gap-x-1 w-full px-2 text-center mb-2">
-                <span id="sub-sets-solar" class="font-mono text-white/60 tracking-[0.2em] text-[11px] cursor-pointer hover:text-sky-400 transition-colors pb-1">0.00</span>
-                <span id="sub-reps-tension" class="font-mono text-white/60 tracking-[0.2em] text-[11px] cursor-pointer hover:text-sky-400 transition-colors pb-1">0.0</span>
-                <span id="tele-col" class="font-mono text-white/60 tracking-[0.1em] text-[10px] cursor-pointer hover:text-sky-400 transition-colors pb-1">--</span>
-                <span id="tele-fru" class="font-mono text-white/60 tracking-[0.1em] text-[10px] cursor-pointer hover:text-sky-400 transition-colors pb-1">--</span>
-                <span id="tele-sec" class="font-mono text-white/60 tracking-[0.1em] text-[10px] cursor-pointer hover:text-sky-400 transition-colors pb-1">--</span>
-                <span id="tele-mol" class="font-mono text-white/60 tracking-[0.1em] text-[10px] cursor-pointer hover:text-sky-400 transition-colors pb-1">--</span>
+<section class="w-full max-w-sm mx-auto pt-3 pb-3 flex flex-col border-t border-white/5 items-center overflow-hidden">
+            <div id="telemetry-scroll-viewport" class="flex overflow-x-auto gap-x-6 w-full px-4 mb-2 scroll-smooth snap-x snap-mandatory [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+                
+                <div class="flex flex-col items-center min-w-[60px] shrink-0 snap-center">
+                    <span id="sub-sets-solar" class="font-mono text-white/60 tracking-[0.2em] text-[11px] cursor-pointer hover:text-sky-400 transition-colors pb-1">0.00</span>
+                    <span class="text-[6px] tracking-[0.2em] text-white/40 uppercase">Hz</span>
+                </div>
 
-                <span class="text-[6px] tracking-[0.2em] text-white/40 uppercase">Hz</span>
-                <span class="text-[6px] tracking-[0.2em] text-white/40 uppercase">Tensión</span>
-                <span class="text-[6px] tracking-[0.2em] text-white/40 uppercase">Siembra</span>
-                <span class="text-[6px] tracking-[0.2em] text-white/40 uppercase">Cosecha</span>
-                <span class="text-[6px] tracking-[0.2em] text-white/40 uppercase">Secado</span>
-                <span class="text-[6px] tracking-[0.2em] text-white/40 uppercase">Precio</span>
+                <div class="flex flex-col items-center min-w-[60px] shrink-0 snap-center">
+                    <span id="sub-reps-tension" class="font-mono text-white/60 tracking-[0.2em] text-[11px] cursor-pointer hover:text-sky-400 transition-colors pb-1">0.0</span>
+                    <span class="text-[6px] tracking-[0.2em] text-white/40 uppercase">Tensión</span>
+                </div>
+
+                <div class="flex flex-col items-center min-w-[60px] shrink-0 snap-center">
+                    <span id="tele-col" class="font-mono text-white/60 tracking-[0.1em] text-[10px] cursor-pointer hover:text-sky-400 transition-colors pb-1">--</span>
+                    <span class="text-[6px] tracking-[0.2em] text-white/40 uppercase">Siembra</span>
+                </div>
+
+                <div class="flex flex-col items-center min-w-[60px] shrink-0 snap-center">
+                    <span id="tele-fru" class="font-mono text-white/60 tracking-[0.1em] text-[10px] cursor-pointer hover:text-sky-400 transition-colors pb-1">--</span>
+                    <span class="text-[6px] tracking-[0.2em] text-white/40 uppercase">Cosecha</span>
+                </div>
+
+                <div class="flex flex-col items-center min-w-[60px] shrink-0 snap-center">
+                    <span id="tele-sec" class="font-mono text-white/60 tracking-[0.1em] text-[10px] cursor-pointer hover:text-sky-400 transition-colors pb-1">--</span>
+                    <span class="text-[6px] tracking-[0.2em] text-white/40 uppercase">Secado</span>
+                </div>
+
+                <div class="flex flex-col items-center min-w-[60px] shrink-0 snap-center">
+                    <span id="tele-mol" class="font-mono text-white/60 tracking-[0.1em] text-[10px] cursor-pointer hover:text-sky-400 transition-colors pb-1">--</span>
+                    <span class="text-[6px] tracking-[0.2em] text-white/40 uppercase">Precio</span>
+                </div>
+
             </div>
 
             <div class="flex flex-col items-center justify-center w-full mt-1">
@@ -107,16 +125,21 @@
             </div>
         </section>
 <section class="w-full max-w-sm mx-auto px-6 py-4 border-t border-white/5 flex flex-col gap-4">
-            <div class="grid grid-cols-3 items-center gap-2 w-full max-w-[240px] mx-auto">
-                <button id="btn-reveal-raw" class="w-full h-9 flex items-center justify-center rounded-sm border border-white/10 bg-white/5 hover:border-sky-500/50 hover:bg-sky-500/10 transition-all duration-300 text-[10px] tracking-[0.2em] font-bold text-white/60 hover:text-sky-400 uppercase">
+            <div class="grid grid-cols-4 items-center gap-2 w-full max-w-[300px] mx-auto">
+                <button id="btn-reveal-raw" class="w-full h-5 flex items-center justify-center rounded-sm border border-white/10 bg-white/5 hover:border-sky-500/50 hover:bg-sky-500/10 transition-all duration-300 text-[9px] tracking-[0.2em] font-bold text-white/60 hover:text-sky-400 uppercase leading-none">
                     Ver
                 </button>
 
-                <button onclick="adquirirNodo()" class="w-full h-9 flex items-center justify-center bg-white/10 backdrop-blur-md rounded-sm border border-white/20 hover:border-sky-500/50 hover:bg-sky-500/10 transition-all duration-300 text-[10px] tracking-[0.2em] font-bold text-white/70 hover:text-sky-400 uppercase">
+                <button onclick="adquirirNodo()" class="w-full h-5 flex items-center justify-center bg-white/10 backdrop-blur-md rounded-sm border border-white/20 hover:border-sky-500/50 hover:bg-sky-500/10 transition-all duration-300 text-[9px] tracking-[0.2em] font-bold text-white/70 hover:text-sky-400 uppercase leading-none">
                     Pedir
                 </button>
 
-                <div id="biorush-variants-container" class="w-full h-9"></div>
+                <button id="biorush-variants-container" onclick="navegarVariante(1)" class="w-full h-5 flex items-center justify-center rounded-sm border border-white/10 bg-white/5 hover:border-sky-500/50 hover:bg-sky-500/10 transition-all duration-300 text-[9px] tracking-[0.2em] font-bold text-white/50 hover:text-sky-400 uppercase leading-none">
+                </button>
+
+                <button onclick="desplazarTelemetria()" class="w-full h-5 flex items-center justify-center rounded-sm border border-white/10 bg-white/5 hover:border-sky-500/50 hover:bg-sky-500/10 transition-all duration-300 text-[9px] tracking-[0.2em] font-bold text-white/60 hover:text-sky-400 uppercase leading-none">
+                    Info
+                </button>
             </div>
         </section>
 
@@ -268,12 +291,9 @@
         if (tSec) tSec.textContent = tele.SEC;
         if (tMol) tMol.textContent = variantConfig.price;
 
-// Renderizar Inyección de Navegación Compacta con Texto
+// Sincronizar solo el dato crudo de texto al botón del frontend
         if (vContainer) {
-            vContainer.innerHTML = `
-                <button onclick="navegarVariante(1)" class="w-full h-full flex items-center justify-center rounded-sm border border-white/10 bg-white/5 hover:border-sky-500/50 hover:bg-sky-500/10 transition-all duration-300 text-[10px] tracking-[0.2em] font-bold text-white/50 hover:text-sky-400 uppercase">
-                    Next
-                </button>`;
+            vContainer.textContent = 'Next';
         }
     }
 
@@ -375,6 +395,27 @@
                 }, 8000);
             });
         });
+    }
+
+// =========================================================================
+    // 7. CONTROLADOR DE DESPLAZAMIENTO INFINITO DE TELEMETRÍA
+    // =========================================================================
+    function desplazarTelemetria() {
+        const viewport = document.getElementById('telemetry-scroll-viewport');
+        if (!viewport) return;
+
+        triggerHaptic(6);
+
+        // Desplazamiento basado en el ancho promedio de dos columnas
+        const pasoDesplazamiento = 120; 
+        const posicionMaxima = viewport.scrollWidth - viewport.clientWidth;
+
+        // Si ya llegó al final o está muy cerca, resetea al inicio
+        if (viewport.scrollLeft >= posicionMaxima - 5) {
+            viewport.scrollTo({ left: 0, behavior: 'smooth' });
+        } else {
+            viewport.scrollBy({ left: pasoDesplazamiento, behavior: 'smooth' });
+        }
     }
 
     // =========================================================================
