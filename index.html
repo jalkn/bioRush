@@ -157,124 +157,121 @@ body {
 
     <main id="main-vault" class="w-screen h-screen flex flex-col relative overflow-hidden justify-between">
         
-<header class="h-[75px] shrink-0 glass-panel border-b border-white/10 z-50 flex flex-col items-center justify-center px-6">
-            <div class="flex items-center justify-center gap-3 w-full"> 
-                <img src="img/lift.png" alt="Back" class="h-5 w-auto object-contain opacity-80" />
-                <span class="text-[11px] tracking-[0.3em] font-black text-white/80 uppercase text-shadow-[0.5px_0.5px_1px_rgba(255,255,255,0.05)]">BIORUSH</span>
-            </div>
-        </header>
+<header class="h-[70px] md:h-[85px] w-full shrink-0 glass-panel border-b border-white/10 z-50 flex items-center justify-center px-6">
+    <div class="flex items-center justify-center gap-3 w-full"> 
+        <img src="img/lift.png" alt="Back" class="h-4 md:h-5 w-auto object-contain opacity-80" />
+        <span class="text-[11px] md:text-[13px] tracking-[0.3em] font-black text-white/80 uppercase text-shadow-[0.5px_0.5px_1px_rgba(255,255,255,0.05)]">BIORUSH</span>
+    </div>
+</header>
 
-        <div class="viewport-scroll-container flex flex-col items-center py-6 px-4 gap-y-4">
-            <div id="biorush-pack-container" class="relative w-full max-w-[180px] xs:max-w-[200px] sm:max-w-[230px] md:max-w-[260px] aspect-[13/15] shrink-0 drop-shadow-[0_35px_55px_rgba(0,0,0,0.95)] my-auto">
-                <div class="w-full h-full relative overflow-hidden bg-transparent">
-                    <img id="biorush-pack-img-back" src="img/45mane.png" alt="BioRush Pack Back" class="img-glow-transition absolute inset-0 w-full h-full object-contain opacity-0 pointer-events-none z-0" />
-                    <img id="biorush-pack-img" src="img/45caps.png" alt="BioRush Pack Front" class="img-glow-transition absolute inset-0 w-full h-full object-contain pointer-events-auto z-10" />
-                    <img id="biorush-pack-img-raw" src="" alt="Raw Content" class="img-glow-transition absolute inset-0 w-full h-full object-contain opacity-0 pointer-events-none z-[5]" />
+<div class="flex-1 w-full flex items-center justify-center p-4 overflow-hidden select-none">
+    <div id="biorush-pack-container" class="relative w-full max-w-[250px] xs:max-w-[280px] sm:max-w-[310px] md:max-w-[360px] aspect-[13/15] shrink-0 drop-shadow-[0_35px_55px_rgba(0,0,0,0.95)]">
+        <div class="w-full h-full relative overflow-hidden bg-transparent">
+            <img id="biorush-pack-img-back" src="img/45mane.png" alt="BioRush Pack Back" class="img-glow-transition absolute inset-0 w-full h-full object-contain opacity-0 pointer-events-none z-0" />
+            <img id="biorush-pack-img" src="img/45caps.png" alt="BioRush Pack Front" class="img-glow-transition absolute inset-0 w-full h-full object-contain pointer-events-auto z-10" />
+            <img id="biorush-pack-img-raw" src="" alt="Raw Content" class="img-glow-transition absolute inset-0 w-full h-full object-contain opacity-0 pointer-events-none z-[5]" />
+            
+            <div class="absolute inset-0 flex items-center justify-center p-2 z-20 pointer-events-none">
+                <svg id="laser-vector-target" viewBox="0 0 400 400" class="w-full h-full fill-none stroke-white/20 stroke-[1.2] transition-all duration-500 origin-center transform scale-[1.25]">
+                    <defs>
+                        <path id="textPath-top" d="M 65,200 A 135,135 0 0,1 335,200" />
+                        <path id="textPath-bottom" d="M 65,200 A 135,135 0 0,0 335,200" />
+                    </defs>
                     
-                    <div class="absolute inset-0 flex items-center justify-center p-2 z-20 pointer-events-none">
-                        <svg id="laser-vector-target" viewBox="0 0 400 400" class="w-full h-full fill-none stroke-white/20 stroke-[1.2] transition-all duration-500 origin-center transform scale-[1.25]">
-                            <defs>
-                                <path id="textPath-top" d="M 65,200 A 135,135 0 0,1 335,200" />
-                                <path id="textPath-bottom" d="M 65,200 A 135,135 0 0,0 335,200" />
-                            </defs>
-                            
-                            <text class="fill-white font-black text-[10px] tracking-[0.3em] uppercase transition-all duration-500">
-                                <textPath id="laser-variant-title" href="#textPath-top" startOffset="50%" text-anchor="middle">PULSOR FOCUS</textPath>
-                            </text>
-                            
-                            <g class="origin-center transform scale-[1.05]">
-                                <path d="M 110,120 L 290,120 L 110,280 L 290,280 Z" class="opacity-15 stroke-[1.0]" />
-                                <path d="M 110,120 Q 200,150 290,120" class="opacity-15 stroke-[1.0]" />
-                                <path d="M 110,280 Q 200,250 290,280" stroke-dasharray="2 2" class="opacity-15 stroke-[1.0]" />
-                                
-                                <text x="200" y="165" text-anchor="middle" class="fill-white/20 text-[7px] tracking-[0.3em] font-bold uppercase"></text>
-                                <text id="z-dial" x="200" y="210" text-anchor="middle" class="fill-white font-black text-[36px] tracking-[0.4em] font-sans">8UST11</text>
-                                <text x="200" y="245" text-anchor="middle" class="fill-white/20 text-[6px] tracking-[0.4em] font-mono"></text>
-                            </g>
-                            
-                            <text class="fill-white/40 font-black text-[10px] tracking-[0.25em] uppercase transition-all duration-500">
-                                <textPath id="biorush-description" href="#textPath-bottom" startOffset="50%" text-anchor="middle">Enfoque y claridad cognitiva</textPath>
-                            </text>
-                        </svg>
-                    </div>
-                </div>
+                    <text class="fill-white font-black text-[10px] tracking-[0.3em] uppercase transition-all duration-500">
+                        <textPath id="laser-variant-title" href="#textPath-top" startOffset="50%" text-anchor="middle">PULSOR FOCUS</textPath>
+                    </text>
+                    
+                    <g class="origin-center transform scale-[1.05]">
+                        <path d="M 110,120 L 290,120 L 110,280 L 290,280 Z" class="opacity-15 stroke-[1.0]" />
+                        <path d="M 110,120 Q 200,150 290,120" class="opacity-15 stroke-[1.0]" />
+                        <path d="M 110,280 Q 200,250 290,280" stroke-dasharray="2 2" class="opacity-15 stroke-[1.0]" />
+                        
+                        <text x="200" y="165" text-anchor="middle" class="fill-white/20 text-[7px] tracking-[0.3em] font-bold uppercase"></text>
+                        <text id="z-dial" x="200" y="215" text-anchor="middle" class="fill-white font-black text-[45px] tracking-[0.4em] font-sans">8UST11</text>
+                        <text x="200" y="245" text-anchor="middle" class="fill-white/20 text-[6px] tracking-[0.4em] font-mono"></text>
+                    </g>
+                    
+                    <text class="fill-white/40 font-black text-[10px] tracking-[0.25em] uppercase transition-all duration-500">
+                        <textPath id="biorush-description" href="#textPath-bottom" startOffset="50%" text-anchor="middle">Enfoque y claridad cognitiva</textPath>
+                    </text>
+                </svg>
             </div>
         </div>
+    </div>
+</div>
 
-<footer class="w-full shrink-0 flex flex-col items-center bg-gradient-to-t from-black via-black/90 to-transparent pt-4 pb-3 z-50 border-t border-white/5">
-            
-<!-- ESPECIFICACIÓN: CENTRALIZADA EN LA PARTE SUPERIOR DEL PANEL DE VIDRIO CON EFECTO GRABADO -->
-            <div class="w-full max-w-sm mx-auto px-4 mb-1 flex justify-center">
-                <span id="biorush-spec" class="transition-all duration-300 text-[7px] tracking-[0.3em] font-mono uppercase tele-value">--</span>
-            </div>
+<footer class="w-full shrink-0 flex flex-col items-center bg-gradient-to-t from-black via-black/95 to-transparent pt-3 pb-3 z-50 border-t border-white/5">
+    
+    <div class="w-full max-w-sm md:max-w-md mx-auto px-4 mb-1 flex items-center justify-between gap-2">
+        <button onclick="navegarVariante(-1)" class="opacity-30 hover:opacity-100 transition-opacity p-2 text-[8px] md:text-[10px] font-mono leading-none">◀</button>
+        <svg class="w-full h-4 fill-none" viewBox="0 0 200 16">
+            <text id="laser-variant-title-footer" x="50%" y="12" text-anchor="middle" class="fill-white font-black text-[9px] md:text-[11px] tracking-[0.3em] uppercase transition-all duration-500 tele-value">
+                PULSOR FOCUS
+            </text>
+        </svg>
+        <button id="biorush-variants-container" onclick="navegarVariante(1)" class="opacity-30 hover:opacity-100 transition-opacity p-2 text-[8px] md:text-[10px] font-mono leading-none">▶</button>
+    </div>
 
-            <!-- PANEL DE VIDRIO INTEGRAL ANCHO COMPLETO -->
-            <div class="w-full pb-3 pt-2 px-4 flex flex-col items-center overflow-hidden relative glass-panel border-t border-b border-white/10 mb-4">
-                
-                <div id="telemetry-led-lens" class="led-lens-bg"></div>
+    <div class="w-full max-w-md md:max-w-xl pb-2.5 pt-2 px-4 flex flex-col items-center overflow-hidden relative glass-panel border-t border-b border-white/10 mb-3.5">
+        <div id="telemetry-led-lens" class="led-lens-bg"></div>
 
-                <div class="absolute left-4 top-[38%] -translate-y-1/2 glass-axis-marker text-left select-none">┠─</div>
-                <div class="absolute right-4 top-[38%] -translate-y-1/2 glass-axis-marker text-right select-none">─┨</div>
+        <div class="flex items-center w-full justify-between z-10 px-1 gap-1">
+            <button onclick="desplazarTelemetria(-1)" class="opacity-25 hover:opacity-100 transition-opacity p-1 text-[8px] font-mono leading-none">◀</button>
 
-                <div id="telemetry-scroll-viewport" class="flex overflow-x-auto w-full pt-1 mb-2 scroll-smooth snap-x snap-mandatory [scrollbar-width:none] [&::-webkit-scrollbar]:hidden z-10 border-b border-white/[0.02]">
-                    <div class="flex flex-col items-center w-1/3 min-w-[33.333%] shrink-0 snap-start">
-                        <span id="sub-sets-solar" class="font-mono tracking-[0.2em] text-[11px] cursor-pointer tele-value">0.00</span>
-                        <span class="text-[5.5px] tracking-[0.25em] text-white/20 uppercase font-black mt-0.5 font-mono">Hz</span>
-                    </div>
-                    <div class="flex flex-col items-center w-1/3 min-w-[33.333%] shrink-0 snap-start">
-                        <span id="sub-reps-tension" class="font-mono tracking-[0.2em] text-[11px] cursor-pointer tele-value">0.0</span>
-                        <span class="text-[5.5px] tracking-[0.25em] text-white/20 uppercase font-black mt-0.5 font-mono">Tensión</span>
-                    </div>
-                    <div class="flex flex-col items-center w-1/3 min-w-[33.333%] shrink-0 snap-start">
-                        <span id="tele-col" class="font-mono tracking-[0.1em] text-[10px] cursor-pointer tele-value">--</span>
-                        <span class="text-[5.5px] tracking-[0.25em] text-white/20 uppercase font-black mt-0.5 font-mono">Siembra</span>
-                    </div>
-                    <div class="flex flex-col items-center w-1/3 min-w-[33.333%] shrink-0 snap-start">
-                        <span id="tele-fru" class="font-mono tracking-[0.1em] text-[10px] cursor-pointer tele-value">--</span>
-                        <span class="text-[5.5px] tracking-[0.25em] text-white/20 uppercase font-black mt-0.5 font-mono">Cosecha</span>
-                    </div>
-                    <div class="flex flex-col items-center w-1/3 min-w-[33.333%] shrink-0 snap-start">
-                        <span id="tele-sec" class="font-mono tracking-[0.1em] text-[10px] cursor-pointer tele-value">--</span>
-                        <span class="text-[5.5px] tracking-[0.25em] text-white/20 uppercase font-black mt-0.5 font-mono">Secado</span>
-                    </div>
-                    <div class="flex flex-col items-center w-1/3 min-w-[33.333%] shrink-0 snap-start">
-                        <span id="tele-mol" class="font-mono tracking-[0.1em] text-[10px] cursor-pointer tele-value">--</span>
-                        <span class="text-[5.5px] tracking-[0.25em] text-white/20 uppercase font-black mt-0.5 font-mono">Precio</span>
-                    </div>
+            <div id="telemetry-scroll-viewport" class="flex overflow-x-auto w-full pt-1 mb-2 scroll-smooth snap-x snap-mandatory [scrollbar-width:none] [&::-webkit-scrollbar]:hidden border-b border-white/[0.02]">
+                <div class="flex flex-col items-center w-1/3 min-w-[33.333%] shrink-0 snap-start">
+                    <span id="sub-sets-solar" class="font-mono tracking-[0.2em] text-[13px] md:text-[16px] cursor-pointer tele-value">0.00</span>
+                    <span class="text-[6.5px] md:text-[8px] tracking-[0.25em] text-white/20 uppercase font-black mt-0.5 font-mono">Hz</span>
                 </div>
-
-                <div class="flex flex-col items-center justify-center w-full z-10 min-h-[14px] mb-2.5">
-                    <span id="panel-telemetry-puls" class="text-[7.5px] text-center tracking-[0.45em] font-bold text-white/40 uppercase transition-all duration-300 font-mono"></span>
+                <div class="flex flex-col items-center w-1/3 min-w-[33.333%] shrink-0 snap-start">
+                    <span id="sub-reps-tension" class="font-mono tracking-[0.2em] text-[13px] md:text-[16px] cursor-pointer tele-value">0.0</span>
+                    <span class="text-[6.5px] md:text-[8px] tracking-[0.25em] text-white/20 uppercase font-black mt-0.5 font-mono">Tensión</span>
                 </div>
-
-                <!-- SUB-BARRA INFERIOR CON LOS OTROS DOS ELEMENTOS CONSERVADOS -->
-                <div class="flex items-center justify-center gap-3 text-white/20 text-[7px] tracking-[0.3em] font-mono select-none w-full uppercase border-t border-white/5 pt-2 z-10 bg-black/[0.05]">
-                    <span id="biorush-cant" class="text-white/20 transition-all duration-300">--</span>
-                    <span class="opacity-10 text-[5px]">|</span>
-                    <span id="biorush-price" class="text-white/50 font-black transition-all duration-300">--</span>
+                <div class="flex flex-col items-center w-1/3 min-w-[33.333%] shrink-0 snap-start">
+                    <span id="tele-col" class="font-mono tracking-[0.1em] text-[12px] md:text-[15px] cursor-pointer tele-value">--</span>
+                    <span class="text-[6.5px] md:text-[8px] tracking-[0.25em] text-white/20 uppercase font-black mt-0.5 font-mono">Siembra</span>
+                </div>
+                <div class="flex flex-col items-center w-1/3 min-w-[33.333%] shrink-0 snap-start">
+                    <span id="tele-fru" class="font-mono tracking-[0.1em] text-[12px] md:text-[15px] cursor-pointer tele-value">--</span>
+                    <span class="text-[6.5px] md:text-[8px] tracking-[0.25em] text-white/20 uppercase font-black mt-0.5 font-mono">Cosecha</span>
+                </div>
+                <div class="flex flex-col items-center w-1/3 min-w-[33.333%] shrink-0 snap-start">
+                    <span id="tele-sec" class="font-mono tracking-[0.1em] text-[12px] md:text-[15px] cursor-pointer tele-value">--</span>
+                    <span class="text-[6.5px] md:text-[8px] tracking-[0.25em] text-white/20 uppercase font-black mt-0.5 font-mono">Secado</span>
+                </div>
+                <div class="flex flex-col items-center w-1/3 min-w-[33.333%] shrink-0 snap-start">
+                    <span id="tele-mol" class="font-mono tracking-[0.1em] text-[12px] md:text-[15px] cursor-pointer tele-value">--</span>
+                    <span class="text-[6.5px] md:text-[8px] tracking-[0.25em] text-white/20 uppercase font-black mt-0.5 font-mono">Precio</span>
                 </div>
             </div>
 
-            <!-- FILA DE BOTONES HUD CON ESTILO STENCIL -->
-            <div class="grid grid-cols-4 items-center gap-2 w-full max-w-[340px] mx-auto px-4 mb-3.5">
-                <button id="biorush-variants-container" onclick="navegarVariante(1)" class="hud-btn-stencil w-full h-6 flex items-center justify-center rounded-sm text-[9px] tracking-[0.2em] font-bold uppercase leading-none">
-                    Next
-                </button>
-                <button onclick="desplazarTelemetria()" class="hud-btn-stencil w-full h-6 flex items-center justify-center rounded-sm text-[9px] tracking-[0.2em] font-bold uppercase leading-none">
-                    Info
-                </button>
-                <button id="btn-reveal-raw" class="hud-btn-stencil w-full h-6 flex items-center justify-center rounded-sm text-[9px] tracking-[0.2em] font-bold uppercase leading-none">
-                    Ver
-                </button>
-                <button onclick="adquirirNodo()" class="hud-btn-stencil w-full h-6 flex items-center justify-center rounded-sm text-[9px] tracking-[0.2em] font-black uppercase leading-none bg-white/[0.03] border-white/20 !color-white/80">
-                    ACTIVAR
-                </button>
-            </div>
+            <button onclick="desplazarTelemetria(1)" class="opacity-25 hover:opacity-100 transition-opacity p-1 text-[8px] font-mono leading-none">▶</button>
+        </div>
 
-            <!-- CRÉDITOS CON ENLACE REDIRECCIONADO A JAKO.WORLD -->
-            <div class="w-full flex justify-center items-center py-1">
-                <a href="https://jako.world" target="_blank" class="text-[6px] tracking-[0.6em] font-bold text-white/20 hover:text-white/40 transition-colors duration-300 uppercase">
-                    POWERED BY JAKO.ART
+        <div class="flex flex-col items-center justify-center w-full z-10 min-h-[14px] mb-2">
+            <span id="panel-telemetry-puls" class="text-[7.5px] md:text-[9px] text-center tracking-[0.45em] font-bold text-white/40 uppercase transition-all duration-300 font-mono"></span>
+        </div>
+
+        <div class="flex items-center justify-center gap-3 text-white/20 text-[7px] md:text-[8.5px] tracking-[0.3em] font-mono w-full uppercase border-t border-white/5 pt-2 z-10 bg-black/[0.05]">
+            <span id="biorush-cant" class="text-white/60 transition-all duration-300">--</span>
+            <span class="opacity-10 text-[5px]">|</span>
+            <span id="biorush-price" class="text-white/60 font-black transition-all duration-300">--</span>
+        </div>
+    </div>
+
+    <div class="grid grid-cols-2 items-center gap-2 w-full max-w-[340px] md:max-w-[420px] mx-auto px-4 mb-3">
+        <button id="btn-reveal-raw" class="hud-btn-stencil w-full h-6 md:h-7 flex items-center justify-center rounded-sm text-[9px] md:text-[11px] tracking-[0.2em] font-bold uppercase leading-none">
+            Ver
+        </button>
+        <button onclick="adquirirNodo()" class="hud-btn-stencil w-full h-6 md:h-7 flex items-center justify-center rounded-sm text-[9px] md:text-[11px] tracking-[0.2em] font-black uppercase leading-none bg-white/[0.03] border-white/20 !color-white/80">
+            ACTIVAR
+        </button>
+    </div>
+
+    <div class="w-full flex justify-center items-center py-0.5">
+        <a href="https://jako.world" target="_blank" class="text-[6px] md:text-[7.5px] tracking-[0.6em] font-bold text-white/20 hover:text-white/40 transition-colors duration-300 uppercase">
+            POWERED BY JAKO.ART
                 </a>
             </div>
         </footer>
@@ -384,7 +381,7 @@ body {
         triggerHaptic(10);
     }
 
-    function actualizarBioUI() {
+function actualizarBioUI() {
         const variantConfig = BIORUSH_CATALOG[currentBioVariant];
         const vContainer = getCachedEl('biorush-variants-container');
         
@@ -402,8 +399,13 @@ body {
                 packImgBack.src = variantConfig.imgBack;
                 if (packImgRaw) packImgRaw.src = variantConfig.imgRaw;
                 
+                // Sincronizar título en el target láser central
                 const labelTitle = getCachedEl('laser-variant-title');
                 if (labelTitle) labelTitle.textContent = variantConfig.label;
+                
+                // Sincronizar título en la especificación vectorial del footer
+                const labelTitleFooter = getCachedEl('laser-variant-title-footer');
+                if (labelTitleFooter) labelTitleFooter.textContent = variantConfig.label;
                 
                 descEl.classList.remove('opacity-0');
             }, 120);
@@ -422,19 +424,18 @@ body {
         if (tMol) tMol.textContent = variantConfig.price;
 
         // --- ENLACE DIRECTO A LA SUB-BARRA INFERIOR DEL CRISTAL ---
-        const hudSpec = getCachedEl('biorush-spec');
         const hudCant = getCachedEl('biorush-cant');
         const hudPrice = getCachedEl('biorush-price');
 
-        if (hudSpec) hudSpec.textContent = variantConfig.spec;
         if (hudCant) hudCant.textContent = variantConfig.cant;
         if (hudPrice) hudPrice.textContent = variantConfig.price;
 
-        // Mantener texto base en el botón disparador
+        // Mantener referencia estable para el contenedor de variantes
         if (vContainer) {
-            vContainer.textContent = 'Next';
+            // Lógica base conservada
         }
     }
+
     function navegarVariante(direccion) {
         const variantsKeys = Object.keys(BIORUSH_CATALOG);
         let currentIndex = variantsKeys.indexOf(currentBioVariant);
@@ -557,31 +558,23 @@ body {
         });
     }
 
-    function desplazarTelemetria() {
+function desplazarTelemetria(direccion = 1) {
         const viewport = document.getElementById('telemetry-scroll-viewport');
         if (!viewport || viewport.children.length === 0) return;
 
         triggerHaptic(6);
         const anchoElemento = viewport.children[0].offsetWidth;
 
-        // Desplazamiento nativo suave hacia la derecha
+        // Desplazamiento adaptativo fluido izquierda o derecha
         viewport.scrollBy({
-            left: anchoElemento,
+            left: anchoElemento * direccion,
             behavior: 'smooth'
         });
 
-        // Bucle infinito: si llega al final del contenedor, reordena los nodos de forma transparente
+        // Asegurar actualización geométrica síncrona del foco central tras la animación
         setTimeout(() => {
-            const maxScrollLeft = viewport.scrollWidth - viewport.clientWidth;
-            if (viewport.scrollLeft >= maxScrollLeft - 5) {
-                const primerElemento = viewport.children[0];
-                viewport.appendChild(primerElemento);
-                viewport.style.scrollBehavior = 'auto';
-                viewport.scrollLeft = viewport.scrollLeft - anchoElemento;
-                viewport.style.scrollBehavior = 'smooth';
-            }
             actualizarFocoCentral();
-        }, 350);
+        }, 300);
     }
 
     function actualizarFocoCentral() {
