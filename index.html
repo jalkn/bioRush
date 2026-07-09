@@ -85,46 +85,48 @@
             </div>
         </div>
 
+
 <section class="w-full max-w-sm mx-auto pt-3 pb-3 flex flex-col border-t border-white/5 items-center overflow-hidden">
             <div id="telemetry-scroll-viewport" class="flex overflow-x-auto w-full mb-2 scroll-smooth snap-x snap-mandatory [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
                 
-                <div class="flex flex-col items-center w-1/3 min-w-[33.333%] shrink-0 snap-start">
-                    <span id="sub-sets-solar" class="font-mono text-white/60 tracking-[0.2em] text-[11px] cursor-pointer hover:text-sky-400 transition-colors pb-1">0.00</span>
+                <div class="flex flex-col items-center w-1/3 min-w-[33.333%] shrink-0 snap-start transition-all duration-500">
+                    <span id="sub-sets-solar" class="font-mono tracking-[0.2em] text-[11px] cursor-pointer transition-all duration-500 pb-1">0.00</span>
                     <span class="text-[6px] tracking-[0.2em] text-white/40 uppercase">Hz</span>
                 </div>
 
-                <div class="flex flex-col items-center w-1/3 min-w-[33.333%] shrink-0 snap-start">
-                    <span id="sub-reps-tension" class="font-mono text-white/60 tracking-[0.2em] text-[11px] cursor-pointer hover:text-sky-400 transition-colors pb-1">0.0</span>
+                <div class="flex flex-col items-center w-1/3 min-w-[33.333%] shrink-0 snap-start transition-all duration-500">
+                    <span id="sub-reps-tension" class="font-mono tracking-[0.2em] text-[11px] cursor-pointer transition-all duration-500 pb-1">0.0</span>
                     <span class="text-[6px] tracking-[0.2em] text-white/40 uppercase">Tensión</span>
                 </div>
 
-                <div class="flex flex-col items-center w-1/3 min-w-[33.333%] shrink-0 snap-start">
-                    <span id="tele-col" class="font-mono text-white/60 tracking-[0.1em] text-[10px] cursor-pointer hover:text-sky-400 transition-colors pb-1">--</span>
+                <div class="flex flex-col items-center w-1/3 min-w-[33.333%] shrink-0 snap-start transition-all duration-500">
+                    <span id="tele-col" class="font-mono tracking-[0.1em] text-[10px] cursor-pointer transition-all duration-500 pb-1">--</span>
                     <span class="text-[6px] tracking-[0.2em] text-white/40 uppercase">Siembra</span>
                 </div>
 
-                <div class="flex flex-col items-center w-1/3 min-w-[33.333%] shrink-0 snap-start">
-                    <span id="tele-fru" class="font-mono text-white/60 tracking-[0.1em] text-[10px] cursor-pointer hover:text-sky-400 transition-colors pb-1">--</span>
+                <div class="flex flex-col items-center w-1/3 min-w-[33.333%] shrink-0 snap-start transition-all duration-500">
+                    <span id="tele-fru" class="font-mono tracking-[0.1em] text-[10px] cursor-pointer transition-all duration-500 pb-1">--</span>
                     <span class="text-[6px] tracking-[0.2em] text-white/40 uppercase">Cosecha</span>
                 </div>
 
-                <div class="flex flex-col items-center w-1/3 min-w-[33.333%] shrink-0 snap-start">
-                    <span id="tele-sec" class="font-mono text-white/60 tracking-[0.1em] text-[10px] cursor-pointer hover:text-sky-400 transition-colors pb-1">--</span>
+                <div class="flex flex-col items-center w-1/3 min-w-[33.333%] shrink-0 snap-start transition-all duration-500">
+                    <span id="tele-sec" class="font-mono tracking-[0.1em] text-[10px] cursor-pointer transition-all duration-500 pb-1">--</span>
                     <span class="text-[6px] tracking-[0.2em] text-white/40 uppercase">Secado</span>
                 </div>
 
-                <div class="flex flex-col items-center w-1/3 min-w-[33.333%] shrink-0 snap-start">
-                    <span id="tele-mol" class="font-mono text-white/60 tracking-[0.1em] text-[10px] cursor-pointer hover:text-sky-400 transition-colors pb-1">--</span>
+                <div class="flex flex-col items-center w-1/3 min-w-[33.333%] shrink-0 snap-start transition-all duration-500">
+                    <span id="tele-mol" class="font-mono tracking-[0.1em] text-[10px] cursor-pointer transition-all duration-500 pb-1">--</span>
                     <span class="text-[6px] tracking-[0.2em] text-white/40 uppercase">Precio</span>
                 </div>
 
             </div>
 
             <div class="flex flex-col items-center justify-center w-full mt-1">
-                <span id="panel-telemetry-puls" class="text-[8px] text-center tracking-[0.5em] text-sky-400 uppercase transition-colors duration-300">ONDAS BIOCINÉTICAS REGENERATIVAS</span>
+                <span id="panel-telemetry-puls" class="text-[8px] text-center tracking-[0.5em] text-sky-400 uppercase transition-all duration-500 min-h-[12px]"></span>
             </div>
         </section>
-<section class="w-full max-w-sm mx-auto px-6 py-4 border-t border-white/5 flex flex-col gap-4">
+
+
             <div class="grid grid-cols-4 items-center gap-2 w-full max-w-[300px] mx-auto">
 
 
@@ -398,39 +400,77 @@
                     }
                 }, 8000);
             });
+            actualizarFocoCentral();
         });
     }
 
-// =========================================================================
-    // 7. MOTOR DE DESPLAZAMIENTO INFINITO CONTINUO (3 COLUMNAS EXACTAS) - FIXED
-    // =========================================================================
-    function desplazarTelemetria() {
+function desplazarTelemetria() {
         const viewport = document.getElementById('telemetry-scroll-viewport');
         if (!viewport || viewport.children.length === 0) return;
 
         triggerHaptic(6);
 
-        // El ancho de un elemento equivale exactamente a un tercio (1/3) del viewport
         const anchoElemento = viewport.children[0].offsetWidth;
 
-        // Desplazamiento suave controlado hacia la derecha
+        // Desplazamiento controlado
         viewport.scrollTo({
             left: anchoElemento,
             behavior: 'smooth'
         });
 
-        // Margen de tolerancia física de 350ms para asegurar la correcta finalización del scroll smooth
         setTimeout(() => {
             const primerElemento = viewport.children[0];
-            
-            // Reubicación instantánea en la cola del DOM
             viewport.appendChild(primerElemento); 
             
-            // Corrección de desfase síncrono del puntero de scroll
             viewport.style.scrollBehavior = 'auto';
             viewport.scrollLeft = 0; 
             viewport.style.scrollBehavior = 'smooth';
+
+            // Ejecutar la actualización del foco central óptico una vez reordenado el DOM
+            actualizarFocoCentral();
         }, 350);
+    }
+
+    function actualizarFocoCentral() {
+        const viewport = document.getElementById('telemetry-scroll-viewport');
+        const telemetryPuls = document.getElementById('panel-telemetry-puls');
+        if (!viewport || !telemetryPuls || viewport.children.length < 3) return;
+
+        // En una matriz exacta de 3 columnas, el elemento del centro físico es siempre el índice 1
+        const nodoCentral = viewport.children[1];
+        
+        // Buscar el span interno que contiene el ID original del dato crudo
+        const spanDato = nodoCentral.querySelector('span[id]');
+        if (!spanDato) return;
+
+        const idOriginal = spanDato.id;
+
+        // Actualizar el enunciado del panel central
+        if (TELEMETRY_MEANINGS[idOriginal]) {
+            telemetryPuls.textContent = TELEMETRY_MEANINGS[idOriginal].toUpperCase();
+        }
+
+        // Aplicar el efecto físico de iluminación en el Frontend a los 3 nodos visibles
+        Array.from(viewport.children).forEach((nodo, index) => {
+            const spanInterno = nodo.querySelector('span');
+            if (!spanInterno) return;
+
+            if (index === 1) {
+                // Nodo Central: Efecto Gota de agua retroiluminada por LED (Cian Líquido)
+                spanInterno.style.color = '#38bdf8';
+                spanInterno.style.opacity = '1';
+                spanInterno.style.filter = 'drop-shadow(0 0 4px rgba(56, 189, 248, 0.8))';
+                spanInterno.style.textShadow = '0 0 8px rgba(56, 189, 248, 0.9)';
+                nodo.style.opacity = '1';
+            } else {
+                // Nodos Laterales: Efecto agua sin iluminación led (Opacos y mate)
+                spanInterno.style.color = 'rgba(255, 255, 255, 0.4)';
+                spanInterno.style.opacity = '0.4';
+                spanInterno.style.filter = 'none';
+                spanInterno.style.textShadow = 'none';
+                nodo.style.opacity = '0.4';
+            }
+        });
     }
 
     // =========================================================================
