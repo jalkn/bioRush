@@ -22,17 +22,41 @@
             }
         }
     </script>
- <style>
+<style>
         body { font-family: 'Orbitron', sans-serif; background-color: #020617; color: #f8fafc; } 
         #page-bg-overlay {
             position: fixed; inset: 0; z-index: -1;
             background: radial-gradient(circle at 50% 50%, #1e3a8a 0%, #0f172a 50%, #020617 100%);
         }
-        .tele-label { color: #64748b; }
-        .tele-value { color: #38bdf8; }
-        .border-custom { border-color: rgba(56, 189, 248, 0.2); }
-        .border-custom:hover { border-color: rgba(56, 189, 248, 0.6); }
+        .tele-label { color: rgba(255, 255, 255, 0.4); }
+        /* Cambiado a blanco puro con transición de opacidad */
+        .tele-value { color: #ffffff; transition: all 0.4s ease; }
+        .border-custom { border-color: rgba(255, 255, 255, 0.1); }
+        .border-custom:hover { border-color: rgba(255, 255, 255, 0.4); }
         .img-glow-transition { transition: opacity 0.6s ease-in-out; }
+        
+        /* Objeto Óptico de Retroiluminación Trasera */
+        .led-lens-bg {
+            position: absolute;
+            left: 50%;
+            top: 40%;
+            transform: translate(-50%, -50%);
+            width: 70px;
+            height: 35px;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0) 70%);
+            border-radius: 50%;
+            filter: blur(4px);
+            pointer-events: none;
+            z-index: 0;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        /* Estado activo: destello hiperrealista blanco mate */
+        .led-lens-bg.lens-active {
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0.02) 50%, rgba(255, 255, 255, 0) 80%);
+            width: 85px;
+            height: 40px;
+            filter: blur(2px);
+        }
     </style>
 </head>
 <body class="antialiased selection:bg-white selection:text-black overflow-x-hidden text-white">
@@ -86,8 +110,11 @@
         </div>
 
 
-<section class="w-full max-w-sm mx-auto pt-3 pb-3 flex flex-col border-t border-white/5 items-center overflow-hidden">
-            <div id="telemetry-scroll-viewport" class="flex overflow-x-auto w-full mb-2 scroll-smooth snap-x snap-mandatory [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+<section class="w-full max-w-sm mx-auto pt-3 pb-3 flex flex-col border-t border-white/5 items-center overflow-hidden relative">
+            
+            <div id="telemetry-led-lens" class="led-lens-bg"></div>
+
+            <div id="telemetry-scroll-viewport" class="flex overflow-x-auto w-full mb-2 scroll-smooth snap-x snap-mandatory [scrollbar-width:none] [&::-webkit-scrollbar]:hidden z-10">
                 
                 <div class="flex flex-col items-center w-1/3 min-w-[33.333%] shrink-0 snap-start transition-all duration-500">
                     <span id="sub-sets-solar" class="font-mono tracking-[0.2em] text-[11px] cursor-pointer transition-all duration-500 pb-1">0.00</span>
@@ -121,21 +148,21 @@
 
             </div>
 
-            <div class="flex flex-col items-center justify-center w-full mt-1">
-                <span id="panel-telemetry-puls" class="text-[8px] text-center tracking-[0.5em] text-sky-400 uppercase transition-all duration-500 min-h-[12px]"></span>
+            <div class="flex flex-col items-center justify-center w-full mt-1 z-10">
+                <span id="panel-telemetry-puls" class="text-[8px] text-center tracking-[0.5em] text-white uppercase transition-all duration-500 min-h-[12px]"></span>
             </div>
         </section>
 
         <div class="grid grid-cols-4 items-center gap-2 w-full max-w-[300px] mx-auto">
-            <button onclick="desplazarTelemetria()" class="w-full h-5 flex items-center justify-center rounded-sm border border-white/10 bg-white/5 hover:border-sky-500/50 hover:bg-sky-500/10 transition-all duration-300 text-[9px] tracking-[0.2em] font-bold text-white/60 hover:text-sky-400 uppercase leading-none">
+            <button onclick="desplazarTelemetria()" class="w-full h-5 flex items-center justify-center rounded-sm border border-white/10 bg-white/5 hover:border-white-500/50 hover:bg-white-500/10 transition-all duration-300 text-[9px] tracking-[0.2em] font-bold text-white/60 hover:text-white-400 uppercase leading-none">
                 Info
             </button>
-            <button id="btn-reveal-raw" class="w-full h-5 flex items-center justify-center rounded-sm border border-white/10 bg-white/5 hover:border-sky-500/50 hover:bg-sky-500/10 transition-all duration-300 text-[9px] tracking-[0.2em] font-bold text-white/60 hover:text-sky-400 uppercase leading-none">
+            <button id="btn-reveal-raw" class="w-full h-5 flex items-center justify-center rounded-sm border border-white/10 bg-white/5 hover:border-white-500/50 hover:bg-white-500/10 transition-all duration-300 text-[9px] tracking-[0.2em] font-bold text-white/60 hover:text-white-400 uppercase leading-none">
                 Ver
             </button>
-            <button id="biorush-variants-container" onclick="navegarVariante(1)" class="w-full h-5 flex items-center justify-center rounded-sm border border-white/10 bg-white/5 hover:border-sky-500/50 hover:bg-sky-500/10 transition-all duration-300 text-[9px] tracking-[0.2em] font-bold text-white/50 hover:text-sky-400 uppercase leading-none">
+            <button id="biorush-variants-container" onclick="navegarVariante(1)" class="w-full h-5 flex items-center justify-center rounded-sm border border-white/10 bg-white/5 hover:border-white-500/50 hover:bg-white-500/10 transition-all duration-300 text-[9px] tracking-[0.2em] font-bold text-white/50 hover:text-white-400 uppercase leading-none">
             </button>
-            <button onclick="adquirirNodo()" class="w-full h-5 flex items-center justify-center bg-white/10 backdrop-blur-md rounded-sm border border-white/20 hover:border-sky-500/50 hover:bg-sky-500/10 transition-all duration-300 text-[9px] tracking-[0.2em] font-bold text-white/70 hover:text-sky-400 uppercase leading-none">
+            <button onclick="adquirirNodo()" class="w-full h-5 flex items-center justify-center bg-white/10 backdrop-blur-md rounded-sm border border-white/20 hover:border-white-500/50 hover:bg-white-500/10 transition-all duration-300 text-[9px] tracking-[0.2em] font-bold text-white/70 hover:text-white-400 uppercase leading-none">
                 Pedir
             </button>
         </div>
@@ -349,8 +376,8 @@
         if (subRepsTension) subRepsTension.textContent = `${(14.2 + (repsStage * 0.8)).toFixed(1)}`;
     }
 
-    // =========================================================================
-    // 5. TRADUCTOR DE ENUNCIADOS DE TELEMETRÍA
+// =========================================================================
+    // 5. MOTOR DE TELEMETRÍA HIPERREALISTA (SCROLL + LENTE COAXIAL)
     // =========================================================================
     const TELEMETRY_MEANINGS = {
         'sub-sets-solar': "Frecuencia de resonancia",
@@ -361,63 +388,74 @@
         'tele-mol': "Valor de adquisición"
     };
 
-    function habilitarReveladoTelemetria() {
-        const telemetryPuls = getCachedEl('panel-telemetry-puls');
-        const textoOriginalPuls = "ONDAS BIOCINÉTICAS REGENERATIVAS";
-        let ultimoElementoActivo = null;
+    let scrollTimeout = null;
 
+    function habilitarReveladoTelemetria() {
+        const viewport = document.getElementById('telemetry-scroll-viewport');
+        if (!viewport) return;
+
+        // Escucha activa de scroll manual (táctil/mouse) para actualización en tiempo real
+        viewport.addEventListener('scroll', () => {
+            actualizarFocoCentral();
+            
+            // Efecto dinámico sobre el lente LED trasero durante el desplazamiento
+            const lens = document.getElementById('telemetry-led-lens');
+            if (lens) lens.classList.add('lens-active');
+
+            // Apaga la sobre-exposición lumínica cuando el scroll se detiene
+            clearTimeout(scrollTimeout);
+            scrollTimeout = setTimeout(() => {
+                if (lens) lens.classList.remove('lens-active');
+            }, 150);
+        });
+
+        // Evento manual por clic directo sobre los elementos de datos
         Object.keys(TELEMETRY_MEANINGS).forEach(id => {
             const el = getCachedEl(id);
             if (!el) return;
 
             el.addEventListener('click', () => {
-                if (ultimoElementoActivo) {
-                    ultimoElementoActivo.classList.remove('text-sky-400');
-                    ultimoElementoActivo.classList.add('text-white/60');
-                }
-                
-                el.classList.remove('text-white/60');
-                el.classList.add('text-sky-400');
-                ultimoElementoActivo = el;
+                const contenedorPadre = el.parentElement;
+                const index = Array.from(viewport.children).indexOf(contenedorPadre);
+                if (index === -1) return;
 
-                telemetryPuls.innerHTML = TELEMETRY_MEANINGS[id].toUpperCase();
+                triggerHaptic(6);
                 
-                setTimeout(() => {
-                    if (ultimoElementoActivo === el) {
-                        telemetryPuls.innerHTML = textoOriginalPuls;
-                        el.classList.remove('text-sky-400');
-                        el.classList.add('text-white/60');
-                        ultimoElementoActivo = null;
-                    }
-                }, 8000);
+                // Mueve el elemento clickeado directamente a la posición central de la matriz
+                const anchoElemento = contenedorPadre.offsetWidth;
+                const destinoScroll = contenedorPadre.offsetLeft - anchoElemento;
+                
+                viewport.scrollTo({
+                    left: destinoScroll,
+                    behavior: 'smooth'
+                });
             });
-            actualizarFocoCentral();
         });
     }
 
-function desplazarTelemetria() {
+    function desplazarTelemetria() {
         const viewport = document.getElementById('telemetry-scroll-viewport');
         if (!viewport || viewport.children.length === 0) return;
 
         triggerHaptic(6);
-
         const anchoElemento = viewport.children[0].offsetWidth;
 
-        // Desplazamiento controlado
-        viewport.scrollTo({
+        // Desplazamiento nativo suave hacia la derecha
+        viewport.scrollBy({
             left: anchoElemento,
             behavior: 'smooth'
         });
 
+        // Bucle infinito: si llega al final del contenedor, reordena los nodos de forma transparente
         setTimeout(() => {
-            const primerElemento = viewport.children[0];
-            viewport.appendChild(primerElemento); 
-            
-            viewport.style.scrollBehavior = 'auto';
-            viewport.scrollLeft = 0; 
-            viewport.style.scrollBehavior = 'smooth';
-
-            // Ejecutar la actualización del foco central óptico una vez reordenado el DOM
+            const maxScrollLeft = viewport.scrollWidth - viewport.clientWidth;
+            if (viewport.scrollLeft >= maxScrollLeft - 5) {
+                const primerElemento = viewport.children[0];
+                viewport.appendChild(primerElemento);
+                viewport.style.scrollBehavior = 'auto';
+                viewport.scrollLeft = viewport.scrollLeft - anchoElemento;
+                viewport.style.scrollBehavior = 'smooth';
+            }
             actualizarFocoCentral();
         }, 350);
     }
@@ -425,41 +463,49 @@ function desplazarTelemetria() {
     function actualizarFocoCentral() {
         const viewport = document.getElementById('telemetry-scroll-viewport');
         const telemetryPuls = document.getElementById('panel-telemetry-puls');
-        if (!viewport || !telemetryPuls || viewport.children.length < 3) return;
+        if (!viewport || !telemetryPuls || viewport.children.length === 0) return;
 
-        // En una matriz exacta de 3 columnas, el elemento del centro físico es siempre el índice 1
-        const nodoCentral = viewport.children[1];
-        
-        // Buscar el span interno que contiene el ID original del dato crudo
-        const spanDato = nodoCentral.querySelector('span[id]');
-        if (!spanDato) return;
+        const viewportCenter = viewport.scrollLeft + (viewport.clientWidth / 2);
+        let nodoCercano = null;
+        let menorDistancia = Infinity;
+        let indiceCentral = 1;
 
-        const idOriginal = spanDato.id;
+        // Cálculo geométrico del nodo más cercano al eje óptico central del dispositivo
+        Array.from(viewport.children).forEach((nodo, index) => {
+            const nodoCenter = nodo.offsetLeft + (nodo.offsetWidth / 2);
+            const distancia = Math.abs(viewportCenter - nodoCenter);
 
-        // Actualizar el enunciado del panel central
-        if (TELEMETRY_MEANINGS[idOriginal]) {
-            telemetryPuls.textContent = TELEMETRY_MEANINGS[idOriginal].toUpperCase();
+            if (distancia < menorDistancia) {
+                menorDistancia = distancia;
+                nodoCercano = nodo;
+                indiceCentral = index;
+            }
+        });
+
+        if (!nodoCercano) return;
+
+        const spanDato = nodoCercano.querySelector('span[id]');
+        if (spanDato && TELEMETRY_MEANINGS[spanDato.id]) {
+            telemetryPuls.textContent = TELEMETRY_MEANINGS[spanDato.id].toUpperCase();
         }
 
-        // Aplicar el efecto físico de iluminación en el Frontend a los 3 nodos visibles
-        Array.from(viewport.children).forEach((nodo, index) => {
+        // Renderizado óptico puro sobre los nodos visibles (Blanco sobre Opaco)
+        Array.from(viewport.children).forEach((nodo) => {
             const spanInterno = nodo.querySelector('span');
             if (!spanInterno) return;
 
-            if (index === 1) {
-                // Nodo Central: Efecto Gota de agua retroiluminada por LED (Cian Líquido)
-                spanInterno.style.color = '#38bdf8';
+            if (nodo === nodoCercano) {
+                // Nodo Central: Foco blanco nítido sobre el objeto retroiluminado
+                spanInterno.style.color = '#ffffff';
                 spanInterno.style.opacity = '1';
-                spanInterno.style.filter = 'drop-shadow(0 0 4px rgba(56, 189, 248, 0.8))';
-                spanInterno.style.textShadow = '0 0 8px rgba(56, 189, 248, 0.9)';
+                spanInterno.style.filter = 'drop-shadow(0 0 2px rgba(255, 255, 255, 0.3))';
                 nodo.style.opacity = '1';
             } else {
-                // Nodos Laterales: Efecto agua sin iluminación led (Opacos y mate)
-                spanInterno.style.color = 'rgba(255, 255, 255, 0.4)';
-                spanInterno.style.opacity = '0.4';
+                // Nodos Laterales: Estética mate atenuada
+                spanInterno.style.color = 'rgba(255, 255, 255, 0.3)';
+                spanInterno.style.opacity = '0.3';
                 spanInterno.style.filter = 'none';
-                spanInterno.style.textShadow = 'none';
-                nodo.style.opacity = '0.4';
+                nodo.style.opacity = '0.3';
             }
         });
     }
