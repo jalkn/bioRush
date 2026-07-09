@@ -22,85 +22,177 @@
             }
         }
     </script>
-<style>
-        body { font-family: 'Orbitron', sans-serif; background-color: #020617; color: #f8fafc; } 
+    <style>
+body { 
+            font-family: 'Orbitron', sans-serif; 
+            background-color: #020617; 
+            color: #f8fafc; 
+            overscroll-behavior: none;
+        } 
         #page-bg-overlay {
-            position: fixed; inset: 0; z-index: -1;
-            background: radial-gradient(circle at 50% 50%, #1e3a8a 0%, #0f172a 50%, #020617 100%);
+            position: fixed; 
+            inset: 0; 
+            z-index: -1;
+            background: radial-gradient(circle at 50% 50%, #0f172a 0%, #051144 100%);
         }
-        .tele-label { color: rgba(255, 255, 255, 0.4); }
-        /* Cambiado a blanco puro con transición de opacidad */
-        .tele-value { color: #ffffff; transition: all 0.4s ease; }
-        .border-custom { border-color: rgba(255, 255, 255, 0.1); }
-        .border-custom:hover { border-color: rgba(255, 255, 255, 0.4); }
-        .img-glow-transition { transition: opacity 0.6s ease-in-out; }
         
-        /* Objeto Óptico de Retroiluminación Trasera */
+        .viewport-scroll-container {
+            flex: 1;
+            width: 100%;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+        .viewport-scroll-container::-webkit-scrollbar { display: none; }
+
+        /* --- ARQUITECTURA UNIFICADA DE VIDRIO ESMERILADO DE ANCHO COMPLETO --- */
+        .glass-panel {
+            width: 100%;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.02) 0%, rgba(255, 255, 255, 0.005) 100%);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            box-shadow: 
+                inset 0 1px 1px rgba(255, 255, 255, 0.08), 
+                inset 0 -1px 0px rgba(0, 0, 0, 0.4),
+                0 12px 40px rgba(0, 0, 0, 0.7);
+        }
+
+        /* --- EFECTO GRABADO LÁSER / ESMERILADO APAGADO (REFLEXIÓN DIFUSA) --- */
+        #telemetry-scroll-viewport > div {
+            opacity: 0.25;
+            transform: scale(0.96);
+            filter: blur(0.3px);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        #telemetry-scroll-viewport > div .tele-value {
+            color: rgba(200, 205, 215, 0.4);
+            text-shadow: 0.5px 0.5px 1px rgba(255, 255, 255, 0.05);
+            transition: all 0.4s ease;
+        }
+
+        /* --- GRABADO ILUMINADO POR LED COAXIAL (ACTIVO) --- */
+        #telemetry-scroll-viewport > div.node-central-active {
+            opacity: 1;
+            transform: scale(1.05);
+            filter: blur(0);
+        }
+        #telemetry-scroll-viewport > div.node-central-active .tele-value {
+            color: #ffffff !important;
+            text-shadow: 
+                0 0 3px rgba(255, 255, 255, 0.9), 
+                0 0 10px rgba(255, 255, 255, 0.5), 
+                0 0 20px rgba(255, 255, 255, 0.2);
+        }
+        
+        /* Lente Óptica Trasera de Iluminación */
         .led-lens-bg {
             position: absolute;
             left: 50%;
-            top: 40%;
+            top: 35%;
             transform: translate(-50%, -50%);
-            width: 70px;
+            width: 120px;
             height: 35px;
-            background: radial-gradient(circle, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0) 70%);
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.07) 0%, rgba(255, 255, 255, 0) 75%);
             border-radius: 50%;
-            filter: blur(4px);
+            filter: blur(6px);
             pointer-events: none;
             z-index: 0;
-            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
         }
-        /* Estado activo: destello hiperrealista blanco mate */
         .led-lens-bg.lens-active {
-            background: radial-gradient(circle, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0.02) 50%, rgba(255, 255, 255, 0) 80%);
-            width: 85px;
-            height: 40px;
-            filter: blur(2px);
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.18) 0%, rgba(255, 255, 255, 0) 70%);
+            width: 160px;
+            height: 45px;
+            filter: blur(4px);
         }
+
+        /* --- BOTONES HUD: STENCIL ESMERILADO CON RETROILUMINACIÓN LED --- */
+        .hud-btn-stencil {
+            position: relative;
+            background: rgba(255, 255, 255, 0.01);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            color: rgba(255, 255, 255, 0.35); /* Tono esmerilado apagado */
+            text-shadow: 0.5px 0.5px 0px rgba(0, 0, 0, 0.5);
+            transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+            overflow: hidden;
+        }
+        .hud-btn-stencil::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0) 70%);
+            opacity: 0;
+            transform: scale(0.6);
+            transition: all 0.4s ease;
+            z-index: 0;
+            pointer-events: none;
+        }
+        .hud-btn-stencil:hover {
+            border-color: rgba(255, 255, 255, 0.25);
+            color: #ffffff;
+            text-shadow: 0 0 4px rgba(255, 255, 255, 0.6);
+            background: rgba(255, 255, 255, 0.03);
+        }
+        .hud-btn-stencil:hover::before {
+            opacity: 1;
+            transform: scale(1.2);
+        }
+
+        .glass-axis-marker {
+            font-family: 'Orbitron', monospace;
+            font-size: 7px;
+            font-weight: 900;
+            color: rgba(255, 255, 255, 0.15);
+            letter-spacing: -1px;
+            pointer-events: none;
+            user-select: none;
+            z-index: 20;
+        }
+
     </style>
 </head>
-<body class="antialiased selection:bg-white selection:text-black overflow-x-hidden text-white">
+<body class="antialiased selection:bg-white selection:text-black overflow-x-hidden text-white min-h-screen flex flex-col justify-between">
 
     <div id="page-bg-overlay"></div>
-    <div class="fixed inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/40 z-0 pointer-events-none"></div>
+    <div class="fixed inset-0 bg-gradient-to-b from-black/50 via-transparent to-black/60 z-0 pointer-events-none"></div>
 
-    <main id="main-vault" class="w-screen h-screen flex flex-col relative overflow-hidden">
-        <header class="h-[80px] shrink-0 bg-gradient-to-b from-black/90 via-black/40 to-transparent backdrop-blur-md z-50 flex flex-col items-center justify-center px-6">
+    <main id="main-vault" class="w-screen h-screen flex flex-col relative overflow-hidden justify-between">
+        
+<header class="h-[75px] shrink-0 glass-panel border-b border-white/10 z-50 flex flex-col items-center justify-center px-6">
             <div class="flex items-center justify-center gap-3 w-full"> 
-                <img src="img/lift.png" alt="Back" class="h-6 w-auto object-contain" />
-                <span class="text-[11px] tracking-[0.25em] font-black text-white uppercase">BIORUSH</span>
+                <img src="img/lift.png" alt="Back" class="h-5 w-auto object-contain opacity-80" />
+                <span class="text-[11px] tracking-[0.3em] font-black text-white/80 uppercase text-shadow-[0.5px_0.5px_1px_rgba(255,255,255,0.05)]">BIORUSH</span>
             </div>
         </header>
 
-        <div class="flex-1 w-full flex flex-col items-center justify-center py-4 px-4 gap-y-4">
-            <div id="biorush-pack-container" class="relative w-full max-w-[180px] xs:max-w-[200px] sm:max-w-[240px] md:max-w-[280px] aspect-[13/15] shrink-0 drop-shadow-[0_40px_60px_rgba(0,0,0,0.9)]">
+        <div class="viewport-scroll-container flex flex-col items-center py-6 px-4 gap-y-4">
+            <div id="biorush-pack-container" class="relative w-full max-w-[180px] xs:max-w-[200px] sm:max-w-[230px] md:max-w-[260px] aspect-[13/15] shrink-0 drop-shadow-[0_35px_55px_rgba(0,0,0,0.95)] my-auto">
                 <div class="w-full h-full relative overflow-hidden bg-transparent">
                     <img id="biorush-pack-img-back" src="img/45mane.png" alt="BioRush Pack Back" class="img-glow-transition absolute inset-0 w-full h-full object-contain opacity-0 pointer-events-none z-0" />
                     <img id="biorush-pack-img" src="img/45caps.png" alt="BioRush Pack Front" class="img-glow-transition absolute inset-0 w-full h-full object-contain pointer-events-auto z-10" />
                     <img id="biorush-pack-img-raw" src="" alt="Raw Content" class="img-glow-transition absolute inset-0 w-full h-full object-contain opacity-0 pointer-events-none z-[5]" />
                     
                     <div class="absolute inset-0 flex items-center justify-center p-2 z-20 pointer-events-none">
-                        <svg id="laser-vector-target" viewBox="0 0 400 400" class="w-full h-full fill-none stroke-white/40 stroke-[1.5] transition-all duration-500 origin-center transform scale-[1.3] sm:scale-[1.2]">
+                        <svg id="laser-vector-target" viewBox="0 0 400 400" class="w-full h-full fill-none stroke-white/20 stroke-[1.2] transition-all duration-500 origin-center transform scale-[1.25]">
                             <defs>
                                 <path id="textPath-top" d="M 65,200 A 135,135 0 0,1 335,200" />
                                 <path id="textPath-bottom" d="M 65,200 A 135,135 0 0,0 335,200" />
                             </defs>
                             
-                            <text class="fill-white font-black text-[12px] sm:text-[10px] tracking-[0.25em] sm:tracking-[0.3em] uppercase transition-all duration-500">
+                            <text class="fill-white font-black text-[10px] tracking-[0.3em] uppercase transition-all duration-500">
                                 <textPath id="laser-variant-title" href="#textPath-top" startOffset="50%" text-anchor="middle">PULSOR FOCUS</textPath>
                             </text>
                             
                             <g class="origin-center transform scale-[1.05]">
-                                <path d="M 110,120 L 290,120 L 110,280 L 290,280 Z" class="opacity-20 stroke-[1.2]" />
-                                <path d="M 110,120 Q 200,150 290,120" class="opacity-20 stroke-[1.2]" />
-                                <path d="M 110,280 Q 200,250 290,280" stroke-dasharray="2 2" class="opacity-20 stroke-[1.2]" />
+                                <path d="M 110,120 L 290,120 L 110,280 L 290,280 Z" class="opacity-15 stroke-[1.0]" />
+                                <path d="M 110,120 Q 200,150 290,120" class="opacity-15 stroke-[1.0]" />
+                                <path d="M 110,280 Q 200,250 290,280" stroke-dasharray="2 2" class="opacity-15 stroke-[1.0]" />
                                 
-                                <text x="200" y="165" text-anchor="middle" class="fill-white/30 text-[7px] tracking-[0.3em] font-bold uppercase"></text>
-                                <text id="z-dial" x="200" y="210" text-anchor="middle" class="fill-white font-black text-[38px] tracking-[0.4em] font-sans">8UST11</text>
-                                <text x="200" y="245" text-anchor="middle" class="fill-white/30 text-[6px] tracking-[0.4em] font-mono"></text>
+                                <text x="200" y="165" text-anchor="middle" class="fill-white/20 text-[7px] tracking-[0.3em] font-bold uppercase"></text>
+                                <text id="z-dial" x="200" y="210" text-anchor="middle" class="fill-white font-black text-[36px] tracking-[0.4em] font-sans">8UST11</text>
+                                <text x="200" y="245" text-anchor="middle" class="fill-white/20 text-[6px] tracking-[0.4em] font-mono"></text>
                             </g>
                             
-                            <text class="fill-white/60 font-black text-[12px] sm:text-[10px] tracking-[0.25em] uppercase transition-all duration-500">
+                            <text class="fill-white/40 font-black text-[10px] tracking-[0.25em] uppercase transition-all duration-500">
                                 <textPath id="biorush-description" href="#textPath-bottom" startOffset="50%" text-anchor="middle">Enfoque y claridad cognitiva</textPath>
                             </text>
                         </svg>
@@ -109,67 +201,81 @@
             </div>
         </div>
 
-
-<section class="w-full max-w-sm mx-auto pt-3 pb-3 flex flex-col border-t border-white/5 items-center overflow-hidden relative">
+<footer class="w-full shrink-0 flex flex-col items-center bg-gradient-to-t from-black via-black/90 to-transparent pt-4 pb-3 z-50 border-t border-white/5">
             
-            <div id="telemetry-led-lens" class="led-lens-bg"></div>
+<!-- ESPECIFICACIÓN: CENTRALIZADA EN LA PARTE SUPERIOR DEL PANEL DE VIDRIO CON EFECTO GRABADO -->
+            <div class="w-full max-w-sm mx-auto px-4 mb-1 flex justify-center">
+                <span id="biorush-spec" class="transition-all duration-300 text-[7px] tracking-[0.3em] font-mono uppercase tele-value">--</span>
+            </div>
 
-            <div id="telemetry-scroll-viewport" class="flex overflow-x-auto w-full mb-2 scroll-smooth snap-x snap-mandatory [scrollbar-width:none] [&::-webkit-scrollbar]:hidden z-10">
+            <!-- PANEL DE VIDRIO INTEGRAL ANCHO COMPLETO -->
+            <div class="w-full pb-3 pt-2 px-4 flex flex-col items-center overflow-hidden relative glass-panel border-t border-b border-white/10 mb-4">
                 
-                <div class="flex flex-col items-center w-1/3 min-w-[33.333%] shrink-0 snap-start transition-all duration-500">
-                    <span id="sub-sets-solar" class="font-mono tracking-[0.2em] text-[11px] cursor-pointer transition-all duration-500 pb-1">0.00</span>
-                    <span class="text-[6px] tracking-[0.2em] text-white/40 uppercase">Hz</span>
+                <div id="telemetry-led-lens" class="led-lens-bg"></div>
+
+                <div class="absolute left-4 top-[38%] -translate-y-1/2 glass-axis-marker text-left select-none">┠─</div>
+                <div class="absolute right-4 top-[38%] -translate-y-1/2 glass-axis-marker text-right select-none">─┨</div>
+
+                <div id="telemetry-scroll-viewport" class="flex overflow-x-auto w-full pt-1 mb-2 scroll-smooth snap-x snap-mandatory [scrollbar-width:none] [&::-webkit-scrollbar]:hidden z-10 border-b border-white/[0.02]">
+                    <div class="flex flex-col items-center w-1/3 min-w-[33.333%] shrink-0 snap-start">
+                        <span id="sub-sets-solar" class="font-mono tracking-[0.2em] text-[11px] cursor-pointer tele-value">0.00</span>
+                        <span class="text-[5.5px] tracking-[0.25em] text-white/20 uppercase font-black mt-0.5 font-mono">Hz</span>
+                    </div>
+                    <div class="flex flex-col items-center w-1/3 min-w-[33.333%] shrink-0 snap-start">
+                        <span id="sub-reps-tension" class="font-mono tracking-[0.2em] text-[11px] cursor-pointer tele-value">0.0</span>
+                        <span class="text-[5.5px] tracking-[0.25em] text-white/20 uppercase font-black mt-0.5 font-mono">Tensión</span>
+                    </div>
+                    <div class="flex flex-col items-center w-1/3 min-w-[33.333%] shrink-0 snap-start">
+                        <span id="tele-col" class="font-mono tracking-[0.1em] text-[10px] cursor-pointer tele-value">--</span>
+                        <span class="text-[5.5px] tracking-[0.25em] text-white/20 uppercase font-black mt-0.5 font-mono">Siembra</span>
+                    </div>
+                    <div class="flex flex-col items-center w-1/3 min-w-[33.333%] shrink-0 snap-start">
+                        <span id="tele-fru" class="font-mono tracking-[0.1em] text-[10px] cursor-pointer tele-value">--</span>
+                        <span class="text-[5.5px] tracking-[0.25em] text-white/20 uppercase font-black mt-0.5 font-mono">Cosecha</span>
+                    </div>
+                    <div class="flex flex-col items-center w-1/3 min-w-[33.333%] shrink-0 snap-start">
+                        <span id="tele-sec" class="font-mono tracking-[0.1em] text-[10px] cursor-pointer tele-value">--</span>
+                        <span class="text-[5.5px] tracking-[0.25em] text-white/20 uppercase font-black mt-0.5 font-mono">Secado</span>
+                    </div>
+                    <div class="flex flex-col items-center w-1/3 min-w-[33.333%] shrink-0 snap-start">
+                        <span id="tele-mol" class="font-mono tracking-[0.1em] text-[10px] cursor-pointer tele-value">--</span>
+                        <span class="text-[5.5px] tracking-[0.25em] text-white/20 uppercase font-black mt-0.5 font-mono">Precio</span>
+                    </div>
                 </div>
 
-                <div class="flex flex-col items-center w-1/3 min-w-[33.333%] shrink-0 snap-start transition-all duration-500">
-                    <span id="sub-reps-tension" class="font-mono tracking-[0.2em] text-[11px] cursor-pointer transition-all duration-500 pb-1">0.0</span>
-                    <span class="text-[6px] tracking-[0.2em] text-white/40 uppercase">Tensión</span>
+                <div class="flex flex-col items-center justify-center w-full z-10 min-h-[14px] mb-2.5">
+                    <span id="panel-telemetry-puls" class="text-[7.5px] text-center tracking-[0.45em] font-bold text-white/40 uppercase transition-all duration-300 font-mono"></span>
                 </div>
 
-                <div class="flex flex-col items-center w-1/3 min-w-[33.333%] shrink-0 snap-start transition-all duration-500">
-                    <span id="tele-col" class="font-mono tracking-[0.1em] text-[10px] cursor-pointer transition-all duration-500 pb-1">--</span>
-                    <span class="text-[6px] tracking-[0.2em] text-white/40 uppercase">Siembra</span>
+                <!-- SUB-BARRA INFERIOR CON LOS OTROS DOS ELEMENTOS CONSERVADOS -->
+                <div class="flex items-center justify-center gap-3 text-white/20 text-[7px] tracking-[0.3em] font-mono select-none w-full uppercase border-t border-white/5 pt-2 z-10 bg-black/[0.05]">
+                    <span id="biorush-cant" class="text-white/20 transition-all duration-300">--</span>
+                    <span class="opacity-10 text-[5px]">|</span>
+                    <span id="biorush-price" class="text-white/50 font-black transition-all duration-300">--</span>
                 </div>
-
-                <div class="flex flex-col items-center w-1/3 min-w-[33.333%] shrink-0 snap-start transition-all duration-500">
-                    <span id="tele-fru" class="font-mono tracking-[0.1em] text-[10px] cursor-pointer transition-all duration-500 pb-1">--</span>
-                    <span class="text-[6px] tracking-[0.2em] text-white/40 uppercase">Cosecha</span>
-                </div>
-
-                <div class="flex flex-col items-center w-1/3 min-w-[33.333%] shrink-0 snap-start transition-all duration-500">
-                    <span id="tele-sec" class="font-mono tracking-[0.1em] text-[10px] cursor-pointer transition-all duration-500 pb-1">--</span>
-                    <span class="text-[6px] tracking-[0.2em] text-white/40 uppercase">Secado</span>
-                </div>
-
-                <div class="flex flex-col items-center w-1/3 min-w-[33.333%] shrink-0 snap-start transition-all duration-500">
-                    <span id="tele-mol" class="font-mono tracking-[0.1em] text-[10px] cursor-pointer transition-all duration-500 pb-1">--</span>
-                    <span class="text-[6px] tracking-[0.2em] text-white/40 uppercase">Precio</span>
-                </div>
-
             </div>
 
-            <div class="flex flex-col items-center justify-center w-full mt-1 z-10">
-                <span id="panel-telemetry-puls" class="text-[8px] text-center tracking-[0.5em] text-white uppercase transition-all duration-500 min-h-[12px]"></span>
+            <!-- FILA DE BOTONES HUD CON ESTILO STENCIL -->
+            <div class="grid grid-cols-4 items-center gap-2 w-full max-w-[340px] mx-auto px-4 mb-3.5">
+                <button id="biorush-variants-container" onclick="navegarVariante(1)" class="hud-btn-stencil w-full h-6 flex items-center justify-center rounded-sm text-[9px] tracking-[0.2em] font-bold uppercase leading-none">
+                    Next
+                </button>
+                <button onclick="desplazarTelemetria()" class="hud-btn-stencil w-full h-6 flex items-center justify-center rounded-sm text-[9px] tracking-[0.2em] font-bold uppercase leading-none">
+                    Info
+                </button>
+                <button id="btn-reveal-raw" class="hud-btn-stencil w-full h-6 flex items-center justify-center rounded-sm text-[9px] tracking-[0.2em] font-bold uppercase leading-none">
+                    Ver
+                </button>
+                <button onclick="adquirirNodo()" class="hud-btn-stencil w-full h-6 flex items-center justify-center rounded-sm text-[9px] tracking-[0.2em] font-black uppercase leading-none bg-white/[0.03] border-white/20 !color-white/80">
+                    ACTIVAR
+                </button>
             </div>
-        </section>
 
-        <div class="grid grid-cols-4 items-center gap-2 w-full max-w-[300px] mx-auto">
-            <button onclick="desplazarTelemetria()" class="w-full h-5 flex items-center justify-center rounded-sm border border-white/10 bg-white/5 hover:border-white-500/50 hover:bg-white-500/10 transition-all duration-300 text-[9px] tracking-[0.2em] font-bold text-white/60 hover:text-white-400 uppercase leading-none">
-                Info
-            </button>
-            <button id="btn-reveal-raw" class="w-full h-5 flex items-center justify-center rounded-sm border border-white/10 bg-white/5 hover:border-white-500/50 hover:bg-white-500/10 transition-all duration-300 text-[9px] tracking-[0.2em] font-bold text-white/60 hover:text-white-400 uppercase leading-none">
-                Ver
-            </button>
-            <button id="biorush-variants-container" onclick="navegarVariante(1)" class="w-full h-5 flex items-center justify-center rounded-sm border border-white/10 bg-white/5 hover:border-white-500/50 hover:bg-white-500/10 transition-all duration-300 text-[9px] tracking-[0.2em] font-bold text-white/50 hover:text-white-400 uppercase leading-none">
-            </button>
-            <button onclick="adquirirNodo()" class="w-full h-5 flex items-center justify-center bg-white/10 backdrop-blur-md rounded-sm border border-white/20 hover:border-white-500/50 hover:bg-white-500/10 transition-all duration-300 text-[9px] tracking-[0.2em] font-bold text-white/70 hover:text-white-400 uppercase leading-none">
-                Pedir
-            </button>
-        </div>
-
-        <footer class="h-[72px] shrink-0 bg-gradient-to-t from-black/60 via-black/40 to-transparent backdrop-blur-md z-50 flex items-center justify-center">
-            <div class="p-6 flex justify-center items-center w-full min-h-[72px]">
-                <span class="text-[6px] tracking-[0.6em] font-bold text-white/40 uppercase">POWERED BY JAKO.ART</span>
+            <!-- CRÉDITOS CON ENLACE REDIRECCIONADO A JAKO.WORLD -->
+            <div class="w-full flex justify-center items-center py-1">
+                <a href="https://jako.world" target="_blank" class="text-[6px] tracking-[0.6em] font-bold text-white/20 hover:text-white/40 transition-colors duration-300 uppercase">
+                    POWERED BY JAKO.ART
+                </a>
             </div>
         </footer>
     </main>
@@ -303,7 +409,7 @@
             }, 120);
         }
 
-        // Sincronizar Telemetría Dinámica
+        // Sincronizar Telemetría Dinámica de Canales
         const tele = variantConfig.telemetry;
         const tCol = getCachedEl('tele-col');
         const tFru = getCachedEl('tele-fru');
@@ -315,12 +421,20 @@
         if (tSec) tSec.textContent = tele.SEC;
         if (tMol) tMol.textContent = variantConfig.price;
 
-// Sincronizar solo el dato crudo de texto al botón del frontend
+        // --- ENLACE DIRECTO A LA SUB-BARRA INFERIOR DEL CRISTAL ---
+        const hudSpec = getCachedEl('biorush-spec');
+        const hudCant = getCachedEl('biorush-cant');
+        const hudPrice = getCachedEl('biorush-price');
+
+        if (hudSpec) hudSpec.textContent = variantConfig.spec;
+        if (hudCant) hudCant.textContent = variantConfig.cant;
+        if (hudPrice) hudPrice.textContent = variantConfig.price;
+
+        // Mantener texto base en el botón disparador
         if (vContainer) {
             vContainer.textContent = 'Next';
         }
     }
-
     function navegarVariante(direccion) {
         const variantsKeys = Object.keys(BIORUSH_CATALOG);
         let currentIndex = variantsKeys.indexOf(currentBioVariant);
@@ -376,7 +490,7 @@
         if (subRepsTension) subRepsTension.textContent = `${(14.2 + (repsStage * 0.8)).toFixed(1)}`;
     }
 
-// =========================================================================
+    // =========================================================================
     // 5. MOTOR DE TELEMETRÍA HIPERREALISTA (SCROLL + LENTE COAXIAL)
     // =========================================================================
     const TELEMETRY_MEANINGS = {
@@ -394,39 +508,49 @@
         const viewport = document.getElementById('telemetry-scroll-viewport');
         if (!viewport) return;
 
-        // Escucha activa de scroll manual (táctil/mouse) para actualización en tiempo real
+        // Detector adaptativo para Scroll táctil o mouse
         viewport.addEventListener('scroll', () => {
+            const anchoElemento = viewport.children[0].offsetWidth;
+            const maxScrollLeft = viewport.scrollWidth - viewport.clientWidth;
+
+            // CONTROL INTRÍNSECO DE SCROLL INFINITO TÁCTIL
+            if (viewport.scrollLeft >= maxScrollLeft - 2) {
+                const primerElemento = viewport.children[0];
+                viewport.appendChild(primerElemento);
+                viewport.style.scrollBehavior = 'auto';
+                viewport.scrollLeft = viewport.scrollLeft - anchoElemento;
+                viewport.style.scrollBehavior = 'smooth';
+            } else if (viewport.scrollLeft <= 2) {
+                const ultimoElemento = viewport.children[viewport.children.length - 1];
+                viewport.insertBefore(ultimoElemento, viewport.children[0]);
+                viewport.style.scrollBehavior = 'auto';
+                viewport.scrollLeft = viewport.scrollLeft + anchoElemento;
+                viewport.style.scrollBehavior = 'smooth';
+            }
+
             actualizarFocoCentral();
             
-            // Efecto dinámico sobre el lente LED trasero durante el desplazamiento
             const lens = document.getElementById('telemetry-led-lens');
             if (lens) lens.classList.add('lens-active');
 
-            // Apaga la sobre-exposición lumínica cuando el scroll se detiene
             clearTimeout(scrollTimeout);
             scrollTimeout = setTimeout(() => {
                 if (lens) lens.classList.remove('lens-active');
-            }, 150);
+            }, 180);
         });
 
-        // Evento manual por clic directo sobre los elementos de datos
+        // Eventos por clic directo conservan su traslación fluida
         Object.keys(TELEMETRY_MEANINGS).forEach(id => {
             const el = getCachedEl(id);
             if (!el) return;
-
             el.addEventListener('click', () => {
                 const contenedorPadre = el.parentElement;
                 const index = Array.from(viewport.children).indexOf(contenedorPadre);
                 if (index === -1) return;
-
                 triggerHaptic(6);
-                
-                // Mueve el elemento clickeado directamente a la posición central de la matriz
                 const anchoElemento = contenedorPadre.offsetWidth;
-                const destinoScroll = contenedorPadre.offsetLeft - anchoElemento;
-                
                 viewport.scrollTo({
-                    left: destinoScroll,
+                    left: contenedorPadre.offsetLeft - anchoElemento,
                     behavior: 'smooth'
                 });
             });
@@ -468,17 +592,15 @@
         const viewportCenter = viewport.scrollLeft + (viewport.clientWidth / 2);
         let nodoCercano = null;
         let menorDistancia = Infinity;
-        let indiceCentral = 1;
 
         // Cálculo geométrico del nodo más cercano al eje óptico central del dispositivo
-        Array.from(viewport.children).forEach((nodo, index) => {
+        Array.from(viewport.children).forEach((nodo) => {
             const nodoCenter = nodo.offsetLeft + (nodo.offsetWidth / 2);
             const distancia = Math.abs(viewportCenter - nodoCenter);
 
             if (distancia < menorDistancia) {
                 menorDistancia = distancia;
                 nodoCercano = nodo;
-                indiceCentral = index;
             }
         });
 
@@ -489,23 +611,12 @@
             telemetryPuls.textContent = TELEMETRY_MEANINGS[spanDato.id].toUpperCase();
         }
 
-        // Renderizado óptico puro sobre los nodos visibles (Blanco sobre Opaco)
+        // LÓGICA DE COMPORTAMIENTO SEPARADA EXCLUSIVAMENTE AL FRONTEND (CSS)
         Array.from(viewport.children).forEach((nodo) => {
-            const spanInterno = nodo.querySelector('span');
-            if (!spanInterno) return;
-
             if (nodo === nodoCercano) {
-                // Nodo Central: Foco blanco nítido sobre el objeto retroiluminado
-                spanInterno.style.color = '#ffffff';
-                spanInterno.style.opacity = '1';
-                spanInterno.style.filter = 'drop-shadow(0 0 2px rgba(255, 255, 255, 0.3))';
-                nodo.style.opacity = '1';
+                nodo.classList.add('node-central-active');
             } else {
-                // Nodos Laterales: Estética mate atenuada
-                spanInterno.style.color = 'rgba(255, 255, 255, 0.3)';
-                spanInterno.style.opacity = '0.3';
-                spanInterno.style.filter = 'none';
-                nodo.style.opacity = '0.3';
+                nodo.classList.remove('node-central-active');
             }
         });
     }
@@ -545,7 +656,6 @@
         habilitarReveladoTelemetria();
         
         // DISPARADOR ÓPTICO INICIAL
-        // Fuerza al motor a calcular la posición del nodo del medio nada más abrir la app
         setTimeout(() => {
             actualizarFocoCentral();
         }, 100);
