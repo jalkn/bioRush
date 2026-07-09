@@ -497,6 +497,12 @@ function desplazarTelemetria() {
         updateZ(); 
         setInterval(updateZ, 1000);
         habilitarReveladoTelemetria();
+        
+        // DISPARADOR ÓPTICO INICIAL
+        // Fuerza al motor a calcular la posición del nodo del medio nada más abrir la app
+        setTimeout(() => {
+            actualizarFocoCentral();
+        }, 100);
     });
 </script>
 </body>
