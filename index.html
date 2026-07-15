@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
     <meta charset="UTF-8">
     <link class="icon" type="image/png" href="img/favicon.png">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>BIORUSH</title>
+    <title>JAKO VAULT</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Plus+Jakarta+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
     <script>
@@ -12,7 +12,13 @@
             theme: { 
                 extend: { 
                     screens: { 'xs': '400px' },
-                    colors: { 'jako-black': '#0a0705' },
+                    colors: { 
+                        'jako-bg': 'var(--jako-bg)',
+                        'jako-text': 'var(--jako-text)',
+                        'jako-border': 'var(--jako-border)',
+                        'jako-glass': 'var(--jako-glass)',
+                        'jako-led': 'var(--jako-led)',
+                    },
                     fontFamily: { 
                         'sans': ['Orbitron', 'sans-serif'],
                         'mono': ['Orbitron', 'monospace'],
@@ -23,645 +29,283 @@
         }
     </script>
     <style>
-body { 
-            font-family: 'Orbitron', sans-serif; 
-            background-color: #020617; 
-            color: #f8fafc; 
+        :root[data-theme="dark"] {
+            --jako-bg: rgba(0, 0, 0, 0.95);
+            --jako-text: #ffffff;
+            --jako-border: rgba(255, 255, 255, 0.02);
+            --jako-glass: rgba(0, 0, 0, 0.5);
+            --jako-led: rgba(255, 255, 255, 0.75);
+            --gradient-start: rgba(255, 255, 255, 0.03);
+            --gradient-mid: rgba(5, 5, 8, 0.85);
+            --gradient-end: #000000;
+        }
+        :root[data-theme="white"] {
+            --jako-bg: #f8f9fa;
+            --jako-text: #000000;
+            --jako-border: rgba(0, 0, 0, 0.08);
+            --jako-glass: rgba(255, 255, 255, 0.4);
+            --jako-led: rgba(0, 0, 0, 0.85);
+            --gradient-start: rgba(0, 0, 0, 0.02);
+            --gradient-mid: rgba(248, 249, 250, 0.85);
+            --gradient-end: #ffffff;
+        }
+
+        body { 
+            scroll-behavior: smooth; 
+            letter-spacing: 0.05em;  
             overscroll-behavior: none;
-        } 
+            background-color: var(--jako-bg);
+            color: var(--jako-text);
+            transition: background-color 0.5s ease, color 0.5s ease;
+        }
+
         #page-bg-overlay {
-            position: fixed; 
-            inset: 0; 
-            z-index: -1;
-            background: radial-gradient(circle at 50% 50%, #0f172a 0%, #051144 100%);
-        }
-        
-        .viewport-scroll-container {
-            flex: 1;
-            width: 100%;
-            overflow-y: auto;
-            -webkit-overflow-scrolling: touch;
-        }
-        .viewport-scroll-container::-webkit-scrollbar { display: none; }
-
-        /* --- ARQUITECTURA UNIFICADA DE VIDRIO ESMERILADO DE ANCHO COMPLETO --- */
-        .glass-panel {
-            width: 100%;
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.02) 0%, rgba(255, 255, 255, 0.005) 100%);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            box-shadow: 
-                inset 0 1px 1px rgba(255, 255, 255, 0.08), 
-                inset 0 -1px 0px rgba(0, 0, 0, 0.4),
-                0 12px 40px rgba(0, 0, 0, 0.7);
-        }
-
-        /* --- EFECTO GRABADO LÁSER / ESMERILADO APAGADO (REFLEXIÓN DIFUSA) --- */
-        #telemetry-scroll-viewport > div {
-            opacity: 0.25;
-            transform: scale(0.96);
-            filter: blur(0.3px);
-            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-        #telemetry-scroll-viewport > div .tele-value {
-            color: rgba(200, 205, 215, 0.4);
-            text-shadow: 0.5px 0.5px 1px rgba(255, 255, 255, 0.05);
-            transition: all 0.4s ease;
-        }
-
-        /* --- GRABADO ILUMINADO POR LED COAXIAL (ACTIVO) --- */
-        #telemetry-scroll-viewport > div.node-central-active {
-            opacity: 1;
-            transform: scale(1.05);
-            filter: blur(0);
-        }
-        #telemetry-scroll-viewport > div.node-central-active .tele-value {
-            color: #ffffff !important;
-            text-shadow: 
-                0 0 3px rgba(255, 255, 255, 0.9), 
-                0 0 10px rgba(255, 255, 255, 0.5), 
-                0 0 20px rgba(255, 255, 255, 0.2);
-        }
-        
-        /* Lente Óptica Trasera de Iluminación */
-        .led-lens-bg {
-            position: absolute;
-            left: 50%;
-            top: 35%;
-            transform: translate(-50%, -50%);
-            width: 120px;
-            height: 35px;
-            background: radial-gradient(circle, rgba(255, 255, 255, 0.07) 0%, rgba(255, 255, 255, 0) 75%);
-            border-radius: 50%;
-            filter: blur(6px);
-            pointer-events: none;
-            z-index: 0;
-            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-        .led-lens-bg.lens-active {
-            background: radial-gradient(circle, rgba(255, 255, 255, 0.18) 0%, rgba(255, 255, 255, 0) 70%);
-            width: 160px;
-            height: 45px;
-            filter: blur(4px);
-        }
-
-        /* --- BOTONES HUD: STENCIL ESMERILADO CON RETROILUMINACIÓN LED --- */
-        .hud-btn-stencil {
-            position: relative;
-            background: rgba(255, 255, 255, 0.01);
-            border: 1px solid rgba(255, 255, 255, 0.06);
-            color: rgba(255, 255, 255, 0.35); /* Tono esmerilado apagado */
-            text-shadow: 0.5px 0.5px 0px rgba(0, 0, 0, 0.5);
-            transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
-            overflow: hidden;
-        }
-        .hud-btn-stencil::before {
-            content: '';
-            position: absolute;
+            position: fixed;
             inset: 0;
-            background: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0) 70%);
-            opacity: 0;
-            transform: scale(0.6);
-            transition: all 0.4s ease;
-            z-index: 0;
-            pointer-events: none;
-        }
-        .hud-btn-stencil:hover {
-            border-color: rgba(255, 255, 255, 0.25);
-            color: #ffffff;
-            text-shadow: 0 0 4px rgba(255, 255, 255, 0.6);
-            background: rgba(255, 255, 255, 0.03);
-        }
-        .hud-btn-stencil:hover::before {
-            opacity: 1;
-            transform: scale(1.2);
+            background: radial-gradient(circle at 50% 50%, var(--gradient-start) 15%, var(--gradient-mid) 80%, var(--gradient-end) 100%);
+            z-index: -1;
+            transform: translateZ(0);
         }
 
-        .glass-axis-marker {
-            font-family: 'Orbitron', monospace;
-            font-size: 7px;
-            font-weight: 900;
-            color: rgba(255, 255, 255, 0.15);
-            letter-spacing: -1px;
-            pointer-events: none;
-            user-select: none;
-            z-index: 20;
+        :root[data-theme="dark"] .active-led {
+            text-shadow: 0 0 10px var(--jako-led), 0 0 4px var(--jako-led) !important;
         }
-
+        :root[data-theme="white"] .active-led {
+            text-shadow: 0 0 6px var(--jako-led) !important;
+        }
+        
+        #artepanel-mask-wrapper {
+        -webkit-mask-image: -webkit-radial-gradient(white, black); /* Hack nativo de Safari para congelar bordes redondeados */
+        transform: translateZ(0);
+        -webkit-transform: translateZ(0);
+        }
     </style>
 </head>
-<body class="antialiased selection:bg-white selection:text-black overflow-x-hidden text-white min-h-screen flex flex-col justify-between">
+<body class="antialiased selection:bg-jako-text selection:text-jako-bg overflow-x-hidden min-h-screen">
 
     <div id="page-bg-overlay"></div>
-    <div class="fixed inset-0 bg-gradient-to-b from-black/50 via-transparent to-black/60 z-0 pointer-events-none"></div>
 
-    <main id="main-vault" class="w-screen h-screen flex flex-col relative overflow-hidden justify-between">
-        
-<header class="h-[70px] md:h-[85px] w-full shrink-0 glass-panel border-b border-white/10 z-50 flex items-center justify-center px-6">
-    <div class="flex items-center justify-center gap-3 w-full"> 
-        <img src="img/lift.png" alt="Back" class="h-4 md:h-5 w-auto object-contain opacity-80" />
-        <span class="text-[11px] md:text-[13px] tracking-[0.3em] font-black text-white/80 uppercase text-shadow-[0.5px_0.5px_1px_rgba(255,255,255,0.05)]">BIORUSH</span>
-    </div>
-</header>
-
-<!-- MAIN (CONTENEDOR CENTRAL): Centrado absoluto con altura de empaque optimizada -->
-<div class="flex-1 w-full flex items-center justify-center p-3 sm:p-4 overflow-hidden select-none">
-    <!-- Contenedor del Empaque: Altura reducida mediante cambio de aspect-ratio y max-w calibrados -->
-    <div id="biorush-pack-container" class="relative w-full max-w-[210px] xs:max-w-[240px] sm:max-w-[280px] md:max-w-[320px] aspect-[4/5] shrink-0 drop-shadow-[0_25px_45px_rgba(0,0,0,0.95)]">
-        <div class="w-full h-full relative overflow-hidden bg-transparent">
-            <img id="biorush-pack-img-back" src="img/45mane.png" alt="BioRush Pack Back" class="img-glow-transition absolute inset-0 w-full h-full object-contain opacity-0 pointer-events-none z-0" />
-            <img id="biorush-pack-img" src="img/45caps.png" alt="BioRush Pack Front" class="img-glow-transition absolute inset-0 w-full h-full object-contain pointer-events-auto z-10" />
-            <img id="biorush-pack-img-raw" src="" alt="Raw Content" class="img-glow-transition absolute inset-0 w-full h-full object-contain opacity-0 pointer-events-none z-[5]" />
-            
-            <div class="absolute inset-0 flex items-center justify-center p-2 z-20 pointer-events-none">
-                <svg id="laser-vector-target" viewBox="0 0 400 400" class="w-full h-full fill-none stroke-white/20 stroke-[1.2] transition-all duration-500 origin-center transform scale-[1.25]">
-                    <defs>
-                        <path id="textPath-top" d="M 65,200 A 135,135 0 0,1 335,200" />
-                        <path id="textPath-bottom" d="M 65,200 A 135,135 0 0,0 335,200" />
-                    </defs>
-                    
-                    <text class="fill-white font-black text-[10px] tracking-[0.3em] uppercase transition-all duration-500">
-                        <textPath id="laser-variant-title" href="#textPath-top" startOffset="50%" text-anchor="middle">PULSOR FOCUS</textPath>
-                    </text>
-                    
-                    <g class="origin-center transform scale-[1.05]">
-                        <path d="M 110,120 L 290,120 L 110,280 L 290,280 Z" class="opacity-15 stroke-[1.0]" />
-                        <path d="M 110,120 Q 200,150 290,120" class="opacity-15 stroke-[1.0]" />
-                        <path d="M 110,280 Q 200,250 290,280" stroke-dasharray="2 2" class="opacity-15 stroke-[1.0]" />
+    <main id="main-vault" class="w-full flex-1 flex flex-col justify-center items-center min-h-screen relative overflow-hidden"> 
+        <div class="w-full flex flex-col items-center justify-center p-4 sm:p-6 select-none relative z-10">
+            <div class="relative w-full max-w-[340px] sm:max-w-[400px] md:max-w-[450px] aspect-square flex flex-col items-center justify-center gap-6">
+                
+                <div id="artepanel-pack-container" class="relative w-[65vw] h-[65vw] sm:w-[50vw] sm:h-[50vw] md:w-[38vh] md:h-[38vh] max-w-[270px] max-h-[270px] min-w-[180px] min-h-[180px] aspect-square shrink-0 drop-shadow-[0_25px_55px_rgba(0,0,0,0.85)] cursor-pointer">
+                    <div id="artepanel-mask-wrapper" class="w-full h-full relative overflow-hidden rounded-full transition-all duration-500" style="background-image: linear-gradient(135deg, var(--gradient-start) 0%, var(--gradient-mid) 50%, var(--gradient-end) 100%);">
                         
-                        <text x="200" y="165" text-anchor="middle" class="fill-white/20 text-[7px] tracking-[0.3em] font-bold uppercase"></text>
-                        <text id="z-dial" x="200" y="215" text-anchor="middle" class="fill-white font-black text-[25px] tracking-[0.4em] font-sans">8UST11</text>
-                        <text x="200" y="245" text-anchor="middle" class="fill-white/20 text-[6px] tracking-[0.4em] font-mono"></text>
-                    </g>
-                    
-                    <text class="fill-white/40 font-black text-[10px] tracking-[0.25em] uppercase transition-all duration-500">
-                        <textPath id="biorush-description" href="#textPath-bottom" startOffset="50%" text-anchor="middle">Enfoque y claridad cognitiva</textPath>
+                        <div class="absolute inset-0 flex items-center justify-center p-0 z-20">
+                            <svg id="laser-vector-target" viewBox="0 0 400 400" class="w-full h-full fill-none stroke-current text-jako-text transition-all duration-500 origin-center">
+                                
+                                <g id="wave-quantum-container" style="transform-origin: 200px 200px; -webkit-transform-origin: 200px 200px;" class="-rotate-90"></g>
+
+                                <g id="sandwatch-group" class="origin-center opacity-0 transition-all duration-500 style-gpu" style="will-change: opacity;">
+                                    <path d="M 90,90 L 310,90 L 90,310 L 310,310 Z" class="stroke-current opacity-20" />
+                                    <path d="M 90,90 Q 200,125 310,90" class="stroke-current opacity-20" />
+                                    <path d="M 90,310 Q 200,275 310,310" stroke-dasharray="3 3" class="stroke-current opacity-20" />
+                                    <text id="z-dial" x="200" y="218" text-anchor="middle" class="fill-current font-black text-[45px] tracking-[0.35em] font-sans">1P1</text>
+                                </g>
+                            </svg>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="w-full max-w-md md:max-w-xl pb-2.5 pt-2 px-4 flex flex-col items-center overflow-hidden relative glass-panel border-t border-b border-white/10 mb-3.5">
+            <div class="w-full max-w-sm md:max-w-md mx-auto px-4 mb-1 flex items-center justify-between gap-2">
+                <button onclick="navegarVariante(-1)" class="opacity-30 hover:opacity-100 transition-opacity p-2 text-[8px] md:text-[10px] font-mono leading-none text-jako-text">◀</button>
+                <svg class="w-full h-4 fill-none" viewBox="0 0 200 16">
+                    <text id="laser-variant-title-footer" x="50%" y="12" text-anchor="middle" class="fill-current text-jako-text font-black text-[9px] md:text-[11px] tracking-[0.3em] uppercase transition-all duration-500 tele-value">
+                        PULSOR FOCUS
                     </text>
                 </svg>
+                <button id="biorush-variants-container" onclick="navegarVariante(1)" class="opacity-30 hover:opacity-100 transition-opacity p-2 text-[8px] md:text-[10px] font-mono leading-none text-jako-text">▶</button>
             </div>
         </div>
-    </div>
-</div>
-
-<footer class="w-full shrink-0 flex flex-col items-center bg-gradient-to-t from-black via-black/95 to-transparent pt-3 pb-3 z-50 border-t border-white/5">
-    
-    <div class="w-full max-w-sm md:max-w-md mx-auto px-4 mb-1 flex items-center justify-between gap-2">
-        <button onclick="navegarVariante(-1)" class="opacity-30 hover:opacity-100 transition-opacity p-2 text-[8px] md:text-[10px] font-mono leading-none">◀</button>
-        <svg class="w-full h-4 fill-none" viewBox="0 0 200 16">
-            <text id="laser-variant-title-footer" x="50%" y="12" text-anchor="middle" class="fill-white font-black text-[9px] md:text-[11px] tracking-[0.3em] uppercase transition-all duration-500 tele-value">
-                PULSOR FOCUS
-            </text>
-        </svg>
-        <button id="biorush-variants-container" onclick="navegarVariante(1)" class="opacity-30 hover:opacity-100 transition-opacity p-2 text-[8px] md:text-[10px] font-mono leading-none">▶</button>
-    </div>
-
-    <div class="w-full max-w-md md:max-w-xl pb-2.5 pt-2 px-4 flex flex-col items-center overflow-hidden relative glass-panel border-t border-b border-white/10 mb-3.5">
-        <div id="telemetry-led-lens" class="led-lens-bg"></div>
-
-        <div class="flex items-center w-full justify-between z-10 px-1 gap-1">
-            <button onclick="desplazarTelemetria(-1)" class="opacity-25 hover:opacity-100 transition-opacity p-1 text-[8px] font-mono leading-none">◀</button>
-
-            <div id="telemetry-scroll-viewport" class="flex overflow-x-auto w-full pt-1 mb-2 scroll-smooth snap-x snap-mandatory [scrollbar-width:none] [&::-webkit-scrollbar]:hidden border-b border-white/[0.02]">
-                <div class="flex flex-col items-center w-1/3 min-w-[33.333%] shrink-0 snap-start">
-                    <span id="sub-sets-solar" class="font-mono tracking-[0.2em] text-[13px] md:text-[16px] cursor-pointer tele-value">0.00</span>
-                    <span class="text-[6.5px] md:text-[8px] tracking-[0.25em] text-white/20 uppercase font-black mt-0.5 font-mono">Hz</span>
-                </div>
-                <div class="flex flex-col items-center w-1/3 min-w-[33.333%] shrink-0 snap-start">
-                    <span id="sub-reps-tension" class="font-mono tracking-[0.2em] text-[13px] md:text-[16px] cursor-pointer tele-value">0.0</span>
-                    <span class="text-[6.5px] md:text-[8px] tracking-[0.25em] text-white/20 uppercase font-black mt-0.5 font-mono">Tensión</span>
-                </div>
-                <div class="flex flex-col items-center w-1/3 min-w-[33.333%] shrink-0 snap-start">
-                    <span id="tele-col" class="font-mono tracking-[0.1em] text-[12px] md:text-[15px] cursor-pointer tele-value">--</span>
-                    <span class="text-[6.5px] md:text-[8px] tracking-[0.25em] text-white/20 uppercase font-black mt-0.5 font-mono">Siembra</span>
-                </div>
-                <div class="flex flex-col items-center w-1/3 min-w-[33.333%] shrink-0 snap-start">
-                    <span id="tele-fru" class="font-mono tracking-[0.1em] text-[12px] md:text-[15px] cursor-pointer tele-value">--</span>
-                    <span class="text-[6.5px] md:text-[8px] tracking-[0.25em] text-white/20 uppercase font-black mt-0.5 font-mono">Cosecha</span>
-                </div>
-                <div class="flex flex-col items-center w-1/3 min-w-[33.333%] shrink-0 snap-start">
-                    <span id="tele-sec" class="font-mono tracking-[0.1em] text-[12px] md:text-[15px] cursor-pointer tele-value">--</span>
-                    <span class="text-[6.5px] md:text-[8px] tracking-[0.25em] text-white/20 uppercase font-black mt-0.5 font-mono">Secado</span>
-                </div>
-                <div class="flex flex-col items-center w-1/3 min-w-[33.333%] shrink-0 snap-start">
-                    <span id="tele-mol" class="font-mono tracking-[0.1em] text-[12px] md:text-[15px] cursor-pointer tele-value">--</span>
-                    <span class="text-[6.5px] md:text-[8px] tracking-[0.25em] text-white/20 uppercase font-black mt-0.5 font-mono">Precio</span>
-                </div>
-            </div>
-
-            <button onclick="desplazarTelemetria(1)" class="opacity-25 hover:opacity-100 transition-opacity p-1 text-[8px] font-mono leading-none">▶</button>
-        </div>
-
-        <div class="flex flex-col items-center justify-center w-full z-10 min-h-[14px] mb-2">
-            <span id="panel-telemetry-puls" class="text-[7.5px] md:text-[9px] text-center tracking-[0.45em] font-bold text-white/40 uppercase transition-all duration-300 font-mono"></span>
-        </div>
-
-<!-- Indicadores de Especificación y Botones HUD Integrados en los Extremos -->
-        <div class="flex items-center justify-between w-full uppercase border-t border-white/5 pt-2 z-10 bg-black/[0.05] px-2 md:px-3">
-            
-            <!-- Botón Izquierdo: Ver -->
-            <button id="btn-reveal-raw" class="hud-btn-stencil px-3 h-5 md:h-6 flex items-center justify-center rounded-sm text-[8px] md:text-[10px] tracking-[0.15em] font-bold uppercase leading-none max-w-[80px] md:max-w-[100px]">
-                Ver
-            </button>
-
-            <!-- Datos Técnicos Centrados -->
-            <div class="flex items-center gap-2 md:gap-3 text-white/20 text-[7px] md:text-[8.5px] tracking-[0.3em] font-mono py-1">
-                <span id="biorush-cant" class="text-white/60 transition-all duration-300">--</span>
-                <span class="opacity-10 text-[5px]">|</span>
-                <span id="biorush-price" class="text-white/60 font-black transition-all duration-300">--</span>
-            </div>
-
-            <!-- Botón Derecho: ACTIVAR -->
-            <button onclick="adquirirNodo()" class="hud-btn-stencil px-3 h-5 md:h-6 flex items-center justify-center rounded-sm text-[8px] md:text-[10px] tracking-[0.15em] font-black uppercase leading-none bg-white/[0.03] border-white/20 !color-white/80 max-w-[80px] md:max-w-[100px]">
-                ACTIVAR
-            </button>
-            
-        </div>
-    </div>
-
-    <div class="w-full flex justify-center items-center py-0.5">
-        <a href="https://jako.world" target="_blank" class="text-[6px] md:text-[7.5px] tracking-[0.6em] font-bold text-white/20 hover:text-white/40 transition-colors duration-300 uppercase">
-            POWERED BY JAKO.ART
-                </a>
-            </div>
-        </footer>
     </main>
 
-<script>
-    // =========================================================================
-    // 1. CONFIGURACIÓN DE VARIANTES LINEALES EXCLUSIVAS BIORUSH
-    // =========================================================================
-    const BIORUSH_CATALOG = {
-        'FOCUS': { 
-            label: 'PULSOR FOCUS', desc: 'Enfoque y claridad cognitiva', 
-            spec: 'LION’S MANE', cant: '45X500MGRS', price: '$70MIL', id: 'PULS45F',
-            img: 'img/45caps.png', imgBack: 'img/45mane.png', imgRaw: 'img/maneRaw.png',
-            telemetry: { COL: '24°', FRU: '18°', SEC: '40°' },
-            benefits: ['NEUROGÉNESIS', 'CLARIDAD COGNITIVA', 'MEMORIA FLUIDA', 'OPTIMIZACIÓN SINÁPTICA', 'ENFOQUE PROFUNDO']
-        },
-        'ZEN': { 
-            label: 'PULSOR ZEN', desc: 'Silencio mental óptimo', 
-            spec: 'REISHI', cant: '45X500MGRS', price: '$70MIL', id: 'PULS45Z',
-            img: 'img/45caps.png', imgBack: 'img/45reishi.png', imgRaw: 'img/reishiRaw.png',
-            telemetry: { COL: '22°', FRU: '16°', SEC: '38°' },
-            benefits: ['REDUCCIÓN CORTISOL', 'CALMA PROFUNDA', 'REGULACIÓN NERVIOSA', 'DESCANSO REPARADOR', 'ADAPTACIÓN AL ESTRÉS']
-        },
-        'STAMINA': { 
-            label: 'PULSOR STAMINA', desc: 'Potencia celular óptima', 
-            spec: 'CORDYCEPS', cant: '45X500MGRS', price: '$70MIL', id: 'PULS45S',
-            img: 'img/45caps.png', imgBack: 'img/45cordy.png', imgRaw: 'img/cordyRaw.png',
-            telemetry: { COL: '20°', FRU: '15°', SEC: '42°' },
-            benefits: ['POTENCIA AERÓBICA', 'ENERGÍA CELULAR (ATP)', 'RESISTENCIA FÍSICA', 'OXIGENACIÓN SANGUÍNEA', 'RECUPERACIÓN RÁPIDA']
-        },
-        'CORE': { 
-            label: 'PULSOR CORE', desc: 'Respuesta inmune óptima', 
-            spec: 'TURKEY TAIL', cant: '45X500MGRS', price: '$70MIL', id: 'PULS45C',
-            img: 'img/45caps.png', imgBack: 'img/45turkey.png', imgRaw: 'img/turkeyRaw.png',
-            telemetry: { COL: '23°', FRU: '19°', SEC: '40°' },
-            benefits: ['RESPUESTA INMUNE', 'BIOMA INTESTINAL', 'DEFENSA CELULAR', 'ANTIOXIDANTE', 'PROTECCIÓN SISTÉMICA']
-        }
-    };
-
-    let currentBioVariant = 'FOCUS';
-    const numeroCelular = "573025333130";
-
-    // ==========================================
-    // 2. CACHÉ DE ELEMENTOS DE UI
-    // ==========================================
-    const $ = (id) => document.getElementById(id);
-    const cachedElements = {};
-    
-    function getCachedEl(id) {
-        if (!cachedElements[id]) {
-            cachedElements[id] = $(id);
-        }
-        return cachedElements[id];
-    }
-
-    const triggerHaptic = (ms) => { if (navigator.vibrate) navigator.vibrate(ms); };
-
-    // ==========================================
-    // 3. MOTOR DE ESTADO VISUAL (FRONT -> BACK -> RAW)
-    // ==========================================
-    function aplicarModoVisual(modo) {
-        const front = getCachedEl('biorush-pack-img');
-        const back = getCachedEl('biorush-pack-img-back');
-        const raw = getCachedEl('biorush-pack-img-raw');
-        const svg = getCachedEl('laser-vector-target');
-
-        [front, back, raw].forEach(el => { if(el) el.style.opacity = '0'; });
-        
-        if (modo === 'front') {
-            front.style.opacity = '1'; front.style.zIndex = '10'; back.style.zIndex = '0';
-            if (svg) { svg.style.opacity = '1'; svg.style.pointerEvents = 'auto'; }
-        } else if (modo === 'back') {
-            back.style.opacity = '1'; back.style.zIndex = '10'; front.style.zIndex = '0';
-            if (svg) { svg.style.opacity = '0'; svg.style.pointerEvents = 'none'; }
-        } else if (modo === 'raw') {
-            raw.style.opacity = '1';
-            if (svg) { svg.style.opacity = '0'; svg.style.pointerEvents = 'none'; }
-        }
-    }
-
-    function vincularBotones() {
-        const btnRaw = getCachedEl('btn-reveal-raw');
-        let modoActual = 'front';
-
-        if (btnRaw) {
-            btnRaw.addEventListener('click', () => {
-                if (modoActual === 'front') {
-                    aplicarModoVisual('back'); modoActual = 'back'; triggerHaptic(12);
-                } else if (modoActual === 'back') {
-                    aplicarModoVisual('raw'); modoActual = 'raw'; triggerHaptic(10);
-                } else {
-                    aplicarModoVisual('front'); modoActual = 'front'; triggerHaptic(8);
-                }
-            });
-        }
-    }
-
-    function inicializarBioRush() {
-        vincularBotones();
-        actualizarBioUI();
-    }
-
-    function cambiarBioVariant(variantKey) {
-        currentBioVariant = variantKey;
-        actualizarBioUI();
-        triggerHaptic(10);
-    }
-
-function actualizarBioUI() {
-        const variantConfig = BIORUSH_CATALOG[currentBioVariant];
-        const vContainer = getCachedEl('biorush-variants-container');
-        
-        const descEl = getCachedEl('biorush-description');
-        const packImg = getCachedEl('biorush-pack-img');
-        const packImgBack = getCachedEl('biorush-pack-img-back');
-        const packImgRaw = getCachedEl('biorush-pack-img-raw');
-        
-        if (descEl && packImg && packImgBack) {
-            descEl.classList.add('opacity-0');
-            
-            setTimeout(() => {
-                descEl.textContent = variantConfig.desc;
-                packImg.src = variantConfig.img;
-                packImgBack.src = variantConfig.imgBack;
-                if (packImgRaw) packImgRaw.src = variantConfig.imgRaw;
-                
-                // Sincronizar título en el target láser central
-                const labelTitle = getCachedEl('laser-variant-title');
-                if (labelTitle) labelTitle.textContent = variantConfig.label;
-                
-                // Sincronizar título en la especificación vectorial del footer
-                const labelTitleFooter = getCachedEl('laser-variant-title-footer');
-                if (labelTitleFooter) labelTitleFooter.textContent = variantConfig.label;
-                
-                descEl.classList.remove('opacity-0');
-            }, 120);
-        }
-
-        // Sincronizar Telemetría Dinámica de Canales
-        const tele = variantConfig.telemetry;
-        const tCol = getCachedEl('tele-col');
-        const tFru = getCachedEl('tele-fru');
-        const tSec = getCachedEl('tele-sec');
-        const tMol = getCachedEl('tele-mol');
-
-        if (tCol) tCol.textContent = tele.COL;
-        if (tFru) tFru.textContent = tele.FRU;
-        if (tSec) tSec.textContent = tele.SEC;
-        if (tMol) tMol.textContent = variantConfig.price;
-
-        // --- ENLACE DIRECTO A LA SUB-BARRA INFERIOR DEL CRISTAL ---
-        const hudCant = getCachedEl('biorush-cant');
-        const hudPrice = getCachedEl('biorush-price');
-
-        if (hudCant) hudCant.textContent = variantConfig.cant;
-        if (hudPrice) hudPrice.textContent = variantConfig.price;
-
-        // Mantener referencia estable para el contenedor de variantes
-        if (vContainer) {
-            // Lógica base conservada
-        }
-    }
-
-    function navegarVariante(direccion) {
-        const variantsKeys = Object.keys(BIORUSH_CATALOG);
-        let currentIndex = variantsKeys.indexOf(currentBioVariant);
-        currentIndex = (currentIndex + direccion + variantsKeys.length) % variantsKeys.length;
-        cambiarBioVariant(variantsKeys[currentIndex]);
-    }
-
-    // =========================================================================
-    // 4. MOTOR DE CONFIGURACIÓN TEMPORAL (LENGUAJE BIOCINÉTICO)
-    // =========================================================================
-    function updateZ() {
-        let biokineticCoordinate = "";
-        const now = new Date();
-        const minutes = now.getMinutes();
-        const seconds = now.getSeconds();
-
-        let setsStage = 1;  
-        let repsStage = 1;  
-        let currentAction = 'P'; 
-
-        if (seconds % 2 !== 0) {
-            const progress1s = now.getMilliseconds() / 1000; 
-            setsStage = Math.floor(progress1s * 12) + 1;
-            repsStage = 13 - setsStage; 
-
-            if (progress1s < 0.25) currentAction = 'P';
-            else if (progress1s < 0.5) currentAction = 'U';
-            else if (progress1s < 0.75) currentAction = 'L';
-            else currentAction = 'S';
-        } else {
-            setsStage = Math.floor((minutes % 12) + 1);
-            
-            if (seconds < 30) {
-                const subSlot = Math.floor((seconds % 30) / 7.5);
-                currentAction = ["PL", "PU", "LU", "SU"][subSlot] || "PL";
-                repsStage = Math.floor((seconds % 10) + 2);
-            } else {
-                const subSlot = Math.floor(((seconds - 30) % 30) / 7.5);
-                currentAction = ["PUL", "PLS", "LUP", "ULS"][subSlot] || "ULS";
-                repsStage = Math.floor(((seconds - 30) % 10) + 3);
+    <script>
+        // =========================================================================
+        // 1. CONFIGURACIÓN DE VARIANTES LINEALES EXCLUSIVAS BIORUSH
+        // =========================================================================
+        const BIORUSH_CATALOG = {
+            'FOCUS': { 
+                label: 'PULSOR FOCUS', desc: 'Enfoque y claridad cognitiva', 
+                spec: 'LION’S MANE', cant: '45X500MGRS', price: '$70MIL', id: 'PULS45F',
+                img: 'img/45caps.png', imgBack: 'img/45mane.png', imgRaw: 'img/maneRaw.png',
+                telemetry: { COL: '24°', FRU: '18°', SEC: '40°' },
+                benefits: ['NEUROGÉNESIS', 'CLARIDAD COGNITIVA', 'MEMORIA FLUIDA', 'OPTIMIZACIÓN SINÁPTICA', 'ENFOQUE PROFUNDO']
+            },
+            'ZEN': { 
+                label: 'PULSOR ZEN', desc: 'Silencio mental óptimo', 
+                spec: 'REISHI', cant: '45X500MGRS', price: '$70MIL', id: 'PULS45Z',
+                img: 'img/45caps.png', imgBack: 'img/45reishi.png', imgRaw: 'img/reishiRaw.png',
+                telemetry: { COL: '22°', FRU: '16°', SEC: '38°' },
+                benefits: ['REDUCCIÓN CORTISOL', 'CALMA PROFUNDA', 'REGULACIÓN NERVIOSA', 'DESCANSO REPARADOR', 'ADAPTACIÓN AL ESTRÉS']
+            },
+            'STAMINA': { 
+                label: 'PULSOR STAMINA', desc: 'Potencia celular óptima', 
+                spec: 'CORDYCEPS', cant: '45X500MGRS', price: '$70MIL', id: 'PULS45S',
+                img: 'img/45caps.png', imgBack: 'img/45cordy.png', imgRaw: 'img/cordyRaw.png',
+                telemetry: { COL: '20°', FRU: '15°', SEC: '42°' },
+                benefits: ['POTENCIA AERÓBICA', 'ENERGÍA CELULAR (ATP)', 'RESISTENCIA FÍSICA', 'OXIGENACIÓN SANGUÍNEA', 'RECUPERACIÓN RÁPIDA']
+            },
+            'CORE': { 
+                label: 'PULSOR CORE', desc: 'Respuesta inmune óptima', 
+                spec: 'TURKEY TAIL', cant: '45X500MGRS', price: '$70MIL', id: 'PULS45C',
+                img: 'img/45caps.png', imgBack: 'img/45turkey.png', imgRaw: 'img/turkeyRaw.png',
+                telemetry: { COL: '23°', FRU: '19°', SEC: '40°' },
+                benefits: ['RESPUESTA INMUNE', 'BIOMA INTESTINAL', 'DEFENSA CELULAR', 'ANTIOXIDANTE', 'PROTECCIÓN SISTÉMICA']
             }
-        }
-        setsStage = Math.max(1, Math.min(12, setsStage));
-        repsStage = Math.max(1, Math.min(12, repsStage));
-        biokineticCoordinate = `${setsStage}${currentAction}${repsStage}`;
+        };
 
-        const elDial = getCachedEl('z-dial');
-        if (elDial) elDial.textContent = biokineticCoordinate;
+        const VECTOR_TO_CLOCK_INDEX = {
+            'P': 1,  'U': 2,  'L': 3,  'S': 4,
+            'PL': 5, 'PU': 6, 'LU': 7, 'SU': 8,
+            'PUL': 9,'LPS': 10,'SPU': 11,'ULS': 12
+        };
 
-        const subSetsSolar = getCachedEl('sub-sets-solar');
-        const subRepsTension = getCachedEl('sub-reps-tension');
-        if (subSetsSolar) subSetsSolar.textContent = `${(0.05 + (setsStage / 240)).toFixed(3)}`;
-        if (subRepsTension) subRepsTension.textContent = `${(14.2 + (repsStage * 0.8)).toFixed(1)}`;
-    }
+        let biokineticWaveHistory = [];
+        let isDialTextRevealed = false;
+        let lastProcessedSecond = -1; 
+        
+        // Estado de la variante activa de BioRush
+        const catalogKeys = Object.keys(BIORUSH_CATALOG);
+        let activeVariantIndex = 0;
 
-    // =========================================================================
-    // 5. MOTOR DE TELEMETRÍA HIPERREALISTA (SCROLL + LENTE COAXIAL)
-    // =========================================================================
-    const TELEMETRY_MEANINGS = {
-        'sub-sets-solar': "Frecuencia de resonancia",
-        'sub-reps-tension': "Índice de cohesión molecular",
-        'tele-col': "Temperatura de Colonizacion",
-        'tele-fru': "Parámetros de maduración",
-        'tele-sec': "Ciclo de deshidratación",
-        'tele-mol': "Valor de adquisición"
-    };
+        const $ = id => document.getElementById(id);
 
-    let scrollTimeout = null;
-
-    function habilitarReveladoTelemetria() {
-        const viewport = document.getElementById('telemetry-scroll-viewport');
-        if (!viewport) return;
-
-        // Detector adaptativo para Scroll táctil o mouse
-        viewport.addEventListener('scroll', () => {
-            const anchoElemento = viewport.children[0].offsetWidth;
-            const maxScrollLeft = viewport.scrollWidth - viewport.clientWidth;
-
-            // CONTROL INTRÍNSECO DE SCROLL INFINITO TÁCTIL
-            if (viewport.scrollLeft >= maxScrollLeft - 2) {
-                const primerElemento = viewport.children[0];
-                viewport.appendChild(primerElemento);
-                viewport.style.scrollBehavior = 'auto';
-                viewport.scrollLeft = viewport.scrollLeft - anchoElemento;
-                viewport.style.scrollBehavior = 'smooth';
-            } else if (viewport.scrollLeft <= 2) {
-                const ultimoElemento = viewport.children[viewport.children.length - 1];
-                viewport.insertBefore(ultimoElemento, viewport.children[0]);
-                viewport.style.scrollBehavior = 'auto';
-                viewport.scrollLeft = viewport.scrollLeft + anchoElemento;
-                viewport.style.scrollBehavior = 'smooth';
-            }
-
-            actualizarFocoCentral();
+        function navegarVariante(direccion) {
+            activeVariantIndex = (activeVariantIndex + direccion + catalogKeys.length) % catalogKeys.length;
+            const currentKey = catalogKeys[activeVariantIndex];
+            const variante = BIORUSH_CATALOG[currentKey];
             
-            const lens = document.getElementById('telemetry-led-lens');
-            if (lens) lens.classList.add('lens-active');
+            const elTitle = $('laser-variant-title-footer');
+            if (elTitle) {
+                elTitle.textContent = variante.label;
+            }
+            if (navigator.vibrate) navigator.vibrate(15);
+        }
 
-            clearTimeout(scrollTimeout);
-            scrollTimeout = setTimeout(() => {
-                if (lens) lens.classList.remove('lens-active');
-            }, 180);
-        });
+        function renderBiokineticWaves() {
+            const container = $('wave-quantum-container');
+            if (!container || biokineticWaveHistory.length === 0) return;
 
-        // Eventos por clic directo conservan su traslación fluida
-        Object.keys(TELEMETRY_MEANINGS).forEach(id => {
-            const el = getCachedEl(id);
-            if (!el) return;
-            el.addEventListener('click', () => {
-                const contenedorPadre = el.parentElement;
-                const index = Array.from(viewport.children).indexOf(contenedorPadre);
-                if (index === -1) return;
-                triggerHaptic(6);
-                const anchoElemento = contenedorPadre.offsetWidth;
-                viewport.scrollTo({
-                    left: contenedorPadre.offsetLeft - anchoElemento,
-                    behavior: 'smooth'
+            let htmlContent = '';
+            biokineticWaveHistory.forEach((dial, tIndex) => {
+                const currentScale = tIndex * 1; 
+                const baseOpacity = isDialTextRevealed ? 0.03 : (1.0 - (tIndex * 0.08));
+                if (baseOpacity <= 0) return;
+
+                const viewFactor = 18; 
+                const layers = [
+                    { id: 'internal',     r: (currentScale * 1.0) * viewFactor, opacity: baseOpacity * 0.70, value: dial.sets },
+                    { id: 'intermediate', r: (currentScale * 1.4) * viewFactor, opacity: baseOpacity * 0.55, value: dial.vector },
+                    { id: 'external',     r: (currentScale * 1.8) * viewFactor, opacity: baseOpacity * 0.40, value: dial.reps }
+                ];
+
+                layers.forEach(layer => {
+                    if (layer.r <= 0) return;
+                    const circumference = 2 * Math.PI * layer.r;
+                    const angle = (layer.value - 1) * 30; 
+                    const arcLength = (layer.value / 12) * circumference;
+                    const dashArray = `${arcLength} ${circumference}`;
+
+                    htmlContent += `
+                        <circle 
+                            id="wave-${layer.id}-t${tIndex}" 
+                            cx="200" 
+                            cy="200" 
+                            r="${layer.r}" 
+                            transform="rotate(${angle} 200 200)"
+                            class="stroke-current transition-all duration-300"
+                            stroke-width="${tIndex === 0 ? 1.5 : 1.0}"
+                            stroke-opacity="${layer.opacity}"
+                            stroke-dasharray="${dashArray}"
+                            stroke-linecap="round"
+                            fill="none"
+                        />`;
                 });
             });
-        });
-    }
-
-function desplazarTelemetria(direccion = 1) {
-        const viewport = document.getElementById('telemetry-scroll-viewport');
-        if (!viewport || viewport.children.length === 0) return;
-
-        triggerHaptic(6);
-        const anchoElemento = viewport.children[0].offsetWidth;
-
-        // Desplazamiento adaptativo fluido izquierda o derecha
-        viewport.scrollBy({
-            left: anchoElemento * direccion,
-            behavior: 'smooth'
-        });
-
-        // Asegurar actualización geométrica síncrona del foco central tras la animación
-        setTimeout(() => {
-            actualizarFocoCentral();
-        }, 300);
-    }
-
-    function actualizarFocoCentral() {
-        const viewport = document.getElementById('telemetry-scroll-viewport');
-        const telemetryPuls = document.getElementById('panel-telemetry-puls');
-        if (!viewport || !telemetryPuls || viewport.children.length === 0) return;
-
-        const viewportCenter = viewport.scrollLeft + (viewport.clientWidth / 2);
-        let nodoCercano = null;
-        let menorDistancia = Infinity;
-
-        // Cálculo geométrico del nodo más cercano al eje óptico central del dispositivo
-        Array.from(viewport.children).forEach((nodo) => {
-            const nodoCenter = nodo.offsetLeft + (nodo.offsetWidth / 2);
-            const distancia = Math.abs(viewportCenter - nodoCenter);
-
-            if (distancia < menorDistancia) {
-                menorDistancia = distancia;
-                nodoCercano = nodo;
-            }
-        });
-
-        if (!nodoCercano) return;
-
-        const spanDato = nodoCercano.querySelector('span[id]');
-        if (spanDato && TELEMETRY_MEANINGS[spanDato.id]) {
-            telemetryPuls.textContent = TELEMETRY_MEANINGS[spanDato.id].toUpperCase();
+            container.innerHTML = htmlContent;
         }
 
-        // LÓGICA DE COMPORTAMIENTO SEPARADA EXCLUSIVAMENTE AL FRONTEND (CSS)
-        Array.from(viewport.children).forEach((nodo) => {
-            if (nodo === nodoCercano) {
-                nodo.classList.add('node-central-active');
+        function updateZ() {
+            const now = new Date();
+            const minutes = now.getMinutes();
+            const seconds = now.getSeconds();
+            const milliseconds = now.getMilliseconds();
+
+            let setsStage = 1;  
+            let repsStage = 1;  
+            let currentAction = 'P'; 
+
+            if (seconds % 2 !== 0) {
+                const progress1s = milliseconds / 1000; 
+                setsStage = Math.floor(progress1s * 12) + 1;
+                repsStage = 13 - setsStage; 
+                if (progress1s < 0.25) currentAction = 'P';
+                else if (progress1s < 0.5) currentAction = 'U';
+                else if (progress1s < 0.75) currentAction = 'L';
+                else currentAction = 'S';
             } else {
-                nodo.classList.remove('node-central-active');
+                setsStage = Math.floor((minutes % 12) + 1);
+                if (seconds < 30) {
+                    const subSlot = Math.floor((seconds % 30) / 7.5);
+                    currentAction = ["PL", "PU", "LU", "SU"][subSlot] || "PL";
+                    repsStage = Math.floor((seconds % 10) + 2);
+                } else {
+                    const subSlot = Math.floor(((seconds - 30) % 30) / 7.5);
+                    currentAction = ["PUL", "LPS", "SPU", "ULS"][subSlot] || "ULS";
+                    repsStage = Math.floor(((seconds - 30) % 10) + 3);
+                }
+            }
+            
+            setsStage = Math.max(1, Math.min(12, setsStage));
+            repsStage = Math.max(1, Math.min(12, repsStage));
+            const biokineticCoordinate = `${setsStage}${currentAction}${repsStage}`;
+            const vectorIndex = VECTOR_TO_CLOCK_INDEX[currentAction] || 1;
+
+            const elDial = $('z-dial');
+            const elDialHud = $('z-dial-hud');
+            if (elDial) elDial.textContent = biokineticCoordinate;
+            if (elDialHud) elDialHud.textContent = biokineticCoordinate;
+
+            if (seconds !== lastProcessedSecond) {
+                biokineticWaveHistory.unshift({ 
+                    sets: setsStage, 
+                    vector: vectorIndex, 
+                    reps: repsStage, 
+                    rawCoord: biokineticCoordinate 
+                });
+                
+                if (biokineticWaveHistory.length > 12) {
+                    biokineticWaveHistory.pop();
+                }
+                
+                lastProcessedSecond = seconds;
+                renderBiokineticWaves();
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            updateZ();
+            setInterval(updateZ, 16); 
+
+            const container = $('artepanel-pack-container');
+            if (container) {
+                container.addEventListener('click', () => {
+                    isDialTextRevealed = !isDialTextRevealed;
+                    const sandwatchGroup = $('sandwatch-group');
+                    if (sandwatchGroup) {
+                        sandwatchGroup.style.opacity = isDialTextRevealed ? "1" : "0";
+                    }
+                    renderBiokineticWaves();
+                    if (navigator.vibrate) navigator.vibrate(10);
+                });
             }
         });
-    }
-
-    // =========================================================================
-    // 6. PAYLOAD DE ADQUISICIÓN WHATSAPP
-    // =========================================================================
-    function adquirirNodo() {
-        const variantConfig = BIORUSH_CATALOG[currentBioVariant];
-        const currentCoord = getCachedEl('z-dial')?.textContent || "N/A";
-        
-        const freqValue = getCachedEl('sub-sets-solar')?.textContent || "0.00 Hz";
-        const tensionValue = getCachedEl('sub-reps-tension')?.textContent || "0.0 N";
-        
-        const dialInterpretation = currentCoord.replace(/(\d+)([A-Z]+)(\d+)/, "$1 FASES, $3 NODOS - ESTADO $2");
-        
-        const mensaje = `⚡ *ORDEN - BIORUSH* ⚡\n\n` +
-                        `• *Vector:* PULSOR ${currentBioVariant}\n` +
-                        `• *Carga:* ${variantConfig.spec}\n` +
-                        `• *ID:* \`${variantConfig.id}\`\n` +
-                        `• *Precio:* ${variantConfig.price}\n\n` +
-                        `--- *LENGUAJE BIOCINÉTICO* ---\n` +
-                        `• *Matriz de Configuración:* \`${currentCoord}\`\n` +
-                        `• *Análisis de Estado:* ${dialInterpretation}\n` +
-                        `• *Resonancia:* \`${freqValue}\`\n` +
-                        `• *Cohesión:* \`${tensionValue}\`\n\n` +
-                        `Activar configuración actual.`;
-
-        triggerHaptic([15, 40, 15]);
-        window.open(`https://api.whatsapp.com/send?phone=${numeroCelular}&text=${encodeURIComponent(mensaje)}`, '_blank');
-    }
-
-    document.addEventListener('DOMContentLoaded', () => {
-        inicializarBioRush();
-        updateZ(); 
-        setInterval(updateZ, 1000);
-        habilitarReveladoTelemetria();
-        
-        // DISPARADOR ÓPTICO INICIAL
-        setTimeout(() => {
-            actualizarFocoCentral();
-        }, 100);
-    });
-</script>
+    </script>
 </body>
 </html>
