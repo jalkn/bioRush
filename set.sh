@@ -261,7 +261,7 @@ cat << 'INDEX10_EOF' > public/index.html
     </script>
     <style>
         :root[data-theme="dark"] {
-            --jako-bg: rgba(0, 0, 0, 0.95);
+            --jako-bg: rgba(0, 15, 131, 0.95);
             --jako-text: #ffffff;
             --jako-border: rgba(255, 255, 255, 0.02);
             --jako-glass: rgba(0, 0, 0, 0.5);
@@ -269,16 +269,6 @@ cat << 'INDEX10_EOF' > public/index.html
             --gradient-start: rgba(255, 255, 255, 0.03);
             --gradient-mid: rgba(5, 5, 8, 0.85);
             --gradient-end: #000000;
-        }
-        :root[data-theme="white"] {
-            --jako-bg: #f8f9fa;
-            --jako-text: #000000;
-            --jako-border: rgba(0, 0, 0, 0.08);
-            --jako-glass: rgba(255, 255, 255, 0.4);
-            --jako-led: rgba(0, 0, 0, 0.85);
-            --gradient-start: rgba(0, 0, 0, 0.02);
-            --gradient-mid: rgba(248, 249, 250, 0.85);
-            --gradient-end: #ffffff;
         }
 
         body { 
@@ -304,12 +294,6 @@ cat << 'INDEX10_EOF' > public/index.html
         :root[data-theme="white"] .active-led {
             text-shadow: 0 0 6px var(--jako-led) !important;
         }
-        
-        #artepanel-mask-wrapper {
-        -webkit-mask-image: -webkit-radial-gradient(white, black); /* Hack nativo de Safari para congelar bordes redondeados */
-        transform: translateZ(0);
-        -webkit-transform: translateZ(0);
-        }
     </style>
 </head>
 <body class="antialiased selection:bg-jako-text selection:text-jako-bg overflow-hidden h-screen flex flex-col justify-between">
@@ -331,7 +315,7 @@ cat << 'INDEX10_EOF' > public/index.html
                                 <g id="sandwatch-group" class="origin-center opacity-100 transition-all duration-500 style-gpu" style="will-change: opacity;">                                    <path d="M 90,90 L 310,90 L 90,310 L 310,310 Z" class="stroke-current opacity-20" />
                                     <path d="M 90,90 Q 200,125 310,90" class="stroke-current opacity-20" />
                                     <path d="M 90,310 Q 200,275 310,310" stroke-dasharray="3 3" class="stroke-current opacity-20" />
-                                    <text id="z-dial" x="200" y="218" text-anchor="middle" class="fill-current font-black text-[45px] tracking-[0.35em] font-sans">1P1</text>
+                                    <text id="z-dial" x="200" y="218" text-anchor="middle" class="fill-current font-black text-[35px] tracking-[0.35em] font-sans">1P1</text>
                                 </g>
                             </svg>
                         </div>
@@ -517,7 +501,7 @@ cat << 'INDEX10_EOF' > public/index.html
             updateZ();
             setInterval(updateZ, 1000);
 
-            §const container = $('artepanel-pack-container');
+            const container = $('artepanel-pack-container');
             if (container) {
                 container.addEventListener('click', () => {
                     isDialTextRevealed = !isDialTextRevealed;
