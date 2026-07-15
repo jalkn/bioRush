@@ -305,17 +305,17 @@ cat << 'INDEX10_EOF' > public/index.html
             <div class="relative w-full max-w-[340px] sm:max-w-[400px] md:max-w-[450px] aspect-square flex flex-col items-center justify-center gap-6">
                 
                 <div id="artepanel-pack-container" class="relative w-[55vw] h-[55vw] sm:w-[50vw] sm:h-[50vw] md:w-[35vh] md:h-[35vh] max-w-[250px] max-h-[250px] min-w-[170px] min-h-[170px] aspect-square shrink-0 drop-shadow-[0_25px_55px_rgba(0,0,0,0.85)] cursor-pointer">
-                    <div id="artepanel-mask-wrapper" class="w-full h-full relative overflow-hidden rounded-full transition-all duration-500" style="background-image: linear-gradient(135deg, var(--gradient-start) 0%, var(--gradient-mid) 50%, var(--gradient-end) 100%);">
+                    <div id="artepanel-mask-wrapper" class="w-full h-full relative overflow-hidden rounded-full transition-all duration-500 bg-cover bg-center" style="background-image: url('img/caps.png');">
                         
-                        <div class="absolute inset-0 flex items-center justify-center p-0 z-20">
+                        <div class="absolute inset-0 flex items-center justify-center p-3 z-20">
                             <svg id="laser-vector-target" viewBox="0 0 400 400" class="w-full h-full fill-none stroke-current text-jako-text transition-all duration-500 origin-center">
                                 
                                 <g id="wave-quantum-container" style="transform-origin: 200px 200px; -webkit-transform-origin: 200px 200px;" class="-rotate-90"></g>
-
-                                <g id="sandwatch-group" class="origin-center opacity-100 transition-all duration-500 style-gpu" style="will-change: opacity;">                                    <path d="M 90,90 L 310,90 L 90,310 L 310,310 Z" class="stroke-current opacity-20" />
-                                    <path d="M 90,90 Q 200,125 310,90" class="stroke-current opacity-20" />
-                                    <path d="M 90,310 Q 200,275 310,310" stroke-dasharray="3 3" class="stroke-current opacity-20" />
-                                    <text id="z-dial" x="200" y="218" text-anchor="middle" class="fill-current font-black text-[35px] tracking-[0.35em] font-sans">1P1</text>
+                                <g id="sandwatch-group" class="origin-center opacity-100 transition-all duration-500 style-gpu" style="will-change: opacity;">
+                                    <path d="M 110,110 L 290,110 L 110,290 L 290,290 Z" class="stroke-current opacity-20" />
+                                    <path d="M 110,110 Q 200,140 290,110" class="stroke-current opacity-20" />
+                                    <path d="M 110,290 Q 200,260 290,290" stroke-dasharray="3 3" class="stroke-current opacity-20" />
+                                    <text id="z-dial" x="200" y="215" text-anchor="middle" class="fill-current font-black text-[25px] tracking-[0.35em] font-sans">1P1</text>
                                 </g>
                             </svg>
                         </div>
@@ -415,7 +415,7 @@ cat << 'INDEX10_EOF' > public/index.html
                 const baseOpacity = isDialTextRevealed ? 0.05 : (1.0 - (tIndex * 0.08));
                 if (baseOpacity <= 0) return;
 
-                const viewFactor = 18; 
+                const viewFactor = 6; 
                 const layers = [
                     { id: 'internal',     r: (currentScale * 1.0) * viewFactor, opacity: baseOpacity * 0.70, value: dial.sets },
                     { id: 'intermediate', r: (currentScale * 1.4) * viewFactor, opacity: baseOpacity * 0.55, value: dial.vector },
