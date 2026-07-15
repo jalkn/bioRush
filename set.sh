@@ -517,7 +517,7 @@ cat << 'INDEX10_EOF' > public/index.html
             updateZ();
             setInterval(updateZ, 1000);
 
-            const container = $('artepanel-pack-container');
+            §const container = $('artepanel-pack-container');
             if (container) {
                 container.addEventListener('click', () => {
                     isDialTextRevealed = !isDialTextRevealed;
