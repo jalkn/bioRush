@@ -18,7 +18,7 @@ echo -e "${CYAN}=========================================================${NC}"
 # =========================================================================
 # 1. Aseptic Cache Purge
 # =========================================================================
-echo -e "\n${MAGENTA}[1/8] Purging caching systems and build targets...${NC}"
+echo -e "\n${MAGENTA}[1/5] Purging caching systems and build targets...${NC}"
 CACHE_PATHS=(".astro" "dist" "node_modules/.vite")
 for path in "${CACHE_PATHS[@]}"; do
     if [ -d "$path" ]; then
@@ -31,7 +31,7 @@ echo -e "${GREEN}✔ Sanitization complete.${NC}"
 # =========================================================================
 # 2. Base Configuration Files (ISOLATED BUILD MANIFEST)
 # =========================================================================
-echo -e "\n${YELLOW}[2/8] Staging project manifests with isolated build safety...${NC}"
+echo -e "\n${YELLOW}[2/5] Staging project manifests with isolated build safety...${NC}"
 
 cat << 'JSON_EOF' > package.json
 {
@@ -68,7 +68,7 @@ MJS_EOF
 # 3. Pure Mathematical Backend Engine Injection (`z_dial_core.py`)
 #    INTEGRATED WITH VOLATILE SQLITE PERSISTENCE LAYER (1:N SCHEMA)
 # =========================================================================
-echo -e "\n${MAGENTA}[3/8] Solidifying core computational engine script with relational DB...${NC}"
+echo -e "\n${MAGENTA}[3/5] Solidifying core computational engine script with relational DB...${NC}"
 
 cat << 'PYTHON_EOF' > z_dial_core.py
 import time
@@ -222,13 +222,13 @@ PYTHON_EOF
 echo -e "${GREEN}✔ Computational core logic verified locally.${NC}"
 
 # =========================================================================
-# 4. Static Assets Provisioning (NATIVE INDEX ANCHOR)
+# 4. Static Assets Provisioning (NATIVE INDEX10 ANCHOR)
 # =========================================================================
-echo -e "\n${MAGENTA}[4/8] Provisioning pristine index.html asset as core target...${NC}"
+echo -e "\n${MAGENTA}[4/5] Provisioning pristine index10.html asset as core target...${NC}"
 
 mkdir -p public/img
 
-cat << 'INDEX_EOF' > public/index.html
+cat << 'INDEX10_EOF' > public/index.html
 <!DOCTYPE html>
 <html lang="en" data-theme="dark">
 <head>
@@ -312,15 +312,15 @@ cat << 'INDEX_EOF' > public/index.html
         }
     </style>
 </head>
-<body class="antialiased selection:bg-jako-text selection:text-jako-bg overflow-x-hidden min-h-screen">
+<body class="antialiased selection:bg-jako-text selection:text-jako-bg overflow-hidden h-screen flex flex-col justify-between">
 
     <div id="page-bg-overlay"></div>
 
-    <main id="main-vault" class="w-full flex-1 flex flex-col justify-center items-center min-h-screen relative overflow-hidden"> 
+   <main id="main-vault" class="w-full flex-1 flex flex-col justify-center items-center relative overflow-hidden">
         <div class="w-full flex flex-col items-center justify-center p-4 sm:p-6 select-none relative z-10">
             <div class="relative w-full max-w-[340px] sm:max-w-[400px] md:max-w-[450px] aspect-square flex flex-col items-center justify-center gap-6">
                 
-                <div id="artepanel-pack-container" class="relative w-[65vw] h-[65vw] sm:w-[50vw] sm:h-[50vw] md:w-[38vh] md:h-[38vh] max-w-[270px] max-h-[270px] min-w-[180px] min-h-[180px] aspect-square shrink-0 drop-shadow-[0_25px_55px_rgba(0,0,0,0.85)] cursor-pointer">
+                <div id="artepanel-pack-container" class="relative w-[55vw] h-[55vw] sm:w-[50vw] sm:h-[50vw] md:w-[35vh] md:h-[35vh] max-w-[250px] max-h-[250px] min-w-[170px] min-h-[170px] aspect-square shrink-0 drop-shadow-[0_25px_55px_rgba(0,0,0,0.85)] cursor-pointer">
                     <div id="artepanel-mask-wrapper" class="w-full h-full relative overflow-hidden rounded-full transition-all duration-500" style="background-image: linear-gradient(135deg, var(--gradient-start) 0%, var(--gradient-mid) 50%, var(--gradient-end) 100%);">
                         
                         <div class="absolute inset-0 flex items-center justify-center p-0 z-20">
@@ -328,8 +328,7 @@ cat << 'INDEX_EOF' > public/index.html
                                 
                                 <g id="wave-quantum-container" style="transform-origin: 200px 200px; -webkit-transform-origin: 200px 200px;" class="-rotate-90"></g>
 
-                                <g id="sandwatch-group" class="origin-center opacity-0 transition-all duration-500 style-gpu" style="will-change: opacity;">
-                                    <path d="M 90,90 L 310,90 L 90,310 L 310,310 Z" class="stroke-current opacity-20" />
+                                <g id="sandwatch-group" class="origin-center opacity-100 transition-all duration-500 style-gpu" style="will-change: opacity;">                                    <path d="M 90,90 L 310,90 L 90,310 L 310,310 Z" class="stroke-current opacity-20" />
                                     <path d="M 90,90 Q 200,125 310,90" class="stroke-current opacity-20" />
                                     <path d="M 90,310 Q 200,275 310,310" stroke-dasharray="3 3" class="stroke-current opacity-20" />
                                     <text id="z-dial" x="200" y="218" text-anchor="middle" class="fill-current font-black text-[45px] tracking-[0.35em] font-sans">1P1</text>
@@ -342,21 +341,27 @@ cat << 'INDEX_EOF' > public/index.html
 
             </div>
         </div>
+    </main>
 
+
+    <footer class="w-full shrink-0 flex flex-col items-center bg-gradient-to-t from-black via-black/95 to-transparent pt-3 pb-3 z-50 border-t border-white/5">
         <div class="w-full max-w-md md:max-w-xl pb-2.5 pt-2 px-4 flex flex-col items-center overflow-hidden relative glass-panel border-t border-b border-white/10 mb-3.5">
+            
             <div class="w-full max-w-sm md:max-w-md mx-auto px-4 mb-1 flex items-center justify-between gap-2">
-                <button onclick="navegarVariante(-1)" class="opacity-30 hover:opacity-100 transition-opacity p-2 text-[8px] md:text-[10px] font-mono leading-none text-jako-text">◀</button>
+                <button onclick="navegarVariante(-1)" class="opacity-30 hover:opacity-100 transition-opacity p-2 text-[8px] md:text-[10px] font-mono leading-none">◀</button>
                 <svg class="w-full h-4 fill-none" viewBox="0 0 200 16">
-                    <text id="laser-variant-title-footer" x="50%" y="12" text-anchor="middle" class="fill-current text-jako-text font-black text-[9px] md:text-[11px] tracking-[0.3em] uppercase transition-all duration-500 tele-value">
+                    <text id="laser-variant-title-footer" x="50%" y="12" text-anchor="middle" class="fill-white font-black text-[9px] md:text-[11px] tracking-[0.3em] uppercase transition-all duration-500">
                         PULSOR FOCUS
                     </text>
                 </svg>
-                <button id="biorush-variants-container" onclick="navegarVariante(1)" class="opacity-30 hover:opacity-100 transition-opacity p-2 text-[8px] md:text-[10px] font-mono leading-none text-jako-text">▶</button>
+                <button id="biorush-variants-container" onclick="navegarVariante(1)" class="opacity-30 hover:opacity-100 transition-opacity p-2 text-[8px] md:text-[10px] font-mono leading-none">▶</button>
             </div>
+
         </div>
-    </main>
+    </footer>
 
     <script>
+
         // =========================================================================
         // 1. CONFIGURACIÓN DE VARIANTES LINEALES EXCLUSIVAS BIORUSH
         // =========================================================================
@@ -391,6 +396,21 @@ cat << 'INDEX_EOF' > public/index.html
             }
         };
 
+        let currentBioVariant = 'FOCUS';
+
+        function navegarVariante(direccion) {
+            const variantsKeys = Object.keys(BIORUSH_CATALOG);
+            let currentIndex = variantsKeys.indexOf(currentBioVariant);
+            currentIndex = (currentIndex + direccion + variantsKeys.length) % variantsKeys.length;
+            currentBioVariant = variantsKeys[currentIndex];
+            
+            const labelTitleFooter = $('laser-variant-title-footer');
+            if (labelTitleFooter) {
+                labelTitleFooter.textContent = BIORUSH_CATALOG[currentBioVariant].label;
+            }
+            if (navigator.vibrate) navigator.vibrate(8);
+        }
+
         const VECTOR_TO_CLOCK_INDEX = {
             'P': 1,  'U': 2,  'L': 3,  'S': 4,
             'PL': 5, 'PU': 6, 'LU': 7, 'SU': 8,
@@ -398,26 +418,8 @@ cat << 'INDEX_EOF' > public/index.html
         };
 
         let biokineticWaveHistory = [];
-        let isDialTextRevealed = false;
-        let lastProcessedSecond = -1; 
-        
-        // Estado de la variante activa de BioRush
-        const catalogKeys = Object.keys(BIORUSH_CATALOG);
-        let activeVariantIndex = 0;
-
+        let isDialTextRevealed = true;
         const $ = id => document.getElementById(id);
-
-        function navegarVariante(direccion) {
-            activeVariantIndex = (activeVariantIndex + direccion + catalogKeys.length) % catalogKeys.length;
-            const currentKey = catalogKeys[activeVariantIndex];
-            const variante = BIORUSH_CATALOG[currentKey];
-            
-            const elTitle = $('laser-variant-title-footer');
-            if (elTitle) {
-                elTitle.textContent = variante.label;
-            }
-            if (navigator.vibrate) navigator.vibrate(15);
-        }
 
         function renderBiokineticWaves() {
             const container = $('wave-quantum-container');
@@ -426,7 +428,7 @@ cat << 'INDEX_EOF' > public/index.html
             let htmlContent = '';
             biokineticWaveHistory.forEach((dial, tIndex) => {
                 const currentScale = tIndex * 1; 
-                const baseOpacity = isDialTextRevealed ? 0.03 : (1.0 - (tIndex * 0.08));
+                const baseOpacity = isDialTextRevealed ? 0.05 : (1.0 - (tIndex * 0.08));
                 if (baseOpacity <= 0) return;
 
                 const viewFactor = 18; 
@@ -450,7 +452,7 @@ cat << 'INDEX_EOF' > public/index.html
                             cy="200" 
                             r="${layer.r}" 
                             transform="rotate(${angle} 200 200)"
-                            class="stroke-current transition-all duration-300"
+                            class="stroke-current"
                             stroke-width="${tIndex === 0 ? 1.5 : 1.0}"
                             stroke-opacity="${layer.opacity}"
                             stroke-dasharray="${dashArray}"
@@ -466,14 +468,13 @@ cat << 'INDEX_EOF' > public/index.html
             const now = new Date();
             const minutes = now.getMinutes();
             const seconds = now.getSeconds();
-            const milliseconds = now.getMilliseconds();
 
             let setsStage = 1;  
             let repsStage = 1;  
             let currentAction = 'P'; 
 
             if (seconds % 2 !== 0) {
-                const progress1s = milliseconds / 1000; 
+                const progress1s = now.getMilliseconds() / 1000; 
                 setsStage = Math.floor(progress1s * 12) + 1;
                 repsStage = 13 - setsStage; 
                 if (progress1s < 0.25) currentAction = 'P';
@@ -498,31 +499,23 @@ cat << 'INDEX_EOF' > public/index.html
             const biokineticCoordinate = `${setsStage}${currentAction}${repsStage}`;
             const vectorIndex = VECTOR_TO_CLOCK_INDEX[currentAction] || 1;
 
+            const lastSavedDial = biokineticWaveHistory[0];
+            if (!lastSavedDial || lastSavedDial.rawCoord !== biokineticCoordinate) {
+                biokineticWaveHistory.unshift({ sets: setsStage, vector: vectorIndex, reps: repsStage, rawCoord: biokineticCoordinate });
+                if (biokineticWaveHistory.length > 12) biokineticWaveHistory.pop();
+            }
+
+            renderBiokineticWaves();
+
             const elDial = $('z-dial');
             const elDialHud = $('z-dial-hud');
             if (elDial) elDial.textContent = biokineticCoordinate;
             if (elDialHud) elDialHud.textContent = biokineticCoordinate;
-
-            if (seconds !== lastProcessedSecond) {
-                biokineticWaveHistory.unshift({ 
-                    sets: setsStage, 
-                    vector: vectorIndex, 
-                    reps: repsStage, 
-                    rawCoord: biokineticCoordinate 
-                });
-                
-                if (biokineticWaveHistory.length > 12) {
-                    biokineticWaveHistory.pop();
-                }
-                
-                lastProcessedSecond = seconds;
-                renderBiokineticWaves();
-            }
         }
 
         document.addEventListener('DOMContentLoaded', () => {
             updateZ();
-            setInterval(updateZ, 16); 
+            setInterval(updateZ, 1000);
 
             const container = $('artepanel-pack-container');
             if (container) {
@@ -530,6 +523,7 @@ cat << 'INDEX_EOF' > public/index.html
                     isDialTextRevealed = !isDialTextRevealed;
                     const sandwatchGroup = $('sandwatch-group');
                     if (sandwatchGroup) {
+                        // Si isDialTextRevealed es true, muestra el Sandwatch (opacidad 1). Si es false, lo oculta (opacidad 0) para ver las ondas.
                         sandwatchGroup.style.opacity = isDialTextRevealed ? "1" : "0";
                     }
                     renderBiokineticWaves();
@@ -540,14 +534,16 @@ cat << 'INDEX_EOF' > public/index.html
     </script>
 </body>
 </html>
-INDEX_EOF
+INDEX10_EOF
 
 # ==============================================================================
-# 5. Injection of Structural Text Data Blocks
+# INJECTION: BIOCINETIC MANIFESTO & P.U.L.S. DICTIONARY DATA BLOCKS
 # ==============================================================================
-echo -e "\n${YELLOW}[5/8] Injecting biokinetic manifesto markdown chapter asset...${NC}"
+
+# Ensure directory structure exists
 mkdir -p docs/manifesto docs/meanings
 
+# Block 1: Manifesto Chapter Document (Markdown for UI/Drawer Integration)
 cat << 'EOF' > docs/manifesto/S01.md
 # JAKO VAULT // BIOMANIFESTO & THE COGNITIVE SYSTEM
 
@@ -573,7 +569,7 @@ The ecosystem self-manages by plotting three recurring, concentric waves that ra
 * **THE EXTERNAL WAVE (Reps):** Dense tensional cohesion. The perimeter boundary where raw energy collides with physical reality under gravitational magnetism. Disciplines Pure Strength and Equilibrium, measuring the residual tension of the tissue.
 EOF
 
-echo -e "\n${YELLOW}[6/8] Injecting P.U.L.S. alphanumeric translation dictionary matrix...${NC}"
+# Block 2: Vector Meanings Dictionary (Aseptic Plain Text Matrix for Terminal/Engine Parse)
 cat << 'EOF' > docs/meanings/PULS.txt
 ================================================================================
 P.U.L.S. PROTOCOL // ALPHANUMERIC DIAL TRANSLATION DICTIONARY
@@ -610,16 +606,16 @@ CORE METRICS DEFINITIONS
 EOF
 
 # =========================================================================
-# 6. Clean Frontend Architecture (MUTED FOR STATIC ISOLATION)
+# 5. Clean Frontend Architecture (MUTED FOR STATIC ISOLATION)
 # =========================================================================
-echo -e "\n${CYAN}[7/8] Bypassing Astro pages to allow pure public anchor execution...${NC}"
+echo -e "\n${CYAN}[4/5] Bypassing Astro pages to allow pure public anchor execution...${NC}"
 rm -rf src/pages
 mkdir -p src/layouts
 
 # =========================================================================
-# 7. Environment Validation, Build & Root Extraction
+# 6. Environment Validation, Build & Root Extraction
 # =========================================================================
-echo -e "\n${YELLOW}[8/8] Validating environments, executing build & compiling target...${NC}"
+echo -e "\n${YELLOW}[5/5] Checking environment packages and running checks...${NC}"
 
 if [ ! -d "node_modules/astro" ]; then
     echo -e "${MAGENTA}⚠️ node_modules missing. Initializing npm installation...${NC}"
