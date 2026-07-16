@@ -49,21 +49,10 @@
             background: radial-gradient(circle at 50% 50%, var(--gradient-start) 15%, var(--gradient-mid) 80%, var(--gradient-end) 100%);
         }
 
-        .border-custom { border-color: rgba(255, 255, 255, 0.15); }
-        .border-custom:hover { border-color: rgba(255, 255, 255, 0.6); }
-
-        /* BISEL SUPERIOR (FOOTER) - Captura luz desde arriba */
-        .glass-footer { 
-            border-top: 0.8px solid rgba(255, 255, 255, 0.25); 
-            backdrop-filter: blur(30px); 
-            -webkit-backdrop-filter: blur(30px);
-        }
-
-        /* BISEL INFERIOR (HEADER) - Espejo exacto, captura luz desde abajo */
-        .glass-header { 
-            border-bottom: 0.8px solid rgba(255, 255, 255, 0.25); 
-            backdrop-filter: blur(30px); 
-            -webkit-backdrop-filter: blur(30px);
+        /* Contorno Grabado sutil que interactúa suavemente con el fondo */
+        .laser-light-catch {
+            color: rgb(255, 255, 255);
+            filter: drop-shadow(0 0 1px rgba(255, 255, 255, 0.25));
         }
     </style>
 </head>
@@ -72,8 +61,8 @@
     <!-- Tres bloques integrados de forma transparente dentro del mismo div de fondo degradado -->
     <div id="page-bg-overlay" class="fixed inset-0 z-10 translate-z-0 flex flex-col justify-between h-full w-full">
 
-<!-- Bloque 1: Identidad de Marca (Header con Bisel Inferior) -->
-        <header class="w-full shrink-0 z-50 py-5 px-9 flex justify-center items-center glass-header">
+        <!-- Bloque 1: Identidad de Marca (Header Transparente) -->
+        <header class="w-full shrink-0 z-50 bg-transparent py-5 px-9 flex justify-center items-center">
             <div class="w-full max-w-[480px] sm:max-w-[675px] flex items-center justify-between gap-3">
                 <div class="opacity-0 p-3 text-[13.5px] font-mono leading-none select-none">◀</div>
                 
@@ -82,7 +71,7 @@
                     <img src="img/lift.png" alt="Back" class="h-[28px] sm:h-[28px] w-auto object-contain filter drop-shadow-[0_0_1px_rgba(255,255,255,0.3)]" />
                     
                     <!-- Texto grabado único adaptado con tipografía Orbitron Monospace -->
-                    <span class="jako-led text-[14px] md:text-[17px] tracking-[0.3em] uppercase font-mono">BIORUSH</span>
+                    <span class="laser-light-catch text-[14px] md:text-[17px] tracking-[0.3em] uppercase font-mono">BIORUSH</span>
                 </div>
 
                 <div class="opacity-0 p-3 text-[13.5px] font-mono leading-none select-none">▶</div>
@@ -102,7 +91,7 @@
                                 <path d="M 90,90 L 310,90 L 90,310 L 310,310 Z" class="stroke-white/10" stroke-width="3" />
                                 <path d="M 90,90 Q 200,130 310,90" class="stroke-white/10" stroke-width="3" />
                                 <path d="M 90,310 Q 200,270 310,310" stroke-dasharray="4 4" class="stroke-white/15" stroke-width="3" />
-                                <text id="z-dial" x="200" y="220" text-anchor="middle" class="jako-led fill-white font-black text-[39px] tracking-[0.3em] font-sans">1P1</text>
+                                <text id="z-dial" x="200" y="220" text-anchor="middle" class="fill-white font-black text-[39px] tracking-[0.3em] font-sans">1P1</text>
                             </g>
                         </svg>
                     </div>
@@ -111,19 +100,17 @@
             </div>
         </main>
 
-        <!-- Bloque 3: Control de Variantes y Navegación (Footer con Bisel Superior y Elementos Alineados) -->
-        <footer class="w-full shrink-0 z-50 py-5 px-9 flex justify-center items-center glass-footer">
+        <!-- Bloque 3: Control de Variantes y Navegación (Footer Transparente) -->
+        <footer class="w-full shrink-0 z-50 bg-transparent py-5 px-9 flex justify-center items-center">
             <div class="w-full max-w-[480px] sm:max-w-[675px] flex items-center justify-between gap-3">
-                <button onclick="navegarVariante(-1)" class="opacity-50 hover:opacity-100 transition-opacity duration-300 p-3 text-[13.5px] font-mono leading-none text-white shrink-0">◀</button>
-                <div class="flex-1 flex justify-center items-center min-w-0">
-                    <svg class="w-full max-w-[270px] h-6 fill-none" viewBox="0 0 200 16">
-                        <!-- Texto adaptado con tipografía Orbitron Monospace -->
-                        <text id="laser-variant-title-footer" x="50%" y="13" text-anchor="middle" class="jako-led fill-current font-mono text-[7px] md:text-[9px] tracking-[0.3em] uppercase transition-all duration-500 font-mono">
-                            PULSOR FOCUS
-                        </text>
-                    </svg>
-                </div>
-                <button id="biorush-variants-container" onclick="navegarVariante(1)" class="opacity-50 hover:opacity-100 transition-opacity duration-300 p-3 text-[13.5px] font-mono leading-none text-white shrink-0">▶</button>
+                <button onclick="navegarVariante(-1)" class="opacity-50 hover:opacity-100 transition-opacity duration-300 p-3 text-[13.5px] font-mono leading-none text-white">◀</button>
+                <svg class="w-full max-w-[270px] h-6 fill-none" viewBox="0 0 200 16">
+                    <!-- Texto adaptado con tipografía Orbitron Monospace -->
+                    <text id="laser-variant-title-footer" x="50%" y="13" text-anchor="middle" class="laser-light-catch fill-current font-mono text-[7px] md:text-[9px] tracking-[0.3em] uppercase transition-all duration-500 font-mono">
+                        PULSOR FOCUS
+                    </text>
+                </svg>
+                <button id="biorush-variants-container" onclick="navegarVariante(1)" class="opacity-50 hover:opacity-100 transition-opacity duration-300 p-3 text-[13.5px] font-mono leading-none text-white">▶</button>
             </div>
         </footer>
 
