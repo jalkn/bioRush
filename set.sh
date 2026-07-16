@@ -259,7 +259,7 @@ cat << 'INDEX10_EOF' > public/index.html
             }
         }
     </script>
-    <style>
+<style>
         :root[data-theme="dark"] {
             --jako-bg: rgba(0, 15, 131, 0.95);
             --jako-text: #ffffff;
@@ -273,7 +273,7 @@ cat << 'INDEX10_EOF' > public/index.html
 
         body { 
             scroll-behavior: smooth; 
-            letter-spacing: 0.05em;  
+            letter-spacing: 0.075em;  
             overscroll-behavior: none;
             background-color: var(--jako-bg);
             color: var(--jako-text);
@@ -289,58 +289,72 @@ cat << 'INDEX10_EOF' > public/index.html
         }
 
         :root[data-theme="dark"] .active-led {
-            text-shadow: 0 0 10px var(--jako-led), 0 0 4px var(--jako-led) !important;
+            text-shadow: 0 0 15px var(--jako-led), 0 0 6px var(--jako-led) !important;
         }
-        :root[data-theme="white"] .active-led {
-            text-shadow: 0 0 6px var(--jako-led) !important;
+
+        /* --- Estructura y Contenedor de Vidrio Estándar (Escala +150%) --- */
+        .hud-glass-bar {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.02) 0%, rgba(255, 255, 255, 0.005) 100%);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            border-top: 1.5px solid rgba(255, 255, 255, 0.08);
+            border-bottom: 1.5px solid rgba(0, 0, 0, 0.4);
+            box-shadow: 0 12px 48px rgba(0, 0, 0, 0.6);
+        }
+
+        /* Enforzamiento de recorte absoluto para evitar halos/strokes parasitarios fuera del empaque circular */
+        .strict-circle-clip {
+            clip-path: circle(50%) !important;
+            -webkit-clip-path: circle(50%) !important;
+            mask-image: -webkit-radial-gradient(white, black);
+            -webkit-mask-image: -webkit-radial-gradient(white, black);
         }
     </style>
 </head>
-<body class="antialiased selection:bg-jako-text selection:text-jako-bg overflow-hidden h-screen flex flex-col justify-between">
+<body class="antialiased selection:bg-jako-text selection:text-jako-bg overflow-hidden h-screen w-screen flex flex-col justify-between">
 
     <div id="page-bg-overlay"></div>
 
-   <main id="main-vault" class="w-full flex-1 flex flex-col justify-center items-center relative overflow-hidden">
-        <div class="w-full flex flex-col items-center justify-center p-4 sm:p-6 select-none relative z-10">
-            <div class="relative w-full max-w-[340px] sm:max-w-[400px] md:max-w-[450px] aspect-square flex flex-col items-center justify-center gap-6">
-                
-                <div id="artepanel-pack-container" class="relative w-[55vw] h-[55vw] sm:w-[50vw] sm:h-[50vw] md:w-[35vh] md:h-[35vh] max-w-[250px] max-h-[250px] min-w-[170px] min-h-[170px] aspect-square shrink-0 drop-shadow-[0_25px_55px_rgba(0,0,0,0.85)] cursor-pointer">
-                    <div id="artepanel-mask-wrapper" class="w-full h-full relative overflow-hidden rounded-full transition-all duration-500 bg-cover bg-center" style="background-image: url('img/caps.png');">
-                        
-                        <div class="absolute inset-0 flex items-center justify-center p-3 z-20">
-                            <svg id="laser-vector-target" viewBox="0 0 400 400" class="w-full h-full fill-none stroke-current text-jako-text transition-all duration-500 origin-center">
-                                
-                                <g id="wave-quantum-container" style="transform-origin: 200px 200px; -webkit-transform-origin: 200px 200px;" class="-rotate-90"></g>
-                                <g id="sandwatch-group" class="origin-center opacity-100 transition-all duration-500 style-gpu" style="will-change: opacity;">
-                                    <path d="M 110,110 L 290,110 L 110,290 L 290,290 Z" class="stroke-current opacity-20" />
-                                    <path d="M 110,110 Q 200,140 290,110" class="stroke-current opacity-20" />
-                                    <path d="M 110,290 Q 200,260 290,290" stroke-dasharray="3 3" class="stroke-current opacity-20" />
-                                    <text id="z-dial" x="200" y="215" text-anchor="middle" class="fill-current font-black text-[25px] tracking-[0.35em] font-sans">1P1</text>
-                                </g>
-                            </svg>
-                        </div>
+    <!-- Bloque 1: Identidad de Marca (Header Fijo - Escala +150%) -->
+    <header class="w-full shrink-0 z-50 hud-glass-bar py-5 px-9 flex justify-center items-center">
+        <div class="flex items-center justify-center gap-4 w-full"> 
+            <img src="img/lift.png" alt="Back" class="h-[21px] md:h-6 w-auto object-contain opacity-80" />
+            <span class="text-[15px] md:text-[18px] tracking-[0.3em] font-black text-white/80 uppercase text-shadow-[0.5px_0.5px_1px_rgba(255,255,255,0.05)]">BIORUSH</span>
+        </div>
+    </header>
 
-                    </div>
+    <!-- Bloque 2: Panel de Interacción Central (Responsivo sin Scroll - Escala +150%) -->
+    <main id="main-vault" class="flex-1 w-full flex items-center justify-center relative overflow-hidden z-10 px-6">
+        <!-- Eliminados bordes externos y aplicadas clases de recorte estricto por hardware -->
+        <div id="artepanel-pack-container" class="relative w-[78vw] h-[78vw] sm:w-[67vw] sm:h-[67vw] md:w-[48vh] md:h-[48vh] max-w-[360px] max-h-[360px] min-w-[255px] min-h-[255px] aspect-square shrink-0 rounded-full overflow-hidden strict-circle-clip drop-shadow-[0_30px_70px_rgba(0,0,0,0.95)] cursor-pointer">
+            <div id="artepanel-mask-wrapper" class="w-full h-full relative overflow-hidden rounded-full strict-circle-clip transition-all duration-500 bg-cover bg-center" style="background-image: url('img/caps.png');">
+                
+                <div class="absolute inset-0 flex items-center justify-center p-5 z-20">
+                    <svg id="laser-vector-target" viewBox="0 0 400 400" class="w-full h-full fill-none stroke-current text-white transition-all duration-500 origin-center">
+                        <g id="wave-quantum-container" class="-rotate-90 origin-[200px_200px]"></g>
+                        <g id="sandwatch-group" class="origin-center opacity-100 transition-all duration-500 style-gpu">
+                            <path d="M 110,110 L 290,110 L 110,290 L 290,290 Z" class="stroke-white/10" stroke-width="2" />
+                            <path d="M 110,110 Q 200,140 290,110" class="stroke-white/10" stroke-width="2" />
+                            <path d="M 110,290 Q 200,260 290,290" stroke-dasharray="4 4" class="stroke-white/15" stroke-width="2" />
+                            <text id="z-dial" x="200" y="220" text-anchor="middle" class="fill-white font-black text-[39px] tracking-[0.3em] font-sans">1P1</text>
+                        </g>
+                    </svg>
                 </div>
 
             </div>
         </div>
     </main>
 
-
-    <footer class="w-full shrink-0 flex flex-col items-center bg-gradient-to-t from-black via-black/95 to-transparent pt-3 pb-3 z-50 border-t border-white/5">
-        <div class="w-full max-w-md md:max-w-xl pb-2.5 pt-2 px-4 flex flex-col items-center overflow-hidden relative glass-panel border-t border-b border-white/10 mb-3.5">
-            
-            <div class="w-full max-w-sm md:max-w-md mx-auto px-4 mb-1 flex items-center justify-between gap-2">
-                <button onclick="navegarVariante(-1)" class="opacity-30 hover:opacity-100 transition-opacity p-2 text-[8px] md:text-[10px] font-mono leading-none">◀</button>
-                <svg class="w-full h-4 fill-none" viewBox="0 0 200 16">
-                    <text id="laser-variant-title-footer" x="50%" y="12" text-anchor="middle" class="fill-white font-black text-[9px] md:text-[11px] tracking-[0.3em] uppercase transition-all duration-500">
-                        PULSOR FOCUS
-                    </text>
-                </svg>
-                <button id="biorush-variants-container" onclick="navegarVariante(1)" class="opacity-30 hover:opacity-100 transition-opacity p-2 text-[8px] md:text-[10px] font-mono leading-none">▶</button>
-            </div>
-
+    <!-- Bloque 3: Control de Variantes y Navegación (Footer Fijo - Escala +150%) -->
+    <footer class="w-full shrink-0 z-50 hud-glass-bar py-5 px-9 flex justify-center items-center">
+        <div class="w-full max-w-[480px] sm:max-w-[675px] flex items-center justify-between gap-3">
+            <button onclick="navegarVariante(-1)" class="opacity-30 hover:opacity-100 transition-opacity duration-300 p-3 text-[13.5px] font-mono leading-none text-white">◀</button>
+            <svg class="w-full max-w-[270px] h-6 fill-none" viewBox="0 0 200 16">
+                <text id="laser-variant-title-footer" x="50%" y="13" text-anchor="middle" class="fill-white font-black text-[14px] sm:text-[17px] tracking-[0.3em] uppercase transition-all duration-500">
+                    PULSOR FOCUS
+                </text>
+            </svg>
+            <button id="biorush-variants-container" onclick="navegarVariante(1)" class="opacity-30 hover:opacity-100 transition-opacity duration-300 p-3 text-[13.5px] font-mono leading-none text-white">▶</button>
         </div>
     </footer>
 
