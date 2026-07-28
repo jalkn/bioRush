@@ -51,6 +51,8 @@
             </div>
         </header>
 
+
+
 <!-- CENTRAL BLOCK: PACKAGING VISUALIZER AND VECTOR LAYER -->
         <div class="flex-1 w-full flex flex-col items-center justify-center py-2 px-4">
             
@@ -83,10 +85,14 @@
 
                             <!-- Geometric Reticle and Central DIAL (Sandwatch Group) -->
                             <g id="sandwatch-group" class="origin-center transform scale-[0.85] transition-all duration-500">
-                                <path d="M 110,120 L 290,120 L 110,280 L 290,280 Z" class="opacity-50 stroke-[1.9]" />
-                                <path d="M 110,120 Q 200,150 290,120" class="opacity-50 stroke-[1.9]" />
-                                <path d="M 110,280 Q 200,250 290,280" stroke-dasharray="2 2" class="opacity-50 stroke-[1.9]" />
+                                <!-- Subgrupo exclusivo para las líneas vectoriales -->
+                                <g id="sandwatch-lines">
+                                    <path d="M 110,120 L 290,120 L 110,280 L 290,280 Z" class="opacity-50 stroke-[1.9]" />
+                                    <path d="M 110,120 Q 200,150 290,120" class="opacity-50 stroke-[1.9]" />
+                                    <path d="M 110,280 Q 200,250 290,280" stroke-dasharray="2 2" class="opacity-50 stroke-[1.9]" />
+                                </g>
                                 
+                                <!-- Texto alfanumérico independiente -->
                                 <text id="z-dial-pack" x="200" y="210" text-anchor="middle" class="fill-white font-black text-[28px] tracking-[0.4em] font-sans">8UST11</text>
                             </g>
                             
@@ -103,20 +109,37 @@
             </div>
         </div>
 
-        <!-- MESSAGES AND TELEMETRY REVEAL SECTION -->
-        <section class="w-full max-w-sm mx-auto px-6 py-1 flex flex-col gap-1">
+        <section class="w-full max-w-sm mx-auto px-6 py-3 flex flex-col gap-2.5">
+
             <div class="flex flex-col items-center justify-center w-full min-h-[16px]">
                 <span id="panel-telemetry-data" class="text-[8px] text-center tracking-[0.4em] text-sky-400 uppercase transition-colors duration-300 font-mono">
                     ONDAS BIOCINÉTICAS REGENERATIVAS
                 </span>
             </div>
-        </section>
 
+            <!-- ROW 1: Telemetry Buttons -->
+            <div class="flex items-center gap-1.5 w-full select-none">
+                <button id="btn-tele-hz" class="h-[34px] flex-1 flex items-center justify-center gap-1 rounded-sm border border-sky-500/20 bg-sky-950/20 hover:border-sky-500/50 hover:bg-sky-500/10 transition-all duration-300 active:scale-95">
+                    <span id="sub-sets-solar" class="font-mono text-white/70 tracking-[0.15em] text-[11px] hover:text-sky-400 transition-colors">0.00</span>
+                    <span class="text-[7px] tracking-[0.2em] text-sky-400/80 uppercase font-bold">Hz</span>
+                </button>
 
-        <!-- TACTICAL CONTROL CONSOLE (ACTIONS AND TELEMETRY) -->
-        <section class="w-full max-w-sm mx-auto px-6 py-3 flex flex-col gap-2.5">
+                <button id="btn-tele-dial" title="Telemetría Biocinética" class="h-[34px] w-[34px] shrink-0 flex items-center justify-center rounded-sm border border-sky-500/20 bg-sky-950/20 hover:border-sky-500/50 hover:bg-sky-500/10 transition-all duration-300 active:scale-95 group">
+                    <span id="z-dial-telemetry" class="hidden">8UST11</span>
+                    <svg viewBox="0 0 100 100" class="w-4 h-4 fill-white/70 group-hover:fill-sky-400 transition-colors pointer-events-none">
+                        <polygon points="20,20 80,20 70,35 30,35" />
+                        <polygon points="50,42 58,50 50,58 42,50" />
+                        <polygon points="30,65 70,65 80,80 20,80" />
+                    </svg>
+                </button>
 
-            <!-- ROW 1: Inspect + Main Action (ACTIVATE) + Quantum Drop -->
+                <button id="btn-tele-tension" class="h-[34px] flex-1 flex items-center justify-center gap-1 rounded-sm border border-sky-500/20 bg-sky-950/20 hover:border-sky-500/50 hover:bg-sky-500/10 transition-all duration-300 active:scale-95">
+                    <span id="sub-reps-tension" class="font-mono text-white/70 tracking-[0.15em] text-[11px] hover:text-sky-400 transition-colors">0.0</span>
+                    <span class="text-[7px] tracking-[0.2em] text-sky-400/80 uppercase font-bold">N</span>
+                </button>
+            </div>
+
+            <!-- ROW 2: Inspect + Main Action (ACTIVATE) + Quantum Drop -->
             <div class="grid grid-cols-7 gap-1.5 w-full items-center">
                 
                 <!-- 1. Inspect (Visual loop mode: Front/Back/Raw) -->
@@ -139,28 +162,6 @@
                     </svg>
                 </button>
 
-            </div>
-
-            <!-- ROW 2: Secondary Telemetry Buttons -->
-            <div class="flex items-center gap-1.5 w-full select-none">
-                <button id="btn-tele-hz" class="h-[34px] flex-1 flex items-center justify-center gap-1 rounded-sm border border-sky-500/20 bg-sky-950/20 hover:border-sky-500/50 hover:bg-sky-500/10 transition-all duration-300 active:scale-95">
-                    <span id="sub-sets-solar" class="font-mono text-white/70 tracking-[0.15em] text-[11px] hover:text-sky-400 transition-colors">0.00</span>
-                    <span class="text-[7px] tracking-[0.2em] text-sky-400/80 uppercase font-bold">Hz</span>
-                </button>
-
-                <button id="btn-tele-dial" title="Telemetría Biocinética" class="h-[34px] w-[34px] shrink-0 flex items-center justify-center rounded-sm border border-sky-500/20 bg-sky-950/20 hover:border-sky-500/50 hover:bg-sky-500/10 transition-all duration-300 active:scale-95 group">
-                    <span id="z-dial-telemetry" class="hidden">8UST11</span>
-                    <svg viewBox="0 0 100 100" class="w-4 h-4 fill-white/70 group-hover:fill-sky-400 transition-colors pointer-events-none">
-                        <polygon points="20,20 80,20 70,35 30,35" />
-                        <polygon points="50,42 58,50 50,58 42,50" />
-                        <polygon points="30,65 70,65 80,80 20,80" />
-                    </svg>
-                </button>
-
-                <button id="btn-tele-tension" class="h-[34px] flex-1 flex items-center justify-center gap-1 rounded-sm border border-sky-500/20 bg-sky-950/20 hover:border-sky-500/50 hover:bg-sky-500/10 transition-all duration-300 active:scale-95">
-                    <span id="sub-reps-tension" class="font-mono text-white/70 tracking-[0.15em] text-[11px] hover:text-sky-400 transition-colors">0.0</span>
-                    <span class="text-[7px] tracking-[0.2em] text-sky-400/80 uppercase font-bold">N</span>
-                </button>
             </div>
 
             <!-- Techno-Ecological Selector -->
@@ -186,10 +187,14 @@
 
         </section>
 
+
+
+
+
         <!-- FOOTER -->
         <footer class="h-[50px] shrink-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent backdrop-blur-sm z-50 flex items-center justify-center">
             <span class="text-[6px] tracking-[0.5em] font-bold text-white/30 uppercase">
-                BIORUSH © 2026
+                POWERED BY JAKO.DEV
             </span>
         </footer>
 
@@ -205,28 +210,28 @@
             variants: {
                 'FOCUS': { 
                     label: 'PULSOR FOCUS', desc: 'Enfoque y claridad cognitiva', 
-                    spec: 'LION’S MANE', cant:  '44X500MGRS', price: '$70.000', id: 'PULS44F',
+                    spec: 'LION’S MANE', cant:  '44 PULSORES X 500 MGRS', price: '$70.000', id: 'PULS44F',
                     img: 'img/44caps.png', imgBack: 'img/44mane.png', imgRaw: 'img/maneRaw.png',
                     telemetry: { COL: '24°', FRU: '18°', SEC: '40°', MOL: '98.2%' },
                     benefits: ['NEUROGÉNESIS', 'CLARIDAD COGNITIVA', 'MEMORIA FLUIDA', 'NIEBLA  (-)', 'OPTIMIZACIÓN SINÁPTICA', 'ENFOQUE PROFUNDO', 'AGUDEZA ', 'REPARACIÓN NEURONAL', 'ENFOQUE', 'PRODUCTIVIDAD SOSTENIDA']
                 },
                 'ZEN': { 
                     label: 'PULSOR ZEN', desc: 'Silencio mental óptimo', 
-                    spec: 'REISHI', cant:  '44X500MGRS', price: '$70.000', id: 'PULS44Z',
+                    spec: 'REISHI', cant:  '44 PULSORES X 500 MGRS', price: '$70.000', id: 'PULS44Z',
                     img: 'img/44caps.png', imgBack: 'img/44reishi.png', imgRaw: 'img/reishiRaw.png',
                     telemetry: { COL: '22°', FRU: '16°', SEC: '38°', MOL: '97.5' },
                     benefits: ['REDUCCIÓN CORTISOL', 'CALMA PROFUNDA', 'REGULACIÓN NERVIOSA', 'DESCANSO REPARADOR', 'EQUILIBRIO ', 'ADAPTACIÓN AL ESTRÉS', 'PAZ COGNITIVA', 'SUEÑO LÚCIDO', 'RELAJACIÓN MUSCULAR', 'CLARIDAD INTERNA']
                 },
                 'STAMINA': { 
                     label: 'PULSOR STAMINA', desc: 'Potencia celular óptima', 
-                    spec: 'CORDYCEPS', cant:  '44X500MGRS', price: '$70.000', id: 'PULS44S',
+                    spec: 'CORDYCEPS', cant:  '44 PULSORES X 500 MGRS', price: '$70.000', id: 'PULS44S',
                     img: 'img/44caps.png', imgBack: 'img/44cordy.png', imgRaw: 'img/cordyRaw.png',
                     telemetry: { COL: '20°', FRU: '15°', SEC: '42°', MOL: '99.0' },
                     benefits: ['POTENCIA AERÓBICA', 'ENERGÍA CELULAR (ATP)', 'RESISTENCIA FÍSICA', 'OXIGENACIÓN SANGUÍNEA', 'RECUPERACIÓN RÁPIDA', 'VITALIDAD GENERAL', 'RENDIMIENTO ATLÉTICO', 'FUNCIÓN RESPIRATORIA', 'METABOLISMO ACTIVO', 'FATIGA (-)']
                 },
                 'CORE': { 
                     label: 'PULSOR CORE', desc: 'Respuesta inmune óptima', 
-                    spec: 'TURKEY TAIL', cant:  '44X500MGRS', price: '$70.000', id: 'PULS44C',
+                    spec: 'TURKEY TAIL', cant:  '44 PULSORES X 500 MGRS', price: '$70.000', id: 'PULS44C',
                     img: 'img/44caps.png', imgBack: 'img/44turkey.png', imgRaw: 'img/turkeyRaw.png',
                     telemetry: { COL: '23°', FRU: '19°', SEC: '40°', MOL: '98.5' },
                     benefits: ['RESPUESTA INMUNE', 'BIOMA INTESTINAL', 'DEFENSA CELULAR', 'ANTIOXIDANTE', 'SALUD DIGESTIVA', 'PROTECCIÓN SISTÉMICA', 'REDUCCIÓN INFLAMACIÓN', 'ESTABILIDAD INTERNA', 'SÍNTESIS NUTRITIVA', 'FORTALEZA INTEGRAL']
@@ -242,7 +247,7 @@
     let activeNodeVal = "0000";
 
     // ==========================================
-    // 2. UI ELEMENTS CACHE (OPTIMIZED)
+    // 2. UI ELEMENTS CACHE
     // ==========================================
     const $ = (id) => document.getElementById(id);
     const cachedElements = {};
@@ -263,12 +268,12 @@
     };
 
     let biokineticWaveHistory = [];
-    let waveDisplayState = 0; // 0 = Sandwatch (alfanumérico normal), 1 = Solo Gota, 2 = Gota + Sandwatch súper puesto
+    let waveDisplayState = 0; // 0 = Sandwatch+Dial, 1 = Solo Ondas Biocinéticas
 
-// ==========================================
-    // 3. VISUAL STATE ENGINE (3-State Loop Sequence)
     // ==========================================
-    let indiceModoInspector = 0; // Estado global para mantener sincronía del inspeccionador
+    // 3. VISUAL STATE ENGINE
+    // ==========================================
+    let indiceModoInspector = 0; 
 
     function aplicarModoVisual(modo) {
         const front = getCachedEl('biorush-pack-img');
@@ -276,23 +281,59 @@
         const raw = getCachedEl('biorush-pack-img-raw');
         const svg = getCachedEl('laser-vector-target');
 
-        // Reset general opacity
         [front, back, raw].forEach(el => { if(el) el.style.opacity = '0'; });
         
-        // Apply active state
         if (modo === 'front') {
+            indiceModoInspector = 0;
             front.style.opacity = '1';
             front.style.zIndex = '10';
             back.style.zIndex = '0';
-            if (svg) { svg.style.opacity = '1'; svg.style.pointerEvents = 'auto'; }
+            if (svg) { 
+                svg.style.opacity = '1'; 
+                svg.style.pointerEvents = 'auto'; 
+            }
         } else if (modo === 'back') {
+            indiceModoInspector = 1;
             back.style.opacity = '1';
             back.style.zIndex = '10';
             front.style.zIndex = '0';
-            if (svg) { svg.style.opacity = '0'; svg.style.pointerEvents = 'none'; }
+            if (svg) { 
+                svg.style.opacity = '0'; 
+                svg.style.pointerEvents = 'none'; 
+            }
         } else if (modo === 'raw') {
+            indiceModoInspector = 2;
             raw.style.opacity = '1';
-            if (svg) { svg.style.opacity = '0'; svg.style.pointerEvents = 'none'; }
+            if (svg) { 
+                svg.style.opacity = '0'; 
+                svg.style.pointerEvents = 'none'; 
+            }
+        }
+    }
+
+    function vincularBotonOnda() {
+        const btnToggleWave = getCachedEl('btn-toggle-wave');
+        const sandwatchGroup = getCachedEl('sandwatch-group');
+
+        if (btnToggleWave && !btnToggleWave.dataset.bound) {
+            btnToggleWave.dataset.bound = "true"; // Previene múltiples bindings
+            btnToggleWave.addEventListener('click', () => {
+                if (indiceModoInspector !== 0) {
+                    aplicarModoVisual('front');
+                    const panelTelemetry = getCachedEl('panel-telemetry-data');
+                    if (panelTelemetry) panelTelemetry.textContent = "ONDAS BIOCINÉTICAS REGENERATIVAS";
+                }
+
+                // Alternar estado (0 ó 1)
+                waveDisplayState = (waveDisplayState + 1) % 2;
+
+                if (sandwatchGroup) {
+                    sandwatchGroup.style.display = (waveDisplayState === 0) ? 'block' : 'none';
+                }
+
+                renderBiokineticWaves();
+                triggerHaptic(12);
+            });
         }
     }
 
@@ -302,16 +343,14 @@
         const defaultText = "ONDAS BIOCINÉTICAS REGENERATIVAS";
         const modos = ['front', 'back', 'raw'];
 
-        if (btnBio) {
+        if (btnBio && !btnBio.dataset.bound) {
+            btnBio.dataset.bound = "true";
             btnBio.addEventListener('click', () => {
-                // Avanzar cíclicamente: 0 (front) -> 1 (back) -> 2 (raw) -> 0 (front)
                 indiceModoInspector = (indiceModoInspector + 1) % modos.length;
                 const modoActual = modos[indiceModoInspector];
                 
-                // Aplicar renderizado visual
                 aplicarModoVisual(modoActual);
                 
-                // Actualizar texto en panel-telemetry-data según el diccionario activo
                 if (panelTelemetry) {
                     const variantConfig = BIORUSH_CATALOG[currentBioItem].variants[currentBioVariant];
                     
@@ -329,72 +368,25 @@
         }
     }
 
-function vincularBotonOnda() {
-        const btnToggleWave = getCachedEl('btn-toggle-wave');
-        const sandwatchGroup = getCachedEl('sandwatch-group');
-
-        if (btnToggleWave) {
-            btnToggleWave.addEventListener('click', () => {
-                // Ciclo de estados: 
-                // 0: Normal Sandwatch -> 1: Solo Gota -> 2: Sandwatch sobre la Gota -> 0
-                waveDisplayState = (waveDisplayState + 1) % 3;
-
-                if (sandwatchGroup) {
-                    if (waveDisplayState === 1) {
-                        sandwatchGroup.style.opacity = '0'; // Oculta retícula/alfanumérico
-                    } else {
-                        sandwatchGroup.style.opacity = '1'; // Muestra retícula/alfanumérico
-                    }
-                }
-
-                renderBiokineticWaves();
-                triggerHaptic(12);
-            });
-        }
-    }
-    
     // ==========================================
     // 4. USER INTERFACE CONTROLLERS
     // ==========================================
     function inicializarBioRush() {
-        const menuContainer = getCachedEl('biorush-items-menu');
-        if (menuContainer) {
-            menuContainer.innerHTML = Object.keys(BIORUSH_CATALOG).map(item => `
-                <span id="menu-bio-${item}" onclick="cambiarBioItem('${item}')" class="cursor-pointer tracking-[0.15em] transition-all duration-300 h-5 leading-none font-bold">
-                    ${item}
-                </span>
-            `).join('');
-        }
-        
         vincularBotones();
         vincularBotonOnda();
         actualizarBioUI();
     }
 
-    function cambiarBioItem(itemKey) {
-        currentBioItem = itemKey;
-        currentBioVariant = BIORUSH_CATALOG[itemKey].defaultVariant;
-        actualizarBioUI();
-        triggerHaptic(15);
-    }
-
-    // ==========================================
-    // VARIANT ROTATION AND UPDATE (BIDIRECTIONAL LOOP)
-    // ==========================================
     function rotarBioVariant(direction = 'next') {
         const itemConfig = BIORUSH_CATALOG[currentBioItem];
         const variantsKeys = Object.keys(itemConfig.variants);
         const currentIndex = variantsKeys.indexOf(currentBioVariant);
         
-        let nextIndex;
-        if (direction === 'next') {
-            nextIndex = (currentIndex + 1) % variantsKeys.length;
-        } else {
-            nextIndex = (currentIndex - 1 + variantsKeys.length) % variantsKeys.length;
-        }
+        let nextIndex = (direction === 'next') 
+            ? (currentIndex + 1) % variantsKeys.length 
+            : (currentIndex - 1 + variantsKeys.length) % variantsKeys.length;
         
         currentBioVariant = variantsKeys[nextIndex];
-        
         actualizarBioUI();
         triggerHaptic(12);
     }
@@ -423,7 +415,6 @@ function vincularBotonOnda() {
                 if (getCachedEl('biorush-label')) getCachedEl('biorush-label').textContent = variantConfig.label;
                 getCachedEl('biorush-price').textContent = variantConfig.price;
                 
-                // Sincroniza la telemetría según el modo de imagen visible
                 if (panelTelemetry) {
                     const backImg = getCachedEl('biorush-pack-img-back');
                     const rawImg = getCachedEl('biorush-pack-img-raw');
@@ -455,14 +446,13 @@ function vincularBotonOnda() {
         return `${String(totalSpheres).padStart(4, '0')}`;
     }
 
-function updateZ() {
+    function updateZ() {
         let biokineticCoordinate = "";
         const now = new Date();
         const hours = now.getHours(); 
         const minutes = now.getMinutes();
         const seconds = now.getSeconds();
 
-        // Actualizar variable global de Esfera
         currentSphereIdx = calculateSphereIndex();
 
         let setsStage = 1;  
@@ -470,7 +460,6 @@ function updateZ() {
         let currentAction = 'P'; 
 
         if (seconds % 2 !== 0) {
-            // Impar: Evaluación sub-segundo para monádicas (4 combinaciones)
             const progress1s = now.getMilliseconds() / 1000; 
             setsStage = Math.floor(progress1s * 12) + 1;
             repsStage = 13 - setsStage; 
@@ -480,16 +469,13 @@ function updateZ() {
             else if (progress1s < 0.75) currentAction = 'L';
             else currentAction = 'S';
         } else {
-            // Par: Evaluación de 12 variables (4 Binarias + 4 Ternarias distribuidas)
             setsStage = Math.floor((minutes % 12) + 1);
             
             if (seconds < 30) {
-                // Primeros 30s: Acciones Binarias (4 variables)
                 const subSlot = Math.floor((seconds % 30) / 7.5);
                 currentAction = ["PL", "PU", "LU", "SU"][subSlot] || "PL";
                 repsStage = Math.floor((seconds % 10) + 2);
             } else {
-                // Segundos 30-59: Acciones Ternarias (4 variables)
                 const subSlot = Math.floor(((seconds - 30) % 30) / 7.5);
                 currentAction = ["PUL", "LPS", "SPU", "ULS"][subSlot] || "ULS";
                 repsStage = Math.floor(((seconds - 30) % 10) + 3);
@@ -500,10 +486,8 @@ function updateZ() {
         repsStage = Math.max(1, Math.min(12, repsStage));
         biokineticCoordinate = `${setsStage}${currentAction}${repsStage}`;
 
-        // Mapeo vectorial a índice de reloj (1-12) para renderizado de la Gota
         const vectorIndex = VECTOR_TO_CLOCK_INDEX[currentAction] || 1;
 
-        // Registrar historial para las capas de la Gota Biocinética (máximo 12 capas)
         biokineticWaveHistory.unshift({
             sets: setsStage,
             vector: vectorIndex,
@@ -511,17 +495,14 @@ function updateZ() {
         });
         if (biokineticWaveHistory.length > 12) biokineticWaveHistory.pop();
 
-        // Renderizar anillos visuales de la gota biocinética en SVG
         renderBiokineticWaves();
 
-        // Actualización simultánea del DIAL en paquete y telemetría
         const elDialPack = getCachedEl('z-dial-pack');
         const elDialTele = getCachedEl('z-dial-telemetry');
 
         if (elDialPack) elDialPack.textContent = biokineticCoordinate;
         if (elDialTele) elDialTele.textContent = biokineticCoordinate;
                 
-        // Actualizar variable global de Nodo
         const totalSecondsSinceMidnight = (hours * 3600) + (minutes * 60) + seconds;
         activeNodeVal = `${String(totalSecondsSinceMidnight + 1).padStart(4, '0')}`;
 
@@ -530,7 +511,6 @@ function updateZ() {
         if (subSetsSolar) subSetsSolar.textContent = `${(0.05 + (setsStage / 240)).toFixed(3)}`;
         if (subRepsTension) subRepsTension.textContent = `${(14.2 + (repsStage * 0.8)).toFixed(1)}`;
 
-        // Refresco dinámico del panel de telemetría en tiempo real (1 Hz)
         if (window.activeTelemetryBtnId && TELEMETRY_CONFIG[window.activeTelemetryBtnId]) {
             const telemetryData = getCachedEl('panel-telemetry-data');
             const meaningConfig = TELEMETRY_CONFIG[window.activeTelemetryBtnId].meaning;
@@ -542,9 +522,6 @@ function updateZ() {
         }
     }
 
-// =========================================================================
-    // 5. TELEMETRY ENGINE & TELEMETRY BUTTONS
-    // =========================================================================
     const TELEMETRY_CONFIG = {
         'btn-tele-hz': {
             meaning: "Frecuencia de resonancia",
@@ -559,21 +536,17 @@ function updateZ() {
                 const [_, sets, action, reps] = match;
                 let vectorText = "";
 
-                // Mapeo sintáctico definitivo: Integración técnico-militar de magnitudes físicas
                 switch (action) {
-                    // --- FUERZAS PURAS Y ABSOLUTAS ---
                     case 'P':  vectorText = `PASOS X${sets}`; break;
                     case 'S':  vectorText = `SALTOS X${sets}`; break; 
                     case 'U':  vectorText = `PRESIONES X${sets}`; break; 
                     case 'L':  vectorText = `CARGAS X${sets}`; break;    
                     
-                    // --- FUERZAS DUALES DE BALANCE ---
                     case 'PL': vectorText = `PASOS CON CARGA X${sets}`; break;
                     case 'PU': vectorText = `PASOS CON PRESIÓN X${sets}`; break;
                     case 'LU': vectorText = `CARGAS CON PRESIÓN X${sets}`; break;
                     case 'SU': vectorText = `SALTOS CON PRESIÓN X${sets}`; break;
                     
-                    // --- VÓRTICES COMPLEJOS DE ILUMINACIÓN ---
                     case 'PUL': vectorText = `PASOS CON PRESIÓN Y CARGA X${sets}`; break;
                     case 'LPS': vectorText = `CARGAS CON PASO Y SALTO X${sets}`; break;
                     case 'SPU': vectorText = `SALTOS CON PASO Y PRESIÓN X${sets}`; break; 
@@ -582,7 +555,6 @@ function updateZ() {
                     default: vectorText = "ONDAS BIOCINÉTICAS REGENERATIVAS";
                 }
 
-                // Entrega continua aséptica: Reps al inicio + Vector y Sets
                 return `${reps} ${vectorText}`;
             },
             targetElId: 'z-dial-telemetry'
@@ -593,19 +565,25 @@ function updateZ() {
         }
     };
 
-function renderBiokineticWaves() {
+    function renderBiokineticWaves() {
         const container = $('wave-quantum-container');
-        if (!container || biokineticWaveHistory.length === 0) return;
+        if (!container) return;
+
+        // Estado 0: Sandwatch visible, contenedor SVG de ondas vacío
+        if (waveDisplayState === 0) {
+            container.innerHTML = '';
+            return;
+        }
+
+        if (biokineticWaveHistory.length === 0) return;
 
         let htmlContent = '';
         biokineticWaveHistory.forEach((dial, tIndex) => {
             const currentScale = tIndex * 0.85; 
-            
-            // Si está en estado 0, la gota no se renderiza u oculta opacidad
-            const baseOpacity = waveDisplayState === 0 ? 0 : (1.0 - (tIndex * 0.08));
+            const baseOpacity = 1.0 - (tIndex * 0.08);
             if (baseOpacity <= 0) return;
 
-            const viewFactor = 15; 
+            const viewFactor = 7.5; 
             const layers = [
                 { id: 'internal',     r: (currentScale * 1.0) * viewFactor, opacity: baseOpacity * 0.80, value: dial.sets },
                 { id: 'intermediate', r: (currentScale * 1.4) * viewFactor, opacity: baseOpacity * 0.60, value: dial.vector },
@@ -646,16 +624,15 @@ function renderBiokineticWaves() {
 
         Object.keys(TELEMETRY_CONFIG).forEach(btnId => {
             const btn = getCachedEl(btnId);
-            if (!btn) return;
+            if (!btn || btn.dataset.bound) return;
+            btn.dataset.bound = "true";
 
             btn.addEventListener('click', () => {
                 triggerHaptic(10);
 
-                // RESTAURAR LA VISTA AL EMBALAJE FRONTAL
                 indiceModoInspector = 0; 
                 aplicarModoVisual('front');
 
-                // 1. Limpieza de estados anteriores
                 if (activeTimeout) clearTimeout(activeTimeout);
 
                 if (ultimoBoton) {
@@ -667,12 +644,10 @@ function renderBiokineticWaves() {
                     ultimoDato.classList.add('text-white/70');
                 }
 
-                // 2. Resaltar Botón presionado
                 btn.classList.remove('border-sky-500/20', 'bg-sky-950/20');
                 btn.classList.add('border-sky-500/80', 'bg-sky-500/20');
                 ultimoBoton = btn;
 
-                // 3. Resaltar Dato Numérico correspondiente
                 const targetDataEl = getCachedEl(TELEMETRY_CONFIG[btnId].targetElId);
                 if (targetDataEl) {
                     targetDataEl.classList.remove('text-white/70');
@@ -680,16 +655,14 @@ function renderBiokineticWaves() {
                     ultimoDato = targetDataEl;
                 }
 
-                // 4. Registrar botón activo dinámico e inyectar
                 window.activeTelemetryBtnId = btnId;
                 const meaningConfig = TELEMETRY_CONFIG[btnId].meaning;
                 const evaluatedMeaning = typeof meaningConfig === 'function' ? meaningConfig() : meaningConfig;
                 
                 telemetryData.innerHTML = evaluatedMeaning.toUpperCase();
                 
-                // 5. Temporizador para restaurar estado tras 8s
                 activeTimeout = setTimeout(() => {
-                    window.activeTelemetryBtnId = null; // Detener re-evaluación continua
+                    window.activeTelemetryBtnId = null; 
                     telemetryData.innerHTML = textoOriginal;
                     
                     if (ultimoBoton) {
@@ -708,17 +681,15 @@ function renderBiokineticWaves() {
     }
 
     // =========================================================================
-    // 6. PURCHASE TELEMETRY CAPTURE (PAYLOAD GENERATION)
+    // 6. PURCHASE TELEMETRY CAPTURE
     // =========================================================================
     function adquirirNodo() {
         const variantConfig = BIORUSH_CATALOG[currentBioItem].variants[currentBioVariant];
         const currentCoord = getCachedEl('z-dial-telemetry')?.textContent || getCachedEl('z-dial-pack')?.textContent || "N/A";
         
-        // Read directly from global variables without depending on DOM
         const currentSphere = currentSphereIdx;
         const currentNode = activeNodeVal;
         
-        // Capture calculated values from DOM
         const freqValue = getCachedEl('sub-sets-solar')?.textContent || "0.00 Hz";
         const tensionValue = getCachedEl('sub-reps-tension')?.textContent || "0.0 N";
         
@@ -743,10 +714,9 @@ function renderBiokineticWaves() {
         window.open(`https://api.whatsapp.com/send?phone=${numeroCelular}&text=${encodeURIComponent(mensaje)}`, '_blank');
     }
 
-    // Coordinated DOM Lifecycle Initialization
+    // Inicialización del DOM
     document.addEventListener('DOMContentLoaded', () => {
         inicializarBioRush();
-        vincularBotonOnda();
         updateZ(); 
         setInterval(updateZ, 1000);
         habilitarReveladoTelemetria();
