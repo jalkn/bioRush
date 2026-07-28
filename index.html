@@ -50,19 +50,7 @@
 
 </header>
 
-<section class="w-full max-w-sm mx-auto pt-3 pb-3 flex flex-col border-t border-white/5 items-center">
-    <div class="grid grid-cols-4 gap-y-1 gap-x-2 w-full px-4 text-center">
-        <span class="text-[7px] tracking-[0.3em] text-white/40 uppercase">Hz</span>
-        <span class="text-[7px] tracking-[0.3em] text-white/40 uppercase">Ciclo</span>
-        <span class="text-[7px] tracking-[0.3em] text-white/40 uppercase">Nodo</span>
-        <span class="text-[7px] tracking-[0.3em] text-white/40 uppercase">Tensión</span>
-        
-        <span id="sub-sets-solar" class="font-mono text-white/60 tracking-[0.2em] text-[11px] cursor-pointer hover:text-sky-400 transition-colors pb-2">0.00</span>
-        <span id="telemetry-sphere-idx" class="font-mono text-white/60 tracking-[0.2em] text-[11px] cursor-pointer hover:text-sky-400 transition-colors pb-2">0000</span>
-        <span id="telemetry-active-node" class="font-mono text-white/60 tracking-[0.2em] text-[11px] cursor-pointer hover:text-sky-400 transition-colors pb-2">0000</span>
-        <span id="sub-reps-tension" class="font-mono text-white/60 tracking-[0.2em] text-[11px] cursor-pointer hover:text-sky-400 transition-colors pb-2">0.0</span>
-    </div>
-</section>
+
 
 
 
@@ -115,21 +103,17 @@
 
 
 
-<section class="w-full max-w-sm mx-auto pt-1 pb-3 flex flex-col items-center">
+<section class="w-full max-w-sm mx-auto pt-3 pb-3 flex flex-col border-t border-white/5 items-center">
     <div class="grid grid-cols-4 gap-y-1 gap-x-2 w-full px-4 text-center">
-
-        <!-- Valores: Fila 2 -->
-        <span id="tele-col" class="font-mono text-white/60 tracking-[0.2em] text-[11px] cursor-pointer hover:text-sky-400 transition-colors">--</span>
-        <span id="tele-fru" class="font-mono text-white/60 tracking-[0.2em] text-[11px] cursor-pointer hover:text-sky-400 transition-colors">--</span>
-        <span id="tele-sec" class="font-mono text-white/60 tracking-[0.2em] text-[11px] cursor-pointer hover:text-sky-400 transition-colors">--</span>
-        <span id="tele-mol" class="font-mono text-white/60 tracking-[0.2em] text-[11px] cursor-pointer hover:text-sky-400 transition-colors">--</span>
-
-        <!-- Etiquetas: Fila 2 (Debajo de los valores) -->
-        <span class="text-[7px] tracking-[0.3em] text-white/40 uppercase">Temp</span>
-        <span class="text-[7px] tracking-[0.3em] text-white/40 uppercase">Fruto</span>
-        <span class="text-[7px] tracking-[0.3em] text-white/40 uppercase">Secado</span>
-        <span class="text-[7px] tracking-[0.3em] text-white/40 uppercase">Pureza</span>
-
+        <span class="text-[7px] tracking-[0.3em] text-white/40 uppercase">Hz</span>
+        <span class="text-[7px] tracking-[0.3em] text-white/40 uppercase">Ciclo</span>
+        <span class="text-[7px] tracking-[0.3em] text-white/40 uppercase">Nodo</span>
+        <span class="text-[7px] tracking-[0.3em] text-white/40 uppercase">Tensión</span>
+        
+        <span id="sub-sets-solar" class="font-mono text-white/60 tracking-[0.2em] text-[11px] cursor-pointer hover:text-sky-400 transition-colors pb-2">0.00</span>
+        <span id="telemetry-sphere-idx" class="font-mono text-white/60 tracking-[0.2em] text-[11px] cursor-pointer hover:text-sky-400 transition-colors pb-2">0000</span>
+        <span id="telemetry-active-node" class="font-mono text-white/60 tracking-[0.2em] text-[11px] cursor-pointer hover:text-sky-400 transition-colors pb-2">0000</span>
+        <span id="sub-reps-tension" class="font-mono text-white/60 tracking-[0.2em] text-[11px] cursor-pointer hover:text-sky-400 transition-colors pb-2">0.0</span>
     </div>
 </section>
 
@@ -141,47 +125,39 @@
     
     <div class="flex flex-col items-center justify-center w-full">
         <span id="panel-telemetry-data" class="text-[8px] text-center tracking-[0.5em] text-sky-400 uppercase transition-colors duration-300">
-            PROTOCOLO BIOCINÉTICO P.U.L.S.<span class="opacity-30">O.R.</span>
+            ONDAS BIOCINÉTICAS REGENERATIVAS</span>
         </span>
     </div>
 
+<!-- Contenedor unificado: extremos cuadrados de 50x50px y centro flexible -->
     <div class="grid grid-cols-[50px_1fr_50px] items-center gap-2 w-full">
-        <button id="btn-reveal-raw" class="h-[50px] flex items-center justify-center rounded-sm border border-white/10 bg-white/5 hover:border-sky-500/50 hover:bg-sky-500/10 transition-all duration-300">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 text-white/60">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 3.75h.008v.008H12v-.008Z" />
-            </svg>
-        </button>
 
-        <button onclick="adquirirNodo()" class="h-[50px] w-full bg-white/10 backdrop-blur-md text-white font-black text-[11px] tracking-[0.3em] uppercase rounded-sm border border-white/20 hover:border-sky-500/50 hover:bg-sky-500/10 transition-all duration-300">
-            ACTIVAR
-        </button>
-
-        <button id="btn-reveal-bio" class="h-[50px] flex items-center justify-center rounded-sm border border-white/10 bg-white/5 hover:border-sky-500/50 hover:bg-sky-500/10 transition-all duration-300">
+        <!-- Botón de Inspección (Ojo - Cuadrado 50x50px) -->
+        <button id="btn-reveal-bio" class="h-[50px] w-[50px] flex items-center justify-center rounded-sm border border-white/10 bg-white/5 hover:border-sky-500/50 hover:bg-sky-500/10 transition-all duration-300">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 text-white/60">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z" />
                 <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
             </svg>
         </button>
-    </div>
 
-    <div id="biorush-variants-container" class="w-full flex justify-center items-center">
-        <button id="btn-cycle-variant" onclick="rotarBioVariant()" class="w-full h-[50px] bg-sky-500/10 border border-sky-500/50 hover:bg-sky-500/20 text-white font-black text-[11px] tracking-[0.3em] uppercase rounded-sm backdrop-blur-md transition-all duration-300 flex items-center justify-center gap-2">
-            <span id="label-current-variant">PULSOR FOCUS</span>
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-3.5 h-3.5 text-sky-400">
+        <!-- Botón ACTIVAR (Ocupa todo el espacio central) -->
+        <button onclick="adquirirNodo()" class="h-[50px] w-full bg-white/10 backdrop-blur-md text-white font-black text-[10px] sm:text-[11px] tracking-[0.2em] sm:tracking-[0.3em] uppercase rounded-sm border border-white/20 hover:border-sky-500/50 hover:bg-sky-500/10 transition-all duration-300 flex items-center justify-center">
+            ACTIVAR
+        </button>
+
+        <!-- Botón de Ciclo de Variante (Cuadrado 50x50px) -->
+        <button id="btn-cycle-variant" onclick="rotarBioVariant()" class="h-[50px] w-[50px] bg-sky-500/10 border border-sky-500/50 hover:bg-sky-500/20 text-white rounded-sm backdrop-blur-md transition-all duration-300 flex items-center justify-center shrink-0">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-4 h-4 text-sky-400">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0 3.181 3.183a8.25 8.25 0 0 0 13.803-3.7M4.031 9.865a8.25 8.25 0 0 1 13.803-3.7l3.181 3.182m0-4.991v4.99" />
             </svg>
         </button>
     </div>
-    </div>
-
-
 
     <div class="flex items-center justify-center gap-3 text-white/50 text-[8px] tracking-[0.3em] font-mono select-none w-full uppercase">
         <span id="biorush-spec">LION’S MANE</span>
         <span class="opacity-30">|</span>
         <span id="biorush-price" class="text-white-400/80">$68.000</span>
     </div>
-
 
 </section>
 
@@ -256,11 +232,8 @@
 
     const triggerHaptic = (ms) => { if (navigator.vibrate) navigator.vibrate(ms); };
 
-    // ==========================================
-    // 3. SISTEMA DE REVELADO (POINTER EVENTS)
-    // ==========================================
 // ==========================================
-    // 3. MOTOR DE ESTADO VISUAL (Centralizado)
+    // 3. MOTOR DE ESTADO VISUAL (Secuencia Loop de 3 Estados)
     // ==========================================
     function aplicarModoVisual(modo) {
         const front = getCachedEl('biorush-pack-img');
@@ -268,10 +241,10 @@
         const raw = getCachedEl('biorush-pack-img-raw');
         const svg = getCachedEl('laser-vector-target');
 
-        // Reset general
+        // Reset de opacidad general
         [front, back, raw].forEach(el => { if(el) el.style.opacity = '0'; });
         
-        // Aplicar estado
+        // Aplicación del estado activo
         if (modo === 'front') {
             front.style.opacity = '1';
             front.style.zIndex = '10';
@@ -290,25 +263,17 @@
 
     function vincularBotones() {
         const btnBio = getCachedEl('btn-reveal-bio');
-        const btnRaw = getCachedEl('btn-reveal-raw');
-        
-        // Estado para gestionar el modo actual y permitir el "cierre" al presionar de nuevo
-        let modoActual = 'front';
+        const modos = ['front', 'back', 'raw'];
+        let indiceActual = 0;
 
-        const alternarModo = (modo, haptic) => {
-            if (modoActual === modo) {
-                aplicarModoVisual('front');
-                modoActual = 'front';
-            } else {
-                aplicarModoVisual(modo);
-                modoActual = modo;
-                triggerHaptic(haptic);
-            }
-        };
-
-        // Eventos de clic simple
-        btnBio.addEventListener('click', () => alternarModo('back', 12));
-        btnRaw.addEventListener('click', () => alternarModo('raw', 10));
+        if (btnBio) {
+            btnBio.addEventListener('click', () => {
+                // Avanza cíclicamente: 0 (front) -> 1 (back) -> 2 (raw) -> 0 (front)
+                indiceActual = (indiceActual + 1) % modos.length;
+                aplicarModoVisual(modos[indiceActual]);
+                triggerHaptic(12);
+            });
+        }
     }
     // ==========================================
     // 4. CONTROLADORES DE INTERFAZ DE USUARIO
@@ -375,13 +340,6 @@
                 descEl.classList.remove('opacity-0');
             }, 120);
         }
-
-        // Actualizar telemetría de variante
-        const tele = variantConfig.telemetry;
-        if (getCachedEl('tele-col')) getCachedEl('tele-col').textContent = tele.COL;
-        if (getCachedEl('tele-fru')) getCachedEl('tele-fru').textContent = tele.FRU;
-        if (getCachedEl('tele-sec')) getCachedEl('tele-sec').textContent = tele.SEC;
-        if (getCachedEl('tele-mol')) getCachedEl('tele-mol').textContent = tele.MOL;
 
         // Actualizar etiqueta del botón único de ciclo
         const labelBtnVariant = getCachedEl('label-current-variant');
@@ -469,12 +427,7 @@
         'telemetry-sphere-idx': "Registro de lote molecular", 
         'telemetry-active-node': "Nivel de saturación técnica",
         'sub-sets-solar': "Frecuencia de resonancia",
-        'sub-reps-tension': "Índice de cohesión molecular",
-        'tele-col': "Temperatura de Colonizacion",
-        'tele-fru': "Parámetros de maduración",
-        'tele-sec': "Ciclo de deshidratación",
-        'tele-mol': "Índice de pureza molecular"
-        
+        'sub-reps-tension': "Índice de cohesión molecular"
     };
 
 // =========================================================================
@@ -483,7 +436,7 @@
     function habilitarReveladoTelemetria() {
         const telemetryData = getCachedEl('panel-telemetry-data');
         // Texto con el efecto visual deseado
-        const textoOriginal = "PROTOCOLO BIOCINÉTICO P.U.L.S.<span class='opacity-30'>O.R.</span>";
+        const textoOriginal = "ONDAS BIOCINÉTICAS REGENERATIVAS</span>";
         let ultimoElemento = null;
 
         Object.keys(TELEMETRY_MEANINGS).forEach(id => {
