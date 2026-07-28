@@ -113,27 +113,27 @@
         <!-- TACTICAL CONTROL CONSOLE (ACTIONS AND TELEMETRY) -->
         <section class="w-full max-w-sm mx-auto px-6 py-3 flex flex-col gap-2.5">
 
-            <!-- ROW 2: Secondary Telemetry Buttons -->
-            <div class="grid grid-cols-3 gap-1.5 w-full">
-                
-                <!-- Hz Reveal -->
-                <button id="btn-tele-hz" class="h-[34px] w-full flex items-center justify-center rounded-sm border border-sky-500/20 bg-sky-950/20 hover:border-sky-500/50 hover:bg-sky-500/10 transition-all duration-300 active:scale-95">
-                    <span id="sub-sets-solar" class="font-mono text-white/70 tracking-[0.2em] text-[11px] cursor-pointer hover:text-sky-400 transition-colors">0.00</span>
-                    <span class="text-[7px] tracking-[0.2em] text-sky-400/80 uppercase font-bold">Hz</span>
-                </button>
+<!-- ROW 2: Secondary Telemetry Buttons -->
+<div class="grid grid-cols-3 gap-1.5 w-full select-none">
+    
+    <!-- Hz Reveal -->
+    <button id="btn-tele-hz" class="h-[34px] w-full flex items-center justify-center gap-1 rounded-sm border border-sky-500/20 bg-sky-950/20 hover:border-sky-500/50 hover:bg-sky-500/10 transition-all duration-300 active:scale-95">
+        <span id="sub-sets-solar" class="font-mono text-white/70 tracking-[0.15em] text-[11px] hover:text-sky-400 transition-colors">0.00</span>
+        <span class="text-[7px] tracking-[0.2em] text-sky-400/80 uppercase font-bold">Hz</span>
+    </button>
 
-                <!-- DIAL Reveal -->
-                <button id="btn-tele-dial" class="h-[34px] w-full flex items-center justify-center rounded-sm border border-sky-500/20 bg-sky-950/20 hover:border-sky-500/50 hover:bg-sky-500/10 transition-all duration-300 active:scale-95">
-                    <span id="z-dial-telemetry" class="font-mono text-white/70 tracking-[0.2em] text-[11px] cursor-pointer hover:text-sky-400 transition-colors">8UST11</span>
-                </button>
+    <!-- DIAL Reveal -->
+    <button id="btn-tele-dial" class="h-[34px] w-full flex items-center justify-center rounded-sm border border-sky-500/20 bg-sky-950/20 hover:border-sky-500/50 hover:bg-sky-500/10 transition-all duration-300 active:scale-95">
+        <span id="z-dial-telemetry" class="font-mono text-white/70 tracking-[0.15em] text-[11px] hover:text-sky-400 transition-colors">8UST11</span>
+    </button>
 
-                <!-- Tension Reveal -->
-                <button id="btn-tele-tension" class="h-[34px] w-full flex items-center justify-center rounded-sm border border-sky-500/20 bg-sky-950/20 hover:border-sky-500/50 hover:bg-sky-500/10 transition-all duration-300 active:scale-95">
-                    <span id="sub-reps-tension" class="font-mono text-white/70 tracking-[0.2em] text-[9px] cursor-pointer hover:text-sky-400 transition-colors">0.0</span>
-                    <span class="text-[6.5px] tracking-[0.1em] text-sky-400/80 uppercase font-bold truncate">N</span>
-                </button>
+    <!-- Tension Reveal -->
+    <button id="btn-tele-tension" class="h-[34px] w-full flex items-center justify-center gap-1 rounded-sm border border-sky-500/20 bg-sky-950/20 hover:border-sky-500/50 hover:bg-sky-500/10 transition-all duration-300 active:scale-95">
+        <span id="sub-reps-tension" class="font-mono text-white/70 tracking-[0.15em] text-[11px] hover:text-sky-400 transition-colors">0.0</span>
+        <span class="text-[7px] tracking-[0.2em] text-sky-400/80 uppercase font-bold">N</span>
+    </button>
 
-            </div>
+</div>
 
             <!-- ROW 1: Inspect + Main Action (ACTIVATE) -->
             <div class="grid grid-cols-6 gap-1.5 w-full items-center">
@@ -251,9 +251,11 @@
 
     const triggerHaptic = (ms) => { if (navigator.vibrate) navigator.vibrate(ms); };
 
-    // ==========================================
+// ==========================================
     // 3. VISUAL STATE ENGINE (3-State Loop Sequence)
     // ==========================================
+    let indiceModoInspector = 0; // Estado global para mantener sincronía del inspeccionador
+
     function aplicarModoVisual(modo) {
         const front = getCachedEl('biorush-pack-img');
         const back = getCachedEl('biorush-pack-img-back');
@@ -285,13 +287,12 @@
         const panelTelemetry = getCachedEl('panel-telemetry-data');
         const defaultText = "ONDAS BIOCINÉTICAS REGENERATIVAS";
         const modos = ['front', 'back', 'raw'];
-        let indiceActual = 0;
 
         if (btnBio) {
             btnBio.addEventListener('click', () => {
                 // Avanzar cíclicamente: 0 (front) -> 1 (back) -> 2 (raw) -> 0 (front)
-                indiceActual = (indiceActual + 1) % modos.length;
-                const modoActual = modos[indiceActual];
+                indiceModoInspector = (indiceModoInspector + 1) % modos.length;
+                const modoActual = modos[indiceModoInspector];
                 
                 // Aplicar renderizado visual
                 aplicarModoVisual(modoActual);
@@ -472,6 +473,9 @@ function actualizarBioUI() {
         if (subRepsTension) subRepsTension.textContent = `${(14.2 + (repsStage * 0.8)).toFixed(1)}`;
     }
 
+    // =========================================================================
+    // 5. TELEMETRY ENGINE & TELEMETRY BUTTONS
+    // =========================================================================
     const TELEMETRY_CONFIG = {
         'btn-tele-hz': {
             meaning: "Frecuencia de resonancia",
@@ -482,7 +486,7 @@ function actualizarBioUI() {
             targetElId: 'z-dial-telemetry'
         },
         'btn-tele-tension': {
-            meaning: "Índice de cohesión molecular",
+            meaning: "Magnetismo gravitacional",
             targetElId: 'sub-reps-tension'
         }
     };
@@ -500,6 +504,10 @@ function actualizarBioUI() {
 
             btn.addEventListener('click', () => {
                 triggerHaptic(10);
+
+                // --- RESTAURAR LA VISTA AL EMBALAJE FRONTAL (FRONT / 44CAPS) ---
+                indiceModoInspector = 0; // Resetea el índice del loop a 'front'
+                aplicarModoVisual('front');
 
                 // 1. Limpieza de estados anteriores activos si el usuario pulsa rápido
                 if (activeTimeout) clearTimeout(activeTimeout);
