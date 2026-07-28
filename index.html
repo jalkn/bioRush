@@ -137,7 +137,7 @@
 
                 <!-- Tension Reveal -->
                 <button id="btn-tele-tension" class="h-[34px] w-full flex items-center justify-center rounded-sm border border-sky-500/20 bg-sky-950/20 hover:border-sky-500/50 hover:bg-sky-500/10 transition-all duration-300 active:scale-95">
-                    <span class="text-[6.5px] tracking-[0.1em] text-sky-400/80 uppercase font-bold truncate">TENSIÓN</span>
+                    <span class="text-[6.5px] tracking-[0.1em] text-sky-400/80 uppercase font-bold truncate">N</span>
                 </button>
 
             </div>
@@ -448,36 +448,76 @@ function calculateSphereIndex() {
         'btn-tele-tension': "Índice de cohesión molecular"
     };
 
+    const TELEMETRY_CONFIG = {
+        'btn-tele-hz': {
+            meaning: "Frecuencia de resonancia",
+            targetElId: 'sub-sets-solar'
+        },
+        'btn-tele-dial': {
+            meaning: "Coordenada Biocinética Activa",
+            targetElId: 'z-dial-telemetry'
+        },
+        'btn-tele-tension': {
+            meaning: "Índice de cohesión molecular",
+            targetElId: 'sub-reps-tension'
+        }
+    };
+
     function habilitarReveladoTelemetria() {
         const telemetryData = getCachedEl('panel-telemetry-data');
         const textoOriginal = "ONDAS BIOCINÉTICAS REGENERATIVAS"; 
-        let ultimoElemento = null;
+        let ultimoBoton = null;
+        let ultimoDato = null;
+        let activeTimeout = null;
 
-        Object.keys(TELEMETRY_MEANINGS).forEach(btnId => {
+        Object.keys(TELEMETRY_CONFIG).forEach(btnId => {
             const btn = getCachedEl(btnId);
             if (!btn) return;
 
             btn.addEventListener('click', () => {
                 triggerHaptic(10);
 
-                if (ultimoElemento) {
-                    ultimoElemento.classList.remove('border-sky-500/80', 'bg-sky-500/20');
-                    ultimoElemento.classList.add('border-white/10', 'bg-white/5');
-                }
-                
-                btn.classList.remove('border-white/10', 'bg-white/5');
-                btn.classList.add('border-sky-500/80', 'bg-sky-500/20');
-                ultimoElemento = btn;
+                // 1. Limpieza de estados anteriores activos si el usuario pulsa rápido
+                if (activeTimeout) clearTimeout(activeTimeout);
 
-                telemetryData.innerHTML = TELEMETRY_MEANINGS[btnId].toUpperCase();
+                if (ultimoBoton) {
+                    ultimoBoton.classList.remove('border-sky-500/80', 'bg-sky-500/20');
+                    ultimoBoton.classList.add('border-sky-500/20', 'bg-sky-950/20');
+                }
+                if (ultimoDato) {
+                    ultimoDato.classList.remove('text-sky-400', 'font-bold', 'scale-110');
+                    ultimoDato.classList.add('text-white/70');
+                }
+
+                // 2. Resaltar Botón presionado
+                btn.classList.remove('border-sky-500/20', 'bg-sky-950/20');
+                btn.classList.add('border-sky-500/80', 'bg-sky-500/20');
+                ultimoBoton = btn;
+
+                // 3. Resaltar Dato Numérico correspondiente
+                const targetDataEl = getCachedEl(TELEMETRY_CONFIG[btnId].targetElId);
+                if (targetDataEl) {
+                    targetDataEl.classList.remove('text-white/70');
+                    targetDataEl.classList.add('text-sky-400', 'font-bold', 'scale-110');
+                    ultimoDato = targetDataEl;
+                }
+
+                // 4. Mostrar Leyenda/Meaning
+                telemetryData.innerHTML = TELEMETRY_CONFIG[btnId].meaning.toUpperCase();
                 
-                setTimeout(() => {
+                // 5. Temporizador para restaurar estado tras 8s
+                activeTimeout = setTimeout(() => {
                     telemetryData.innerHTML = textoOriginal;
                     
-                    if (ultimoElemento === btn) {
-                        btn.classList.remove('border-sky-500/80', 'bg-sky-500/20');
-                        btn.classList.add('border-white/10', 'bg-white/5');
-                        ultimoElemento = null;
+                    if (ultimoBoton) {
+                        ultimoBoton.classList.remove('border-sky-500/80', 'bg-sky-500/20');
+                        ultimoBoton.classList.add('border-sky-500/20', 'bg-sky-950/20');
+                        ultimoBoton = null;
+                    }
+                    if (ultimoDato) {
+                        ultimoDato.classList.remove('text-sky-400', 'font-bold', 'scale-110');
+                        ultimoDato.classList.add('text-white/70');
+                        ultimoDato = null;
                     }
                 }, 8000);
             });
