@@ -164,7 +164,14 @@
         </button>
     </div>
 
-    <div id="biorush-variants-container" class="w-full">
+    <div id="biorush-variants-container" class="w-full flex justify-center items-center">
+        <button id="btn-cycle-variant" onclick="rotarBioVariant()" class="w-full h-[50px] bg-sky-500/10 border border-sky-500/50 hover:bg-sky-500/20 text-white font-black text-[11px] tracking-[0.3em] uppercase rounded-sm backdrop-blur-md transition-all duration-300 flex items-center justify-center gap-2">
+            <span id="label-current-variant">PULSOR FOCUS</span>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-3.5 h-3.5 text-sky-400">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0 3.181 3.183a8.25 8.25 0 0 0 13.803-3.7M4.031 9.865a8.25 8.25 0 0 1 13.803-3.7l3.181 3.182m0-4.991v4.99" />
+            </svg>
+        </button>
+    </div>
     </div>
 
 
@@ -327,16 +334,25 @@
         triggerHaptic(15);
     }
 
-    function cambiarBioVariant(variantKey) {
-        currentBioVariant = variantKey;
+// ==========================================
+    // ROTACIÓN Y ACTUALIZACIÓN DE VARIANTES (LOOP)
+    // ==========================================
+    function rotarBioVariant() {
+        const itemConfig = BIORUSH_CATALOG[currentBioItem];
+        const variantsKeys = Object.keys(itemConfig.variants);
+        const currentIndex = variantsKeys.indexOf(currentBioVariant);
+        
+        // Calcular el siguiente índice en loop circular
+        const nextIndex = (currentIndex + 1) % variantsKeys.length;
+        currentBioVariant = variantsKeys[nextIndex];
+        
         actualizarBioUI();
-        triggerHaptic(10);
+        triggerHaptic(12);
     }
 
     function actualizarBioUI() {
         const itemConfig = BIORUSH_CATALOG[currentBioItem];
         const variantConfig = itemConfig.variants[currentBioVariant];
-        const vContainer = getCachedEl('biorush-variants-container');
         
         const descEl = getCachedEl('biorush-description');
         const packImg = getCachedEl('biorush-pack-img');
@@ -360,35 +376,19 @@
             }, 120);
         }
 
-        // Actualizar estados visuales de menú
-        Object.keys(BIORUSH_CATALOG).forEach(item => {
-            const el = getCachedEl(`menu-bio-${item}`);
-            if (el) el.className = (item === currentBioItem) ? "cursor-pointer tracking-[0.15em] transition-all duration-300 h-5 leading-none font-bold text-white scale-105 border-b border-sky-400 pb-0.5" : "cursor-pointer tracking-[0.15em] transition-all duration-300 h-5 leading-none text-white/80 hover:text-white/80";
-        });
-
-        // ... dentro de actualizarBioUI() ...
-
-        // Actualizar variantes
+        // Actualizar telemetría de variante
         const tele = variantConfig.telemetry;
-        getCachedEl('tele-col').textContent = tele.COL;
-        getCachedEl('tele-fru').textContent = tele.FRU;
-        getCachedEl('tele-sec').textContent = tele.SEC;
-        getCachedEl('tele-mol').textContent = tele.MOL;
+        if (getCachedEl('tele-col')) getCachedEl('tele-col').textContent = tele.COL;
+        if (getCachedEl('tele-fru')) getCachedEl('tele-fru').textContent = tele.FRU;
+        if (getCachedEl('tele-sec')) getCachedEl('tele-sec').textContent = tele.SEC;
+        if (getCachedEl('tele-mol')) getCachedEl('tele-mol').textContent = tele.MOL;
 
-        if (vContainer) {
-        vContainer.innerHTML = `
-                    <div class="col-start-2 flex items-center justify-center gap-2">
-                        ${Object.keys(itemConfig.variants).map(vKey => `
-                            <span onclick="cambiarBioVariant('${vKey}')" 
-                                class="cursor-pointer transition-all duration-300 px-4 py-3 rounded-sm border backdrop-blur-md whitespace-nowrap font-black uppercase tracking-[0.3em] text-[10px]
-                                ${vKey === currentBioVariant 
-                                    ? 'bg-sky-500/20 border-sky-500/50 text-white' 
-                                    : 'bg-white/10 border-white/20 text-white/60 hover:border-sky-500/50 hover:bg-sky-500/10'}">
-                                ${vKey}
-                            </span>`).join('')}
-                    </div>`;
-            }
+        // Actualizar etiqueta del botón único de ciclo
+        const labelBtnVariant = getCachedEl('label-current-variant');
+        if (labelBtnVariant) {
+            labelBtnVariant.textContent = variantConfig.label;
         }
+    }
 
     // =========================================================================
     // 5. MOTOR DE TELEMETRÍA (PROTOCOLO PULS)
