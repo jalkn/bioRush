@@ -114,21 +114,29 @@
         <section class="w-full max-w-sm mx-auto px-6 py-3 flex flex-col gap-2.5">
 
 <!-- ROW 2: Secondary Telemetry Buttons -->
-<div class="grid grid-cols-3 gap-1.5 w-full select-none">
+<div class="flex items-center gap-1.5 w-full select-none">
     
-    <!-- Hz Reveal -->
-    <button id="btn-tele-hz" class="h-[34px] w-full flex items-center justify-center gap-1 rounded-sm border border-sky-500/20 bg-sky-950/20 hover:border-sky-500/50 hover:bg-sky-500/10 transition-all duration-300 active:scale-95">
+    <!-- Hz Reveal (Expansivo Izquierda) -->
+    <button id="btn-tele-hz" class="h-[34px] flex-1 flex items-center justify-center gap-1 rounded-sm border border-sky-500/20 bg-sky-950/20 hover:border-sky-500/50 hover:bg-sky-500/10 transition-all duration-300 active:scale-95">
         <span id="sub-sets-solar" class="font-mono text-white/70 tracking-[0.15em] text-[11px] hover:text-sky-400 transition-colors">0.00</span>
         <span class="text-[7px] tracking-[0.2em] text-sky-400/80 uppercase font-bold">Hz</span>
     </button>
 
-    <!-- DIAL Reveal -->
-    <button id="btn-tele-dial" class="h-[34px] w-full flex items-center justify-center rounded-sm border border-sky-500/20 bg-sky-950/20 hover:border-sky-500/50 hover:bg-sky-500/10 transition-all duration-300 active:scale-95">
-        <span id="z-dial-telemetry" class="font-mono text-white/70 tracking-[0.15em] text-[11px] hover:text-sky-400 transition-colors">8UST11</span>
+    <!-- DIAL Reveal (Cuadrado Central Fijo) -->
+    <button id="btn-tele-dial" title="Telemetría Biocinética" class="h-[34px] w-[34px] shrink-0 flex items-center justify-center rounded-sm border border-sky-500/20 bg-sky-950/20 hover:border-sky-500/50 hover:bg-sky-500/10 transition-all duration-300 active:scale-95 group">
+        <!-- Span Oculto para preservar el Estado Biocinético en JS -->
+        <span id="z-dial-telemetry" class="hidden">8UST11</span>
+        
+        <!-- Icono Geometrico Logo -->
+        <svg viewBox="0 0 100 100" class="w-4 h-4 fill-white/70 group-hover:fill-sky-400 transition-colors pointer-events-none">
+            <polygon points="20,20 80,20 70,35 30,35" />
+            <polygon points="50,42 58,50 50,58 42,50" />
+            <polygon points="30,65 70,65 80,80 20,80" />
+        </svg>
     </button>
 
-    <!-- Tension Reveal -->
-    <button id="btn-tele-tension" class="h-[34px] w-full flex items-center justify-center gap-1 rounded-sm border border-sky-500/20 bg-sky-950/20 hover:border-sky-500/50 hover:bg-sky-500/10 transition-all duration-300 active:scale-95">
+    <!-- Tension Reveal (Expansivo Derecha) -->
+    <button id="btn-tele-tension" class="h-[34px] flex-1 flex items-center justify-center gap-1 rounded-sm border border-sky-500/20 bg-sky-950/20 hover:border-sky-500/50 hover:bg-sky-500/10 transition-all duration-300 active:scale-95">
         <span id="sub-reps-tension" class="font-mono text-white/70 tracking-[0.15em] text-[11px] hover:text-sky-400 transition-colors">0.0</span>
         <span class="text-[7px] tracking-[0.2em] text-sky-400/80 uppercase font-bold">N</span>
     </button>
@@ -471,9 +479,22 @@ function actualizarBioUI() {
         const subRepsTension = getCachedEl('sub-reps-tension');
         if (subSetsSolar) subSetsSolar.textContent = `${(0.05 + (setsStage / 240)).toFixed(3)}`;
         if (subRepsTension) subRepsTension.textContent = `${(14.2 + (repsStage * 0.8)).toFixed(1)}`;
+
+        // =========================================================================
+        // REFRESTO DE TRADUCCIÓN DINÁMICA EN TIEMPO REAL (1 Hz)
+        // =========================================================================
+        if (window.activeTelemetryBtnId && TELEMETRY_CONFIG[window.activeTelemetryBtnId]) {
+            const telemetryData = getCachedEl('panel-telemetry-data');
+            const meaningConfig = TELEMETRY_CONFIG[window.activeTelemetryBtnId].meaning;
+            const evaluatedMeaning = typeof meaningConfig === 'function' ? meaningConfig() : meaningConfig;
+            
+            if (telemetryData) {
+                telemetryData.innerHTML = evaluatedMeaning.toUpperCase();
+            }
+        }
     }
 
-    // =========================================================================
+// =========================================================================
     // 5. TELEMETRY ENGINE & TELEMETRY BUTTONS
     // =========================================================================
     const TELEMETRY_CONFIG = {
@@ -482,7 +503,40 @@ function actualizarBioUI() {
             targetElId: 'sub-sets-solar'
         },
         'btn-tele-dial': {
-            meaning: "Coordenada Biocinética Activa",
+            meaning: () => {
+                const coord = getCachedEl('z-dial-telemetry')?.textContent || "1P1";
+                const match = coord.match(/^(\d+)([A-Z]+)(\d+)$/);
+                if (!match) return "MATRIZ BIOCINÉTICA ACTIVA.";
+                
+                const [_, sets, action, reps] = match;
+                let vectorText = "";
+
+                // Mapeo sintáctico definitivo: Integración técnico-militar de magnitudes físicas
+                switch (action) {
+                    // --- FUERZAS PURAS Y ABSOLUTAS ---
+                    case 'P':  vectorText = `PASOS X${sets}`; break;
+                    case 'S':  vectorText = `SALTOS X${sets}`; break; 
+                    case 'U':  vectorText = `PRESIONES X${sets}`; break; 
+                    case 'L':  vectorText = `CARGAS X${sets}`; break;    
+                    
+                    // --- FUERZAS DUALES DE BALANCE ---
+                    case 'PL': vectorText = `PASOS CON CARGA X${sets}`; break;
+                    case 'PU': vectorText = `PASOS CON PRESIÓN X${sets}`; break;
+                    case 'LU': vectorText = `CARGAS CON PRESIÓN X${sets}`; break;
+                    case 'SU': vectorText = `SALTOS CON PRESIÓN X${sets}`; break;
+                    
+                    // --- VÓRTICES COMPLEJOS DE ILUMINACIÓN ---
+                    case 'PUL': vectorText = `PASOS CON PRESIÓN Y CARGA X${sets}`; break;
+                    case 'LPS': vectorText = `CARGAS CON PASO Y SALTO X${sets}`; break;
+                    case 'SPU': vectorText = `SALTOS CON PASO Y PRESIÓN X${sets}`; break; 
+                    case 'ULS': vectorText = `PRESIONES CON CARGA Y SALTO X${sets}`; break;
+                    
+                    default: vectorText = "ONDAS BIOCINÉTICAS REGENERATIVAS";
+                }
+
+                // Entrega continua aséptica: Reps al inicio + Vector y Sets
+                return `${reps} ${vectorText}`;
+            },
             targetElId: 'z-dial-telemetry'
         },
         'btn-tele-tension': {
@@ -505,11 +559,11 @@ function actualizarBioUI() {
             btn.addEventListener('click', () => {
                 triggerHaptic(10);
 
-                // --- RESTAURAR LA VISTA AL EMBALAJE FRONTAL (FRONT / 44CAPS) ---
-                indiceModoInspector = 0; // Resetea el índice del loop a 'front'
+                // RESTAURAR LA VISTA AL EMBALAJE FRONTAL
+                indiceModoInspector = 0; 
                 aplicarModoVisual('front');
 
-                // 1. Limpieza de estados anteriores activos si el usuario pulsa rápido
+                // 1. Limpieza de estados anteriores
                 if (activeTimeout) clearTimeout(activeTimeout);
 
                 if (ultimoBoton) {
@@ -534,11 +588,16 @@ function actualizarBioUI() {
                     ultimoDato = targetDataEl;
                 }
 
-                // 4. Mostrar Leyenda/Meaning
-                telemetryData.innerHTML = TELEMETRY_CONFIG[btnId].meaning.toUpperCase();
+                // 4. Registrar botón activo dinámico e inyectar
+                window.activeTelemetryBtnId = btnId;
+                const meaningConfig = TELEMETRY_CONFIG[btnId].meaning;
+                const evaluatedMeaning = typeof meaningConfig === 'function' ? meaningConfig() : meaningConfig;
+                
+                telemetryData.innerHTML = evaluatedMeaning.toUpperCase();
                 
                 // 5. Temporizador para restaurar estado tras 8s
                 activeTimeout = setTimeout(() => {
+                    window.activeTelemetryBtnId = null; // Detener re-evaluación continua
                     telemetryData.innerHTML = textoOriginal;
                     
                     if (ultimoBoton) {
