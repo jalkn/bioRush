@@ -51,7 +51,7 @@
             </div>
         </header>
 
-        <!-- CENTRAL BLOCK: PACKAGING VISUALIZER AND VECTOR LAYER -->
+<!-- CENTRAL BLOCK: PACKAGING VISUALIZER AND VECTOR LAYER -->
         <div class="flex-1 w-full flex flex-col items-center justify-center py-2 px-4">
             
             <div id="biorush-pack-container" class="relative w-full max-w-[180px] xs:max-w-[200px] sm:max-w-[240px] md:max-w-[280px] aspect-[13/15] shrink-0 drop-shadow-[0_40px_60px_rgba(0,0,0,0.9)]">
@@ -78,8 +78,11 @@
                                 </textPath>
                             </text>
                             
-                            <!-- Geometric Reticle and Central DIAL -->
-                            <g class="origin-center transform scale-[0.85]">
+                            <!-- Círculos de Ondas Biocinéticas (Gota Quant) -->
+                            <g id="wave-quantum-container" style="transform-origin: 200px 200px; -webkit-transform-origin: 200px 200px;" class="-rotate-90"></g>
+
+                            <!-- Geometric Reticle and Central DIAL (Sandwatch Group) -->
+                            <g id="sandwatch-group" class="origin-center transform scale-[0.85] transition-all duration-500">
                                 <path d="M 110,120 L 290,120 L 110,280 L 290,280 Z" class="opacity-50 stroke-[1.9]" />
                                 <path d="M 110,120 Q 200,150 290,120" class="opacity-50 stroke-[1.9]" />
                                 <path d="M 110,280 Q 200,250 290,280" stroke-dasharray="2 2" class="opacity-50 stroke-[1.9]" />
@@ -113,38 +116,8 @@
         <!-- TACTICAL CONTROL CONSOLE (ACTIONS AND TELEMETRY) -->
         <section class="w-full max-w-sm mx-auto px-6 py-3 flex flex-col gap-2.5">
 
-<!-- ROW 2: Secondary Telemetry Buttons -->
-<div class="flex items-center gap-1.5 w-full select-none">
-    
-    <!-- Hz Reveal (Expansivo Izquierda) -->
-    <button id="btn-tele-hz" class="h-[34px] flex-1 flex items-center justify-center gap-1 rounded-sm border border-sky-500/20 bg-sky-950/20 hover:border-sky-500/50 hover:bg-sky-500/10 transition-all duration-300 active:scale-95">
-        <span id="sub-sets-solar" class="font-mono text-white/70 tracking-[0.15em] text-[11px] hover:text-sky-400 transition-colors">0.00</span>
-        <span class="text-[7px] tracking-[0.2em] text-sky-400/80 uppercase font-bold">Hz</span>
-    </button>
-
-    <!-- DIAL Reveal (Cuadrado Central Fijo) -->
-    <button id="btn-tele-dial" title="Telemetría Biocinética" class="h-[34px] w-[34px] shrink-0 flex items-center justify-center rounded-sm border border-sky-500/20 bg-sky-950/20 hover:border-sky-500/50 hover:bg-sky-500/10 transition-all duration-300 active:scale-95 group">
-        <!-- Span Oculto para preservar el Estado Biocinético en JS -->
-        <span id="z-dial-telemetry" class="hidden">8UST11</span>
-        
-        <!-- Icono Geometrico Logo -->
-        <svg viewBox="0 0 100 100" class="w-4 h-4 fill-white/70 group-hover:fill-sky-400 transition-colors pointer-events-none">
-            <polygon points="20,20 80,20 70,35 30,35" />
-            <polygon points="50,42 58,50 50,58 42,50" />
-            <polygon points="30,65 70,65 80,80 20,80" />
-        </svg>
-    </button>
-
-    <!-- Tension Reveal (Expansivo Derecha) -->
-    <button id="btn-tele-tension" class="h-[34px] flex-1 flex items-center justify-center gap-1 rounded-sm border border-sky-500/20 bg-sky-950/20 hover:border-sky-500/50 hover:bg-sky-500/10 transition-all duration-300 active:scale-95">
-        <span id="sub-reps-tension" class="font-mono text-white/70 tracking-[0.15em] text-[11px] hover:text-sky-400 transition-colors">0.0</span>
-        <span class="text-[7px] tracking-[0.2em] text-sky-400/80 uppercase font-bold">N</span>
-    </button>
-
-</div>
-
-            <!-- ROW 1: Inspect + Main Action (ACTIVATE) -->
-            <div class="grid grid-cols-6 gap-1.5 w-full items-center">
+            <!-- ROW 1: Inspect + Main Action (ACTIVATE) + Quantum Drop -->
+            <div class="grid grid-cols-7 gap-1.5 w-full items-center">
                 
                 <!-- 1. Inspect (Visual loop mode: Front/Back/Raw) -->
                 <button id="btn-reveal-bio" title="Inspeccionar" class="h-[42px] col-span-1 w-full flex items-center justify-center rounded-sm border border-white/10 bg-white/5 hover:border-sky-500/50 hover:bg-sky-500/10 transition-all duration-300 active:scale-95">
@@ -159,32 +132,56 @@
                     ACTIVAR
                 </button>
 
+                <!-- 3. Quantum Drop Toggle Button -->
+                <button id="btn-toggle-wave" title="Ondas Biocinéticas" class="h-[42px] col-span-1 w-full flex items-center justify-center rounded-sm border border-white/10 bg-white/5 hover:border-sky-500/50 hover:bg-sky-500/10 transition-all duration-300 active:scale-95">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4 text-sky-400">
+                        <path d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s9.75 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zM12 15a3 3 0 1 1 0-6 3 3 0 0 1 0 6z" />
+                    </svg>
+                </button>
+
             </div>
 
-            <!-- Techno-Ecological Selector (Prev Arrow + Label & Price + Next Arrow) -->
+            <!-- ROW 2: Secondary Telemetry Buttons -->
+            <div class="flex items-center gap-1.5 w-full select-none">
+                <button id="btn-tele-hz" class="h-[34px] flex-1 flex items-center justify-center gap-1 rounded-sm border border-sky-500/20 bg-sky-950/20 hover:border-sky-500/50 hover:bg-sky-500/10 transition-all duration-300 active:scale-95">
+                    <span id="sub-sets-solar" class="font-mono text-white/70 tracking-[0.15em] text-[11px] hover:text-sky-400 transition-colors">0.00</span>
+                    <span class="text-[7px] tracking-[0.2em] text-sky-400/80 uppercase font-bold">Hz</span>
+                </button>
+
+                <button id="btn-tele-dial" title="Telemetría Biocinética" class="h-[34px] w-[34px] shrink-0 flex items-center justify-center rounded-sm border border-sky-500/20 bg-sky-950/20 hover:border-sky-500/50 hover:bg-sky-500/10 transition-all duration-300 active:scale-95 group">
+                    <span id="z-dial-telemetry" class="hidden">8UST11</span>
+                    <svg viewBox="0 0 100 100" class="w-4 h-4 fill-white/70 group-hover:fill-sky-400 transition-colors pointer-events-none">
+                        <polygon points="20,20 80,20 70,35 30,35" />
+                        <polygon points="50,42 58,50 50,58 42,50" />
+                        <polygon points="30,65 70,65 80,80 20,80" />
+                    </svg>
+                </button>
+
+                <button id="btn-tele-tension" class="h-[34px] flex-1 flex items-center justify-center gap-1 rounded-sm border border-sky-500/20 bg-sky-950/20 hover:border-sky-500/50 hover:bg-sky-500/10 transition-all duration-300 active:scale-95">
+                    <span id="sub-reps-tension" class="font-mono text-white/70 tracking-[0.15em] text-[11px] hover:text-sky-400 transition-colors">0.0</span>
+                    <span class="text-[7px] tracking-[0.2em] text-sky-400/80 uppercase font-bold">N</span>
+                </button>
+            </div>
+
+            <!-- Techno-Ecological Selector -->
             <div class="flex items-center justify-between text-white/50 text-[8px] tracking-[0.25em] font-mono select-none w-full uppercase pt-1">
-                
-                <!-- Left Arrow (Previous Variant) -->
                 <button id="btn-prev-variant" title="Variante Anterior" onclick="rotarBioVariant('prev')" class="p-1 hover:text-sky-400 text-sky-400/70 transition-colors active:scale-90">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-4 h-4">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" />
                     </svg>
                 </button>
 
-                <!-- Label & Price Block -->
                 <div class="flex items-center gap-3">
                     <span id="biorush-label">PULSOR FOCUS</span>
                     <span class="opacity-30">|</span>
                     <span id="biorush-price">$70.000</span>
                 </div>
 
-                <!-- Right Arrow (Next Variant) -->
                 <button id="btn-next-variant" title="Variante Siguiente" onclick="rotarBioVariant('next')" class="p-1 hover:text-sky-400 text-sky-400/70 transition-colors active:scale-90">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-4 h-4">
                         <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
                     </svg>
                 </button>
-
             </div>
 
         </section>
@@ -259,6 +256,15 @@
 
     const triggerHaptic = (ms) => { if (navigator.vibrate) navigator.vibrate(ms); };
 
+    const VECTOR_TO_CLOCK_INDEX = {
+        'P': 1,  'U': 2,  'L': 3,  'S': 4,
+        'PL': 5, 'PU': 6, 'LU': 7, 'SU': 8,
+        'PUL': 9,'LPS': 10,'SPU': 11,'ULS': 12
+    };
+
+    let biokineticWaveHistory = [];
+    let waveDisplayState = 0; // 0 = Sandwatch (alfanumérico normal), 1 = Solo Gota, 2 = Gota + Sandwatch súper puesto
+
 // ==========================================
     // 3. VISUAL STATE ENGINE (3-State Loop Sequence)
     // ==========================================
@@ -322,6 +328,30 @@
             });
         }
     }
+
+function vincularBotonOnda() {
+        const btnToggleWave = getCachedEl('btn-toggle-wave');
+        const sandwatchGroup = getCachedEl('sandwatch-group');
+
+        if (btnToggleWave) {
+            btnToggleWave.addEventListener('click', () => {
+                // Ciclo de estados: 
+                // 0: Normal Sandwatch -> 1: Solo Gota -> 2: Sandwatch sobre la Gota -> 0
+                waveDisplayState = (waveDisplayState + 1) % 3;
+
+                if (sandwatchGroup) {
+                    if (waveDisplayState === 1) {
+                        sandwatchGroup.style.opacity = '0'; // Oculta retícula/alfanumérico
+                    } else {
+                        sandwatchGroup.style.opacity = '1'; // Muestra retícula/alfanumérico
+                    }
+                }
+
+                renderBiokineticWaves();
+                triggerHaptic(12);
+            });
+        }
+    }
     
     // ==========================================
     // 4. USER INTERFACE CONTROLLERS
@@ -337,6 +367,7 @@
         }
         
         vincularBotones();
+        vincularBotonOnda();
         actualizarBioUI();
     }
 
@@ -368,46 +399,46 @@
         triggerHaptic(12);
     }
 
-function actualizarBioUI() {
-    const itemConfig = BIORUSH_CATALOG[currentBioItem];
-    const variantConfig = itemConfig.variants[currentBioVariant];
-    
-    const descEl = getCachedEl('biorush-description');
-    const packImg = getCachedEl('biorush-pack-img');
-    const packImgBack = getCachedEl('biorush-pack-img-back');
-    const panelTelemetry = getCachedEl('panel-telemetry-data');
-    
-    if (descEl && packImg && packImgBack) {
-        descEl.classList.add('opacity-0');
+    function actualizarBioUI() {
+        const itemConfig = BIORUSH_CATALOG[currentBioItem];
+        const variantConfig = itemConfig.variants[currentBioVariant];
         
-        setTimeout(() => {
-            descEl.textContent = variantConfig.desc;
-            packImg.src = variantConfig.img;
-            packImgBack.src = variantConfig.imgBack;
-            getCachedEl('biorush-pack-img-raw').src = variantConfig.imgRaw;
+        const descEl = getCachedEl('biorush-description');
+        const packImg = getCachedEl('biorush-pack-img');
+        const packImgBack = getCachedEl('biorush-pack-img-back');
+        const panelTelemetry = getCachedEl('panel-telemetry-data');
+        
+        if (descEl && packImg && packImgBack) {
+            descEl.classList.add('opacity-0');
             
-            const labelTitle = getCachedEl('laser-variant-title');
-            if (labelTitle) labelTitle.textContent = variantConfig.label;
-            
-            if (getCachedEl('biorush-label')) getCachedEl('biorush-label').textContent = variantConfig.label;
-            getCachedEl('biorush-price').textContent = variantConfig.price;
-            
-            // Sincroniza la telemetría según el modo de imagen visible
-            if (panelTelemetry) {
-                const backImg = getCachedEl('biorush-pack-img-back');
-                const rawImg = getCachedEl('biorush-pack-img-raw');
+            setTimeout(() => {
+                descEl.textContent = variantConfig.desc;
+                packImg.src = variantConfig.img;
+                packImgBack.src = variantConfig.imgBack;
+                getCachedEl('biorush-pack-img-raw').src = variantConfig.imgRaw;
                 
-                if (backImg && backImg.style.opacity === '1') {
-                    panelTelemetry.textContent = variantConfig.spec.toUpperCase();
-                } else if (rawImg && rawImg.style.opacity === '1') {
-                    panelTelemetry.textContent = variantConfig.cant.toUpperCase();
+                const labelTitle = getCachedEl('laser-variant-title');
+                if (labelTitle) labelTitle.textContent = variantConfig.label;
+                
+                if (getCachedEl('biorush-label')) getCachedEl('biorush-label').textContent = variantConfig.label;
+                getCachedEl('biorush-price').textContent = variantConfig.price;
+                
+                // Sincroniza la telemetría según el modo de imagen visible
+                if (panelTelemetry) {
+                    const backImg = getCachedEl('biorush-pack-img-back');
+                    const rawImg = getCachedEl('biorush-pack-img-raw');
+                    
+                    if (backImg && backImg.style.opacity === '1') {
+                        panelTelemetry.textContent = variantConfig.spec.toUpperCase();
+                    } else if (rawImg && rawImg.style.opacity === '1') {
+                        panelTelemetry.textContent = variantConfig.cant.toUpperCase();
+                    }
                 }
-            }
 
-            descEl.classList.remove('opacity-0');
-        }, 120);
+                descEl.classList.remove('opacity-0');
+            }, 120);
+        }
     }
-}
 
     // =========================================================================
     // 5. TELEMETRY ENGINE (PULS PROTOCOL)
@@ -424,14 +455,14 @@ function actualizarBioUI() {
         return `${String(totalSpheres).padStart(4, '0')}`;
     }
 
-    function updateZ() {
+function updateZ() {
         let biokineticCoordinate = "";
         const now = new Date();
         const hours = now.getHours(); 
         const minutes = now.getMinutes();
         const seconds = now.getSeconds();
 
-        // Update global Sphere variable
+        // Actualizar variable global de Esfera
         currentSphereIdx = calculateSphereIndex();
 
         let setsStage = 1;  
@@ -439,6 +470,7 @@ function actualizarBioUI() {
         let currentAction = 'P'; 
 
         if (seconds % 2 !== 0) {
+            // Impar: Evaluación sub-segundo para monádicas (4 combinaciones)
             const progress1s = now.getMilliseconds() / 1000; 
             setsStage = Math.floor(progress1s * 12) + 1;
             repsStage = 13 - setsStage; 
@@ -448,30 +480,48 @@ function actualizarBioUI() {
             else if (progress1s < 0.75) currentAction = 'L';
             else currentAction = 'S';
         } else {
+            // Par: Evaluación de 12 variables (4 Binarias + 4 Ternarias distribuidas)
             setsStage = Math.floor((minutes % 12) + 1);
             
             if (seconds < 30) {
+                // Primeros 30s: Acciones Binarias (4 variables)
                 const subSlot = Math.floor((seconds % 30) / 7.5);
                 currentAction = ["PL", "PU", "LU", "SU"][subSlot] || "PL";
                 repsStage = Math.floor((seconds % 10) + 2);
             } else {
+                // Segundos 30-59: Acciones Ternarias (4 variables)
                 const subSlot = Math.floor(((seconds - 30) % 30) / 7.5);
-                currentAction = ["PUL", "PLS", "LUP", "ULS"][subSlot] || "ULS";
+                currentAction = ["PUL", "LPS", "SPU", "ULS"][subSlot] || "ULS";
                 repsStage = Math.floor(((seconds - 30) % 10) + 3);
             }
         }
+
         setsStage = Math.max(1, Math.min(12, setsStage));
         repsStage = Math.max(1, Math.min(12, repsStage));
         biokineticCoordinate = `${setsStage}${currentAction}${repsStage}`;
 
-        // Simultaneous DIAL update on package and bottom bar
+        // Mapeo vectorial a índice de reloj (1-12) para renderizado de la Gota
+        const vectorIndex = VECTOR_TO_CLOCK_INDEX[currentAction] || 1;
+
+        // Registrar historial para las capas de la Gota Biocinética (máximo 12 capas)
+        biokineticWaveHistory.unshift({
+            sets: setsStage,
+            vector: vectorIndex,
+            reps: repsStage
+        });
+        if (biokineticWaveHistory.length > 12) biokineticWaveHistory.pop();
+
+        // Renderizar anillos visuales de la gota biocinética en SVG
+        renderBiokineticWaves();
+
+        // Actualización simultánea del DIAL en paquete y telemetría
         const elDialPack = getCachedEl('z-dial-pack');
         const elDialTele = getCachedEl('z-dial-telemetry');
 
         if (elDialPack) elDialPack.textContent = biokineticCoordinate;
         if (elDialTele) elDialTele.textContent = biokineticCoordinate;
                 
-        // Update global Node variable
+        // Actualizar variable global de Nodo
         const totalSecondsSinceMidnight = (hours * 3600) + (minutes * 60) + seconds;
         activeNodeVal = `${String(totalSecondsSinceMidnight + 1).padStart(4, '0')}`;
 
@@ -480,9 +530,7 @@ function actualizarBioUI() {
         if (subSetsSolar) subSetsSolar.textContent = `${(0.05 + (setsStage / 240)).toFixed(3)}`;
         if (subRepsTension) subRepsTension.textContent = `${(14.2 + (repsStage * 0.8)).toFixed(1)}`;
 
-        // =========================================================================
-        // REFRESTO DE TRADUCCIÓN DINÁMICA EN TIEMPO REAL (1 Hz)
-        // =========================================================================
+        // Refresco dinámico del panel de telemetría en tiempo real (1 Hz)
         if (window.activeTelemetryBtnId && TELEMETRY_CONFIG[window.activeTelemetryBtnId]) {
             const telemetryData = getCachedEl('panel-telemetry-data');
             const meaningConfig = TELEMETRY_CONFIG[window.activeTelemetryBtnId].meaning;
@@ -544,6 +592,50 @@ function actualizarBioUI() {
             targetElId: 'sub-reps-tension'
         }
     };
+
+function renderBiokineticWaves() {
+        const container = $('wave-quantum-container');
+        if (!container || biokineticWaveHistory.length === 0) return;
+
+        let htmlContent = '';
+        biokineticWaveHistory.forEach((dial, tIndex) => {
+            const currentScale = tIndex * 0.85; 
+            
+            // Si está en estado 0, la gota no se renderiza u oculta opacidad
+            const baseOpacity = waveDisplayState === 0 ? 0 : (1.0 - (tIndex * 0.08));
+            if (baseOpacity <= 0) return;
+
+            const viewFactor = 15; 
+            const layers = [
+                { id: 'internal',     r: (currentScale * 1.0) * viewFactor, opacity: baseOpacity * 0.80, value: dial.sets },
+                { id: 'intermediate', r: (currentScale * 1.4) * viewFactor, opacity: baseOpacity * 0.60, value: dial.vector },
+                { id: 'external',     r: (currentScale * 1.8) * viewFactor, opacity: baseOpacity * 0.40, value: dial.reps }
+            ];
+
+            layers.forEach(layer => {
+                if (layer.r <= 0) return;
+                const circumference = 2 * Math.PI * layer.r;
+                const angle = (layer.value - 1) * 30; 
+                const arcLength = (layer.value / 12) * circumference;
+                const dashArray = `${arcLength} ${circumference}`;
+
+                htmlContent += `
+                    <circle 
+                        cx="200" 
+                        cy="200" 
+                        r="${layer.r}" 
+                        transform="rotate(${angle} 200 200)"
+                        class="stroke-white transition-all duration-300"
+                        stroke-width="${tIndex === 0 ? 1.5 : 1.0}"
+                        stroke-opacity="${layer.opacity}"
+                        stroke-dasharray="${dashArray}"
+                        stroke-linecap="round"
+                        fill="none"
+                    />`;
+            });
+        });
+        container.innerHTML = htmlContent;
+    }
 
     function habilitarReveladoTelemetria() {
         const telemetryData = getCachedEl('panel-telemetry-data');
@@ -654,6 +746,7 @@ function actualizarBioUI() {
     // Coordinated DOM Lifecycle Initialization
     document.addEventListener('DOMContentLoaded', () => {
         inicializarBioRush();
+        vincularBotonOnda();
         updateZ(); 
         setInterval(updateZ, 1000);
         habilitarReveladoTelemetria();
