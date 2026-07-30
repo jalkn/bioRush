@@ -30,26 +30,64 @@
         body { font-family: 'Orbitron', sans-serif; background-color: #020617; color: #f8fafc; } 
         #page-bg-overlay {
             position: fixed; inset: 0; z-index: -1;
-            background: radial-gradient(circle at 50% 36%, #1e3a8a 0%, #0f172a 50%, #020617 100%);
+            background: radial-gradient(circle at 50% 44%, #1e3a8a 0%, #0f172a 50%, #020617 100%);
         }
         .img-glow-transition { transition: opacity 0.5s ease-in-out; }
+
+        /* Integrated projection plane buttons */
+        .btn-tele-glass {
+            @apply bg-transparent hover:bg-sky-500/10 transition-all duration-300 active:scale-95 flex items-center text-white;
+        }
     </style>
 </head>
-<body class="antialiased selection:bg-white selection:text-black overflow-x-hidden text-white">
+<body class="antialiased selection:bg-white selection:text-black min-h-screen w-full flex flex-col justify-between relative overflow-x-hidden text-white bg-[#020617] select-none">
 
     <!-- Wallpaper and Ambient Overlay -->
     <div id="page-bg-overlay"></div>
     <div class="fixed inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/40 z-0 pointer-events-none"></div>
-
-<main id="main-vault" class="w-screen h-screen flex flex-col justify-between relative overflow-hidden select-none">
         
-        <!-- HEADER -->
-        <header class="h-[70px] shrink-0 bg-gradient-to-b from-black/90 via-black/40 to-transparent backdrop-blur-md z-50 flex items-center justify-center px-6">
-            <div class="flex items-center justify-center gap-3 w-full"> 
-                <img src="img/lift.png" alt="Back" class="h-5 w-auto object-contain opacity-80" />
-                <span class="text-[11px] tracking-[0.25em] font-black text-white uppercase">BIORUSH</span>
-            </div>
-        </header>
+<!-- ========================================================================= -->
+<!-- 1. HEADER BLOCK (Minimalist Glass Panel with Dividers & Justified Base)    -->
+<!-- ========================================================================= -->
+<header class="w-full shrink-0 z-50 bg-sky-950/20 backdrop-blur-md shadow-[0_4px_30px_rgba(14,165,233,0.1)] flex flex-col">
+    
+    <!-- Top Control Grid (Full-Width Symmetric 3-Block Grid) -->
+    <div class="grid grid-cols-[1fr_auto_1fr] items-center w-full max-w-full px-4 mx-auto h-12 select-none">
+        
+        <!-- Left Button: Tension (N) -> Extremified Left -->
+        <button id="btn-tele-tension" title="Cohesión / Tensión" class="btn-tele-glass h-full pl-2 pr-1 gap-1.5 justify-start flex items-center">
+            <span id="sub-reps-tension" class="font-mono text-white tracking-[0.1em] text-[10px] hover:text-sky-300 transition-colors">0.0</span>
+            <span class="text-[9px] tracking-[0.15em] text-sky-400 font-bold uppercase">N</span>
+        </button>
+
+        <!-- Center Button: Telemetry Dial / Logo (Rigid 1:1 Square, Absolute Center) -->
+        <button id="btn-tele-dial" title="Telemetría Biocinética" class="btn-tele-glass w-12 h-12 flex-none group flex items-center justify-center border-x border-sky-500/30">
+            <span id="z-dial-telemetry" class="hidden">8UST11</span>
+            <svg viewBox="0 0 100 100" class="w-4 h-4 fill-white group-hover:fill-sky-300 transition-colors pointer-events-none">
+                <polygon points="50,42 58,50 50,58 42,50" />
+                <polygon points="30,65 70,65 80,80 20,80" />
+            </svg>
+        </button>
+
+        <!-- Right Button: Frequency (Hz) -> Extremified Right -->
+        <button id="btn-tele-hz" title="Resonancia / Frecuencia" class="btn-tele-glass h-full pr-2 pl-1 gap-1.5 justify-end flex items-center">
+            <span id="sub-sets-solar" class="font-mono text-white tracking-[0.1em] text-[10px] hover:text-sky-300 transition-colors">0.00</span>
+            <span class="text-[9px] tracking-[0.15em] text-sky-400 font-bold uppercase">Hz</span>
+        </button>
+
+    </div>
+
+    <!-- Biokinetic Telemetry Display (Justified at Header Base) -->
+    <div class="w-full border-t border-sky-500/30 py-1.5 flex items-center justify-center">
+        <span id="panel-telemetry-data" class="text-white/50 text-[8px] tracking-[0.25em] font-mono uppercase transition-colors duration-300">
+            ONDAS BIOCINÉTICAS REGENERATIVAS
+        </span>
+    </div>
+
+</header>
+
+
+
 
         <!-- CENTRAL BLOCK: PACKAGING VISUALIZER AND VECTOR LAYER -->
         <div class="flex-1 w-full flex flex-col items-center justify-center py-2 px-4">
@@ -105,84 +143,49 @@
             </div>
         </div>
 
-        <section class="w-full max-w-sm mx-auto px-6 py-3 flex flex-col gap-2.5">
 
-            <div class="flex flex-col items-center justify-center w-full min-h-[16px]">
-                <span id="panel-telemetry-data" class="text-[8px] text-center tracking-[0.4em] text-sky-400 uppercase transition-colors duration-300 font-mono">
-                    ONDAS BIOCINÉTICAS REGENERATIVAS
-                </span>
-            </div>
 
-            <!-- ROW 1: Telemetry Value Buttons -->
-            <div class="flex items-center gap-1.5 w-full select-none">
 
-                <button id="btn-tele-tension" class="h-[34px] flex-1 flex items-center justify-center gap-1 rounded-sm border border-sky-500/20 bg-sky-950/20 hover:border-sky-500/50 hover:bg-sky-500/10 transition-all duration-300 active:scale-95">
-                    <span id="sub-reps-tension" class="font-mono text-white/70 tracking-[0.15em] text-[11px] hover:text-sky-400 transition-colors">0.0</span>
-                    <span class="text-[7px] tracking-[0.2em] text-sky-400/80 uppercase font-bold">N</span>
-                </button>
+<!-- Techno-Ecological Selector with Integrated End Buttons -->
+<div class="flex items-center justify-between text-white/50 text-[8px] tracking-[0.25em] font-mono select-none w-full uppercase pt-1 gap-2">
 
-                <button id="btn-tele-hz" class="h-[34px] flex-1 flex items-center justify-center gap-1 rounded-sm border border-sky-500/20 bg-sky-950/20 hover:border-sky-500/50 hover:bg-sky-500/10 transition-all duration-300 active:scale-95">
-                    <span id="sub-sets-solar" class="font-mono text-white/70 tracking-[0.15em] text-[11px] hover:text-sky-400 transition-colors">0.00</span>
-                    <span class="text-[7px] tracking-[0.2em] text-sky-400/80 uppercase font-bold">Hz</span>
-                </button>
+    <!-- Center Info (Product and Price) -->
+    <div class="w-full border-b border-sky-500/30 py-1.5 flex items-center justify-center gap-2 text-center truncate">
+        <span id="biorush-label" class="truncate">PULSOR FOCUS</span>
+        <span class="opacity-70 shrink-0">|</span>
+        <span id="biorush-price" class="shrink-0">$70.000</span>
+    </div>
 
-            </div>
 
-<!-- Techno-Ecological Selector -->
-            <div class="flex items-center justify-center text-white/50 text-[8px] tracking-[0.25em] font-mono select-none w-full uppercase pt-1">
-                <div class="flex items-center gap-3">
-                    <span id="biorush-label">PULSOR FOCUS</span>
-                    <span class="opacity-30">|</span>
-                    <span id="biorush-price">$70.000</span>
-                </div>
-            </div>
+</div>
 
-<!-- ROW 2: Inspect + Main Action (ACTIVATE) + Telemetry Dial -->
-<div class="flex items-center justify-between gap-1.5 w-full select-none">
 
-    <!-- Flecha Anterior -->
-    <button id="btn-prev-variant" title="Variante Anterior" onclick="rotarBioVariant('prev')" 
-        class="h-11 w-9 shrink-0 bg-sky-500/10 backdrop-blur-md text-white font-black text-[10px] sm:text-[11px] tracking-[0.3em] uppercase rounded-sm border border-sky-500/40 hover:border-sky-400 hover:bg-sky-500/25 hover:shadow-[0_0_20px_rgba(14,165,233,0.3)] transition-all duration-300 flex items-center justify-center active:scale-[0.98]">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-4 h-4">
+<!-- ROW 2: Variant Navigation & Action Controls (Symmetric 3-Block Grid) -->
+<div class="grid grid-cols-[1fr_auto_1fr] border-b border-sky-500/30 items-center w-full max-w-full px-4 mx-auto h-12 select-none">
+
+    <!-- Previous Variant Arrow -> Extremified Left -->
+    <button id="btn-prev-variant" title="Previous Variant" onclick="rotarBioVariant('prev')" 
+        class="btn-tele-glass h-full pl-2 pr-1 gap-1.5 justify-start flex items-center group">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" 
+            class="w-4 h-4 text-white group-hover:text-sky-300 transition-colors pointer-events-none">
             <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" />
         </svg>
     </button>
-    
-    <!-- Bloque Central: Inspeccionar (1) + ACTIVAR (3) + Telemetría (1) -->
-    <div class="grid grid-cols-5 gap-1.5 flex-1 items-center">
-        
-        <!-- 1. Inspect -->
-        <button id="btn-reveal-bio" title="Inspeccionar" 
-            class="h-11 col-span-1 w-full bg-sky-500/10 backdrop-blur-md text-white font-black text-[10px] sm:text-[11px] tracking-[0.3em] uppercase rounded-sm border border-sky-500/40 hover:border-sky-400 hover:bg-sky-500/25 hover:shadow-[0_0_20px_rgba(14,165,233,0.3)] transition-all duration-300 flex items-center justify-center active:scale-[0.98]">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z" />
-                <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
-            </svg>
-        </button>
 
-        <!-- 2. Main Action (ACTIVATE) -->
-        <button onclick="adquirirNodo()" 
-            class="h-11 col-span-3 w-full bg-sky-500/10 backdrop-blur-md text-white font-black text-[10px] sm:text-[11px] tracking-[0.3em] uppercase rounded-sm border border-sky-500/40 hover:border-sky-400 hover:bg-sky-500/25 hover:shadow-[0_0_20px_rgba(14,165,233,0.3)] transition-all duration-300 flex items-center justify-center active:scale-[0.98]">
-            ACTIVAR
-        </button>
+    <!-- Center Action Button: Acquire/Activate Node (Rigid 1:1 Square, Absolute Center) -->
+    <button id="btn-activate-node" title="Activate Node" onclick="adquirirNodo()" 
+        class="btn-tele-glass w-12 h-12 flex-none group flex items-center justify-center border-x border-sky-500/30">
+        <svg viewBox="0 0 100 100" class="w-4 h-4 fill-white group-hover:fill-sky-300 transition-colors pointer-events-none">
+            <polygon points="20,20 80,20 70,35 30,35" />
+            <polygon points="50,42 58,50 50,58 42,50" />
+        </svg>
+    </button>
 
-        <!-- 3. Telemetry Dial Button -->
-        <button id="btn-tele-dial" title="Telemetría Biocinética" 
-            class="h-11 col-span-1 w-full bg-sky-500/10 backdrop-blur-md text-white font-black text-[10px] sm:text-[11px] tracking-[0.3em] uppercase rounded-sm border border-sky-500/40 hover:border-sky-400 hover:bg-sky-500/25 hover:shadow-[0_0_20px_rgba(14,165,233,0.3)] transition-all duration-300 flex items-center justify-center active:scale-[0.98] group">
-            <span id="z-dial-telemetry" class="hidden">8UST11</span>
-            <svg viewBox="0 0 100 100" class="w-4 h-4 fill-white group-hover:fill-sky-300 transition-colors pointer-events-none">
-                <polygon points="20,20 80,20 70,35 30,35" />
-                <polygon points="50,42 58,50 50,58 42,50" />
-                <polygon points="30,65 70,65 80,80 20,80" />
-            </svg>
-        </button>
-
-    </div>
-
-    <!-- Flecha Siguiente -->
-    <button id="btn-next-variant" title="Variante Siguiente" onclick="rotarBioVariant('next')" 
-        class="h-11 w-9 shrink-0 bg-sky-500/10 backdrop-blur-md text-white font-black text-[10px] sm:text-[11px] tracking-[0.3em] uppercase rounded-sm border border-sky-500/40 hover:border-sky-400 hover:bg-sky-500/25 hover:shadow-[0_0_20px_rgba(14,165,233,0.3)] transition-all duration-300 flex items-center justify-center active:scale-[0.98]">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-4 h-4">
+    <!-- Next Variant Arrow -> Extremified Right -->
+    <button id="btn-next-variant" title="Next Variant" onclick="rotarBioVariant('next')" 
+        class="btn-tele-glass h-full pr-2 pl-1 gap-1.5 justify-end flex items-center group">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" 
+            class="w-4 h-4 text-white group-hover:text-sky-300 transition-colors pointer-events-none">
             <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
         </svg>
     </button>
@@ -191,16 +194,39 @@
 
 
 
+
+
+
         </section>
 
-        <!-- FOOTER -->
-        <footer class="h-[50px] shrink-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent backdrop-blur-sm z-50 flex items-center justify-center">
-            <span class="text-[6px] tracking-[0.5em] font-bold text-white/30 uppercase">
-                POWERED BY JAKO.DEV
-            </span>
-        </footer>
+       
+<!-- Footer Container: Extreme Justified Brand & Action Control -->
+<div class="h-[50px] w-full shrink-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent backdrop-blur-sm z-50 px-4 flex items-center justify-between select-none">
+    
+    <!-- Single-Line Brand Container: Extremified Left -->
+    <div class="flex items-center gap-2 pointer-events-none group">
+        <svg viewBox="0 0 100 100" class="w-4 h-4 shrink-0 fill-white group-hover:fill-sky-300 transition-colors duration-300">
+            <polygon points="20,20 80,20 70,35 30,35" />
+            <polygon points="50,42 58,50 50,58 42,50" />
+            <polygon points="30,65 70,65 80,80 20,80" />
+        </svg>
+        <span class="text-[6px] tracking-[0.35em] font-mono font-bold text-sky-200/40 group-hover:text-sky-300/80 transition-colors duration-300 uppercase">
+            POWERED BY JAKO.DEV
+        </span>
+    </div>
 
-    </main>
+    <!-- Inspect Button: Extremified Right -->
+    <button id="btn-reveal-bio" title="Inspect" 
+        class="btn-tele-glass w-12 h-12 flex-none group flex items-center justify-center">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" 
+            class="w-4 h-4 text-white group-hover:text-sky-300 transition-colors pointer-events-none">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z" />
+            <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+        </svg>
+    </button>
+
+</div>
+
 
 <script>
     // =========================================================================
@@ -212,28 +238,28 @@
             variants: {
                 'FOCUS': { 
                     label: 'PULSOR FOCUS', desc: 'Enfoque y claridad cognitiva', 
-                    spec: 'LION’S MANE', cant:  '44 PULSORES X 500 MGRS', price: '$70.000', id: 'PULS44F',
+                    spec: 'LION’S MANE', cant: '44 PULSORES X 500 MGRS', price: '$70MIL', id: 'PULS44F',
                     img: 'img/44caps.png', imgBack: 'img/44mane.png', imgRaw: 'img/maneRaw.png',
                     telemetry: { COL: '24°', FRU: '18°', SEC: '40°', MOL: '98.2%' },
                     benefits: ['NEUROGÉNESIS', 'CLARIDAD COGNITIVA', 'MEMORIA FLUIDA', 'NIEBLA  (-)', 'OPTIMIZACIÓN SINÁPTICA', 'ENFOQUE PROFUNDO', 'AGUDEZA ', 'REPARACIÓN NEURONAL', 'ENFOQUE', 'PRODUCTIVIDAD SOSTENIDA']
                 },
                 'ZEN': { 
                     label: 'PULSOR ZEN', desc: 'Silencio mental óptimo', 
-                    spec: 'REISHI', cant:  '44 PULSORES X 500 MGRS', price: '$70.000', id: 'PULS44Z',
+                    spec: 'REISHI', cant: '44 PULSORES X 500 MGRS', price: '$70MIL', id: 'PULS44Z',
                     img: 'img/44caps.png', imgBack: 'img/44reishi.png', imgRaw: 'img/reishiRaw.png',
                     telemetry: { COL: '22°', FRU: '16°', SEC: '38°', MOL: '97.5' },
                     benefits: ['REDUCCIÓN CORTISOL', 'CALMA PROFUNDA', 'REGULACIÓN NERVIOSA', 'DESCANSO REPARADOR', 'EQUILIBRIO ', 'ADAPTACIÓN AL ESTRÉS', 'PAZ COGNITIVA', 'SUEÑO LÚCIDO', 'RELAJACIÓN MUSCULAR', 'CLARIDAD INTERNA']
                 },
                 'STAMINA': { 
                     label: 'PULSOR STAMINA', desc: 'Potencia celular óptima', 
-                    spec: 'CORDYCEPS', cant:  '44 PULSORES X 500 MGRS', price: '$70.000', id: 'PULS44S',
+                    spec: 'CORDYCEPS', cant: '44 PULSORES X 500 MGRS', price: '$70MIL', id: 'PULS44S',
                     img: 'img/44caps.png', imgBack: 'img/44cordy.png', imgRaw: 'img/cordyRaw.png',
                     telemetry: { COL: '20°', FRU: '15°', SEC: '42°', MOL: '99.0' },
                     benefits: ['POTENCIA AERÓBICA', 'ENERGÍA CELULAR (ATP)', 'RESISTENCIA FÍSICA', 'OXIGENACIÓN SANGUÍNEA', 'RECUPERACIÓN RÁPIDA', 'VITALIDAD GENERAL', 'RENDIMIENTO ATLÉTICO', 'FUNCIÓN RESPIRATORIA', 'METABOLISMO ACTIVO', 'FATIGA (-)']
                 },
                 'CORE': { 
                     label: 'PULSOR CORE', desc: 'Respuesta inmune óptima', 
-                    spec: 'TURKEY TAIL', cant:  '44 PULSORES X 500 MGRS', price: '$70.000', id: 'PULS44C',
+                    spec: 'TURKEY TAIL', cant: '44 PULSORES X 500 MGRS', price: '$70MIL', id: 'PULS44C',
                     img: 'img/44caps.png', imgBack: 'img/44turkey.png', imgRaw: 'img/turkeyRaw.png',
                     telemetry: { COL: '23°', FRU: '19°', SEC: '40°', MOL: '98.5' },
                     benefits: ['RESPUESTA INMUNE', 'BIOMA INTESTINAL', 'DEFENSA CELULAR', 'ANTIOXIDANTE', 'SALUD DIGESTIVA', 'PROTECCIÓN SISTÉMICA', 'REDUCCIÓN INFLAMACIÓN', 'ESTABILIDAD INTERNA', 'SÍNTESIS NUTRITIVA', 'FORTALEZA INTEGRAL']
@@ -270,13 +296,6 @@
     };
 
     let biokineticWaveHistory = [];
-    
-    /**
-     * DISPLAY STATE TRACKER FOR TELEMETRY DIAL
-     * 0 -> Quantum Waves inside Pack (SVG) AND Natural Text Translation in Bottom Panel.
-     * 1 -> Sandwatch Group & Alphanumeric Code inside Pack (SVG) AND Raw Code in Bottom Panel.
-     * Initially set to 0 to align default state with Quantum Waves.
-     */
     let waveDisplayState = 0; 
 
     // ==========================================
@@ -322,29 +341,13 @@
 
     function vincularBotones() {
         const btnBio = getCachedEl('btn-reveal-bio');
-        const biorushLabel = getCachedEl('biorush-label');
         const modos = ['front', 'back', 'raw'];
 
         if (btnBio && !btnBio.dataset.bound) {
             btnBio.dataset.bound = "true";
             btnBio.addEventListener('click', () => {
                 indiceModoInspector = (indiceModoInspector + 1) % modos.length;
-                const modoActual = modos[indiceModoInspector];
-                
-                aplicarModoVisual(modoActual);
-                
-                if (biorushLabel) {
-                    const variantConfig = BIORUSH_CATALOG[currentBioItem].variants[currentBioVariant];
-                    
-                    if (modoActual === 'back') {
-                        biorushLabel.textContent = variantConfig.spec.toUpperCase();
-                    } else if (modoActual === 'raw') {
-                        biorushLabel.textContent = variantConfig.cant.toUpperCase();
-                    } else {
-                        biorushLabel.textContent = variantConfig.label;
-                    }
-                }
-
+                aplicarModoVisual(modos[indiceModoInspector]);
                 triggerHaptic(12);
             });
         }
@@ -380,8 +383,6 @@
         const packImg = getCachedEl('biorush-pack-img');
         const packImgBack = getCachedEl('biorush-pack-img-back');
         const biorushLabel = getCachedEl('biorush-label');
-        const modos = ['front', 'back', 'raw'];
-        const modoActual = modos[indiceModoInspector];
         
         if (descEl && packImg && packImgBack) {
             descEl.classList.add('opacity-0');
@@ -395,16 +396,7 @@
                 const labelTitle = getCachedEl('laser-variant-title');
                 if (labelTitle) labelTitle.textContent = variantConfig.label;
                 
-                if (biorushLabel) {
-                    if (modoActual === 'back') {
-                        biorushLabel.textContent = variantConfig.spec.toUpperCase();
-                    } else if (modoActual === 'raw') {
-                        biorushLabel.textContent = variantConfig.cant.toUpperCase();
-                    } else {
-                        biorushLabel.textContent = variantConfig.label;
-                    }
-                }
-
+                if (biorushLabel) biorushLabel.textContent = variantConfig.label;
                 getCachedEl('biorush-price').textContent = variantConfig.price;
 
                 descEl.classList.remove('opacity-0');
@@ -427,9 +419,6 @@
         return `${String(totalSpheres).padStart(4, '0')}`;
     }
 
-    /**
-     * Real-time Clock loop updating biokinetic telemetry, coordinates, and bottom text display
-     */
     function updateZ() {
         let biokineticCoordinate = "";
         const now = new Date();
@@ -495,28 +484,25 @@
         if (subSetsSolar) subSetsSolar.textContent = `${(0.05 + (setsStage / 240)).toFixed(3)}`;
         if (subRepsTension) subRepsTension.textContent = `${(14.2 + (repsStage * 0.8)).toFixed(1)}`;
 
-// Dynamic assessment of the bottom readout bar based on current active button
-if (window.activeTelemetryBtnId && TELEMETRY_CONFIG[window.activeTelemetryBtnId]) {
-    const telemetryData = getCachedEl('panel-telemetry-data');
-    
-    if (telemetryData) {
-        if (window.activeTelemetryBtnId === 'btn-tele-dial') {
-            if (waveDisplayState === 0) { // <--- CAMBIA EL 1 POR UN 0 AQUÍ
-                // State 0: Quantum Waves -> Muestra el código alfanumérico abajo
-                telemetryData.innerHTML = biokineticCoordinate;
-            } else {
-                // State 1: Sandwatch (Alfanumérico) -> Muestra la traducción del texto abajo
-                const meaningConfig = TELEMETRY_CONFIG['btn-tele-dial'].meaning;
-                const evaluatedMeaning = typeof meaningConfig === 'function' ? meaningConfig() : meaningConfig;
-                telemetryData.innerHTML = evaluatedMeaning.toUpperCase();
+        if (window.activeTelemetryBtnId && TELEMETRY_CONFIG[window.activeTelemetryBtnId]) {
+            const telemetryData = getCachedEl('panel-telemetry-data');
+            
+            if (telemetryData) {
+                if (window.activeTelemetryBtnId === 'btn-tele-dial') {
+                    if (waveDisplayState === 0) {
+                        telemetryData.innerHTML = biokineticCoordinate;
+                    } else {
+                        const meaningConfig = TELEMETRY_CONFIG['btn-tele-dial'].meaning;
+                        const evaluatedMeaning = typeof meaningConfig === 'function' ? meaningConfig() : meaningConfig;
+                        telemetryData.innerHTML = evaluatedMeaning.toUpperCase();
+                    }
+                } else {
+                    const meaningConfig = TELEMETRY_CONFIG[window.activeTelemetryBtnId].meaning;
+                    const evaluatedMeaning = typeof meaningConfig === 'function' ? meaningConfig() : meaningConfig;
+                    telemetryData.innerHTML = evaluatedMeaning.toUpperCase();
+                }
             }
-        } else {
-            const meaningConfig = TELEMETRY_CONFIG[window.activeTelemetryBtnId].meaning;
-            const evaluatedMeaning = typeof meaningConfig === 'function' ? meaningConfig() : meaningConfig;
-            telemetryData.innerHTML = evaluatedMeaning.toUpperCase();
         }
-    }
-}
     }
 
     const TELEMETRY_CONFIG = {
@@ -538,17 +524,14 @@ if (window.activeTelemetryBtnId && TELEMETRY_CONFIG[window.activeTelemetryBtnId]
                     case 'S':  vectorText = `SALTOS X${sets}`; break; 
                     case 'U':  vectorText = `PRESIONES X${sets}`; break; 
                     case 'L':  vectorText = `CARGAS X${sets}`; break;    
-                    
                     case 'PL': vectorText = `PASOS CON CARGA X${sets}`; break;
                     case 'PU': vectorText = `PASOS CON PRESIÓN X${sets}`; break;
                     case 'LU': vectorText = `CARGAS CON PRESIÓN X${sets}`; break;
                     case 'SU': vectorText = `SALTOS CON PRESIÓN X${sets}`; break;
-                    
                     case 'PUL': vectorText = `PASOS CON PRESIÓN Y CARGA X${sets}`; break;
                     case 'LPS': vectorText = `CARGAS CON PASO Y SALTO X${sets}`; break;
                     case 'SPU': vectorText = `SALTOS CON PASO Y PRESIÓN X${sets}`; break; 
                     case 'ULS': vectorText = `PRESIONES CON CARGA Y SALTO X${sets}`; break;
-                    
                     default: vectorText = "ONDAS BIOCINÉTICAS REGENERATIVAS";
                 }
 
@@ -562,14 +545,10 @@ if (window.activeTelemetryBtnId && TELEMETRY_CONFIG[window.activeTelemetryBtnId]
         }
     };
 
-    /**
-     * Renders biokinetic quantum SVG circles inside package
-     */
     function renderBiokineticWaves() {
         const container = $('wave-quantum-container');
         if (!container) return;
 
-        // If state is 1 (Sandwatch enabled), hide quantum wave layers
         if (waveDisplayState === 1) {
             container.innerHTML = '';
             return;
@@ -615,9 +594,6 @@ if (window.activeTelemetryBtnId && TELEMETRY_CONFIG[window.activeTelemetryBtnId]
         container.innerHTML = htmlContent;
     }
 
-/**
-     * Attaches click handlers for bottom telemetry buttons with toggle synchronization
-     */
     function habilitarReveladoTelemetria() {
         const telemetryData = getCachedEl('panel-telemetry-data');
         const sandwatchGroup = getCachedEl('sandwatch-group');
@@ -643,11 +619,9 @@ if (window.activeTelemetryBtnId && TELEMETRY_CONFIG[window.activeTelemetryBtnId]
                     if (window.activeTelemetryBtnId === 'btn-tele-dial') {
                         waveDisplayState = (waveDisplayState === 0) ? 1 : 0;
                     } else {
-                        // First time entering Dial Telemetry mode defaults to Waves (State 0)
                         waveDisplayState = 0;
                     }
 
-                    // Synchronize Sandwatch visibility inside package SVG
                     if (sandwatchGroup) {
                         sandwatchGroup.style.display = (waveDisplayState === 1) ? 'block' : 'none';
                     }
@@ -657,29 +631,24 @@ if (window.activeTelemetryBtnId && TELEMETRY_CONFIG[window.activeTelemetryBtnId]
                     aplicarModoVisual('front');
                 }
 
-                // Resaltar únicamente los valores de texto del panel ROW 1 si aplica
+                // JS only assigns or removes a neutral state class or attribute (e.g. 'is-active')
                 if (ultimoDato) {
-                    ultimoDato.classList.remove('text-sky-400', 'font-bold', 'scale-110');
-                    ultimoDato.classList.add('text-white/70');
+                    ultimoDato.classList.remove('is-active');
                 }
 
                 const targetDataEl = TELEMETRY_CONFIG[btnId].targetElId ? getCachedEl(TELEMETRY_CONFIG[btnId].targetElId) : null;
                 if (targetDataEl) {
-                    targetDataEl.classList.remove('text-white/70');
-                    targetDataEl.classList.add('text-sky-400', 'font-bold', 'scale-110');
+                    targetDataEl.classList.add('is-active');
                     ultimoDato = targetDataEl;
                 }
 
                 window.activeTelemetryBtnId = btnId;
 
-                // Evaluate text output for bottom telemetry bar immediately upon click
                 let evaluatedMeaning = "";
                 if (btnId === 'btn-tele-dial') {
                     if (waveDisplayState === 0) {
-                        // Sandwatch active inside container -> Display direct alphanumeric code
                         evaluatedMeaning = getCachedEl('z-dial-telemetry')?.textContent || "8UST11";
                     } else {
-                        // Quantum Waves active inside container -> Display movement translation text
                         const meaningConfig = TELEMETRY_CONFIG[btnId].meaning;
                         evaluatedMeaning = typeof meaningConfig === 'function' ? meaningConfig() : meaningConfig;
                     }
@@ -694,7 +663,7 @@ if (window.activeTelemetryBtnId && TELEMETRY_CONFIG[window.activeTelemetryBtnId]
     }
 
     // =========================================================================
-    // 6. PURCHASE TELEMETRY CAPTURE
+    // 6. PURCHASE TELEMETRY CAPTURE (RAW / UNSTYLED DATA)
     // =========================================================================
     function adquirirNodo() {
         const variantConfig = BIORUSH_CATALOG[currentBioItem].variants[currentBioVariant];
@@ -705,23 +674,21 @@ if (window.activeTelemetryBtnId && TELEMETRY_CONFIG[window.activeTelemetryBtnId]
         
         const freqValue = getCachedEl('sub-sets-solar')?.textContent || "0.00 Hz";
         const tensionValue = getCachedEl('sub-reps-tension')?.textContent || "0.0 N";
-        
-        const dialInterpretation = currentCoord.replace(/(\d+)([A-Z]+)(\d+)/, "$1 FASES, $3 NODOS - ESTADO $2");
-        
-        const mensaje = `⚡ *ORDEN - BIORUSH* ⚡\n\n` +
-                        `• *Vector:* ${currentBioItem} ${currentBioVariant}\n` +
-                        `• *Carga:* ${variantConfig.spec}\n` +
-                        `• *ID:* \`${variantConfig.id}\`\n` +
-                        `• *Precio:* ${variantConfig.price}\n\n` +
-                        `--- *PROTOCOLO P.U.L.S.* ---\n` +
-                        `• *Matriz de Configuración:* \`${currentCoord}\`\n` +
-                        `• *Análisis de Estado:* ${dialInterpretation}\n` +
-                        `• *Lote:* \`${currentSphere}\`\n` +
-                        `• *Saturación:* \`${currentNode}\`\n` +
-                        `• *Resonancia:* \`${freqValue}\`\n` +
-                        `• *Cohesión:* \`${tensionValue}\`\n\n` +
-                        `• *Cantidad:* ${variantConfig.cant}\n` +
-                        `Activar configuración actual.`;
+
+        // 100% Raw Key: Value data structure
+        const mensaje = [
+            `ORDEN: BIORUSH`,
+            `VECTOR: ${currentBioItem} ${currentBioVariant}`,
+            `CARGA: ${variantConfig.spec}`,
+            `ID: ${variantConfig.id}`,
+            `PRECIO: ${variantConfig.price}`,
+            `CANTIDAD: ${variantConfig.cant}`,
+            `MATRIZ_CONFIG: ${currentCoord}`,
+            `LOTE: ${currentSphere}`,
+            `SATURACION: ${currentNode}`,
+            `RESONANCIA: ${freqValue}`,
+            `COHESION: ${tensionValue}`
+        ].join('\n');
 
         triggerHaptic([15, 40, 15]);
         window.open(`https://api.whatsapp.com/send?phone=${numeroCelular}&text=${encodeURIComponent(mensaje)}`, '_blank');
