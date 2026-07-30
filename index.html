@@ -238,28 +238,28 @@
             variants: {
                 'FOCUS': { 
                     label: 'PULSOR FOCUS', desc: 'Enfoque y claridad cognitiva', 
-                    spec: 'LION’S MANE', cant: '44 PULSORES X 500 MGRS', price: '$70MIL', id: 'PULS44F',
+                    spec: 'LION’S MANE', cant: '44X500MGRS', price: '$70MIL', id: 'PULS44F',
                     img: 'img/44caps.png', imgBack: 'img/44mane.png', imgRaw: 'img/maneRaw.png',
                     telemetry: { COL: '24°', FRU: '18°', SEC: '40°', MOL: '98.2%' },
                     benefits: ['NEUROGÉNESIS', 'CLARIDAD COGNITIVA', 'MEMORIA FLUIDA', 'NIEBLA  (-)', 'OPTIMIZACIÓN SINÁPTICA', 'ENFOQUE PROFUNDO', 'AGUDEZA ', 'REPARACIÓN NEURONAL', 'ENFOQUE', 'PRODUCTIVIDAD SOSTENIDA']
                 },
                 'ZEN': { 
                     label: 'PULSOR ZEN', desc: 'Silencio mental óptimo', 
-                    spec: 'REISHI', cant: '44 PULSORES X 500 MGRS', price: '$70MIL', id: 'PULS44Z',
+                    spec: 'REISHI', cant: '44X500MGRS', price: '$70MIL', id: 'PULS44Z',
                     img: 'img/44caps.png', imgBack: 'img/44reishi.png', imgRaw: 'img/reishiRaw.png',
                     telemetry: { COL: '22°', FRU: '16°', SEC: '38°', MOL: '97.5' },
                     benefits: ['REDUCCIÓN CORTISOL', 'CALMA PROFUNDA', 'REGULACIÓN NERVIOSA', 'DESCANSO REPARADOR', 'EQUILIBRIO ', 'ADAPTACIÓN AL ESTRÉS', 'PAZ COGNITIVA', 'SUEÑO LÚCIDO', 'RELAJACIÓN MUSCULAR', 'CLARIDAD INTERNA']
                 },
                 'STAMINA': { 
                     label: 'PULSOR STAMINA', desc: 'Potencia celular óptima', 
-                    spec: 'CORDYCEPS', cant: '44 PULSORES X 500 MGRS', price: '$70MIL', id: 'PULS44S',
+                    spec: 'CORDYCEPS', cant: '44X500MGRS', price: '$70MIL', id: 'PULS44S',
                     img: 'img/44caps.png', imgBack: 'img/44cordy.png', imgRaw: 'img/cordyRaw.png',
                     telemetry: { COL: '20°', FRU: '15°', SEC: '42°', MOL: '99.0' },
                     benefits: ['POTENCIA AERÓBICA', 'ENERGÍA CELULAR (ATP)', 'RESISTENCIA FÍSICA', 'OXIGENACIÓN SANGUÍNEA', 'RECUPERACIÓN RÁPIDA', 'VITALIDAD GENERAL', 'RENDIMIENTO ATLÉTICO', 'FUNCIÓN RESPIRATORIA', 'METABOLISMO ACTIVO', 'FATIGA (-)']
                 },
                 'CORE': { 
                     label: 'PULSOR CORE', desc: 'Respuesta inmune óptima', 
-                    spec: 'TURKEY TAIL', cant: '44 PULSORES X 500 MGRS', price: '$70MIL', id: 'PULS44C',
+                    spec: 'TURKEY TAIL', cant: '44X500MGRS', price: '$70MIL', id: 'PULS44C',
                     img: 'img/44caps.png', imgBack: 'img/44turkey.png', imgRaw: 'img/turkeyRaw.png',
                     telemetry: { COL: '23°', FRU: '19°', SEC: '40°', MOL: '98.5' },
                     benefits: ['RESPUESTA INMUNE', 'BIOMA INTESTINAL', 'DEFENSA CELULAR', 'ANTIOXIDANTE', 'SALUD DIGESTIVA', 'PROTECCIÓN SISTÉMICA', 'REDUCCIÓN INFLAMACIÓN', 'ESTABILIDAD INTERNA', 'SÍNTESIS NUTRITIVA', 'FORTALEZA INTEGRAL']
@@ -678,16 +678,16 @@
         // 100% Raw Key: Value data structure
         const mensaje = [
             `ORDEN: BIORUSH`,
-            `VECTOR: ${currentBioItem} ${currentBioVariant}`,
+            `PULSOR: ${currentBioVariant}`,
             `CARGA: ${variantConfig.spec}`,
             `ID: ${variantConfig.id}`,
             `PRECIO: ${variantConfig.price}`,
             `CANTIDAD: ${variantConfig.cant}`,
-            `MATRIZ_CONFIG: ${currentCoord}`,
+            `DIAL: ${currentCoord}`,
             `LOTE: ${currentSphere}`,
             `SATURACION: ${currentNode}`,
             `RESONANCIA: ${freqValue}`,
-            `COHESION: ${tensionValue}`
+            `TENSION: ${tensionValue}`
         ].join('\n');
 
         triggerHaptic([15, 40, 15]);
