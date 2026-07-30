@@ -30,7 +30,7 @@
         body { font-family: 'Orbitron', sans-serif; background-color: #020617; color: #f8fafc; } 
         #page-bg-overlay {
             position: fixed; inset: 0; z-index: -1;
-            background: radial-gradient(circle at 50% 44%, #1e3a8a 0%, #0f172a 50%, #020617 100%);
+            background: radial-gradient(circle at 50% 49%, #1e3a8a 0%, #0f172a 50%, #020617 100%);
         }
         .img-glow-transition { transition: opacity 0.5s ease-in-out; }
 
@@ -238,28 +238,28 @@
             variants: {
                 'FOCUS': { 
                     label: 'PULSOR FOCUS', desc: 'Enfoque y claridad cognitiva', 
-                    spec: 'LION’S MANE', cant: '44X500MGRS', price: '$70MIL', id: 'PULS44F',
+                    spec: 'LION’S MANE', cant: '44X500MGRS', price: '$70MIL', id: 'FOCUS45',
                     img: 'img/44caps.png', imgBack: 'img/44mane.png', imgRaw: 'img/maneRaw.png',
                     telemetry: { COL: '24°', FRU: '18°', SEC: '40°', MOL: '98.2%' },
                     benefits: ['NEUROGÉNESIS', 'CLARIDAD COGNITIVA', 'MEMORIA FLUIDA', 'NIEBLA  (-)', 'OPTIMIZACIÓN SINÁPTICA', 'ENFOQUE PROFUNDO', 'AGUDEZA ', 'REPARACIÓN NEURONAL', 'ENFOQUE', 'PRODUCTIVIDAD SOSTENIDA']
                 },
                 'ZEN': { 
                     label: 'PULSOR ZEN', desc: 'Silencio mental óptimo', 
-                    spec: 'REISHI', cant: '44X500MGRS', price: '$70MIL', id: 'PULS44Z',
+                    spec: 'REISHI', cant: '44X500MGRS', price: '$70MIL', id: 'ZEN45',
                     img: 'img/44caps.png', imgBack: 'img/44reishi.png', imgRaw: 'img/reishiRaw.png',
                     telemetry: { COL: '22°', FRU: '16°', SEC: '38°', MOL: '97.5' },
                     benefits: ['REDUCCIÓN CORTISOL', 'CALMA PROFUNDA', 'REGULACIÓN NERVIOSA', 'DESCANSO REPARADOR', 'EQUILIBRIO ', 'ADAPTACIÓN AL ESTRÉS', 'PAZ COGNITIVA', 'SUEÑO LÚCIDO', 'RELAJACIÓN MUSCULAR', 'CLARIDAD INTERNA']
                 },
                 'STAMINA': { 
                     label: 'PULSOR STAMINA', desc: 'Potencia celular óptima', 
-                    spec: 'CORDYCEPS', cant: '44X500MGRS', price: '$70MIL', id: 'PULS44S',
+                    spec: 'CORDYCEPS', cant: '44X500MGRS', price: '$70MIL', id: 'CORDY45',
                     img: 'img/44caps.png', imgBack: 'img/44cordy.png', imgRaw: 'img/cordyRaw.png',
                     telemetry: { COL: '20°', FRU: '15°', SEC: '42°', MOL: '99.0' },
                     benefits: ['POTENCIA AERÓBICA', 'ENERGÍA CELULAR (ATP)', 'RESISTENCIA FÍSICA', 'OXIGENACIÓN SANGUÍNEA', 'RECUPERACIÓN RÁPIDA', 'VITALIDAD GENERAL', 'RENDIMIENTO ATLÉTICO', 'FUNCIÓN RESPIRATORIA', 'METABOLISMO ACTIVO', 'FATIGA (-)']
                 },
                 'CORE': { 
                     label: 'PULSOR CORE', desc: 'Respuesta inmune óptima', 
-                    spec: 'TURKEY TAIL', cant: '44X500MGRS', price: '$70MIL', id: 'PULS44C',
+                    spec: 'TURKEY TAIL', cant: '44X500MGRS', price: '$70MIL', id: 'CORE45',
                     img: 'img/44caps.png', imgBack: 'img/44turkey.png', imgRaw: 'img/turkeyRaw.png',
                     telemetry: { COL: '23°', FRU: '19°', SEC: '40°', MOL: '98.5' },
                     benefits: ['RESPUESTA INMUNE', 'BIOMA INTESTINAL', 'DEFENSA CELULAR', 'ANTIOXIDANTE', 'SALUD DIGESTIVA', 'PROTECCIÓN SISTÉMICA', 'REDUCCIÓN INFLAMACIÓN', 'ESTABILIDAD INTERNA', 'SÍNTESIS NUTRITIVA', 'FORTALEZA INTEGRAL']
@@ -558,11 +558,11 @@
 
         let htmlContent = '';
         biokineticWaveHistory.forEach((dial, tIndex) => {
-            const currentScale = tIndex * 0.85; 
-            const baseOpacity = 1.0 - (tIndex * 0.08);
+            const currentScale = (tIndex + 5) * 0.85;
+            const baseOpacity = 1.0 - (tIndex * 0.12);
             if (baseOpacity <= 0) return;
 
-            const viewFactor = 7.5; 
+            const viewFactor = 8.5; 
             const layers = [
                 { id: 'internal',     r: (currentScale * 1.0) * viewFactor, opacity: baseOpacity * 0.80, value: dial.sets },
                 { id: 'intermediate', r: (currentScale * 1.4) * viewFactor, opacity: baseOpacity * 0.60, value: dial.vector },
@@ -682,9 +682,9 @@
             `CARGA: ${variantConfig.spec}`,
             `ID: ${variantConfig.id}`,
             `PRECIO: ${variantConfig.price}`,
-            `CANTIDAD: ${variantConfig.cant}`,
+            `CANT.: ${variantConfig.cant}`,
             `DIAL: ${currentCoord}`,
-            `LOTE: ${currentSphere}`,
+            `CICLO: ${currentSphere}`,
             `SATURACION: ${currentNode}`,
             `RESONANCIA: ${freqValue}`,
             `TENSION: ${tensionValue}`
