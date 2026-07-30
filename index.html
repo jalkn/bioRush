@@ -163,12 +163,13 @@
 <!-- ROW 2: Variant Navigation & Action Controls (Symmetric 3-Block Grid) -->
 <div class="grid grid-cols-[1fr_auto_1fr] border-b border-sky-500/30 items-center w-full max-w-full px-4 mx-auto h-12 select-none">
 
-    <!-- Previous Variant Arrow -> Extremified Left -->
-    <button id="btn-prev-variant" title="Previous Variant" onclick="rotarBioVariant('prev')" 
+    <!-- Inspect Button -> Extremified Left -->
+    <button id="btn-reveal-bio" title="Inspect" 
         class="btn-tele-glass h-full pl-2 pr-1 gap-1.5 justify-start flex items-center group">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" 
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" 
             class="w-4 h-4 text-white group-hover:text-sky-300 transition-colors pointer-events-none">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" />
+            <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z" />
+            <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
         </svg>
     </button>
 
@@ -178,6 +179,7 @@
         <svg viewBox="0 0 100 100" class="w-4 h-4 fill-white group-hover:fill-sky-300 transition-colors pointer-events-none">
             <polygon points="20,20 80,20 70,35 30,35" />
             <polygon points="50,42 58,50 50,58 42,50" />
+            <polygon points="30,65 70,65 80,80 20,80" />
         </svg>
     </button>
 
@@ -192,38 +194,15 @@
 
 </div>
 
-
-
-
-
-
-        </section>
-
-       
-<!-- Footer Container: Extreme Justified Brand & Action Control -->
-<div class="h-[50px] w-full shrink-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent backdrop-blur-sm z-50 px-4 flex items-center justify-between select-none">
+<!-- Footer Container: Brand Credit -->
+<div class="h-[50px] w-full shrink-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent backdrop-blur-sm z-50 px-4 flex items-center justify-center select-none">
     
-    <!-- Single-Line Brand Container: Extremified Left -->
+    <!-- Single-Line Brand Container -->
     <div class="flex items-center gap-2 pointer-events-none group">
-        <svg viewBox="0 0 100 100" class="w-4 h-4 shrink-0 fill-white group-hover:fill-sky-300 transition-colors duration-300">
-            <polygon points="20,20 80,20 70,35 30,35" />
-            <polygon points="50,42 58,50 50,58 42,50" />
-            <polygon points="30,65 70,65 80,80 20,80" />
-        </svg>
         <span class="text-[6px] tracking-[0.35em] font-mono font-bold text-sky-200/40 group-hover:text-sky-300/80 transition-colors duration-300 uppercase">
             POWERED BY JAKO.DEV
         </span>
     </div>
-
-    <!-- Inspect Button: Extremified Right -->
-    <button id="btn-reveal-bio" title="Inspect" 
-        class="btn-tele-glass w-12 h-12 flex-none group flex items-center justify-center">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" 
-            class="w-4 h-4 text-white group-hover:text-sky-300 transition-colors pointer-events-none">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z" />
-            <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
-        </svg>
-    </button>
 
 </div>
 
